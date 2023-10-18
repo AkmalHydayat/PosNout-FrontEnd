@@ -4,40 +4,40 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
-
+import { getStoks } from "../../utils/api";
+import { useNavigate } from "react-router-dom";
+import DateNow from "../../components/Date";
 /* eslint-disable react/prop-types */
 const FormAddStok = ({
   getIdName,
-  tanggal,
-  bulan,
-  tahun,
-  // addStok,
   onClose,
   isHide,
   setIsHide,
   idSelect,
   namaSelect,
+  setStoks,
 }) => {
-  // const [tanggal, setTanggal] = useState("");
-  // const [id, setId] = useState("");
-  const dateNow = tanggal + "/" + bulan + "/" + tahun;
-  // const [nama, setNama] = useState("");
+  const { hari, month, year } = DateNow();
   const [jumlah, setJumlah] = useState("");
   const [isBarcodeEmpty, setIsBarcodeEmpty] = useState(false);
   const [isJumlahEmpty, setIsJumlahEmpty] = useState(false);
   const emptyBarcodeStyle = isBarcodeEmpty ? "border-[1px] border-red-500" : "";
   const emptyJumlahStyle = isJumlahEmpty ? "border-[1px] border-red-500" : "";
-
+  const tanggalSekarang = `${hari}-${month}-${year}`;
+  const navigate = useNavigate();
   // Definisikan fungsi untuk menambah stok pada
-  const tambahStok = async (barcodeProduk, jumlah, namaProduk) => {
+  const tambahStok = async (barcodeProduk, jumlah, namaProduk, tanggal) => {
     try {
       const response = await axios.post("http://localhost:3000/tambahStok", {
         barcodeProduk: barcodeProduk,
         nama_produk: namaProduk,
         jumlah: jumlah,
+        tanggal: tanggal,
       });
-
-      console.log(response.data.message); // Output pesan dari server
+      const updatedStoks = await getStoks();
+      setStoks(updatedStoks);
+      navigate("/Stok"); // <-- Gunakan hook di dalam fungsi komponen
+      console.log(response.data.message);
     } catch (error) {
       console.error("Terjadi kesalahan:", error.message);
     }
@@ -59,11 +59,10 @@ const FormAddStok = ({
           } else if (jumlah === "") {
             setIsJumlahEmpty(true);
           } else {
-            // addStok(idSelect, namaSelect, jumlah, dateNow);
-            tambahStok(idSelect, jumlah, namaSelect);
+            tambahStok(idSelect, jumlah, namaSelect, tanggalSekarang);
             setJumlah("");
-            onClose();
             getIdName("", "");
+            onClose();
           }
         }}
       >
@@ -76,7 +75,7 @@ const FormAddStok = ({
               type="text"
               className="w-full h-10 focus:outline-none bg-gray-300 border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 cursor-default"
               placeholder=""
-              value={`${tanggal}/${bulan}/${tahun}`}
+              value={tanggalSekarang}
               readOnly
             />
           </div>

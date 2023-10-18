@@ -29,3 +29,13 @@ export const getProduks = async () => {
     throw error; // atau Anda dapat menangani error di tempat lain
   }
 };
+
+export const getStoks = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/tambahStok");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // atau Anda dapat menangani error di tempat lain
+  }
+};

@@ -1,20 +1,35 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import SearchGroup from "../../components/ui/SearchGroup";
-import ProdukListData from "../daftarProduk/ProdukListData";
 import ButtonSelect from "../../components/ui/ButtonSelect";
+import { getProduks } from "../../utils/api";
 
-const TableProdukList = ({ getIdName, isHide, setIsHide }) => {
-  const { produkList } = ProdukListData();
+const Tableproduks = ({ getIdName, isHide, setIsHide }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
+  const [produks, setProduks] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getProduks();
+        setProduks(data);
+      } catch (error) {
+        // Handle error jika diperlukan
+        console.error("Error in component:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   // Fungsi untuk mencari Produk berdasarkan nama
   const searchProduk = () => {
-    const results = produkList.filter((item) => {
+    const results = produks.filter((item) => {
       return item.nama.toLowerCase().includes(searchTerm.toLowerCase());
     });
     setSearchResults(results);
@@ -33,7 +48,7 @@ const TableProdukList = ({ getIdName, isHide, setIsHide }) => {
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
 
-  const currentItems = produkList.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = produks.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <div>
       <div className="bg-colorTwo p-6 space-y-3  rounded ">
@@ -119,17 +134,17 @@ const TableProdukList = ({ getIdName, isHide, setIsHide }) => {
                       key={index}
                     >
                       <td className="w-36 py-2 border-[1px] border-gray-300">
-                        {item.id}
+                        {item.barcode}
                       </td>
                       <td className="w-96 py-2 border-[1px] border-gray-300">
-                        {item.nama}
+                        {item.nama_produk}
                       </td>
                       <td className="w-32 py-2 border-[1px] border-gray-300">
                         {item.satuan}
                       </td>
 
                       <td className="w-40 py-2 border-[1px] border-gray-300">
-                        {item.hargaBeli}
+                        {item.harga_jual}
                       </td>
                       <td className="w-16 py-2 border-[1px] border-gray-300">
                         {item.stok}
@@ -138,7 +153,7 @@ const TableProdukList = ({ getIdName, isHide, setIsHide }) => {
                         <ButtonSelect
                           className={`bg-purple-600 px-2 hover:bg-purple-700 py-[1px] rounded text-white text-sm`}
                           onClick={() => {
-                            getIdName(item.id, item.nama);
+                            getIdName(item.barcode, item.nama_produk);
                             setIsHide(!isHide);
                           }}
                         >
@@ -213,17 +228,17 @@ const TableProdukList = ({ getIdName, isHide, setIsHide }) => {
                       key={index}
                     >
                       <td className="w-36 py-2 border-[1px] border-gray-300">
-                        {item.id}
+                        {item.barcode}
                       </td>
                       <td className="w-96 py-2 border-[1px] border-gray-300">
-                        {item.nama}
+                        {item.nama_produk}
                       </td>
                       <td className="w-32 py-2 border-[1px] border-gray-300">
                         {item.satuan}
                       </td>
 
                       <td className="w-40 py-2 border-[1px] border-gray-300 break-words">
-                        {item.hargaBeli}
+                        {item.harga_jual}
                       </td>
 
                       <td className="w-16 py-2 border-[1px] border-gray-300">
@@ -233,7 +248,7 @@ const TableProdukList = ({ getIdName, isHide, setIsHide }) => {
                         <ButtonSelect
                           className={`bg-purple-600 px-2 hover:bg-purple-700 py-[1px] rounded text-white text-sm`}
                           onClick={() => {
-                            getIdName(item.id, item.nama);
+                            getIdName(item.barcode, item.nama_produk);
                             setIsHide(!isHide);
                           }}
                         >
@@ -248,8 +263,8 @@ const TableProdukList = ({ getIdName, isHide, setIsHide }) => {
             <div className="flex justify-between mt-3">
               <div className="text-sm">
                 Showing {indexOfFirstItem + 1} to{" "}
-                {Math.min(indexOfLastItem, produkList.length)} of{" "}
-                {produkList.length} entries
+                {Math.min(indexOfLastItem, produks.length)} of {produks.length}{" "}
+                entries
               </div>
               <div className="space-x-1 flex">
                 <button
@@ -264,7 +279,7 @@ const TableProdukList = ({ getIdName, isHide, setIsHide }) => {
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
-                  disabled={indexOfLastItem >= produkList.length}
+                  disabled={indexOfLastItem >= produks.length}
                   className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
                 >
                   Next
@@ -278,4 +293,4 @@ const TableProdukList = ({ getIdName, isHide, setIsHide }) => {
   );
 };
 
-export default TableProdukList;
+export default Tableproduks;

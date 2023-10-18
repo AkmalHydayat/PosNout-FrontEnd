@@ -5,21 +5,31 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 import SearchGroup from "../../components/ui/SearchGroup";
 
-const TableStok = ({
-  searchStok,
-  stopSearch,
-  stokList,
-  searchTerm,
-  setSearchTerm,
-  searchResults,
-  isSearching,
-}) => {
+const TableStok = ({ stoks }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(8); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
+  // Fungsi untuk mencari stok berdasarkan nama
+  const searchStok = () => {
+    const results = stoks.filter((item) =>
+      item.nama.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+    setIsSearching(true);
+  };
 
-  const currentItems = stokList.slice(indexOfFirstItem, indexOfLastItem);
+  // Fungsi untuk menutup table pecarian
+  const stopSearch = () => {
+    setIsSearching(false);
+    setSearchTerm(""); // Mengosongkan input pencarian saat pencarian dihentikan
+    setSearchResults([]);
+  };
+
+  const currentItems = stoks.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <div>
       <div className="bg-colorTwo p-6 space-y-3  rounded-b ">
@@ -108,10 +118,10 @@ const TableStok = ({
                         {item.tanggal}
                       </td>
                       <td className="w-36 border-[1px] py-1 border-gray-300">
-                        {item.id}
+                        {item.barcodeProduk}
                       </td>
                       <td className="w-96 border-[1px] py-1 border-gray-300">
-                        {item.nama}
+                        {item.nama_produk}
                       </td>
                       <td className="w-36 border-[1px] py-1 border-gray-300">
                         {item.jumlah}
@@ -185,10 +195,10 @@ const TableStok = ({
                         {item.tanggal}
                       </td>
                       <td className="w-36 border-[1px] py-1 border-gray-300">
-                        {item.id}
+                        {item.barcodeProduk}
                       </td>
                       <td className="w-96 border-[1px] py-1 border-gray-300">
-                        {item.nama}
+                        {item.nama_produk}
                       </td>
                       <td className="w-36 border-[1px] py-1 border-gray-300">
                         {item.jumlah}
@@ -201,8 +211,8 @@ const TableStok = ({
             <div className="flex justify-between mt-3">
               <div className="text-sm">
                 Showing {indexOfFirstItem + 1} to{" "}
-                {Math.min(indexOfLastItem, stokList.length)} of{" "}
-                {stokList.length} entries
+                {Math.min(indexOfLastItem, stoks.length)} of {stoks.length}{" "}
+                entries
               </div>
               <div className="space-x-1 flex">
                 <button
@@ -217,7 +227,7 @@ const TableStok = ({
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
-                  disabled={indexOfLastItem >= stokList.length}
+                  disabled={indexOfLastItem >= stoks.length}
                   className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
                 >
                   Next
