@@ -16,7 +16,7 @@ const TableStok = ({ stoks }) => {
   // Fungsi untuk mencari stok berdasarkan nama
   const searchStok = () => {
     const results = stoks.filter((item) =>
-      item.nama.toLowerCase().includes(searchTerm.toLowerCase())
+      item.nama_produk.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
     setIsSearching(true);

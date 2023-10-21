@@ -14,6 +14,7 @@ const FormEditProduk = ({
   searchResults,
   setProduks,
   produks,
+  stok
 }) => {
   if (!isVisible) return null;
   const [newNamaProduk, setNewNamaProduk] = useState("");
@@ -189,6 +190,7 @@ const FormEditProduk = ({
           newHargaJualProduk={newHargaJualProduk}
           setNewHargaJualProduk={setNewHargaJualProduk}
           errorInput={errorInput}
+          stok={stok}
         />
         <p className="text-center text-fnd text-sm">{msg}</p>
 

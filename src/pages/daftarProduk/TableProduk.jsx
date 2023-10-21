@@ -167,6 +167,7 @@ const TableProduk = ({ produks, setProduks }) => {
                             setProduks={setProduks}
                             id={item.id}
                             produks={produks}
+                            stok={item.stok}
                           />
                           <ButtonDeleteProduk
                             setProduks={setProduks}
@@ -290,6 +291,7 @@ const TableProduk = ({ produks, setProduks }) => {
                             setProduks={setProduks}
                             id={item.id}
                             produks={produks}
+                            stok={item.stok}
                           />
                           <ButtonDeleteProduk
                             setProduks={setProduks}

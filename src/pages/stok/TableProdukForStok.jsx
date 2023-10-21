@@ -30,7 +30,7 @@ const Tableproduks = ({ getIdName, isHide, setIsHide }) => {
   // Fungsi untuk mencari Produk berdasarkan nama
   const searchProduk = () => {
     const results = produks.filter((item) => {
-      return item.nama.toLowerCase().includes(searchTerm.toLowerCase());
+      return item.nama_produk.toLowerCase().includes(searchTerm.toLowerCase());
     });
     setSearchResults(results);
     setIsSearching(true);
@@ -53,7 +53,7 @@ const Tableproduks = ({ getIdName, isHide, setIsHide }) => {
     <div>
       <div className="bg-colorTwo p-6 space-y-3  rounded ">
         <div className="flex justify-between h-full">
-          <div className="space-x-1 flex ">
+          <div className="space-x-1 flex font-medium ">
             <label htmlFor="" className="my-auto ">
               Show
             </label>
@@ -119,7 +119,7 @@ const Tableproduks = ({ getIdName, isHide, setIsHide }) => {
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2 border-gray-300"
+                      className=" text-center font-medium text-base border-[1px] py-2 border-gray-300"
                       colSpan={7}
                     >
                       Tidak ada hasil pencarian.
@@ -128,7 +128,7 @@ const Tableproduks = ({ getIdName, isHide, setIsHide }) => {
                 ) : (
                   searchResults.map((item, index) => (
                     <tr
-                      className={`text-center text-gray-900 ${
+                      className={`text-center font-medium text-base text-gray-900 ${
                         index % 2 ? "  " : "bg-gray-200"
                       }`}
                       key={index}
@@ -166,13 +166,13 @@ const Tableproduks = ({ getIdName, isHide, setIsHide }) => {
               </tbody>
             </table>
             <div className="flex justify-between mt-3">
-              <div className="text-sm">
+              <div className="text-sm font-medium">
                 Showing 1 to {searchResults.length} of {searchResults.length}{" "}
                 entries
               </div>
               <div className="space-x-1">
                 <span
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className="border-[1px] font-normal bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -261,12 +261,12 @@ const Tableproduks = ({ getIdName, isHide, setIsHide }) => {
               </tbody>
             </table>
             <div className="flex justify-between mt-3">
-              <div className="text-sm">
+              <div className="text-sm font-medium">
                 Showing {indexOfFirstItem + 1} to{" "}
                 {Math.min(indexOfLastItem, produks.length)} of {produks.length}{" "}
                 entries
               </div>
-              <div className="space-x-1 flex">
+              <div className="space-x-1 flex font-normal">
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}

@@ -15,7 +15,7 @@ const ButtonAddKategori = ({ kategoris, setKategoris }) => {
         buttonLabel={
           <div className="text-base font-semibold font-titilium">Add</div>
         }
-        className={`bg-purple-600 text-white hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+        className={`bg-purple-600 text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
         modalContent={
           <FormAddKategori
             setKategoris={setKategoris}

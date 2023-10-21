@@ -24,6 +24,7 @@ const FormInputProduk = ({
   setIsKategoriProdukEmpty,
   setIsHargaBeliProdukEmpty,
   setIsHargaJualProdukEmpty,
+  stok,
 }) => {
   console.log();
   const [kategoris, setKategoris] = useState([]);
@@ -184,7 +185,7 @@ const FormInputProduk = ({
             type="text"
             className="w-1/5 h-10 focus:outline-none font-semibold bg-gray-300 cursor-default border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 mb-3"
             placeholder="Harga Jual"
-            value={0}
+            value={stok ? stok : 0}
             readOnly
           />
         </div>

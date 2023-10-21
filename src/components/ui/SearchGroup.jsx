@@ -12,7 +12,7 @@ const SearchGroup = ({ onSubmit, value, onChange, placeholder }) => {
           onSubmit();
         }}
       >
-        <label htmlFor="" className="me-2 text-gray-900">
+        <label htmlFor="" className="me-2 font-medium text-gray-900">
           Search:
         </label>
         <input
@@ -20,7 +20,7 @@ const SearchGroup = ({ onSubmit, value, onChange, placeholder }) => {
           placeholder={`Cari ${placeholder}`}
           value={value}
           onChange={onChange}
-          className="rounded-l  w-48 focus:outline-none ps-2 h-full border-[1px] border-e-0 border-gray-300 placeholder:text-sm"
+          className="rounded-l font-medium w-48 focus:outline-none ps-2 h-full border-[1px] border-e-0 border-gray-300 placeholder:text-sm"
           required
         />
         <button

@@ -45,10 +45,21 @@ export default {
             transform: "rotate(360deg)",
           },
         },
+        slideDown: {
+          "0%": {
+            transform: "translateY(-100%)",
+          },
+
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
       },
       animation: {
         blink: "blink 8s ease-in-out infinite",
         rotates: "rotates 4s linear infinite",
+        rotatesIn: "rotates 4s ease-in-out",
+        slideDown: "slideDown 0.5s ease-in-out",
       },
     },
   },

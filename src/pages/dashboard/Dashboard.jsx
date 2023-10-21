@@ -3,7 +3,7 @@ import LayoutPage from "../../layout/PageLayout";
 const Dashboard = () => {
   return (
     <LayoutPage>
-      <div className="  ">
+      <div className="">
         <div
           className={`p-6 space-y-6 font-acme text-lg font-normal text-gray-950 `}
         >

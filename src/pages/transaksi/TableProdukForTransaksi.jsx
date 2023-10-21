@@ -30,7 +30,7 @@ const Tableproduks = ({ getSelected, onClose }) => {
   // Fungsi untuk mencari Produk berdasarkan nama
   const searchProduk = () => {
     const results = produks.filter((item) => {
-      return item.nama.toLowerCase().includes(searchTerm.toLowerCase());
+      return item.nama_produk.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
     setSearchResults(results);
@@ -52,8 +52,8 @@ const Tableproduks = ({ getSelected, onClose }) => {
   const currentItems = produks.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <div>
-      <div className="bg-colorTwo p-6 space-y-3  rounded ">
-        <div className="flex justify-between h-full">
+      <div className="bg-colorTwo p-6 space-y-3 rounded font-normal">
+        <div className="flex justify-between h-full ">
           <div className="space-x-1 flex ">
             <label htmlFor="" className="my-auto ">
               Show
@@ -157,7 +157,8 @@ const Tableproduks = ({ getSelected, onClose }) => {
                             getSelected(
                               item.barcode,
                               item.nama_produk,
-                              item.harga_jual
+                              item.harga_jual,
+                              item.stok
                             );
                             onClose();
                           }}
@@ -256,7 +257,8 @@ const Tableproduks = ({ getSelected, onClose }) => {
                             getSelected(
                               item.barcode,
                               item.nama_produk,
-                              item.harga_jual
+                              item.harga_jual,
+                              item.stok
                             );
                             onClose();
                           }}

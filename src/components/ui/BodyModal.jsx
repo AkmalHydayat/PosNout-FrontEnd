@@ -3,18 +3,30 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const BodyModal = ({ children, isVisible, onClose }) => {
-  if (!isVisible) return null;
-
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center font-titilium bg-black bg-opacity-25 backdrop-blur-sm shadow-cus"
+      className={`fixed inset-0 ${
+        isVisible ? "visible bg-black/30" : "invisible"
+      } flex items-center justify-center font-titilium  backdrop-blur-sm transition-colors`}
       id="wrapper"
     >
-      <div className="w-[500px] relative text-lg font-semibold bg-colorTwo rounded-md">
+      <div
+        className={`${
+          isVisible
+            ? "scale-100 opacity-100 delay-150 duration-300"
+            : "scale-75 opacity-10"
+        } w-[500px] relative text-lg transition-all font-semibold bg-colorTwo rounded-md`}
+      >
         {/* Button Close Modal */}
         <button
-          className="text-colorTwo absolute z-20 -end-2 -top-2 bg-purple-600 px-2 rounded-lg  hover:bg-purple-700 hover:shadow-sm"
-          onClick={onClose}
+          className={`text-colorTwo ${
+            isVisible
+              ? "scale-100 opacity-100  duration-300"
+              : "scale-75 opacity-0"
+          } absolute z-20 -end-2 -top-2 bg-purple-600 px-2 rounded-lg  hover:bg-purple-700 hover:shadow-sm`}
+          onClick={() => {
+            onClose();
+          }}
         >
           <FontAwesomeIcon icon={faXmark} />
         </button>

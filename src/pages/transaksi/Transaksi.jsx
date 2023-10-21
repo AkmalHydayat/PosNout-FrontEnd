@@ -2,14 +2,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LayoutPage from "../../layout/PageLayout";
-import ButtonBgSec from "../../components/ui/ButtonBgSec";
 import DateNow from "../../components/Date";
 import { TableTransaksi } from "./TableTransaksi";
 import transaksiListData from "./TransaksiListData";
 import { useEffect, useState } from "react";
 import ButtonGetProduk from "./ButtonGetProduk";
 import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import axios from "axios";
+import ButtonPayment from "./ButtonPayment";
 
+const MySwal = withReactContent(Swal);
 /* eslint-disable react/prop-types */
 const Transaksi = () => {
   const { hari, month, year } = DateNow();
@@ -18,6 +22,7 @@ const Transaksi = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [produkSelect, setProdukSelect] = useState("");
+  const [produkStokSelect, setProdukStokSelect] = useState(0);
   const [produkBarcodeSelect, setProdukBarcodeSelect] = useState("");
   const [produkHargaSelect, setProdukHargaSelect] = useState("");
   const [jumlah, setJumlah] = useState("");
@@ -45,8 +50,41 @@ const Transaksi = () => {
     if (existingTransaksi) {
       // Jika produk dengan barcode yang sama sudah ada,
       // tambahkan jumlahnya
-      existingTransaksi.jumlah += jumlahToAdd;
+      if (existingTransaksi.jumlah >= produkStokSelect) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "rgb(147 51 234)",
+          color: "#f5f5f5",
+          iconColor: "#f5f5f5",
+        });
 
+        Toast.fire({
+          icon: "warning",
+          title: "Stok barang tidak mencukupi",
+        });
+        return;
+      } else if (existingTransaksi.jumlah + jumlahToAdd > produkStokSelect) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          timer: 2000,
+          background: "rgb(147 51 234)",
+          color: "#f5f5f5",
+          iconColor: "#f5f5f5",
+        });
+
+        Toast.fire({
+          icon: "warning",
+          title: "Stok barang tidak mencukupi",
+        });
+        return;
+      } else {
+        existingTransaksi.jumlah += jumlahToAdd;
+      }
       // Pastikan bahwa existingTransaksi.jumlah adalah angka
       if (isNaN(existingTransaksi.jumlah) || existingTransaksi.jumlah <= 0) {
         // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
@@ -58,14 +96,6 @@ const Transaksi = () => {
       existingTransaksi.total =
         existingTransaksi.harga * existingTransaksi.jumlah;
 
-      // Pastikan bahwa existingTransaksi.total adalah angka
-      if (isNaN(existingTransaksi.total) || existingTransaksi.total <= 0) {
-        // Tampilkan pesan kesalahan atau lakukan tindakan yang sesuai
-        console.error("Total harus berupa angka positif.");
-        return;
-      }
-
-      // Update transaksiList
       const updatedTransaksiList = [...transaksiList];
       setTransaksiList(updatedTransaksiList);
     } else {
@@ -83,6 +113,19 @@ const Transaksi = () => {
 
       // Menambahkan transaksi ke dalam transaksiList
       setTransaksiList([...transaksiList, newTransaksiList]);
+      console.log(newTransaksiList);
+    }
+  };
+
+  const tambahTransaksi = async (transaksi) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/tambahTransaksi",
+        transaksi
+      );
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Terjadi kesalahan:", error.message);
     }
   };
 
@@ -102,10 +145,11 @@ const Transaksi = () => {
     setSearchResults([]);
   };
 
-  const getSelected = (barcode, nama, harga) => {
+  const getSelected = (barcode, nama, harga, stok) => {
     setProdukSelect(nama);
     setProdukBarcodeSelect(barcode);
     setProdukHargaSelect(harga);
+    setProdukStokSelect(stok);
   };
 
   const [invoiceNumber, setInvoiceNumber] = useState("");
@@ -136,35 +180,9 @@ const Transaksi = () => {
     generateInvoice();
   }, []);
 
-  const editJumlah = (newJumlah, barcode) => {
-    const updatedTransaksiList = transaksiList.map((list) => {
-      if (list.barcode === barcode) {
-        list.jumlah = newJumlah;
-        // Update total based on the new jumlah
-        list.total = list.harga * newJumlah;
-      }
-
-      return list;
-    });
-
-    setJumlah(updatedTransaksiList);
-    // Perbarui juga searchResults jika id ada dalam hasil pencarian
-    if (isSearching) {
-      const updatedSearchResults = searchResults.map((list) => {
-        if (list.barcode === barcode) {
-          list.jumlah = newJumlah;
-          // Update total based on the new jumlah
-          list.total = list.harga * newJumlah;
-        }
-        return list;
-      });
-      setSearchResults(updatedSearchResults);
-    }
-  };
-
   return (
     <LayoutPage>
-      <div className={` p-6 font-titilium`}>
+      <div className={`p-6 font-titilium`}>
         <div className=" text-3xl mb-3 text-gray-900 font-semibold">
           Transaksi
         </div>
@@ -219,28 +237,52 @@ const Transaksi = () => {
                   className=""
                   onSubmit={(e) => {
                     e.preventDefault();
+
+                    // Inisialisasi variabel kesalahan
+                    let hasErrors = false;
+
+                    // Validasi produkBarcodeSelect
                     if (produkBarcodeSelect === "") {
                       setIsBarcodeEmpty(true);
-                    } else if (produkBarcodeSelect !== "") {
+                      hasErrors = true;
+                    } else {
                       setIsBarcodeEmpty(false);
                     }
 
+                    // Validasi jumlah
                     if (jumlah === "") {
                       setIsJumlahEmpty(true);
-                    } else if (jumlah !== "") {
+                      hasErrors = true;
+                    } else {
                       setIsJumlahEmpty(false);
                     }
 
-                    // Check all conditions and execute the final block if none of the conditions are met
-                    if (produkBarcodeSelect !== "" && jumlah !== "") {
-                      // Your existing logic for addTransaksi
+                    if (jumlah > produkStokSelect) {
+                      const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        background: "rgb(147 51 234)",
+                        color: "#f5f5f5",
+                        iconColor: "#f5f5f5",
+                      });
+
+                      Toast.fire({
+                        icon: "warning",
+                        title: "Stok barang tidak mencukupi",
+                      });
+                      hasErrors = true;
+                    }
+
+                    // Jika tidak ada kesalahan, tambahkan transaksi
+                    if (!hasErrors) {
                       addTransaksi();
                       setProdukSelect("");
+                      setProdukStokSelect(0);
                       setProdukBarcodeSelect("");
                       setProdukHargaSelect("");
                       setJumlah("");
-                      setIsBarcodeEmpty(false);
-                      setIsJumlahEmpty(false);
                     }
                   }}
                 >
@@ -257,7 +299,12 @@ const Transaksi = () => {
                           /[^0-9]/g,
                           ""
                         );
-                        setJumlah(sanitizedValue);
+                        if (sanitizedValue.charAt(0) === "0") {
+                          // Angka 0 berada di awal inputan, jadi kita menghapusnya
+                          setJumlah(sanitizedValue.slice(1));
+                        } else {
+                          setJumlah(sanitizedValue);
+                        }
                       }}
                       placeholder="Jumlah Pesanan"
                       className={`bg-white ${emptyJumlahStyle} focus:outline-none  font-acme placeholder:font-titilium placeholder:text-sm placeholder:text-gray-500 w-2/4 px-2 me-6 rounded`}
@@ -284,9 +331,27 @@ const Transaksi = () => {
                   </span>
                   <span className="font-acme text-lg">{invoiceNumber}</span>
                 </div>
-                <button className="bg-purple-600 hover:bg-purple-700 px-3 py-1.5 text-white font-bold rounded text-sm flex justify-center items-center">
+                <ButtonPayment
+                  searchTerm={searchTerm}
+                  stopSearch={stopSearch}
+                  setSearchTerm={setSearchTerm}
+                  searchResults={searchResults}
+                  setJumlah={setJumlah}
+                  isSearching={isSearching}
+                  addTransaksi={addTransaksi}
+                  transaksiList={transaksiList}
+                  searchTransaksi={searchTransaksi}
+                  produkSelect={produkSelect}
+                  produkHargaSelect={produkHargaSelect}
+                  invoiceNumber={invoiceNumber}
+                  formattedTotal={formattedTotal}
+                />
+                {/* <button
+                
+                  className="bg-purple-600 hover:bg-purple-700 px-3 py-1.5 text-white font-bold rounded text-sm flex justify-center items-center"
+                >
                   Bayar
-                </button>
+                </button> */}
               </div>
               <div className="text-5xl mt-6 font-acme text-end">
                 <span className="me-2">Rp.</span>
@@ -302,7 +367,6 @@ const Transaksi = () => {
               setSearchTerm={setSearchTerm}
               searchResults={searchResults}
               setJumlah={setJumlah}
-              editJumlah={editJumlah}
               isSearching={isSearching}
               addTransaksi={addTransaksi}
               transaksiList={transaksiList}
@@ -318,3 +382,29 @@ const Transaksi = () => {
 };
 
 export default Transaksi;
+
+// const editJumlah = (newJumlah, barcode) => {
+//   const updatedTransaksiList = transaksiList.map((list) => {
+//     if (list.barcode === barcode) {
+//       list.jumlah = newJumlah;
+//       // Update total based on the new jumlah
+//       list.total = list.harga * newJumlah;
+//     }
+
+//     return list;
+//   });
+
+//   setJumlah(updatedTransaksiList);
+//   // Perbarui juga searchResults jika id ada dalam hasil pencarian
+//   if (isSearching) {
+//     const updatedSearchResults = searchResults.map((list) => {
+//       if (list.barcode === barcode) {
+//         list.jumlah = newJumlah;
+//         // Update total based on the new jumlah
+//         list.total = list.harga * newJumlah;
+//       }
+//       return list;
+//     });
+//     setSearchResults(updatedSearchResults);
+//   }
+// };

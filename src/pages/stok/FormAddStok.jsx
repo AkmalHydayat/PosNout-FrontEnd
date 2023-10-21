@@ -83,18 +83,15 @@ const FormAddStok = ({
             <label htmlFor="" className="text-gray-900 text-base">
               Barcode
             </label>
-            <div className="flex w-full">
+            <div className="flex w-full " onClick={() => setIsHide(!isHide)}>
               <input
                 type="text"
-                className={`${emptyBarcodeStyle} w-full h-10 focus:outline-none bg-gray-300 border-gray-300 border-[1px] text-gray-900 rounded-s px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 cursor-default`}
+                className={`${emptyBarcodeStyle} cursor-pointer w-full h-10 focus:outline-none bg-gray-300 border-gray-300 border-[1px] text-gray-900 rounded-s px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 `}
                 placeholder=""
                 readOnly
                 value={idSelect ? idSelect : "-"}
               />
-              <div
-                className="w-10 bg-purple-600  rounded-e flex justify-center items-center cursor-pointer"
-                onClick={() => setIsHide(!isHide)}
-              >
+              <div className="w-10 bg-purple-600  rounded-e flex justify-center items-center cursor-pointer">
                 <FontAwesomeIcon
                   icon={faMagnifyingGlass}
                   className="text-white "
