@@ -12,7 +12,7 @@ const ModalPayment = ({
   onClose,
   onClick,
   invoiceNumber,
-  formattedTotal,
+  totalJumlah,
 }) => {
   return (
     <div>
@@ -22,7 +22,7 @@ const ModalPayment = ({
       <BodyModalPayment
         isVisible={isVisible}
         onClose={onClose}
-        formattedTotal={formattedTotal}
+        totalJumlah={totalJumlah}
         invoiceNumber={invoiceNumber}
       >
         {/* modal content berisi formAddStok */}

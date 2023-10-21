@@ -19,6 +19,7 @@ export const TableTransaksi = ({
   transaksiList,
   editJumlah,
   setJumlah,
+  deleteData,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(8); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
@@ -149,7 +150,10 @@ export const TableTransaksi = ({
                         {item.total}
                       </td>
                       <td className="w-20 py-2 border-[1px] border-gray-300 space-x-2">
-                        <button className="bg-red-600 hover:bg-red-700 rounded">
+                        <button
+                          className="bg-red-600 hover:bg-red-700 rounded"
+                          onClick={deleteData}
+                        >
                           <FontAwesomeIcon
                             className="py-1 px-2 text-colorTwo"
                             icon={faTrash}
@@ -260,7 +264,10 @@ export const TableTransaksi = ({
                         {item.total}
                       </td>
                       <td className="w-20 py-2 border-[1px] border-gray-300 space-x-2">
-                        <button className="bg-red-600 hover:bg-red-700 rounded">
+                        <button
+                          className="bg-red-600 hover:bg-red-700 rounded"
+                          onClick={() => deleteData(item.barcode)}
+                        >
                           <FontAwesomeIcon
                             className="py-1 px-2 text-colorTwo"
                             icon={faTrash}

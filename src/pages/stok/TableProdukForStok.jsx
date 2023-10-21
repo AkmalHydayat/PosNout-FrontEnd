@@ -239,6 +239,9 @@ const Tableproduks = ({ getIdName, isHide, setIsHide, produks }) => {
                           onClick={() => {
                             getIdName(item.barcode, item.nama_produk);
                             setIsHide(!isHide);
+                            setTimeout(() => {
+                              setCurrentPage(1);
+                            }, 1000);
                           }}
                         >
                           Select

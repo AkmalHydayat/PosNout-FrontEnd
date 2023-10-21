@@ -10,7 +10,6 @@ import ButtonGetProduk from "./ButtonGetProduk";
 import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import axios from "axios";
 import ButtonPayment from "./ButtonPayment";
 
 const MySwal = withReactContent(Swal);
@@ -38,7 +37,7 @@ const Transaksi = () => {
   const totalJumlah = transaksiList.reduce((accumulator, transaksi) => {
     return accumulator + transaksi.total;
   }, 0);
-  const formattedTotal = totalJumlah.toLocaleString("id-ID");
+  // const totalJumlah = totalJumlah.toLocaleString("id-ID");
 
   const addTransaksi = () => {
     const existingTransaksi = transaksiList.find(
@@ -113,19 +112,6 @@ const Transaksi = () => {
 
       // Menambahkan transaksi ke dalam transaksiList
       setTransaksiList([...transaksiList, newTransaksiList]);
-      console.log(newTransaksiList);
-    }
-  };
-
-  const tambahTransaksi = async (transaksi) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/tambahTransaksi",
-        transaksi
-      );
-      console.log(response.data.message);
-    } catch (error) {
-      console.error("Terjadi kesalahan:", error.message);
     }
   };
 
@@ -179,6 +165,18 @@ const Transaksi = () => {
     // Panggil generate Invoice hanya saat komponen pertama kali dirender
     generateInvoice();
   }, []);
+
+  const deleteData = (id) => {
+    const updatedTransaksiList = transaksiList.filter((item) => item.id !== id);
+    setTransaksiList(updatedTransaksiList);
+    // Perbarui juga searchResults jika id dihapus dari hasil pencarian
+    if (isSearching) {
+      const updatedSearchResults = searchResults.filter(
+        (item) => item.id !== id
+      );
+      setSearchResults(updatedSearchResults);
+    }
+  };
 
   return (
     <LayoutPage>
@@ -344,7 +342,7 @@ const Transaksi = () => {
                   produkSelect={produkSelect}
                   produkHargaSelect={produkHargaSelect}
                   invoiceNumber={invoiceNumber}
-                  formattedTotal={formattedTotal}
+                  totalJumlah={totalJumlah}
                 />
                 {/* <button
                 
@@ -356,7 +354,7 @@ const Transaksi = () => {
               <div className="text-5xl mt-6 font-acme text-end">
                 <span className="me-2">Rp.</span>
 
-                <span> {formattedTotal}</span>
+                <span> {totalJumlah}</span>
               </div>
             </div>
           </div>
@@ -373,6 +371,7 @@ const Transaksi = () => {
               searchTransaksi={searchTransaksi}
               produkSelect={produkSelect}
               produkHargaSelect={produkHargaSelect}
+              deleteData={deleteData}
             />
           </div>
         </div>

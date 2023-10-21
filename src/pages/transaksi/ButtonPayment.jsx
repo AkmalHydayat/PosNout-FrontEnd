@@ -4,7 +4,9 @@ import { useState } from "react";
 import { faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons";
 import ModalPayment from "./ModalPayment";
 import { PaymentTable } from "./PaymentTable";
+import Swal from "sweetalert2";
 
+// const MySwal = withReactContent(Swal);
 const ButtonPayment = ({
   searchTransaksi,
   stopSearch,
@@ -15,17 +17,36 @@ const ButtonPayment = ({
   transaksiList,
   setJumlah,
   invoiceNumber,
-  formattedTotal,
+  totalJumlah,
 }) => {
   const [showModal, setShowModal] = useState(false);
-
   return (
     <div>
       <ModalPayment
         isVisible={showModal}
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          if (transaksiList.length === 0) {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "top",
+              showConfirmButton: false,
+              timer: 2000,
+              background: "rgb(147 51 234)",
+              color: "#f5f5f5",
+              iconColor: "#f5f5f5",
+            });
+
+            Toast.fire({
+              icon: "warning",
+              title: "tidak ada barang yang diinputkan!",
+              width: 400,
+            });
+          } else {
+            setShowModal(true);
+          }
+        }}
         onClose={() => setShowModal(false)}
-        formattedTotal={formattedTotal}
+        totalJumlah={totalJumlah}
         invoiceNumber={invoiceNumber}
         buttonLabel={
           <div>

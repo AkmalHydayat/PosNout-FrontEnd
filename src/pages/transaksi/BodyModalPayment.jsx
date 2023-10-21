@@ -1,14 +1,29 @@
 /* eslint-disable react/prop-types */
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
 const BodyModalGetProduk = ({
   children,
   isVisible,
   onClose,
-  formattedTotal,
+  totalJumlah,
   invoiceNumber,
 }) => {
+  const [pembayaran, setPembayaran] = useState("");
+  const [kembalian, setKembalian] = useState(0);
+
+  const calculateKembalian = (pembayaran, totalJumlah) => {
+    if (pembayaran !== "") {
+      const bayar = parseInt(pembayaran); // Menggunakan parseInt
+      const total = parseInt(totalJumlah);
+
+      if (!isNaN(bayar) && !isNaN(total)) {
+        const kembalian = bayar - total;
+        setKembalian(kembalian); // Menggunakan toFixed(2) untuk 2 desimal
+      }
+    }
+  };
   return (
     <div
       className={`fixed inset-0 ${
@@ -54,7 +69,7 @@ const BodyModalGetProduk = ({
             <div className="flex border-b-[1px] pb-2 border-purple-200 ">
               <div className="w-32">Total Belanja</div>
               <div className="text-end w-10">:</div>
-              <div className="text-end w-72">{formattedTotal}</div>
+              <div className="text-end w-72">{totalJumlah}</div>
             </div>
             <div className="flex border-b-[1px] pb-2 border-purple-200 ">
               <div className="w-32">Bayar</div>
@@ -63,14 +78,19 @@ const BodyModalGetProduk = ({
                 <input
                   type="text"
                   className="bg-transparent text-end accent-black focus:outline-purple-600"
-                  placeholder="bayar "
+                  placeholder="bayar"
+                  value={pembayaran}
+                  onChange={(e) => {
+                    setPembayaran(e.target.value);
+                    calculateKembalian(e.target.value, totalJumlah);
+                  }}
                 />
               </div>
             </div>
             <div className="flex border-b-[1px] pb-2 border-purple-200 ">
               <div className="w-32">Kembalian</div>
               <div className="text-end w-10">:</div>
-              <div className="text-end  w-72">0</div>
+              <div className="text-end  w-72">{kembalian}</div>
             </div>
             <div className="flex justify-evenly py-2">
               <button className="px-3 py-1 w-32 bg-purple-600 rounded text-white">
