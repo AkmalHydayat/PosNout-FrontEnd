@@ -5,7 +5,11 @@ export const PaymentTable = ({ transaksiList }) => {
     <div>
       <div className="  py-5 rounded">
         <div className="text-xl  text-center  font-bold">Data Barang</div>
-        <div className=" px-6 py-5">
+        <div
+          className={`${
+            transaksiList.length > 8 ? "h-96 overflow-y-scroll" : ""
+          }   px-6 py-5`}
+        >
           <table className="">
             <thead className="border-[1px] border-gray-300 ">
               <tr className="text-center font-bold text-base text-gray-900">

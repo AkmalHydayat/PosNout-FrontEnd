@@ -4,11 +4,12 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
-import { getStoks } from "../../utils/api";
+import { getProduks, getStoks } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import DateNow from "../../components/Date";
 /* eslint-disable react/prop-types */
 const FormAddStok = ({
+  setProduks,
   getIdName,
   onClose,
   isHide,
@@ -37,6 +38,8 @@ const FormAddStok = ({
       const updatedStoks = await getStoks();
       setStoks(updatedStoks);
       navigate("/Stok"); // <-- Gunakan hook di dalam fungsi komponen
+      const updatedProduks = await getProduks();
+      setProduks(updatedProduks);
       console.log(response.data.message);
     } catch (error) {
       console.error("Terjadi kesalahan:", error.message);

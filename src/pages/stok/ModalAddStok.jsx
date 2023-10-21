@@ -5,6 +5,8 @@ import ButtonModal from "../../components/ui/ButtonModal";
 import BodyModalAddStok from "./BodyModalAddStok";
 
 const ModalAddStok = ({
+  produks,
+  setProduks,
   getIdName,
   isHide,
   setIsHide,
@@ -17,7 +19,7 @@ const ModalAddStok = ({
 }) => {
   return (
     <div>
-      <ButtonModal onClick={onClick} className={className} >
+      <ButtonModal onClick={onClick} className={className}>
         {buttonLabel}
       </ButtonModal>
       <BodyModalAddStok
@@ -26,6 +28,8 @@ const ModalAddStok = ({
         isHide={isHide}
         setIsHide={setIsHide}
         getIdName={getIdName}
+        produks={produks}
+        setProduks={setProduks}
       >
         {/* modal content berisi formAddStok */}
         {modalContent}

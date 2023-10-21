@@ -67,7 +67,7 @@ const BodyModalGetProduk = ({
                 />
               </div>
             </div>
-            <div className="flex border-b-[1px] border-purple-200 ">
+            <div className="flex border-b-[1px] pb-2 border-purple-200 ">
               <div className="w-32">Kembalian</div>
               <div className="text-end w-10">:</div>
               <div className="text-end  w-72">0</div>

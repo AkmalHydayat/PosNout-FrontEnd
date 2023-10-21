@@ -10,6 +10,8 @@ const BodyModalAddStok = ({
   isHide,
   setIsHide,
   getIdName,
+  produks,
+  setProduks,
 }) => {
   return (
     <div
@@ -47,8 +49,8 @@ const BodyModalAddStok = ({
           <div
             className={`${
               isHide
-                ? "scale-100 opacity-100 delay-300 translate-y-0 rotate-0 "
-                : "scale-50 opacity-0 delay-100 translate-y-32 rotate-45"
+                ? "scale-100 opacity-100 delay-300 translate-y-0 "
+                : "scale-50 opacity-0 delay-50 translate-y-32 "
             }  relative text-base transition-all ease-out font-semibold bg-colorTwo rounded-md`}
           >
             <TableProdukList
@@ -56,6 +58,8 @@ const BodyModalAddStok = ({
               getIdName={getIdName}
               isHide={isHide}
               setIsHide={setIsHide}
+              produks={produks}
+              setProduks={setProduks}
             />
           </div>
         </div>

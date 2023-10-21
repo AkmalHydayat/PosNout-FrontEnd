@@ -4,7 +4,7 @@ import FormAddStok from "./FormAddStok";
 import { useState } from "react";
 import ModalAddStok from "./ModalAddStok";
 
-const ButtonAddStok = ({ setStoks }) => {
+const ButtonAddStok = ({ setStoks, produks, setProduks }) => {
   const [showModal, setShowModal] = useState(false);
   const [isHide, setIsHide] = useState(false);
   const [idSelect, setIdSelect] = useState("");
@@ -16,6 +16,8 @@ const ButtonAddStok = ({ setStoks }) => {
   return (
     <div>
       <ModalAddStok
+        setProduks={setProduks}
+        produks={produks}
         getIdName={getIdName}
         isHide={isHide}
         setIsHide={setIsHide}
@@ -25,6 +27,7 @@ const ButtonAddStok = ({ setStoks }) => {
         buttonLabel={<div className="text-base font-semibold">Add</div>}
         modalContent={
           <FormAddStok
+            setProduks={setProduks}
             getIdName={getIdName}
             idSelect={idSelect}
             namaSelect={namaSelect}

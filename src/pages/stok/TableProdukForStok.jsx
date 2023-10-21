@@ -1,31 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import SearchGroup from "../../components/ui/SearchGroup";
 import ButtonSelect from "../../components/ui/ButtonSelect";
-import { getProduks } from "../../utils/api";
 
-const Tableproduks = ({ getIdName, isHide, setIsHide }) => {
+const Tableproduks = ({ getIdName, isHide, setIsHide, produks }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-
-  const [produks, setProduks] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getProduks();
-        setProduks(data);
-      } catch (error) {
-        // Handle error jika diperlukan
-        console.error("Error in component:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   // Fungsi untuk mencari Produk berdasarkan nama
   const searchProduk = () => {
@@ -155,6 +138,12 @@ const Tableproduks = ({ getIdName, isHide, setIsHide }) => {
                           onClick={() => {
                             getIdName(item.barcode, item.nama_produk);
                             setIsHide(!isHide);
+                            setSearchTerm("");
+                            setSearchResults([]);
+                            setTimeout(() => {
+                              setIsSearching(false);
+                              setCurrentPage(1);
+                            }, 1000);
                           }}
                         >
                           Select

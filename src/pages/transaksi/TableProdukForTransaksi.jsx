@@ -161,6 +161,9 @@ const Tableproduks = ({ getSelected, onClose }) => {
                               item.stok
                             );
                             onClose();
+                            setTimeout(() => {
+                              setCurrentPage(1);
+                            }, 1000);
                           }}
                         >
                           Select
@@ -261,6 +264,9 @@ const Tableproduks = ({ getSelected, onClose }) => {
                               item.stok
                             );
                             onClose();
+                            setTimeout(() => {
+                              setCurrentPage(1);
+                            }, 1000);
                           }}
                         >
                           Select
