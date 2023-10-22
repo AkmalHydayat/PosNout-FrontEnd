@@ -2,7 +2,15 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BodyModalPayment = ({ children, isVisible, onClose }) => {
+const BodyModalPayment = ({
+  children,
+  isVisible,
+  onClose,
+  setIsSearching,
+  setSearchTerm,
+  setSearchResults,
+  setCurrentPage,
+}) => {
   return (
     <div
       className={`fixed inset-0 ${
@@ -23,6 +31,12 @@ const BodyModalPayment = ({ children, isVisible, onClose }) => {
             className="text-white absolute z-20 -end-2 -top-2 bg-purple-600 px-2 rounded-lg  hover:bg-purple-700 hover:shadow-sm"
             onClick={() => {
               onClose();
+              setTimeout(() => {
+                setIsSearching(false);
+                setSearchTerm("");
+                setSearchResults([]);
+                setCurrentPage(1);
+              }, 500);
             }}
           >
             <FontAwesomeIcon icon={faXmark} />

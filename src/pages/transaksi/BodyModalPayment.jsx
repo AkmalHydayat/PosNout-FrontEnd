@@ -51,6 +51,8 @@ const BodyModalGetProduk = ({
             className="text-colorTwo absolute z-20 -end-2 -top-2 bg-purple-600 px-2 rounded-lg  hover:bg-purple-700 hover:shadow-sm"
             onClick={() => {
               onClose();
+              setKembalian(0);
+              setPembayaran("");
             }}
           >
             <FontAwesomeIcon icon={faXmark} />
@@ -81,8 +83,15 @@ const BodyModalGetProduk = ({
                   placeholder="bayar"
                   value={pembayaran}
                   onChange={(e) => {
-                    setPembayaran(e.target.value);
-                    calculateKembalian(e.target.value, totalJumlah);
+                    const inputValue = e.target.value;
+                    const sanitizedValue = inputValue.replace(/[^0-9]/g, "");
+                    if (sanitizedValue.charAt(0) === "0") {
+                      // Angka 0 berada di awal inputan, jadi kita menghapusnya
+                      setPembayaran(sanitizedValue.slice(1));
+                    } else {
+                      setPembayaran(sanitizedValue);
+                    }
+                    calculateKembalian(sanitizedValue, totalJumlah);
                   }}
                 />
               </div>

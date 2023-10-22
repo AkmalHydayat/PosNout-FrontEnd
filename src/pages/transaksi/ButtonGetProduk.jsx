@@ -6,12 +6,20 @@ import ModalGetProduk from "./ModalGetProduk";
 import TableProdukForTransaksi from "./TableProdukForTransaksi";
 
 const ButtonGetProduk = ({ getSelected }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(8);
   return (
     <div>
       <ModalGetProduk
         isVisible={showModal}
+        setCurrentPage={setCurrentPage}
+        setIsSearching={setIsSearching}
+        setSearchTerm={setSearchTerm}
+        setSearchResults={setSearchResults}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
         buttonLabel={
@@ -22,6 +30,16 @@ const ButtonGetProduk = ({ getSelected }) => {
           <TableProdukForTransaksi
             getSelected={getSelected}
             onClose={() => setShowModal(false)}
+            setIsSearching={setIsSearching}
+            setSearchTerm={setSearchTerm}
+            setSearchResults={setSearchResults}
+            searchTerm={searchTerm}
+            searchResults={searchResults}
+            isSearching={isSearching}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            perPage={perPage}
+            setPerPage={setPerPage}
           />
         }
       ></ModalGetProduk>

@@ -2,31 +2,52 @@
 import {
   faCaretDown,
   faCaretUp,
-  faPen,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import SearchGroup from "../../components/ui/SearchGroup";
 
-export const TableTransaksi = ({
-  searchTransaksi,
-  stopSearch,
-  searchTerm,
-  setSearchTerm,
-  searchResults,
-  isSearching,
-  transaksiList,
-  editJumlah,
-  setJumlah,
-  deleteData,
-}) => {
+export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(8); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
   const currentItems = transaksiList.slice(indexOfFirstItem, indexOfLastItem);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
 
+  const deleteData = (barcode) => {
+    const updatedTransaksiList = transaksiList.filter(
+      (item) => item.barcode !== barcode
+    );
+    setTransaksiList(updatedTransaksiList);
+    // Perbarui juga searchResults jika id dihapus dari hasil pencarian
+    if (isSearching) {
+      console.log("hello from is searching");
+      const updatedSearchResults = searchResults.filter(
+        (item) => item.barcode !== barcode
+      );
+      setSearchResults(updatedSearchResults);
+    }
+  };
+
+  const searchTransaksi = () => {
+    const results = transaksiList.filter((item) =>
+      item.namaProduk.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setSearchResults(results);
+    setIsSearching(true);
+  };
+
+  // Fungsi untuk menutup table pecarian
+  const stopSearch = () => {
+    setIsSearching(false);
+    setSearchTerm(""); // Mengosongkan input pencarian saat pencarian dihentikan
+    setSearchResults([]);
+  };
   return (
     <div>
       <div className="bg-colorTwo p-6 space-y-3  rounded">
@@ -86,13 +107,7 @@ export const TableTransaksi = ({
                     Harga
                   </td>
                   <td className="w-14  py-2 border-[1px] border-gray-300">
-                    Qty{" "}
-                    <span>
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        className=" ms-1.5 text-xs text-purple-600 "
-                      />
-                    </span>
+                    Qty
                   </td>
                   <td className="w-32 py-2 border-[1px] border-gray-300">
                     Total
@@ -133,18 +148,7 @@ export const TableTransaksi = ({
                         {item.harga}
                       </td>
                       <td className="w-14 py-2 border-[1px] border-gray-300">
-                        <input
-                          type="text"
-                          onChange={(e) => {
-                            const newValue = parseInt(e.target.value, 10);
-                            if (!isNaN(newValue)) {
-                              editJumlah(newValue, item.barcode);
-                              setJumlah(newValue);
-                            }
-                          }}
-                          value={item.jumlah}
-                          className="w-10 bg-transparent text-center focus:outline-1 focus:outline-gray-900 focus:bg-white focus:font-semibold"
-                        />
+                        {item.jumlah}
                       </td>
                       <td className="w-32 py-2 border-[1px] border-gray-300">
                         {item.total}
@@ -152,7 +156,7 @@ export const TableTransaksi = ({
                       <td className="w-20 py-2 border-[1px] border-gray-300 space-x-2">
                         <button
                           className="bg-red-600 hover:bg-red-700 rounded"
-                          onClick={deleteData}
+                          onClick={() => deleteData(item.barcode)}
                         >
                           <FontAwesomeIcon
                             className="py-1 px-2 text-colorTwo"
@@ -200,13 +204,7 @@ export const TableTransaksi = ({
                     Harga
                   </td>
                   <td className="w-14  py-2 border-[1px] border-gray-300">
-                    Qty{" "}
-                    <span>
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        className=" ms-1.5 text-xs text-purple-600 "
-                      />
-                    </span>
+                    Qty
                   </td>
                   <td className="w-32 py-2 border-[1px] border-gray-300">
                     Total
@@ -246,19 +244,8 @@ export const TableTransaksi = ({
                       <td className="w-28 py-2 border-[1px] border-gray-300">
                         {item.harga}
                       </td>
-                      <td className="w-14 py-2 border-[1px] border-gray-300">
-                        <input
-                          type="text"
-                          onChange={(e) => {
-                            const newValue = parseInt(e.target.value, 10);
-                            if (!isNaN(newValue)) {
-                              editJumlah(newValue, item.barcode);
-                              setJumlah(newValue);
-                            }
-                          }}
-                          value={item.jumlah}
-                          className="w-10 bg-transparent text-center focus:outline-1 focus:outline-gray-900 focus:bg-white focus:font-semibold"
-                        />
+                      <td className="w-14 py-2 border-[1px]  border-gray-300">
+                        {item.jumlah}
                       </td>
                       <td className="w-32 py-2 border-[1px] border-gray-300">
                         {item.total}

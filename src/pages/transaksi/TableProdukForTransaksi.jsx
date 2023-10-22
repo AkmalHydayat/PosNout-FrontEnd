@@ -6,11 +6,20 @@ import SearchGroup from "../../components/ui/SearchGroup";
 import ButtonSelect from "../../components/ui/ButtonSelect";
 import { getProduks } from "../../utils/api";
 
-const Tableproduks = ({ getSelected, onClose }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
-
+const TableprodukForTransaksi = ({
+  getSelected,
+  onClose,
+  setIsSearching,
+  setSearchTerm,
+  setSearchResults,
+  searchTerm,
+  searchResults,
+  isSearching,
+  currentPage,
+  setCurrentPage,
+  perPage,
+  setPerPage,
+}) => {
   const [produks, setProduks] = useState([]);
 
   useEffect(() => {
@@ -44,8 +53,6 @@ const Tableproduks = ({ getSelected, onClose }) => {
     setSearchResults([]);
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(8); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
 
@@ -163,6 +170,9 @@ const Tableproduks = ({ getSelected, onClose }) => {
                             onClose();
                             setTimeout(() => {
                               setCurrentPage(1);
+                              setIsSearching("");
+                              setSearchTerm([]);
+                              setSearchResults(false);
                             }, 1000);
                           }}
                         >
@@ -266,6 +276,9 @@ const Tableproduks = ({ getSelected, onClose }) => {
                             onClose();
                             setTimeout(() => {
                               setCurrentPage(1);
+                              setIsSearching("");
+                              setSearchTerm([]);
+                              setSearchResults(false);
                             }, 1000);
                           }}
                         >
@@ -310,4 +323,4 @@ const Tableproduks = ({ getSelected, onClose }) => {
   );
 };
 
-export default Tableproduks;
+export default TableprodukForTransaksi;

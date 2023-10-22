@@ -9,17 +9,12 @@ import { useEffect, useState } from "react";
 import ButtonGetProduk from "./ButtonGetProduk";
 import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import ButtonPayment from "./ButtonPayment";
 
-const MySwal = withReactContent(Swal);
 /* eslint-disable react/prop-types */
 const Transaksi = () => {
   const { hari, month, year } = DateNow();
   const { transaksiList, setTransaksiList } = transaksiListData();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
   const [produkSelect, setProdukSelect] = useState("");
   const [produkStokSelect, setProdukStokSelect] = useState(0);
   const [produkBarcodeSelect, setProdukBarcodeSelect] = useState("");
@@ -115,22 +110,6 @@ const Transaksi = () => {
     }
   };
 
-  const searchTransaksi = () => {
-    const results = transaksiList.filter((item) =>
-      item.namaProduk.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    setSearchResults(results);
-    setIsSearching(true);
-  };
-
-  // Fungsi untuk menutup table pecarian
-  const stopSearch = () => {
-    setIsSearching(false);
-    setSearchTerm(""); // Mengosongkan input pencarian saat pencarian dihentikan
-    setSearchResults([]);
-  };
-
   const getSelected = (barcode, nama, harga, stok) => {
     setProdukSelect(nama);
     setProdukBarcodeSelect(barcode);
@@ -166,15 +145,54 @@ const Transaksi = () => {
     generateInvoice();
   }, []);
 
-  const deleteData = (id) => {
-    const updatedTransaksiList = transaksiList.filter((item) => item.id !== id);
-    setTransaksiList(updatedTransaksiList);
-    // Perbarui juga searchResults jika id dihapus dari hasil pencarian
-    if (isSearching) {
-      const updatedSearchResults = searchResults.filter(
-        (item) => item.id !== id
-      );
-      setSearchResults(updatedSearchResults);
+  const setSubmit = (e) => {
+    e.preventDefault();
+
+    // Inisialisasi variabel kesalahan
+    let hasErrors = false;
+
+    // Validasi produkBarcodeSelect
+    if (produkBarcodeSelect === "") {
+      setIsBarcodeEmpty(true);
+      hasErrors = true;
+    } else {
+      setIsBarcodeEmpty(false);
+    }
+
+    // Validasi jumlah
+    if (jumlah === "") {
+      setIsJumlahEmpty(true);
+      hasErrors = true;
+    } else {
+      setIsJumlahEmpty(false);
+    }
+
+    if (jumlah > produkStokSelect) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 2000,
+        background: "rgb(147 51 234)",
+        color: "#f5f5f5",
+        iconColor: "#f5f5f5",
+      });
+
+      Toast.fire({
+        icon: "warning",
+        title: "Stok barang tidak mencukupi",
+      });
+      hasErrors = true;
+    }
+
+    // Jika tidak ada kesalahan, tambahkan transaksi
+    if (!hasErrors) {
+      addTransaksi();
+      setProdukSelect("");
+      setProdukStokSelect(0);
+      setProdukBarcodeSelect("");
+      setProdukHargaSelect("");
+      setJumlah("");
     }
   };
 
@@ -230,60 +248,7 @@ const Transaksi = () => {
                   />
                   <ButtonGetProduk getSelected={getSelected} />
                 </div>
-                <form
-                  action=""
-                  className=""
-                  onSubmit={(e) => {
-                    e.preventDefault();
-
-                    // Inisialisasi variabel kesalahan
-                    let hasErrors = false;
-
-                    // Validasi produkBarcodeSelect
-                    if (produkBarcodeSelect === "") {
-                      setIsBarcodeEmpty(true);
-                      hasErrors = true;
-                    } else {
-                      setIsBarcodeEmpty(false);
-                    }
-
-                    // Validasi jumlah
-                    if (jumlah === "") {
-                      setIsJumlahEmpty(true);
-                      hasErrors = true;
-                    } else {
-                      setIsJumlahEmpty(false);
-                    }
-
-                    if (jumlah > produkStokSelect) {
-                      const Toast = Swal.mixin({
-                        toast: true,
-                        position: "top",
-                        showConfirmButton: false,
-                        timer: 2000,
-                        background: "rgb(147 51 234)",
-                        color: "#f5f5f5",
-                        iconColor: "#f5f5f5",
-                      });
-
-                      Toast.fire({
-                        icon: "warning",
-                        title: "Stok barang tidak mencukupi",
-                      });
-                      hasErrors = true;
-                    }
-
-                    // Jika tidak ada kesalahan, tambahkan transaksi
-                    if (!hasErrors) {
-                      addTransaksi();
-                      setProdukSelect("");
-                      setProdukStokSelect(0);
-                      setProdukBarcodeSelect("");
-                      setProdukHargaSelect("");
-                      setJumlah("");
-                    }
-                  }}
-                >
+                <form action="" className="" onSubmit={setSubmit}>
                   <div className=" flex h-8">
                     <label htmlFor="" className="w-1/4 ">
                       Qty
@@ -330,26 +295,10 @@ const Transaksi = () => {
                   <span className="font-acme text-lg">{invoiceNumber}</span>
                 </div>
                 <ButtonPayment
-                  searchTerm={searchTerm}
-                  stopSearch={stopSearch}
-                  setSearchTerm={setSearchTerm}
-                  searchResults={searchResults}
-                  setJumlah={setJumlah}
-                  isSearching={isSearching}
-                  addTransaksi={addTransaksi}
                   transaksiList={transaksiList}
-                  searchTransaksi={searchTransaksi}
-                  produkSelect={produkSelect}
-                  produkHargaSelect={produkHargaSelect}
                   invoiceNumber={invoiceNumber}
                   totalJumlah={totalJumlah}
                 />
-                {/* <button
-                
-                  className="bg-purple-600 hover:bg-purple-700 px-3 py-1.5 text-white font-bold rounded text-sm flex justify-center items-center"
-                >
-                  Bayar
-                </button> */}
               </div>
               <div className="text-5xl mt-6 font-acme text-end">
                 <span className="me-2">Rp.</span>
@@ -358,20 +307,10 @@ const Transaksi = () => {
               </div>
             </div>
           </div>
-          <div className=" shadow-lg rounded  shadow-gray-400">
+          <div className="shadow-lg rounded shadow-gray-400">
             <TableTransaksi
-              searchTerm={searchTerm}
-              stopSearch={stopSearch}
-              setSearchTerm={setSearchTerm}
-              searchResults={searchResults}
-              setJumlah={setJumlah}
-              isSearching={isSearching}
-              addTransaksi={addTransaksi}
               transaksiList={transaksiList}
-              searchTransaksi={searchTransaksi}
-              produkSelect={produkSelect}
-              produkHargaSelect={produkHargaSelect}
-              deleteData={deleteData}
+              setTransaksiList={setTransaksiList}
             />
           </div>
         </div>

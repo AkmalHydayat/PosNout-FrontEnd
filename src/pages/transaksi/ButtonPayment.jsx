@@ -7,19 +7,9 @@ import { PaymentTable } from "./PaymentTable";
 import Swal from "sweetalert2";
 
 // const MySwal = withReactContent(Swal);
-const ButtonPayment = ({
-  searchTransaksi,
-  stopSearch,
-  searchTerm,
-  setSearchTerm,
-  searchResults,
-  isSearching,
-  transaksiList,
-  setJumlah,
-  invoiceNumber,
-  totalJumlah,
-}) => {
+const ButtonPayment = ({ transaksiList, invoiceNumber, totalJumlah }) => {
   const [showModal, setShowModal] = useState(false);
+
   return (
     <div>
       <ModalPayment
@@ -58,19 +48,8 @@ const ButtonPayment = ({
           </div>
         }
         className={`bg-purple-600 text-white  hover:bg-purple-700 rounded hover:shadow-purple-700 group px-3 py-1 font-semibold text-md`}
-        modalContent={
-          <PaymentTable
-            searchTerm={searchTerm}
-            stopSearch={stopSearch}
-            setSearchTerm={setSearchTerm}
-            searchResults={searchResults}
-            setJumlah={setJumlah}
-            isSearching={isSearching}
-            transaksiList={transaksiList}
-            searchTransaksi={searchTransaksi}
-          />
-        }
-      ></ModalPayment>
+        modalContent={<PaymentTable transaksiList={transaksiList} />}
+      />
     </div>
   );
 };

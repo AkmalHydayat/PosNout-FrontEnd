@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-export const PaymentTable = ({ transaksiList }) => {
+export const  PaymentTable = ({ transaksiList }) => {
   return (
     <div>
       <div className="  py-5 rounded">
