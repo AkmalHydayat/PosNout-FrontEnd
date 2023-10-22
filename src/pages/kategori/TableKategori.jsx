@@ -6,7 +6,7 @@ import ButtonEditKategori from "./ButtonEditKategori";
 import ButtonDeleteKategori from "./ButtonDeleteKategori";
 import SearchGroup from "../../components/ui/SearchGroup";
 
-const TableKategori = ({ kategoris, setKategoris }) => {
+const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -126,7 +126,8 @@ const TableKategori = ({ kategoris, setKategoris }) => {
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
                             setKategoris={setKategoris}
-                          />
+                         AlertMessage={AlertMessage}
+                         />
                           <ButtonDeleteKategori
                             setKategoris={setKategoris}
                             id={item.id}
@@ -134,6 +135,7 @@ const TableKategori = ({ kategoris, setKategoris }) => {
                             isSearching={isSearching}
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
+                            AlertMessage={AlertMessage}
                           />
                         </div>
                       </td>
@@ -208,7 +210,8 @@ const TableKategori = ({ kategoris, setKategoris }) => {
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
                             setKategoris={setKategoris}
-                          />
+                         AlertMessage={AlertMessage}
+                         />
                           <ButtonDeleteKategori
                             setKategoris={setKategoris}
                             id={item.id}
@@ -216,6 +219,7 @@ const TableKategori = ({ kategoris, setKategoris }) => {
                             isSearching={isSearching}
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
+                            AlertMessage={AlertMessage}
                           />
                         </div>
                       </td>

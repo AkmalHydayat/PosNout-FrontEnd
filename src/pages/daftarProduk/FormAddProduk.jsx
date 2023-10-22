@@ -2,36 +2,37 @@
 import axios from "axios";
 import { getProduks } from "../../utils/api";
 import FormInputProduk from "./FormInputProduk";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 /* eslint-disable react/prop-types */
-const FormAddProduk = ({ produks, setProduks, onClose }) => {
-  const [newNamaProduk, setNewNamaProduk] = useState("");
-  const [newSatuanProduk, setNewSatuanProduk] = useState("");
-  const [newKategoriProduk, setNewKategoriProduk] = useState("");
-  const [newHargaBeliProduk, setNewHargaBeliProduk] = useState("");
-  const [newHargaJualProduk, setNewHargaJualProduk] = useState("");
-  const [isNamaProdukEmpty, setIsNamaProdukEmpty] = useState(false);
-  const [isSatuanProdukEmpty, setIsSatuanProdukEmpty] = useState(false);
-  const [isKategoriProdukEmpty, setIsKategoriProdukEmpty] = useState(false);
-  const [isHargaBeliProdukEmpty, setIsHargaBeliProdukEmpty] = useState(false);
-  const [isHargaJualProdukEmpty, setIsHargaJualProdukEmpty] = useState(false);
-  const [errorInput, setErrorInput] = useState("");
-  const emptyNamaProdukStyle = isNamaProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
-  const emptySatuanProdukStyle = isSatuanProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
-  const emptyKategoriProdukStyle = isKategoriProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
-  const emptyHargaBeliProdukStyle = isHargaBeliProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
-  const emptyHargaJualProdukStyle = isHargaJualProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
+const FormAddProduk = ({
+  produks,
+  setProduks,
+  onClose,
+  AlertMessage,
+  errorInput,
+  newNamaProduk,
+  setNewNamaProduk,
+  newSatuanProduk,
+  setNewSatuanProduk,
+  newKategoriProduk,
+  setNewKategoriProduk,
+  newHargaBeliProduk,
+  setNewHargaBeliProduk,
+  newHargaJualProduk,
+  setNewHargaJualProduk,
+  setErrorInput,
+  setIsNamaProdukEmpty,
+  setIsSatuanProdukEmpty,
+  setIsKategoriProdukEmpty,
+  setIsHargaBeliProdukEmpty,
+  setIsHargaJualProdukEmpty,
+  emptyNamaProdukStyle,
+  emptySatuanProdukStyle,
+  emptyKategoriProdukStyle,
+  emptyHargaBeliProdukStyle,
+  emptyHargaJualProdukStyle,
+}) => {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
   let productIdCounter =
@@ -117,6 +118,7 @@ const FormAddProduk = ({ produks, setProduks, onClose }) => {
       setNewHargaJualProduk("");
       setErrorInput("");
       onClose();
+      AlertMessage("berhasil menambahkan produk", 370, "success");
     }
   };
   return (

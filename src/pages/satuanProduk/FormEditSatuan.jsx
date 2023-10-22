@@ -14,6 +14,7 @@ const FormEditSatuan = ({
   setSearchResults,
   searchResults,
   setSatuans,
+  AlertMessage
 }) => {
   if (!isVisible) return null;
 
@@ -79,6 +80,7 @@ const FormEditSatuan = ({
           e.preventDefault();
           updateSatuan();
           onClose();
+          AlertMessage("berhasil memperbarui", 310, "success");
         }}
       >
         <div className="px-6 py-4 space-y-2 text-start ">

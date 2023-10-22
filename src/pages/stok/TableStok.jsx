@@ -5,7 +5,7 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 import SearchGroup from "../../components/ui/SearchGroup";
 
-const TableStok = ({ stoks }) => {
+const TableStok = ({ stoks,AlertMessage }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);

@@ -12,6 +12,7 @@ const ButtonDeleteSatuan = ({
   isSearching,
   setSearchResults,
   searchResults,
+  AlertMessage
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -37,6 +38,7 @@ const ButtonDeleteSatuan = ({
             onClose={() => setShowModal(false)}
             id={id}
             list={"satuan"}
+            AlertMessage={AlertMessage}
           />
         }
         className={`bg-red-600 text-white hover:bg-red-700 rounded group px-3 py-1 font-semibold text-base`}

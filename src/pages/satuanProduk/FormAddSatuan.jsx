@@ -6,9 +6,16 @@ import { useNavigate } from "react-router-dom";
 import { getSatuans } from "../../utils/api";
 
 /* eslint-disable react/prop-types */
-const FormAddSatuan = ({ onClose, satuans, setSatuans }) => {
-  const [errorInput, setErrorInput] = useState("");
-  const [namaNewSatuan, setNamaNewSatuan] = useState("");
+const FormAddSatuan = ({
+  onClose,
+  satuans,
+  setSatuans,
+  AlertMessage,
+  errorInput,
+  setErrorInput,
+  namaNewSatuan,
+  setNamaNewSatuan,
+}) => {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
@@ -43,6 +50,7 @@ const FormAddSatuan = ({ onClose, satuans, setSatuans }) => {
       setNamaNewSatuan("");
       setErrorInput("");
       onClose();
+      AlertMessage("berhasil menambahkan", 310, "success");
     }
   };
   return (

@@ -4,9 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getKategoris } from "../../utils/api";
 
-const FormAddKategori = ({ onClose, kategoris, setKategoris }) => {
-  const [errorInput, setErrorInput] = useState("");
-  const [namaNewKategori, setNamaNewKategori] = useState("");
+const FormAddKategori = ({
+  onClose,
+  kategoris,
+  setKategoris,
+  AlertMessage,
+  errorInput,
+  setErrorInput,
+  namaNewKategori,
+  setNamaNewKategori,
+}) => {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
@@ -41,6 +48,7 @@ const FormAddKategori = ({ onClose, kategoris, setKategoris }) => {
       setNamaNewKategori("");
       setErrorInput("");
       onClose();
+      AlertMessage("berhasil menambahkan", 310, "success");
     }
   };
 

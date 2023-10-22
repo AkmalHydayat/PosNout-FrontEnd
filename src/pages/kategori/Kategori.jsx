@@ -3,10 +3,13 @@ import LayoutPage from "../../layout/PageLayout";
 import ButtonAddKategori from "./ButtonAddKategori";
 import TableKategori from "./TableKategori";
 import { getKategoris } from "../../utils/api";
+import AlertShow from "../../components/ui/Alert";
 
 const Kategori = () => {
   const [kategoris, setKategoris] = useState([]);
-
+  const AlertMessage = (message, width, icon) => {
+    AlertShow(message, width, icon);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,9 +35,10 @@ const Kategori = () => {
             <ButtonAddKategori
               kategoris={kategoris}
               setKategoris={setKategoris}
+              AlertMessage={AlertMessage}
             />
           </div>
-          <TableKategori kategoris={kategoris} setKategoris={setKategoris} />
+          <TableKategori kategoris={kategoris} setKategoris={setKategoris} AlertMessage={AlertMessage} />
         </div>
       </div>
     </LayoutPage>

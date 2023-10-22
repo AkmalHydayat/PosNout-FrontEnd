@@ -6,7 +6,7 @@ import ButtonEditSatuan from "./ButtonEditSatuan";
 import ButtonDeleteSatuan from "./ButtonDeleteSatuan";
 import SearchGroup from "../../components/ui/SearchGroup";
 
-const TableSatuan = ({ satuans, setSatuans }) => {
+const TableSatuan = ({ satuans, setSatuans,AlertMessage }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -125,6 +125,7 @@ const TableSatuan = ({ satuans, setSatuans }) => {
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
                             setSatuans={setSatuans}
+                          AlertMessage={AlertMessage}
                           />
                           <ButtonDeleteSatuan
                             setSatuans={setSatuans}
@@ -133,6 +134,7 @@ const TableSatuan = ({ satuans, setSatuans }) => {
                             isSearching={isSearching}
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
+                            AlertMessage={AlertMessage}
                           />
                         </div>
                       </td>
@@ -207,6 +209,7 @@ const TableSatuan = ({ satuans, setSatuans }) => {
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
                             setSatuans={setSatuans}
+                          AlertMessage={AlertMessage}
                           />
                           <ButtonDeleteSatuan
                             setSatuans={setSatuans}
@@ -215,6 +218,7 @@ const TableSatuan = ({ satuans, setSatuans }) => {
                             isSearching={isSearching}
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
+                            AlertMessage={AlertMessage}
                           />
                         </div>
                       </td>

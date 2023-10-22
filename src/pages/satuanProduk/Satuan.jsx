@@ -4,11 +4,14 @@ import LayoutPage from "../../layout/PageLayout";
 import ButtonAddSatuan from "./ButtonAddSatuan";
 import TableSatuan from "./TableSatuan";
 import { getSatuans } from "../../utils/api";
+import AlertShow from "../../components/ui/Alert";
 
 /* eslint-disable react/prop-types */
 const Satuan = () => {
   const [satuans, setSatuans] = useState([]);
-
+  const AlertMessage = (message, width, icon) => {
+    AlertShow(message, width, icon);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,9 +34,9 @@ const Satuan = () => {
         </div>
         <div className="rounded bg-colorTwo shadow-lg shadow-gray-400">
           <div className="px-6 py-3 border-b-2 border-gray-400">
-            <ButtonAddSatuan satuans={satuans} setSatuans={setSatuans} />
+            <ButtonAddSatuan satuans={satuans} setSatuans={setSatuans} AlertMessage={AlertMessage} />
           </div>
-          <TableSatuan satuans={satuans} setSatuans={setSatuans} />
+          <TableSatuan satuans={satuans} setSatuans={setSatuans} AlertMessage={AlertMessage} />
         </div>
       </div>
     </LayoutPage>

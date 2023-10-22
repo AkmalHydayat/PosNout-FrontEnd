@@ -15,6 +15,7 @@ const DeleteConfirmProduk = ({
   itemToDelete,
   id,
   list,
+  AlertMessage,
 }) => {
   if (!isVisible) return null;
 
@@ -50,7 +51,10 @@ const DeleteConfirmProduk = ({
           className={
             "text-center w-16 py-[2px] bg-purple-600 hover:bg-purple-700 rounded text-white"
           }
-          onClick={() => handleDelete(id)}
+          onClick={() => {
+            handleDelete(id);
+            AlertMessage("berhasil menghapus", 310, "success");
+          }}
         >
           Ya
         </ButtonBgSec>

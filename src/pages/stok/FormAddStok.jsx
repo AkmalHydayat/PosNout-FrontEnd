@@ -7,6 +7,7 @@ import { useState } from "react";
 import { getProduks, getStoks } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import DateNow from "../../components/Date";
+import AlertShow from "../../components/ui/Alert";
 /* eslint-disable react/prop-types */
 const FormAddStok = ({
   setProduks,
@@ -18,6 +19,9 @@ const FormAddStok = ({
   namaSelect,
   setStoks,
 }) => {
+  const AlertMessage = (message, width, icon) => {
+    AlertShow(message, width, icon);
+  };
   const { hari, month, year } = DateNow();
   const [jumlah, setJumlah] = useState("");
   const [isBarcodeEmpty, setIsBarcodeEmpty] = useState(false);
@@ -66,6 +70,7 @@ const FormAddStok = ({
             setJumlah("");
             getIdName("", "");
             onClose();
+            AlertMessage("berhasil menambahkan stok", 350, "success");
           }
         }}
       >

@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LayoutPage from "../../layout/PageLayout";
 import DateNow from "../../components/Date";
@@ -8,10 +8,9 @@ import transaksiListData from "./TransaksiListData";
 import { useEffect, useState } from "react";
 import ButtonGetProduk from "./ButtonGetProduk";
 import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Swal from "sweetalert2";
 import ButtonPayment from "./ButtonPayment";
+import AlertShow from "../../components/ui/Alert";
 
-/* eslint-disable react/prop-types */
 const Transaksi = () => {
   const { hari, month, year } = DateNow();
   const { transaksiList, setTransaksiList } = transaksiListData();
@@ -29,6 +28,10 @@ const Transaksi = () => {
     ? "border-[1px] border-red-500"
     : "border-[1px] border-gray-400";
 
+  const AlertMessage = (message, width, icon) => {
+    AlertShow(message, width, icon);
+  };
+
   const totalJumlah = transaksiList.reduce((accumulator, transaksi) => {
     return accumulator + transaksi.total;
   }, 0);
@@ -45,36 +48,10 @@ const Transaksi = () => {
       // Jika produk dengan barcode yang sama sudah ada,
       // tambahkan jumlahnya
       if (existingTransaksi.jumlah >= produkStokSelect) {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 2000,
-          background: "rgb(147 51 234)",
-          color: "#f5f5f5",
-          iconColor: "#f5f5f5",
-        });
-
-        Toast.fire({
-          icon: "warning",
-          title: "Stok barang tidak mencukupi",
-        });
+        AlertMessage("Stok barang tidak mencukupi", 350, "warning");
         return;
       } else if (existingTransaksi.jumlah + jumlahToAdd > produkStokSelect) {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          timer: 2000,
-          background: "rgb(147 51 234)",
-          color: "#f5f5f5",
-          iconColor: "#f5f5f5",
-        });
-
-        Toast.fire({
-          icon: "warning",
-          title: "Stok barang tidak mencukupi",
-        });
+        AlertMessage("Stok barang tidak mencukupi", 350, "warning");
         return;
       } else {
         existingTransaksi.jumlah += jumlahToAdd;
@@ -153,6 +130,7 @@ const Transaksi = () => {
 
     // Validasi produkBarcodeSelect
     if (produkBarcodeSelect === "") {
+      AlertMessage("input tidak boleh kosong", 350, "warning");
       setIsBarcodeEmpty(true);
       hasErrors = true;
     } else {
@@ -161,6 +139,7 @@ const Transaksi = () => {
 
     // Validasi jumlah
     if (jumlah === "") {
+      AlertMessage("input tidak boleh kosong", 350, "warning");
       setIsJumlahEmpty(true);
       hasErrors = true;
     } else {
@@ -168,20 +147,7 @@ const Transaksi = () => {
     }
 
     if (jumlah > produkStokSelect) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        timer: 2000,
-        background: "rgb(147 51 234)",
-        color: "#f5f5f5",
-        iconColor: "#f5f5f5",
-      });
-
-      Toast.fire({
-        icon: "warning",
-        title: "Stok barang tidak mencukupi",
-      });
+      AlertMessage("Stok barang tidak mencukupi", 350, "warning");
       hasErrors = true;
     }
 
@@ -298,6 +264,7 @@ const Transaksi = () => {
                   transaksiList={transaksiList}
                   invoiceNumber={invoiceNumber}
                   totalJumlah={totalJumlah}
+                  AlertMessage={AlertMessage}
                 />
               </div>
               <div className="text-5xl mt-6 font-acme text-end">

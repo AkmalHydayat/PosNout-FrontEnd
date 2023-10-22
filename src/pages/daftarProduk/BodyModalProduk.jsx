@@ -2,12 +2,21 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BodyModal = ({
+const BodyModalProduk = ({
   children,
   isVisible,
   onClose,
+  setNewNamaProduk,
+  setNewSatuanProduk,
+  setNewKategoriProduk,
+  setNewHargaBeliProduk,
+  setNewHargaJualProduk,
+  setIsNamaProdukEmpty,
+  setIsSatuanProdukEmpty,
+  setIsKategoriProdukEmpty,
+  setIsHargaBeliProdukEmpty,
+  setIsHargaJualProdukEmpty,
   setErrorInput,
-  setItem,
 }) => {
   return (
     <div
@@ -32,8 +41,17 @@ const BodyModal = ({
           } absolute z-20 -end-2 -top-2 bg-purple-600 px-2 rounded-lg  hover:bg-purple-700 hover:shadow-sm`}
           onClick={() => {
             onClose();
+            setNewNamaProduk("");
+            setNewSatuanProduk("");
+            setNewKategoriProduk("");
+            setNewHargaBeliProduk("");
+            setNewHargaJualProduk("");
+            setIsNamaProdukEmpty(false);
+            setIsSatuanProdukEmpty(false);
+            setIsKategoriProdukEmpty(false);
+            setIsHargaBeliProdukEmpty(false);
+            setIsHargaJualProdukEmpty(false);
             setErrorInput("");
-            setItem("");
           }}
         >
           <FontAwesomeIcon icon={faXmark} />
@@ -45,4 +63,4 @@ const BodyModal = ({
   );
 };
 
-export default BodyModal;
+export default BodyModalProduk;

@@ -14,7 +14,8 @@ const FormEditProduk = ({
   searchResults,
   setProduks,
   produks,
-  stok
+  stok,
+  AlertMessage,
 }) => {
   if (!isVisible) return null;
   const [newNamaProduk, setNewNamaProduk] = useState("");
@@ -159,6 +160,7 @@ const FormEditProduk = ({
     } else {
       updateProduk();
       onClose();
+      AlertMessage("berhasil memperbarui", 310, "success");
     }
   };
 

@@ -19,6 +19,7 @@ const ButtonEditProduk = ({
   id,
   produks,
   stok,
+  AlertMessage,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -50,6 +51,7 @@ const ButtonEditProduk = ({
             setProduks={setProduks}
             produks={produks}
             stok={stok}
+            AlertMessage={AlertMessage}
           />
         }
         className={`text-white bg-sky-700 hover:bg-sky-800 rounded group px-3 py-1 font-semibold text-base`}

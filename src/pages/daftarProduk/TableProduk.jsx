@@ -6,7 +6,7 @@ import ButtonEditProduk from "./ButtonEditProduk";
 import ButtonDeleteProduk from "./ButtonDeleteProduk";
 import SearchGroup from "../../components/ui/SearchGroup";
 
-const TableProduk = ({ produks, setProduks }) => {
+const TableProduk = ({ produks, setProduks, AlertMessage }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -167,6 +167,7 @@ const TableProduk = ({ produks, setProduks }) => {
                             setProduks={setProduks}
                             id={item.id}
                             produks={produks}
+                            AlertMessage={AlertMessage}
                             stok={item.stok}
                           />
                           <ButtonDeleteProduk
@@ -176,6 +177,7 @@ const TableProduk = ({ produks, setProduks }) => {
                             isSearching={isSearching}
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
+                            AlertMessage={AlertMessage}
                           />
                         </div>
                       </td>
@@ -291,6 +293,7 @@ const TableProduk = ({ produks, setProduks }) => {
                             setProduks={setProduks}
                             id={item.id}
                             produks={produks}
+                            AlertMessage={AlertMessage}
                             stok={item.stok}
                           />
                           <ButtonDeleteProduk
@@ -300,6 +303,7 @@ const TableProduk = ({ produks, setProduks }) => {
                             isSearching={isSearching}
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
+                            AlertMessage={AlertMessage}
                           />
                         </div>
                       </td>

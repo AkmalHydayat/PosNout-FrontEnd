@@ -11,13 +11,20 @@ const Modal = ({
   isVisible,
   onClose,
   onClick,
+  setErrorInput,
+  setItem,
 }) => {
   return (
     <div>
       <ButtonModal onClick={onClick} className={className}>
         {buttonLabel}
       </ButtonModal>
-      <BodyModal isVisible={isVisible} onClose={onClose}>
+      <BodyModal
+        isVisible={isVisible}
+        onClose={onClose}
+        setErrorInput={setErrorInput}
+        setItem={setItem}
+      >
         {modalContent}
       </BodyModal>
     </div>

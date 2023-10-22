@@ -13,6 +13,7 @@ const FormEditKategori = ({
   isSearching,
   setSearchResults,
   searchResults,
+  AlertMessage,
   setKategoris,
 }) => {
   if (!isVisible) return null;
@@ -81,6 +82,7 @@ const FormEditKategori = ({
           e.preventDefault();
           updateKategori();
           onClose();
+          AlertMessage("berhasil memperbarui", 310, "success");
         }}
       >
         <div className="px-6 py-4 space-y-2 text-start ">

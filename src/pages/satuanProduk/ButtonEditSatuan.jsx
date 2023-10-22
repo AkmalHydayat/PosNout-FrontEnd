@@ -12,6 +12,7 @@ const ButtonEditSatuan = ({
   setSearchResults,
   searchResults,
   setSatuans,
+  AlertMessage
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -36,6 +37,7 @@ const ButtonEditSatuan = ({
             searchResults={searchResults}
             setSearchResults={setSearchResults}
             setSatuans={setSatuans}
+            AlertMessage={AlertMessage}
           />
         }
         className={`text-white bg-sky-700 hover:bg-sky-800 rounded group px-3 py-1 font-semibold text-base`}

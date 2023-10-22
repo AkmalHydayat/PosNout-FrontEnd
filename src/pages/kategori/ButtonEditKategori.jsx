@@ -12,6 +12,7 @@ const ButtonEditKategori = ({
   setSearchResults,
   searchResults,
   setKategoris,
+  AlertMessage
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -37,6 +38,7 @@ const ButtonEditKategori = ({
             searchResults={searchResults}
             setSearchResults={setSearchResults}
             setKategoris={setKategoris}
+            AlertMessage={AlertMessage}
           />
         }
       ></Modal>

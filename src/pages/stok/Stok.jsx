@@ -8,7 +8,6 @@ import { getProduks, getStoks } from "../../utils/api";
 /* eslint-disable react/prop-types */
 const Stok = () => {
   const [stoks, setStoks] = useState([]);
-
   const [produks, setProduks] = useState([]);
 
   useEffect(() => {
@@ -46,7 +45,11 @@ const Stok = () => {
         </div>
         <div className="rounded bg-colorTwo shadow-lg shadow-gray-400">
           <div className="px-6 py-3 border-b-2 border-gray-400">
-            <ButtonAddStok setStoks={setStoks} produks={produks} setProduks={setProduks} />
+            <ButtonAddStok
+              setStoks={setStoks}
+              produks={produks}
+              setProduks={setProduks}
+            />
           </div>
           <TableStok stoks={stoks} setStoks={setStoks} />
         </div>

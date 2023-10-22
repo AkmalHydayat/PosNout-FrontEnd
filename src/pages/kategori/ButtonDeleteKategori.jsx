@@ -12,6 +12,7 @@ const ButtonDeleteKategori = ({
   isSearching,
   setSearchResults,
   searchResults,
+  AlertMessage,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -38,6 +39,7 @@ const ButtonDeleteKategori = ({
             onClose={() => setShowModal(false)}
             id={id}
             list={"kategori"}
+            AlertMessage={AlertMessage}
           />
         }
       ></Modal>
