@@ -16,6 +16,15 @@ const ModalAddStok = ({
   isVisible,
   onClose,
   onClick,
+  setJumlah,
+  setSearchTerm,
+  setSearchResults,
+  setIsSearching,
+  setCurrentPage,
+  searchTerm,
+  searchResults,
+  isSearching,
+  currentPage,
 }) => {
   return (
     <div>
@@ -30,6 +39,15 @@ const ModalAddStok = ({
         getIdName={getIdName}
         produks={produks}
         setProduks={setProduks}
+        setJumlah={setJumlah}
+        searchTerm={searchTerm}
+        searchResults={searchResults}
+        isSearching={isSearching}
+        currentPage={currentPage}
+        setSearchTerm={setSearchTerm}
+        setSearchResults={setSearchResults}
+        setIsSearching={setIsSearching}
+        setCurrentPage={setCurrentPage}
       >
         {/* modal content berisi formAddStok */}
         {modalContent}

@@ -9,6 +9,7 @@ const transaksiListData = () => {
     //   harga: "3000.00",
     //   jumlah: 2,
     //   total: 6000,
+    //   waktuTransaksi: 22 - 10 - 2023,
     // },
     // {
     //   barcode: "BRG00009",
@@ -16,6 +17,7 @@ const transaksiListData = () => {
     //   harga: "3500.00",
     //   jumlah: 5,
     //   total: 17500,
+    //   waktuTransaksi: 22 - 10 - 2023,
     // },
   ]);
 

@@ -13,6 +13,8 @@ const ModalPayment = ({
   onClick,
   invoiceNumber,
   totalJumlah,
+  transaksiList,
+  tanggalSekarang
 }) => {
   return (
     <div>
@@ -24,6 +26,8 @@ const ModalPayment = ({
         onClose={onClose}
         totalJumlah={totalJumlah}
         invoiceNumber={invoiceNumber}
+        transaksiList={transaksiList}
+        tanggalSekarang={tanggalSekarang}
       >
         {/* modal content berisi formAddStok */}
         {modalContent}

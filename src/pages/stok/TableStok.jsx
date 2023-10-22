@@ -5,7 +5,7 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 import SearchGroup from "../../components/ui/SearchGroup";
 
-const TableStok = ({ stoks,AlertMessage }) => {
+const TableStok = ({ stoks }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -97,7 +97,7 @@ const TableStok = ({ stoks,AlertMessage }) => {
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2 border-gray-300"
+                      className=" text-center border-[1px] py-1 border-gray-300"
                       colSpan={5}
                     >
                       Tidak ada hasil pencarian.
@@ -174,7 +174,7 @@ const TableStok = ({ stoks,AlertMessage }) => {
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2  border-gray-300 "
+                      className=" text-center border-[1px] py-1  border-gray-300 "
                       colSpan={5}
                     >
                       Tidak ada Data Tersedia

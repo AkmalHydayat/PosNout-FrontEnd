@@ -27,7 +27,7 @@ const Transaksi = () => {
   const emptyJumlahStyle = isJumlahEmpty
     ? "border-[1px] border-red-500"
     : "border-[1px] border-gray-400";
-
+    const tanggalSekarang = `${hari}-${month}-${year}`;
   const AlertMessage = (message, width, icon) => {
     AlertShow(message, width, icon);
   };
@@ -36,7 +36,7 @@ const Transaksi = () => {
     return accumulator + transaksi.total;
   }, 0);
   // const totalJumlah = totalJumlah.toLocaleString("id-ID");
-
+ 
   const addTransaksi = () => {
     const existingTransaksi = transaksiList.find(
       (transaksi) => transaksi.barcode === produkBarcodeSelect
@@ -77,6 +77,7 @@ const Transaksi = () => {
         harga: produkHargaSelect,
         jumlah: jumlahToAdd,
         total: 0,
+        waktuTransaksi: tanggalSekarang,
       };
 
       // Menghitung total berdasarkan harga dan jumlah
@@ -97,12 +98,7 @@ const Transaksi = () => {
   const [invoiceNumber, setInvoiceNumber] = useState("");
 
   const generateInvoice = () => {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear().toString().slice(-2);
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    const day = currentDate.getDate().toString().padStart(2, "0");
-
-    const formattedDate = `PP${day}${month}${year}`;
+    const formattedDate = `PP${hari}${month}${year}`;
     let newInvoiceNumber = "";
     // periksa apakah invoiceNumber kosong atau tanggalnya sudah berganti
     if (!invoiceNumber || formattedDate !== invoiceNumber.substring(0, 8)) {
@@ -265,6 +261,7 @@ const Transaksi = () => {
                   invoiceNumber={invoiceNumber}
                   totalJumlah={totalJumlah}
                   AlertMessage={AlertMessage}
+                  tanggalSekarang={tanggalSekarang}
                 />
               </div>
               <div className="text-5xl mt-6 font-acme text-end">

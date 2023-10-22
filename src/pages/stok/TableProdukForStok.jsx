@@ -5,11 +5,20 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import SearchGroup from "../../components/ui/SearchGroup";
 import ButtonSelect from "../../components/ui/ButtonSelect";
 
-const Tableproduks = ({ getIdName, isHide, setIsHide, produks }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
-
+const Tableproduks = ({
+  getIdName,
+  isHide,
+  setIsHide,
+  produks,
+  setSearchTerm,
+  setSearchResults,
+  setIsSearching,
+  setCurrentPage,
+  searchTerm,
+  searchResults,
+  isSearching,
+  currentPage,
+}) => {
   // Fungsi untuk mencari Produk berdasarkan nama
   const searchProduk = () => {
     const results = produks.filter((item) => {
@@ -26,8 +35,7 @@ const Tableproduks = ({ getIdName, isHide, setIsHide, produks }) => {
     setSearchResults([]);
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(8); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
+  const [perPage, setPerPage] = useState(12); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
 
@@ -102,7 +110,7 @@ const Tableproduks = ({ getIdName, isHide, setIsHide, produks }) => {
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center font-medium text-base border-[1px] py-2 border-gray-300"
+                      className=" text-center font-medium text-base border-[1px] py-1 border-gray-300"
                       colSpan={7}
                     >
                       Tidak ada hasil pencarian.
@@ -116,25 +124,25 @@ const Tableproduks = ({ getIdName, isHide, setIsHide, produks }) => {
                       }`}
                       key={index}
                     >
-                      <td className="w-36 py-2 border-[1px] border-gray-300">
+                      <td className="w-36 py-1 border-[1px] border-gray-300">
                         {item.barcode}
                       </td>
-                      <td className="w-96 py-2 border-[1px] border-gray-300">
+                      <td className="w-96 py-1 border-[1px] border-gray-300">
                         {item.nama_produk}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.satuan}
                       </td>
 
-                      <td className="w-40 py-2 border-[1px] border-gray-300">
+                      <td className="w-40 py-1 border-[1px] border-gray-300">
                         {item.harga_jual}
                       </td>
-                      <td className="w-16 py-2 border-[1px] border-gray-300">
+                      <td className="w-16 py-1 border-[1px] border-gray-300">
                         {item.stok}
                       </td>
-                      <td className="w-28 py-2 border-[1px] border-gray-300">
+                      <td className="w-28 py-1 border-[1px] border-gray-300">
                         <ButtonSelect
-                          className={`bg-purple-600 px-2 hover:bg-purple-700 py-[1px] rounded text-white text-sm`}
+                          className={`bg-purple-600 px-3 hover:bg-purple-700 py-[1px] rounded text-white text-sm`}
                           onClick={() => {
                             getIdName(item.barcode, item.nama_produk);
                             setIsHide(!isHide);
@@ -202,7 +210,7 @@ const Tableproduks = ({ getIdName, isHide, setIsHide, produks }) => {
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2  border-gray-300 "
+                      className=" text-center border-[1px] py-1  border-gray-300 "
                       colSpan={7}
                     >
                       Tidak ada Data Tersedia
@@ -216,26 +224,26 @@ const Tableproduks = ({ getIdName, isHide, setIsHide, produks }) => {
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
-                      <td className="w-36 py-2 border-[1px] border-gray-300">
+                      <td className="w-36 py-1 border-[1px] border-gray-300">
                         {item.barcode}
                       </td>
-                      <td className="w-96 py-2 border-[1px] border-gray-300">
+                      <td className="w-96 py-1 border-[1px] border-gray-300">
                         {item.nama_produk}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.satuan}
                       </td>
 
-                      <td className="w-40 py-2 border-[1px] border-gray-300 break-words">
+                      <td className="w-40 py-1 border-[1px] border-gray-300 break-words">
                         {item.harga_jual}
                       </td>
 
-                      <td className="w-16 py-2 border-[1px] border-gray-300">
+                      <td className="w-16 py-1 border-[1px] border-gray-300">
                         {item.stok}
                       </td>
-                      <td className="w-28 py-2 border-[1px] border-gray-300">
+                      <td className="w-28 py-1 border-[1px] border-gray-300">
                         <ButtonSelect
-                          className={`bg-purple-600 px-2 hover:bg-purple-700 py-[1px] rounded text-white text-sm`}
+                          className={`bg-purple-600 px-3 hover:bg-purple-700 py-[1px] rounded text-white text-sm`}
                           onClick={() => {
                             getIdName(item.barcode, item.nama_produk);
                             setIsHide(!isHide);

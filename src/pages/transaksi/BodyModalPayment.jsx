@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import { useState } from "react";
 
 const BodyModalGetProduk = ({
@@ -9,9 +10,43 @@ const BodyModalGetProduk = ({
   onClose,
   totalJumlah,
   invoiceNumber,
+  transaksiList,
+  tanggalSekarang,
 }) => {
   const [pembayaran, setPembayaran] = useState("");
   const [kembalian, setKembalian] = useState(0);
+
+  const addLaporanTransaksi = async () => {
+    try {
+      await axios.post("http://localhost:3000/laporanTransaksi", {
+        invoice: invoiceNumber,
+        totalTransaksi: totalJumlah,
+        waktuTransaksi: tanggalSekarang,
+      });
+    } catch (error) {
+      console.error("Gagal menyimpan data transaksi ke database:", error);
+    }
+  };
+
+  const addTransaksiDetail = async () => {
+    const invoice = invoiceNumber; // Gantilah invoiceNumber dengan nilai sesuai kebutuhan
+
+    const transaksiListWithInvoice = transaksiList.map((item) => {
+      return {
+        ...item,
+        invoice: invoice,
+      };
+    });
+
+    try {
+      await axios.post("http://localhost:3000/orderDetail", {
+        transaksiList: transaksiListWithInvoice,
+      });
+      console.log("Data transaksi berhasil disimpan ke database.");
+    } catch (error) {
+      console.error("Gagal menyimpan data transaksi ke database:", error);
+    }
+  };
 
   const calculateKembalian = (pembayaran, totalJumlah) => {
     if (pembayaran !== "") {
@@ -102,8 +137,14 @@ const BodyModalGetProduk = ({
               <div className="text-end  w-72">{kembalian}</div>
             </div>
             <div className="flex justify-evenly py-2">
-              <button className="px-3 py-1 w-32 bg-purple-600 rounded text-white">
-                Bayar & Print
+              <button
+                className="px-3 py-1 w-32 bg-purple-600 rounded text-white"
+                onClick={() => {
+                  addTransaksiDetail();
+                  addLaporanTransaksi();
+                }}
+              >
+                Proses
               </button>
               <button className="px-3 py-1 w-32 bg-purple-600 rounded text-white">
                 Selesai

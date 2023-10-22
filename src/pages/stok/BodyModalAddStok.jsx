@@ -12,6 +12,15 @@ const BodyModalAddStok = ({
   getIdName,
   produks,
   setProduks,
+  setJumlah,
+  setSearchTerm,
+  setSearchResults,
+  setIsSearching,
+  setCurrentPage,
+  searchTerm,
+  searchResults,
+  isSearching,
+  currentPage,
 }) => {
   return (
     <div
@@ -37,6 +46,13 @@ const BodyModalAddStok = ({
               onClose();
               setIsHide(false);
               getIdName("", "");
+              setJumlah("");
+              setTimeout(() => {
+                setSearchTerm("");
+                setSearchResults([]);
+                setIsSearching(false);
+                setCurrentPage(1);
+              }, 500);
             }}
           >
             <FontAwesomeIcon icon={faXmark} />
@@ -60,6 +76,14 @@ const BodyModalAddStok = ({
               setIsHide={setIsHide}
               produks={produks}
               setProduks={setProduks}
+              searchTerm={searchTerm}
+              searchResults={searchResults}
+              isSearching={isSearching}
+              currentPage={currentPage}
+              setSearchTerm={setSearchTerm}
+              setSearchResults={setSearchResults}
+              setIsSearching={setIsSearching}
+              setCurrentPage={setCurrentPage}
             />
           </div>
         </div>

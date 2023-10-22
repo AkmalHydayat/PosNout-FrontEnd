@@ -6,7 +6,7 @@ import ButtonEditSatuan from "./ButtonEditSatuan";
 import ButtonDeleteSatuan from "./ButtonDeleteSatuan";
 import SearchGroup from "../../components/ui/SearchGroup";
 
-const TableSatuan = ({ satuans, setSatuans,AlertMessage }) => {
+const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -96,7 +96,7 @@ const TableSatuan = ({ satuans, setSatuans,AlertMessage }) => {
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2 border-gray-300"
+                      className=" text-center border-[1px] py-1 border-gray-300"
                       colSpan={3}
                     >
                       Tidak ada hasil pencarian.
@@ -125,7 +125,7 @@ const TableSatuan = ({ satuans, setSatuans,AlertMessage }) => {
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
                             setSatuans={setSatuans}
-                          AlertMessage={AlertMessage}
+                            AlertMessage={AlertMessage}
                           />
                           <ButtonDeleteSatuan
                             setSatuans={setSatuans}
@@ -180,7 +180,7 @@ const TableSatuan = ({ satuans, setSatuans,AlertMessage }) => {
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2  border-gray-300 "
+                      className=" text-center border-[1px] py-1  border-gray-300 "
                       colSpan={3}
                     >
                       Tidak ada Data Tersedia
@@ -209,7 +209,7 @@ const TableSatuan = ({ satuans, setSatuans,AlertMessage }) => {
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
                             setSatuans={setSatuans}
-                          AlertMessage={AlertMessage}
+                            AlertMessage={AlertMessage}
                           />
                           <ButtonDeleteSatuan
                             setSatuans={setSatuans}

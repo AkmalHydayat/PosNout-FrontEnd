@@ -4,24 +4,26 @@ import { useState } from "react";
 import { faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons";
 import ModalPayment from "./ModalPayment";
 import { PaymentTable } from "./PaymentTable";
-// import Swal from "sweetalert2";
 
 const ButtonPayment = ({
   transaksiList,
   invoiceNumber,
   totalJumlah,
   AlertMessage,
+  tanggalSekarang
 }) => {
   const [showModal, setShowModal] = useState(false);
+  
 
   return (
     <div>
       <ModalPayment
         isVisible={showModal}
+        tanggalSekarang={tanggalSekarang}
+        transaksiList={transaksiList}
         onClick={() => {
           if (transaksiList.length === 0) {
-            // AlertMessage("tidak ada barang yang diinputkan!", 400);
-            AlertMessage("berhasil menghapus", 310, "success");
+            AlertMessage("tidak ada barang yang diinputkan!", 400, "warning");
           } else {
             setShowModal(true);
           }

@@ -121,7 +121,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2 border-gray-300"
+                      className=" text-center border-[1px] py-1 border-gray-300"
                       colSpan={7}
                     >
                       Tidak ada hasil pencarian.
@@ -135,31 +135,31 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
-                      <td className="w-10 py-2 border-[1px] border-gray-300 ">
+                      <td className="w-10 py-1 border-[1px] border-gray-300 ">
                         {index + 1}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.barcode}
                       </td>
-                      <td className="w-72 py-2 border-[1px] border-gray-300">
+                      <td className="w-72 py-1 border-[1px] border-gray-300">
                         {item.namaProduk}
                       </td>
-                      <td className="w-28 py-2 border-[1px] border-gray-300">
+                      <td className="w-28 py-1 border-[1px] border-gray-300">
                         {item.harga}
                       </td>
-                      <td className="w-14 py-2 border-[1px] border-gray-300">
+                      <td className="w-14 py-1 border-[1px] border-gray-300">
                         {item.jumlah}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.total}
                       </td>
-                      <td className="w-20 py-2 border-[1px] border-gray-300 space-x-2">
+                      <td className="w-20 py-1 border-[1px] border-gray-300 space-x-2">
                         <button
                           className="bg-red-600 hover:bg-red-700 rounded"
                           onClick={() => deleteData(item.barcode)}
                         >
                           <FontAwesomeIcon
-                            className="py-1 px-2 text-colorTwo"
+                            className="py-1 px-2 text-sm text-colorTwo"
                             icon={faTrash}
                           />
                         </button>
@@ -218,7 +218,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2  border-gray-300 "
+                      className=" text-center border-[1px] py-1  border-gray-300 "
                       colSpan={7}
                     >
                       Tidak ada Data Tersedia
@@ -232,31 +232,31 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
-                      <td className="w-10 py-2 border-[1px] border-gray-300 ">
+                      <td className="w-10 py-1 border-[1px] border-gray-300 ">
                         {index + 1}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.barcode}
                       </td>
-                      <td className="w-72 py-2 border-[1px] border-gray-300">
+                      <td className="w-72 py-1 border-[1px] border-gray-300">
                         {item.namaProduk}
                       </td>
-                      <td className="w-28 py-2 border-[1px] border-gray-300">
+                      <td className="w-28 py-1 border-[1px] border-gray-300">
                         {item.harga}
                       </td>
-                      <td className="w-14 py-2 border-[1px]  border-gray-300">
+                      <td className="w-14 py-1 border-[1px]  border-gray-300">
                         {item.jumlah}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.total}
                       </td>
-                      <td className="w-20 py-2 border-[1px] border-gray-300 space-x-2">
+                      <td className="w-20 py-1 border-[1px] border-gray-300 space-x-2">
                         <button
                           className="bg-red-600 hover:bg-red-700 rounded"
                           onClick={() => deleteData(item.barcode)}
                         >
                           <FontAwesomeIcon
-                            className="py-1 px-2 text-colorTwo"
+                            className="py-1 px-2 text-sm text-colorTwo"
                             icon={faTrash}
                           />
                         </button>

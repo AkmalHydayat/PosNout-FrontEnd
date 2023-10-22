@@ -127,7 +127,7 @@ const TableprodukForTransaksi = ({
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2 border-gray-300"
+                      className=" text-center border-[1px] py-1 border-gray-300"
                       colSpan={7}
                     >
                       Tidak ada hasil pencarian.
@@ -141,25 +141,25 @@ const TableprodukForTransaksi = ({
                       }`}
                       key={index}
                     >
-                      <td className="w-36 py-2 border-[1px] border-gray-300">
+                      <td className="w-36 py-1 border-[1px] border-gray-300">
                         {item.barcode}
                       </td>
-                      <td className="w-96 py-2 border-[1px] border-gray-300">
+                      <td className="w-96 py-1 border-[1px] border-gray-300">
                         {item.nama_produk}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.satuan}
                       </td>
 
-                      <td className="w-40 py-2 border-[1px] border-gray-300">
+                      <td className="w-40 py-1 border-[1px] border-gray-300">
                         {item.harga_jual}
                       </td>
-                      <td className="w-16 py-2 border-[1px] border-gray-300">
+                      <td className="w-16 py-1 border-[1px] border-gray-300">
                         {item.stok}
                       </td>
-                      <td className="w-28 py-2  border-[1px] border-gray-300">
+                      <td className="w-28 py-1  border-[1px] border-gray-300">
                         <ButtonSelect
-                          className={`bg-gray-100 px-2 hover:bg-gray-200 py-[1px] rounded text-purple-600 border-[1px] border-purple-600 font-semibold text-sm`}
+                          className={`bg-gray-100 px-2 hover:bg-purple-600 hover:text-white py-[1px] rounded text-purple-600 border-[1px] border-purple-600 font-semibold text-sm`}
                           onClick={() => {
                             getSelected(
                               item.barcode,
@@ -232,7 +232,7 @@ const TableprodukForTransaksi = ({
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2  border-gray-300 "
+                      className=" text-center border-[1px] py-1  border-gray-300 "
                       colSpan={7}
                     >
                       Tidak ada Data Tersedia
@@ -246,26 +246,26 @@ const TableprodukForTransaksi = ({
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
-                      <td className="w-36 py-2 border-[1px] border-gray-300">
+                      <td className="w-36 py-1 border-[1px] border-gray-300">
                         {item.barcode}
                       </td>
-                      <td className="w-96 py-2 border-[1px] border-gray-300">
+                      <td className="w-96 py-1 border-[1px] border-gray-300">
                         {item.nama_produk}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.satuan}
                       </td>
 
-                      <td className="w-40 py-2 border-[1px] border-gray-300 break-words">
+                      <td className="w-40 py-1 border-[1px] border-gray-300 break-words">
                         {item.harga_jual}
                       </td>
 
-                      <td className="w-16 py-2 border-[1px] border-gray-300">
+                      <td className="w-16 py-1 border-[1px] border-gray-300">
                         {item.stok}
                       </td>
-                      <td className="w-28 py-2 border-[1px] border-gray-300">
+                      <td className="w-28 py-1 border-[1px] border-gray-300">
                         <ButtonSelect
-                          className={`bg-gray-100 px-2 hover:bg-gray-200 py-[1px] rounded text-purple-600 border-[1px] border-purple-600 font-semibold text-sm`}
+                          className={`bg-gray-100 px-2 hover:bg-purple-600 hover:text-white py-[1px] rounded text-purple-600 border-[1px] border-purple-600 font-semibold text-sm`}
                           onClick={() => {
                             getSelected(
                               item.barcode,

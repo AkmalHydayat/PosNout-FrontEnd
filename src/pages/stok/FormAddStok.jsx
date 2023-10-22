@@ -18,12 +18,14 @@ const FormAddStok = ({
   idSelect,
   namaSelect,
   setStoks,
+  setJumlah,
+  jumlah,
 }) => {
   const AlertMessage = (message, width, icon) => {
     AlertShow(message, width, icon);
   };
   const { hari, month, year } = DateNow();
-  const [jumlah, setJumlah] = useState("");
+
   const [isBarcodeEmpty, setIsBarcodeEmpty] = useState(false);
   const [isJumlahEmpty, setIsJumlahEmpty] = useState(false);
   const emptyBarcodeStyle = isBarcodeEmpty ? "border-[1px] border-red-500" : "";

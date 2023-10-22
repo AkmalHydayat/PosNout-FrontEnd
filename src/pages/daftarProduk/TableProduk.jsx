@@ -129,31 +129,31 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                       }`}
                       key={item.id}
                     >
-                      <td className="w-16 py-2 border-[1px] border-gray-300 ">
+                      <td className="w-16 py-1 border-[1px] border-gray-300 ">
                         {index + 1}
                       </td>
-                      <td className="w-36 py-2 border-[1px] border-gray-300">
+                      <td className="w-36 py-1 border-[1px] border-gray-300">
                         {item.barcode}
                       </td>
-                      <td className="w-96 py-2 border-[1px] border-gray-300">
+                      <td className="w-96 py-1 border-[1px] border-gray-300">
                         {item.nama_produk}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.satuan}
                       </td>
-                      <td className="w-40 py-2 border-[1px] border-gray-300">
+                      <td className="w-40 py-1 border-[1px] border-gray-300">
                         {item.kategori}
                       </td>
-                      <td className="w-40 py-2 border-[1px] border-gray-300">
+                      <td className="w-40 py-1 border-[1px] border-gray-300">
                         {item.harga_beli}
                       </td>
-                      <td className="w-40 py-2 border-[1px] border-gray-300">
+                      <td className="w-40 py-1 border-[1px] border-gray-300">
                         {item.harga_jual}
                       </td>
-                      <td className="w-16 py-2 border-[1px] border-gray-300">
+                      <td className="w-16 py-1 border-[1px] border-gray-300">
                         {item.stok}
                       </td>
-                      <td className="w-48 py-2 border-[1px] border-gray-300">
+                      <td className="w-48 py-1 border-[1px] border-gray-300">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditProduk
                             editNama={item.nama_produk}
@@ -255,31 +255,31 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                       }  font-normal text-base text-gray-900`}
                       key={item.id}
                     >
-                      <td className="w-16 py-2 border-[1px] border-gray-300 ">
+                      <td className="w-16 py-1 border-[1px] border-gray-300 ">
                         {index + 1}
                       </td>
-                      <td className="w-36 py-2 border-[1px] border-gray-300">
+                      <td className="w-36 py-1 border-[1px] border-gray-300">
                         {item.barcode}
                       </td>
-                      <td className="w-96 py-2 border-[1px] border-gray-300">
+                      <td className="w-96 py-1 border-[1px] border-gray-300">
                         {item.nama_produk}
                       </td>
-                      <td className="w-32 py-2 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-[1px] border-gray-300">
                         {item.satuan}
                       </td>
-                      <td className="w-40 py-2 border-[1px] border-gray-300">
+                      <td className="w-40 py-1 border-[1px] border-gray-300">
                         {item.kategori}
                       </td>
-                      <td className="w-40 py-2 border-[1px] border-gray-300 break-words">
+                      <td className="w-40 py-1 border-[1px] border-gray-300 break-words">
                         {item.harga_beli}
                       </td>
-                      <td className="w-40 py-2 border-[1px] border-gray-300">
+                      <td className="w-40 py-1 border-[1px] border-gray-300">
                         {item.harga_jual}
                       </td>
-                      <td className="w-16 py-2 border-[1px] border-gray-300">
+                      <td className="w-16 py-1 border-[1px] border-gray-300">
                         {item.stok}
                       </td>
-                      <td className="w-48 py-2 border-[1px] border-gray-300">
+                      <td className="w-48 py-1 border-[1px] border-gray-300">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditProduk
                             editNama={item.nama_produk}

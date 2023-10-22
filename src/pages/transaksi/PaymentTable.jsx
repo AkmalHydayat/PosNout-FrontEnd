@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-export const  PaymentTable = ({ transaksiList }) => {
+export const PaymentTable = ({ transaksiList }) => {
   return (
     <div>
       <div className="  py-5 rounded">
@@ -37,22 +37,22 @@ export const  PaymentTable = ({ transaksiList }) => {
                   }  font-normal text-base text-gray-900`}
                   key={index}
                 >
-                  <td className="w-10 py-2 border-[1px] border-gray-300 ">
+                  <td className="w-10 py-1 border-[1px] border-gray-300 ">
                     {index + 1}
                   </td>
-                  <td className="w-32 py-2 border-[1px] border-gray-300">
+                  <td className="w-32 py-1 border-[1px] border-gray-300">
                     {item.barcode}
                   </td>
-                  <td className="w-72 py-2 border-[1px] border-gray-300">
+                  <td className="w-72 py-1 border-[1px] border-gray-300">
                     {item.namaProduk}
                   </td>
-                  <td className="w-28 py-2 border-[1px] border-gray-300">
+                  <td className="w-28 py-1 border-[1px] border-gray-300">
                     {item.harga}
                   </td>
-                  <td className="w-14 py-2 border-[1px] border-gray-300">
+                  <td className="w-14 py-1 border-[1px] border-gray-300">
                     {item.jumlah}
                   </td>
-                  <td className="w-32 py-2 border-[1px] border-gray-300">
+                  <td className="w-32 py-1 border-[1px] border-gray-300">
                     {item.total}
                   </td>
                 </tr>
