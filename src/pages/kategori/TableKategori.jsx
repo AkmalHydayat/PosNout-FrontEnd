@@ -6,7 +6,7 @@ import ButtonEditKategori from "./ButtonEditKategori";
 import ButtonDeleteKategori from "./ButtonDeleteKategori";
 import SearchGroup from "../../components/ui/SearchGroup";
 
-const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
+const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -38,17 +38,17 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
 
   return (
     <div>
-      <div className="bg-colorTwo p-6 space-y-3 rounded-b">
+      <div className="bg-colorTwo p-6  space-y-3 rounded-b">
         <div className="flex justify-between h-full">
-          <div className="space-x-1 flex">
+          <div className="space-x-1.5 flex">
             <label htmlFor="" className="my-auto">
               Show
             </label>
-            <div className="flex border border-gray-300 rounded">
+            <div className="flex border-[1px] border-purple-600 rounded">
               <div className="">
                 <input
                   type="text"
-                  className="w-8 text-center rounded font-semibold focus:outline-none h-full cursor-default"
+                  className="w-8 text-center  bg-colorTwo rounded font-semibold focus:outline-none h-full cursor-default"
                   value={perPage}
                   readOnly
                 />
@@ -56,12 +56,12 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
               <div className="flex flex-col items-center justify-center space-y-[1px]">
                 <FontAwesomeIcon
                   icon={faCaretUp}
-                  className="h-3 text-xs px-[3px] rounded-tr-sm cursor-pointer bg-purple-600 text-white"
+                  className="h-3 text-xs px-[3px] rounded-tr-sm cursor-pointer bg-purple-600 hover:bg-purple-700 text-white"
                   onClick={() => setPerPage(perPage + 1)}
                 />
                 <FontAwesomeIcon
                   icon={faCaretDown}
-                  className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 text-white cursor-pointer"
+                  className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 hover:bg-purple-700 text-white cursor-pointer"
                   onClick={() =>
                     setPerPage(perPage > 5 ? perPage - 1 : perPage)
                   }
@@ -97,7 +97,7 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className="text-center border-[1px] py-2 border-gray-300"
+                      className="text-center border-[1px] py-0.5 border-gray-300"
                       colSpan={3}
                     >
                       Tidak ada hasil pencarian.
@@ -111,13 +111,13 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
                       }`}
                       key={item.id}
                     >
-                      <td className="w-1/12 border-[1px] py-1 border-gray-300">
+                      <td className="w-1/12 border-[1px] py-0.5 border-gray-300">
                         {index + 1}
                       </td>
-                      <td className="w-4/6 border-[1px] py-1 border-gray-300">
+                      <td className="w-4/6 border-[1px] py-0.5 border-gray-300">
                         {item.nama_kategori}
                       </td>
-                      <td className="w-1/5 border-[1px] py-1 border-gray-300 text-sm">
+                      <td className="w-1/5 border-[1px] py-0.5 border-gray-300 text-sm">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditKategori
                             id={item.id}
@@ -126,8 +126,8 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
                             setKategoris={setKategoris}
-                         AlertMessage={AlertMessage}
-                         />
+                            AlertMessage={AlertMessage}
+                          />
                           <ButtonDeleteKategori
                             setKategoris={setKategoris}
                             id={item.id}
@@ -151,7 +151,7 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
               </div>
               <div className="space-x-1">
                 <span
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1 font-semibold text-sm`}
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -181,7 +181,7 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className="text-center border-[1px] py-2  border-gray-300"
+                      className="text-center border-[1px] py-0.5  border-gray-300"
                       colSpan={3}
                     >
                       Tidak ada Data Tersedia
@@ -195,13 +195,13 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
                       }`}
                       key={item.id}
                     >
-                      <td className="w-1/12 border-[1px] py-1 border-gray-300">
+                      <td className="w-1/12 border-[1px] py-0.5 border-gray-300">
                         {index + 1}
                       </td>
-                      <td className="w-4/6 border-[1px] py-1 border-gray-300">
+                      <td className="w-4/6 border-[1px] py-0.5 border-gray-300">
                         {item.nama_kategori}
                       </td>
-                      <td className="w-1/5 border-[1px] py-1 border-gray-300 text-sm">
+                      <td className="w-1/5 border-[1px] py-0.5 border-gray-300 text-sm">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditKategori
                             id={item.id}
@@ -210,8 +210,8 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}
                             setKategoris={setKategoris}
-                         AlertMessage={AlertMessage}
-                         />
+                            AlertMessage={AlertMessage}
+                          />
                           <ButtonDeleteKategori
                             setKategoris={setKategoris}
                             id={item.id}
@@ -238,17 +238,17 @@ const TableKategori = ({ kategoris, setKategoris,AlertMessage }) => {
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-sm`}
                 >
                   Previous
                 </button>
-                <div className="bg-colorTwo px-3 py-[2px] border-[1px] font-bold border-gray-300 text-purple-600 rounded cursor-default">
+                <div className="bg-purple-600 px-3 py-[2px] border-[1px]  shadow-gray-300 font-bold border-gray-600 text-colorTwo rounded cursor-default">
                   {currentPage}
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={indexOfLastItem >= kategoris.length}
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-sm`}
                 >
                   Next
                 </button>

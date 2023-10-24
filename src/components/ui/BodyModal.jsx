@@ -13,7 +13,7 @@ const BodyModal = ({
     <div
       className={`fixed inset-0 ${
         isVisible ? "visible bg-black/30" : "invisible"
-      } flex items-center justify-center font-titilium  backdrop-blur-sm transition-colors`}
+      } flex items-center justify-center  backdrop-blur-sm transition-colors`}
       id="wrapper"
     >
       <div

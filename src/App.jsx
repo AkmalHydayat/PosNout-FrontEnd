@@ -39,7 +39,7 @@ function App() {
       <div className="flex w-full overflow-hidden">
         {isHomePage ? null : (
           <div
-            className={`${sideWidth}  bg-colorTwo shadow-cus shadow-gray-400 h-screen fixed`}
+            className={`${sideWidth}  bg-colorTwo border-[1px] shadow-cus shadow-gray-300 border-gray-200 h-screen fixed`}
           >
             <Sidebar
               iconToggle={iconToggle}

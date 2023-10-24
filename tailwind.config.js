@@ -7,7 +7,7 @@ export default {
         "login-bg-img": "url('./assets/bg.jpg')",
       },
       colors: {
-        colorOne: "#dddddd",
+        colorOne: "#f1f1f1",
         colorTwo: "#f5f5f5",
         primary: "#eae2b7",
         secondary: "#003049",
@@ -23,7 +23,11 @@ export default {
         titilium: ["Titillium Web", "sans-serif"],
         acme: ["Acme", "sans-serif"],
         mouse: ["Mouse Memoirs", "sans-serif"],
-        roboto: ["Roboto", "sans-serif"],
+        Roboto: ["Roboto", "sans-serif"],
+        Montserrat: ["Montserrat", "sans-serif"],
+        DMSans: ["DM Sans", "sans-serif"],
+        Nunito_Sans: ["Nunito Sans", "sans-serif"],
+        pt_Sans: ["PT Sans", "sans-serif"],
       },
       boxShadow: {
         cus: " 0 0 10px 2px",

@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useState } from "react";
 import Modal from "../../components/ui/Modal";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import DeleteConfirmKategori from "./DeleteConfirmKategori";
-
+import { HiOutlineTrash } from "react-icons/hi";
 const ButtonDeleteKategori = ({
   setKategoris,
   id,
@@ -23,11 +22,11 @@ const ButtonDeleteKategori = ({
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
         buttonLabel={
-          <div className="flex items-center text-white">
-            <FontAwesomeIcon className="" icon={faTrash} />
+          <div className="flex items-center p-0.5">
+            <HiOutlineTrash className="text-xl " />
           </div>
         }
-        className={`bg-red-600 text-white hover:bg-red-700 rounded group px-3 py-1 font-semibold text-base`}
+        className={`bg-colorTwo text-purple-600 shadow-sm2 border-[1px] p-0.5 border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-red-700 hover:border-white rounded  group  font-semibold text-md`}
         modalContent={
           <DeleteConfirmKategori
             setKategoris={setKategoris}

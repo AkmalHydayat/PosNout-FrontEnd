@@ -28,15 +28,23 @@ const Satuan = () => {
 
   return (
     <LayoutPage>
-      <div className={` p-6  font-titilium`}>
-        <div className="font-semibold text-3xl mb-3 text-gray-900">
+      <div className={` p-6  font-pt_Sans`}>
+        <div className="font-medium  text-3xl mb-3 text-gray-900">
           Satuan Produk
         </div>
-        <div className="rounded bg-colorTwo shadow-lg shadow-gray-400">
-          <div className="px-6 py-3 border-b-2 border-gray-400">
-            <ButtonAddSatuan satuans={satuans} setSatuans={setSatuans} AlertMessage={AlertMessage} />
+        <div className="rounded bg-colorTwo shadow-lg border-[1px] border-gray-200 shadow-gray-300 ">
+          <div className="px-6 py-3 border-b-[1px]  border-purple-300">
+            <ButtonAddSatuan
+              satuans={satuans}
+              setSatuans={setSatuans}
+              AlertMessage={AlertMessage}
+            />
           </div>
-          <TableSatuan satuans={satuans} setSatuans={setSatuans} AlertMessage={AlertMessage} />
+          <TableSatuan
+            satuans={satuans}
+            setSatuans={setSatuans}
+            AlertMessage={AlertMessage}
+          />
         </div>
       </div>
     </LayoutPage>

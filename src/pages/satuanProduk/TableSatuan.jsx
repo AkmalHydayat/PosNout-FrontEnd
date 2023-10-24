@@ -39,15 +39,15 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
     <div>
       <div className="bg-colorTwo p-6 space-y-3  rounded-b">
         <div className="flex justify-between h-full">
-          <div className="space-x-1 flex ">
-            <label htmlFor="" className="my-auto ">
+          <div className="space-x-1.5 flex">
+            <label htmlFor="" className="my-auto">
               Show
             </label>
-            <div className="flex border border-gray-300 rounded">
+            <div className="flex border-[1px] border-purple-600 rounded">
               <div className="">
                 <input
                   type="text"
-                  className="w-8 text-center rounded font-semibold focus:outline-none h-full cursor-default"
+                  className="w-8 text-center  bg-colorTwo rounded font-semibold focus:outline-none h-full cursor-default"
                   value={perPage}
                   readOnly
                 />
@@ -55,12 +55,12 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
               <div className="flex flex-col items-center justify-center space-y-[1px]">
                 <FontAwesomeIcon
                   icon={faCaretUp}
-                  className="h-3 text-xs px-[3px] rounded-tr-sm cursor-pointer bg-purple-600  text-colorTwo"
+                  className="h-3 text-xs px-[3px] rounded-tr-sm cursor-pointer bg-purple-600 hover:bg-purple-700 text-white"
                   onClick={() => setPerPage(perPage + 1)}
                 />
                 <FontAwesomeIcon
                   icon={faCaretDown}
-                  className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 text-colorTwo cursor-pointer "
+                  className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 hover:bg-purple-700 text-white cursor-pointer"
                   onClick={() =>
                     setPerPage(perPage > 5 ? perPage - 1 : perPage)
                   }
@@ -73,7 +73,7 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
             onSubmit={() => searchSatuan(searchTerm)}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder={"Satuan"}
+            placeholder={"Kategori"}
           />
         </div>
         {isSearching ? (
@@ -150,7 +150,7 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
               </div>
               <div className="space-x-1">
                 <span
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1 font-semibold text-sm`}
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -237,17 +237,17 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-sm`}
                 >
                   Previous
                 </button>
-                <div className="bg-colorTwo px-3 py-[2px] border-[1px] font-bold border-gray-300 text-purple-600 rounded cursor-default">
+                <div className="bg-purple-600 px-3 py-[2px] border-[1px]  shadow-gray-300 font-bold border-gray-600 text-colorTwo rounded cursor-default">
                   {currentPage}
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={indexOfLastItem >= satuans.length}
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-sm`}
                 >
                   Next
                 </button>

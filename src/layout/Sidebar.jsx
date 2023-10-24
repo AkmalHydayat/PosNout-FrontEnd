@@ -1,28 +1,28 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 
-import {
-  faBoxArchive,
-  faCartShopping,
-  faChevronDown,
-  faChevronRight,
-  faCubesStacked,
-  faDolly,
-  faFileInvoiceDollar,
-  faGaugeHigh,
-  faLayerGroup,
-  faScaleUnbalanced,
-  faTableList,
-  faTag,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
-
+// import { LiaUserSolid } from "react-icons/lia";
+// import { LuUser2 } from "react-icons/lu";
+import { PiUserThin, PiUser } from "react-icons/pi";
+// import { HiOutlineUser } from "react-icons/hi2";
+import { FiChevronUp, FiChevronDown} from "react-icons/fi";
+import {
+  BsActivity,
+  BsBoxSeam,
+  BsGrid,
+  BsCart2,
+  BsFileEarmarkText,
+  BsFileEarmarkSpreadsheet,
+  BsFileEarmarkBarGraph,
+  BsTags,
+  BsPass,
+  BsBoxes,
+} from "react-icons/bs";
 const Sidebar = ({
   widthUserImg,
   inlineHiden,
-  fontSize,
+  // fontSize,
   textCenter,
   fontSize6xl,
   mSDrop,
@@ -38,38 +38,38 @@ const Sidebar = ({
       id: 1,
       list: "Dashboard",
       linkPath: "/Dashboard",
-      icon: faGaugeHigh,
+      icon: BsActivity,
     },
     {
       id: 2,
       list: "Produk",
       linkPath: "/Produk",
-      icon: faTableList,
+      icon: BsGrid,
     },
     {
       id: 3,
       list: "Stok",
       linkPath: "/Stok",
-      icon: faBoxArchive,
+      icon: BsBoxSeam,
     },
     {
       id: 4,
       list: "Transaksi",
       linkPath: "/Transaksi",
-      icon: faCartShopping,
+      icon: BsCart2,
     },
 
     {
       id: 5,
       list: "Laporan",
       linkPath: "/Laporan",
-      icon: faFileInvoiceDollar,
+      icon: BsFileEarmarkText,
     },
     {
       id: 6,
       list: "User/Karyawan",
       linkPath: "/Karyawan",
-      icon: faUser,
+      icon: PiUser,
     },
   ];
 
@@ -78,19 +78,20 @@ const Sidebar = ({
       id: 1,
       list: "Kategori",
       linkPath: "/KategoriProduk",
-      icon: faTag,
+      icon: BsTags,
     },
     {
       id: 2,
       list: "Satuan",
       linkPath: "/SatuanProduk",
-      icon: faDolly,
+      icon: BsPass,
+      BsBoxes,
     },
     {
       id: 3,
       list: "Daftar",
       linkPath: "/DaftarProduk",
-      icon: faCubesStacked,
+      icon: BsBoxes,
     },
   ];
 
@@ -99,13 +100,13 @@ const Sidebar = ({
       id: 1,
       list: "Penjualan",
       linkPath: "/LaporanPenjualan",
-      icon: faScaleUnbalanced,
+      icon: BsFileEarmarkBarGraph,
     },
     {
       id: 2,
       list: "Stok",
       linkPath: "/LaporanStok",
-      icon: faLayerGroup,
+      icon: BsFileEarmarkSpreadsheet,
     },
   ];
 
@@ -127,19 +128,16 @@ const Sidebar = ({
   };
   return (
     <div className="my-8">
-      <div className={`flex flex-col font-titilium text-gray-300`}>
+      <div className={`flex flex-col  text-gray-300`}>
         <div className="text-center basis-1/6 ">
           <div
-            className={`-translate-y-0.5 transition-all ${pb} border-b-2 border-gray-400`}
+            className={`-translate-y-0.5 transition-all ${pb} border-b-[1px] border-gray-300`}
           >
             <div
               onClick={() => setShowModal(true)}
-              className={`mx-auto cursor-pointer mb-2 scale-105 transition-all rounded-full flex justify-center items-center bg-gray-200  ${widthUserImg}`}
+              className={`mx-auto cursor-pointer mb-2 scale-105 transition-all rounded-full flex  justify-center items-center bg-gray-200  ${widthUserImg}`}
             >
-              <FontAwesomeIcon
-                icon={faUser}
-                className={`my-auto text-gray-400 ${fontSize6xl}`}
-              />
+              <PiUserThin className={`my-auto text-gray-900 ${fontSize6xl}`} />
             </div>
             <h1
               className={`text-gray-900 font-acme font-semibold ${inlineHiden} `}
@@ -149,47 +147,43 @@ const Sidebar = ({
           </div>
         </div>
         <div
-          className={`mt-4 space-y-1 flex flex-col ${textCenter} ${fontSize} basis-4/6 text-gray-900`}
+          className={`mt-4 space-y-1 flex flex-col ${textCenter} font-titilium font-semibold basis-4/6  text-gray-900`}
         >
           {listNav.map((item) => (
             <React.Fragment key={item.id}>
               {item.list === "Produk" ? (
                 <div
                   onClick={toggleProdukDropdown}
-                  className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl cursor-pointer ${me4}   `}
+                  className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
                 >
                   <span className="">
-                    <FontAwesomeIcon
-                      icon={item.icon}
-                      className={`${w45} me-4`}
-                    />
+                    <item.icon className={` ${w45} me-4`} />
                   </span>
+
                   <span className={inlineHiden}>{item.list}</span>
-                  <span className={`ms-[75px] ${inlineHiden}`}>
-                    <FontAwesomeIcon
-                      icon={showProdukDropdown ? faChevronDown : faChevronRight}
-                    />
+                  <span className={`ms-[60px] ${inlineHiden} mt-1`}>
+                    {showProdukDropdown ? <FiChevronUp /> : <FiChevronDown />}
                   </span>
-                  <span className={`${hidenBlock} ms-3.5`}>{item.list}</span>
+                  <span className={`${hidenBlock} ms-12 -mt-1   `}>
+                    {item.list}
+                  </span>
                 </div>
               ) : item.list === "Laporan" ? (
                 <div
                   onClick={toggleLaporanDropdown}
-                  className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl  cursor-pointer ${me4}`}
+                  className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl  cursor-pointer ms-1 ${me4} flex`}
                 >
                   <span className="">
-                    <FontAwesomeIcon icon={item.icon} className="w-4 me-4" />
+                    <item.icon className={`  ${w45} me-4`} />
                   </span>
                   <span className={inlineHiden}>{item.list}</span>
 
-                  <span className={`ms-[64px] ${inlineHiden}`}>
-                    <FontAwesomeIcon
-                      icon={
-                        showLaporanDropdown ? faChevronDown : faChevronRight
-                      }
-                    />
+                  <span className={`ms-[50px] ${inlineHiden} mt-1`}>
+                    {showLaporanDropdown ? <FiChevronUp /> : <FiChevronDown />}
                   </span>
-                  <span className={`${hidenBlock} ms-4`}>{item.list}</span>
+                  <span className={`${hidenBlock} ms-12 -mt-1  `}>
+                    {item.list}
+                  </span>
                 </div>
               ) : (
                 <NavLink
@@ -200,18 +194,20 @@ const Sidebar = ({
                   to={item.linkPath}
                   key={item.id}
                   className={({ isActive }) => {
-                    return `ps-3 py-2 hover:text-purple-600 translate-y-0.5 transition-all relative group  ${
+                    return `ps-3 py-2 hover:text-purple-600 translate-y-0.5 transition-all relative group ${me4}  flex ms-1 ${
                       isActive
-                        ? `bg-gray-200 border-e-4 ${rounded} border-purple-600 border-box  text-purple-600`
+                        ? `bg-gray-200 border-e-4 ${rounded} border-purple-600 group border-box text-purple-600`
                         : "bg-colorTwo"
                     }`;
                   }}
                 >
                   <span className="">
-                    <FontAwesomeIcon icon={item.icon} className="me-4" />
+                    <item.icon className={`  ${w45} me-4`} />
                   </span>
                   <span className={inlineHiden}>{item.list}</span>
-                  <span className={`${hidenBlock} ms-3.5`}>{item.list}</span>
+                  <span className={`${hidenBlock} ms-12 -mt-1  `}>
+                    {item.list}
+                  </span>
                 </NavLink>
               )}
 
@@ -223,7 +219,7 @@ const Sidebar = ({
                       to={ProdukItem.linkPath}
                       key={ProdukItem.id}
                       className={({ isActive }) => {
-                        return ` ps-3 py-2  transition-all relative group hover:text-purple-600 block ${textCenter} ${mSDrop} ${
+                        return ` ps-3 py-2  transition-all relative group hover:text-purple-600 block ${textCenter} flex  ${mSDrop} ms-1 ${
                           isActive
                             ? `bg-gray-200 border-e-4 ${rounded}  border-purple-600 border-box  text-purple-600`
                             : `bg-colorTwo `
@@ -231,15 +227,12 @@ const Sidebar = ({
                       }}
                     >
                       <span className="">
-                        <FontAwesomeIcon
-                          icon={ProdukItem.icon}
-                          className={` w-5 me-2 `}
-                        />
+                        <ProdukItem.icon className={`  ${w45} me-3`} />
                       </span>
                       <span className={`${inlineHiden}`}>
                         {ProdukItem.list}
                       </span>
-                      <span className={`${hidenBlock} ms-5`}>
+                      <span className={`${hidenBlock} ms-12 -mt-1 `}>
                         {ProdukItem.list}
                       </span>
                     </NavLink>
@@ -253,20 +246,20 @@ const Sidebar = ({
                       to={laporanItem.linkPath}
                       key={laporanItem.id}
                       className={({ isActive }) => {
-                        return `ps-3 py-2 scale-100 transition-all relative group  hover:text-purple-600 rounded-s-xl  ${textCenter} ${mSDrop} ${
+                        return `ps-3 py-2 scale-100 transition-all relative group  hover:text-purple-600 rounded-s-xl flex ${textCenter} ${mSDrop} ms-1 ${
                           isActive
                             ? `bg-gray-200 border-e-4 ${rounded} border-purple-600 border-box  text-purple-600`
                             : "bg-colorTwo"
                         }`;
                       }}
                     >
-                      <span className="me-2 ">
-                        <FontAwesomeIcon icon={laporanItem.icon} />
+                      <span className="">
+                        <laporanItem.icon className={`  ${w45} me-3`} />
                       </span>
                       <span className={`${inlineHiden} `}>
                         {laporanItem.list}
                       </span>
-                      <span className={`${hidenBlock} ms-5`}>
+                      <span className={`${hidenBlock} ms-12 -mt-1 `}>
                         {laporanItem.list}
                       </span>
                     </NavLink>

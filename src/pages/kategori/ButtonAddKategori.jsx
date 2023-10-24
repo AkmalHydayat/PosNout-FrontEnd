@@ -2,7 +2,7 @@
 import FormAddKategori from "./FormAddKategori";
 import Modal from "../../components/ui/Modal";
 import { useState } from "react";
-
+import { FiPlusCircle } from "react-icons/fi";
 const ButtonAddKategori = ({ kategoris, setKategoris, AlertMessage }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorInput, setErrorInput] = useState("");
@@ -16,9 +16,12 @@ const ButtonAddKategori = ({ kategoris, setKategoris, AlertMessage }) => {
         setItem={setNamaNewKategori}
         setErrorInput={setErrorInput}
         buttonLabel={
-          <div className="text-base font-semibold font-titilium">Add</div>
+          <div className="flex items-center space-x-2">
+            <FiPlusCircle className="text-lg" />
+            <div className="text-base font-semibold font-pt_Sans">Add</div>
+          </div>
         }
-        className={`bg-purple-600 text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+        className={`bg-colorTwo text-purple-600 shadow-sm2 border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
         modalContent={
           <FormAddKategori
             AlertMessage={AlertMessage}

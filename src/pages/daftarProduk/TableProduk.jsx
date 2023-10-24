@@ -193,7 +193,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
               </div>
               <div className="space-x-1">
                 <span
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1 font-semibold text-sm`}
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -322,17 +322,17 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-sm`}
                 >
                   Previous
                 </button>
-                <div className="bg-colorTwo px-3 py-[2px] border-[1px] font-bold border-gray-300 text-purple-600 rounded cursor-default">
+                <div className="bg-purple-600 px-3 py-[2px] border-[1px]  shadow-gray-300 font-bold border-gray-600 text-colorTwo rounded cursor-default">
                   {currentPage}
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={indexOfLastItem >= produks.length}
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-sm`}
                 >
                   Next
                 </button>

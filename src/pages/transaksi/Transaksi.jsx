@@ -27,7 +27,8 @@ const Transaksi = () => {
   const emptyJumlahStyle = isJumlahEmpty
     ? "border-[1px] border-red-500"
     : "border-[1px] border-gray-400";
-    const tanggalSekarang = `${hari}-${month}-${year}`;
+  const tanggalSekarang = `${hari}-${month}-${year}`;
+
   const AlertMessage = (message, width, icon) => {
     AlertShow(message, width, icon);
   };
@@ -36,7 +37,7 @@ const Transaksi = () => {
     return accumulator + transaksi.total;
   }, 0);
   // const totalJumlah = totalJumlah.toLocaleString("id-ID");
- 
+
   const addTransaksi = () => {
     const existingTransaksi = transaksiList.find(
       (transaksi) => transaksi.barcode === produkBarcodeSelect
@@ -262,6 +263,7 @@ const Transaksi = () => {
                   totalJumlah={totalJumlah}
                   AlertMessage={AlertMessage}
                   tanggalSekarang={tanggalSekarang}
+                  generateInvoice={generateInvoice}
                 />
               </div>
               <div className="text-5xl mt-6 font-acme text-end">

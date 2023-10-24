@@ -10,15 +10,16 @@ const ButtonPayment = ({
   invoiceNumber,
   totalJumlah,
   AlertMessage,
-  tanggalSekarang
+  tanggalSekarang,
+  generateInvoice,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  
 
   return (
     <div>
       <ModalPayment
         isVisible={showModal}
+        generateInvoice={generateInvoice}
         tanggalSekarang={tanggalSekarang}
         transaksiList={transaksiList}
         onClick={() => {

@@ -3,6 +3,7 @@
 import FormAddProduk from "./FormAddProduk";
 import { useState } from "react";
 import ModalAddProduk from "./ModalAddProduk";
+import { FiPlusCircle } from "react-icons/fi";
 
 const ButtonAddProduk = ({ produks, setProduks, AlertMessage }) => {
   const [showModal, setShowModal] = useState(false);
@@ -51,8 +52,12 @@ const ButtonAddProduk = ({ produks, setProduks, AlertMessage }) => {
         setIsHargaJualProdukEmpty={setIsHargaJualProdukEmpty}
         setErrorInput={setErrorInput}
         buttonLabel={
-          <div className="text-base font-semibold font-titilium">Add</div>
+          <div className="flex items-center space-x-2">
+            <FiPlusCircle className="text-lg" />
+            <div className="text-base font-semibold font-pt_Sans">Add</div>
+          </div>
         }
+        className={`bg-colorTwo text-purple-600 shadow-sm2 border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
         modalContent={
           <FormAddProduk
             setProduks={setProduks}
@@ -83,7 +88,6 @@ const ButtonAddProduk = ({ produks, setProduks, AlertMessage }) => {
             setErrorInput={setErrorInput}
           />
         }
-        className={`bg-purple-600 text-colorTwo hover:bg-purple-700 rounded hover:shadow-purple-700 group px-3 py-1 font-semibold text-md`}
       ></ModalAddProduk>
     </div>
   );

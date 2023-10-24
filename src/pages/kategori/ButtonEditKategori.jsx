@@ -3,8 +3,8 @@
 import { useState } from "react";
 import FormEditKategori from "./FormEditKategori";
 import Modal from "../../components/ui/Modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+
 const ButtonEditKategori = ({
   id,
   namaKategori,
@@ -12,7 +12,7 @@ const ButtonEditKategori = ({
   setSearchResults,
   searchResults,
   setKategoris,
-  AlertMessage
+  AlertMessage,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -22,10 +22,10 @@ const ButtonEditKategori = ({
         isVisible={showModal}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
-        className={`text-white bg-sky-700 hover:bg-sky-800 rounded group px-3 py-1 font-semibold text-base`}
+        className={`bg-colorTwo text-purple-600 shadow-sm2 border-[1px] p-0.5 border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:border-white hover:text-white  hover:bg-purple-700 rounded  group font-semibold text-md`}
         buttonLabel={
-          <div className="flex items-center">
-            <FontAwesomeIcon className=" " icon={faPenToSquare} />
+          <div className="flex items-center p-0.5">
+            <HiOutlinePencilAlt className="text-xl " />
           </div>
         }
         modalContent={

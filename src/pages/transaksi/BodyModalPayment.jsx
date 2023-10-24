@@ -12,6 +12,7 @@ const BodyModalGetProduk = ({
   invoiceNumber,
   transaksiList,
   tanggalSekarang,
+  generateInvoice,
 }) => {
   const [pembayaran, setPembayaran] = useState("");
   const [kembalian, setKembalian] = useState(0);
@@ -76,12 +77,11 @@ const BodyModalGetProduk = ({
         <div
           className={`w-[650px] relative text-base  font-semibold bg-colorTwo rounded-md`}
         >
-          {/* Button Close Modal */}
-
           {/* children berisi formAddStok  */}
           <div className="">{children}</div>
         </div>
         <div className={`w-[400px] relative`}>
+          {/* Button Close Modal   */}
           <button
             className="text-colorTwo absolute z-20 -end-2 -top-2 bg-purple-600 px-2 rounded-lg  hover:bg-purple-700 hover:shadow-sm"
             onClick={() => {
@@ -142,6 +142,7 @@ const BodyModalGetProduk = ({
                 onClick={() => {
                   addTransaksiDetail();
                   addLaporanTransaksi();
+                  generateInvoice();
                 }}
               >
                 Proses

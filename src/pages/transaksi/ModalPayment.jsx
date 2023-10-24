@@ -14,7 +14,8 @@ const ModalPayment = ({
   invoiceNumber,
   totalJumlah,
   transaksiList,
-  tanggalSekarang
+  tanggalSekarang,
+  generateInvoice,
 }) => {
   return (
     <div>
@@ -22,6 +23,7 @@ const ModalPayment = ({
         {buttonLabel}
       </ButtonModal>
       <BodyModalPayment
+        generateInvoice={generateInvoice}
         isVisible={isVisible}
         onClose={onClose}
         totalJumlah={totalJumlah}
