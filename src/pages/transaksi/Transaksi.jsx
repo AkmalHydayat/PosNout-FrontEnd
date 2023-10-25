@@ -1,15 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LayoutPage from "../../layout/PageLayout";
 import DateNow from "../../components/Date";
 import { TableTransaksi } from "./TableTransaksi";
 import transaksiListData from "./TransaksiListData";
 import { useEffect, useState } from "react";
 import ButtonGetProduk from "./ButtonGetProduk";
-import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons";
 import ButtonPayment from "./ButtonPayment";
 import AlertShow from "../../components/ui/Alert";
+import { TbShoppingCartPlus } from "react-icons/tb";
 
 const Transaksi = () => {
   const { hari, month, year } = DateNow();
@@ -161,13 +159,13 @@ const Transaksi = () => {
 
   return (
     <LayoutPage>
-      <div className={`p-6 font-titilium`}>
-        <div className=" text-3xl mb-3 text-gray-900 font-semibold">
+      <div className={`p-6 font-pt_Sans`}>
+        <div className=" text-3xl mb-3 text-gray-900 font-medium">
           Transaksi
         </div>
         <div className="space-y-7">
           <div className="flex justify-between gap-6 ">
-            <div className=" py-6 px-6 w-1/4 rounded shadow-lg shadow-gray-400 bg-colorTwo">
+            <div className=" py-6 px-6 w-1/4 rounded shadow-md border-[1px] border-gray-200 shadow-gray-300 bg-colorTwo">
               <form action="" className="space-y-8">
                 <div className="gap-2 flex h-8">
                   <label htmlFor="" className="w-1/4 ">
@@ -193,7 +191,7 @@ const Transaksi = () => {
                 </div>
               </form>
             </div>
-            <div className="px-6 py-6 rounded bg-colorTwo shadow-lg shadow-gray-400">
+            <div className="px-6 py-6 rounded bg-colorTwo shadow-md border-[1px] border-gray-200 shadow-gray-300">
               <div className="space-y-8">
                 <div className=" flex h-8">
                   <label htmlFor="" className="w-1/4 me-1">
@@ -237,25 +235,24 @@ const Transaksi = () => {
                     />
                     <button
                       type="submit"
-                      className="bg-purple-600 hover:bg-purple-700 w-1/4 px-2  rounded text-sm flex justify-center items-center"
+                      className="bg-purple-600 hover:bg-purple-700 w-1/4 px-2 shadow-cus2 shadow-gray-400 hover:shadow-sm2 hover:shadow-gray-400  rounded text-sm flex justify-center items-center"
                     >
-                      <FontAwesomeIcon
+                      {/* <FontAwesomeIcon
                         icon={faCartArrowDown}
                         className=" text-white me-2 font-bold"
-                      />
-                      <span className="text-white font-bold ">Add</span>
+                      /> */}
+                      <TbShoppingCartPlus className="text-colorTwo text-lg" />
+                      <span className="text-white font-bold ms-1">Add</span>
                     </button>
                   </div>
                 </form>
               </div>
             </div>
-            <div className="px-6 py-4 w-2/5 rounded bg-colorTwo shadow-lg shadow-gray-400 ">
+            <div className="px-6 py-4 w-2/5 rounded bg-colorTwo shadow-md border-[1px] border-gray-200 shadow-gray-300 ">
               <div className="flex justify-between">
                 <div className="">
-                  <span className="font-titilium me-1 text-base font-medium">
-                    Invoice
-                  </span>
-                  <span className="font-acme text-lg">{invoiceNumber}</span>
+                  <span className=" me-1 text-base font-medium">Invoice</span>
+                  <span className="font-semibold text-lg">{invoiceNumber}</span>
                 </div>
                 <ButtonPayment
                   transaksiList={transaksiList}
@@ -273,7 +270,7 @@ const Transaksi = () => {
               </div>
             </div>
           </div>
-          <div className="shadow-lg rounded shadow-gray-400">
+          <div className="shadow-md border-[1px] border-gray-200 rounded shadow-gray-300">
             <TableTransaksi
               transaksiList={transaksiList}
               setTransaksiList={setTransaksiList}

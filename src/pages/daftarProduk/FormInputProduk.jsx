@@ -63,13 +63,13 @@ const FormInputProduk = ({
       {/* input nama produk */}
       <div>
         <div className="px-6 py-1 mt-2 ">
-          <label htmlFor="" className="text-gray-900">
+          <label htmlFor="" className="text-gray-900 font-medium text-lg">
             Produk
           </label>
           <input
             type="text"
             autoFocus
-            className={`w-full h-10 focus:outline-none bg-white border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base font-medium placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptyNamaProdukStyle}
+            className={`w-full h-10  focus:outline-none  focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne ease-in border-gray-300 focus:border-none  transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptyNamaProdukStyle}
             }`}
             placeholder="Produk"
             value={newNamaProduk}
@@ -84,11 +84,11 @@ const FormInputProduk = ({
         {/* input satuan */}
         <div className="w-1/2 ">
           <div className="ps-6 py-1 mt-2 ">
-            <label htmlFor="" className="text-gray-900">
+            <label htmlFor="" className="text-gray-900 font-medium text-lg">
               Satuan
             </label>
             <select
-              className={`w-full cursor-pointer h-10 focus:outline-none bg-white border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base font-medium placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptySatuanProdukStyle}
+              className={`w-full cursor-pointer text-[15px] h-10 outline-none focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne ease-in border-gray-300 focus:border-none  transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptySatuanProdukStyle}
             }`}
               value={newSatuanProduk}
               onChange={(e) => {
@@ -96,7 +96,9 @@ const FormInputProduk = ({
                 setIsSatuanProdukEmpty(false);
               }}
             >
-              <option value="">--Pilih--</option>
+              <option value="" className="">
+                --Pilih--
+              </option>
               {satuans.map((satuan, index) => (
                 <option value={satuan.nama_satuan} key={index}>
                   {satuan.nama_satuan}
@@ -109,12 +111,12 @@ const FormInputProduk = ({
         {/* input kategori */}
         <div className="w-1/2 ">
           <div className="pe-6 py-1 mt-2 ">
-            <label htmlFor="" className="text-gray-900">
+            <label htmlFor="" className="text-gray-900 font-medium text-lg">
               Kategori
             </label>
             <select
-              className={`w-full h-10 cursor-pointer focus:outline-none bg-white border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base font-medium placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptyKategoriProdukStyle}
-            }`}
+              className={`w-full cursor-pointer text-[15px] h-10 outline-none focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne ease-in border-gray-300 focus:border-none  transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptyKategoriProdukStyle}
+          }`}
               size={1}
               placeholder="pilih"
               value={newKategoriProduk}
@@ -139,12 +141,12 @@ const FormInputProduk = ({
         {/* input harga beli */}
         <div>
           <div className="ps-6 py-1 mt-2 ">
-            <label htmlFor="" className="text-gray-900">
+            <label htmlFor="" className="text-gray-900 font-medium text-lg">
               Harga Beli
             </label>
             <input
               type="text"
-              className={`w-full h-10 focus:outline-none bg-white border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base font-medium placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptyHargaBeliProdukStyle}
+              className={`w-full h-10  focus:outline-none  focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne ease-in border-gray-300 focus:border-none  transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptyHargaBeliProdukStyle}
             }`}
               placeholder="Harga Beli"
               value={newHargaBeliProduk}
@@ -158,12 +160,12 @@ const FormInputProduk = ({
         {/* input harga jual */}
         <div>
           <div className="pe-6 py-1 mt-2  ">
-            <label htmlFor="" className="text-gray-900">
+            <label htmlFor="" className="text-gray-900 font-medium text-lg">
               Harga Jual
             </label>
             <input
               type="text"
-              className={`w-full h-10 focus:outline-none bg-white border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base font-medium placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptyHargaJualProdukStyle}
+              className={`w-full h-10  focus:outline-none  focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne ease-in border-gray-300 focus:border-none  transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 ${emptyHargaJualProdukStyle}
             }`}
               placeholder="Harga Jual"
               value={newHargaJualProduk}
@@ -178,12 +180,12 @@ const FormInputProduk = ({
       {/* stok */}
       <div>
         <div className="px-6 py-1 mt-2  flex flex-col">
-          <label htmlFor="" className="text-gray-900">
+          <label htmlFor="" className="text-gray-900 font-medium text-lg">
             Stok
           </label>
           <input
             type="text"
-            className="w-1/5 h-10 focus:outline-none font-semibold bg-gray-300 cursor-default border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 mb-3"
+            className="w-[10%] text-center h-10 focus:outline-none font-semibold bg-gray-300 cursor-default border-gray-300 border-[1px] text-gray-900 rounded px-2 text-[15px] placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 mb-3"
             placeholder="Harga Jual"
             value={stok ? stok : 0}
             readOnly

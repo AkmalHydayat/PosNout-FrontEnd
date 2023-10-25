@@ -122,9 +122,11 @@ const FormAddProduk = ({
     }
   };
   return (
-    <div className="">
+    <div className="font-pt_Sans ">
       <div className="border-b-[1px] border-gray-300">
-        <div className="px-6 py-3 text-2xl text-gray-900">Add Data</div>
+        <div className="px-6 py-3 text-2xl  font-semibold text-left text-purple-600">
+          Add Data
+        </div>
       </div>
       <form action="" onSubmit={setSubmit}>
         <FormInputProduk
@@ -152,7 +154,9 @@ const FormAddProduk = ({
         />
         <p className="text-center text-fnd text-sm">{msg}</p>
         <div className="px-6 py-4 space-x-2 text-base flex border-t-[1px] border-gray-300 justify-end ">
-          <button className="bg-purple-600 text-white font-semibold px-2 py-1 rounded  hover:bg-purple-700 hover:shadow-sm2">
+          <button
+            className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+          >
             Add
           </button>
         </div>

@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import Modal from "../../components/ui/Modal";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import DeleteConfirmSatuan from "./DeleteConfirmSatuan";
+import { HiOutlineTrash } from "react-icons/hi";
 
 const ButtonDeleteSatuan = ({
   setSatuans,
@@ -12,7 +11,7 @@ const ButtonDeleteSatuan = ({
   isSearching,
   setSearchResults,
   searchResults,
-  AlertMessage
+  AlertMessage,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -23,10 +22,11 @@ const ButtonDeleteSatuan = ({
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
         buttonLabel={
-          <div className="flex items-center text-white">
-            <FontAwesomeIcon icon={faTrash} />
+          <div className="flex items-center ">
+            <HiOutlineTrash className="text-lg" />
           </div>
         }
+        className={`bg-red-700 font-pt_Sans text-colorTwo border-[1px] p-1 border-red-700 transition-all ease-in  hover:scale-95  hover:bg-red-800 hover:border-colorTwo rounded  group font-semibold text-md`}
         modalContent={
           <DeleteConfirmSatuan
             setSatuans={setSatuans}
@@ -41,7 +41,6 @@ const ButtonDeleteSatuan = ({
             AlertMessage={AlertMessage}
           />
         }
-        className={`bg-red-600 text-white hover:bg-red-700 rounded group px-3 py-1 font-semibold text-base`}
       ></Modal>
     </div>
   );

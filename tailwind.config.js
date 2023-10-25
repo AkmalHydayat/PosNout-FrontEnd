@@ -7,8 +7,8 @@ export default {
         "login-bg-img": "url('./assets/bg.jpg')",
       },
       colors: {
-        colorOne: "#f1f1f1",
-        colorTwo: "#f5f5f5",
+        colorOne: "#f7f7f7",
+        colorTwo: "#fff",
         primary: "#eae2b7",
         secondary: "#003049",
         thrd: "#437cff",
@@ -31,6 +31,7 @@ export default {
       },
       boxShadow: {
         cus: " 0 0 10px 2px",
+        cus2: " 0px 0px 4px 0px",
         sm2: " 0 0 5px 1px",
         glasses: "0 4px 30px rgba(0, 0, 0, 0.1)",
       },

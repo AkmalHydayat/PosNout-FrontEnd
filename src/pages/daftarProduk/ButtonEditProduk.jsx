@@ -3,8 +3,8 @@
 import { useState } from "react";
 import FormEditProduk from "./FormEditProduk";
 import Modal from "../../components/ui/Modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+
 const ButtonEditProduk = ({
   editNama,
   editSatuan,
@@ -29,9 +29,10 @@ const ButtonEditProduk = ({
         isVisible={showModal}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
+        className={`bg-sky-700 text-colorTwo border-[1px] p-1 border-sky-700  transition-colors ease-in hover:scale-95 hover:bg-sky-800 rounded  group font-semibold text-md`}
         buttonLabel={
           <div className="flex items-center ">
-            <FontAwesomeIcon className="" icon={faPenToSquare} />
+            <HiOutlinePencilAlt className="text-lg " />
           </div>
         }
         modalContent={
@@ -54,7 +55,6 @@ const ButtonEditProduk = ({
             AlertMessage={AlertMessage}
           />
         }
-        className={`text-white bg-sky-700 hover:bg-sky-800 rounded group px-3 py-1 font-semibold text-base`}
       ></Modal>
     </div>
   );

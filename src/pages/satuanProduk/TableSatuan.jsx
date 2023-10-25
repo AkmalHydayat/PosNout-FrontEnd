@@ -78,25 +78,25 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
         </div>
         {isSearching ? (
           <div>
-            <table className="w-full ">
+            <table className="w-full my-5">
               <thead className="border-[1px] border-gray-300 bg-colorTwo">
                 <tr className="text-center font-semibold text-lg">
-                  <td className="w-1/12 py-2 border-[1px] border-gray-300 ">
+                  <td className="w-1/12 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
-                  <td className="w-4/6 py-2 border-[1px] border-gray-300">
+                  <td className="w-4/6 py-2 border-s-[1px] border-gray-300">
                     Satuan
                   </td>
-                  <td className="w-1/5 py-2 border-[1px] border-gray-300">
+                  <td className="w-1/5 py-2 border-x-[1px] border-gray-300">
                     Aksi
                   </td>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="border-b-[1px] border-gray-300">
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-1 border-gray-300"
+                      className=" text-center border-[1px] py-2 border-gray-300"
                       colSpan={3}
                     >
                       Tidak ada hasil pencarian.
@@ -105,18 +105,18 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                 ) : (
                   searchResults.map((item, index) => (
                     <tr
-                      className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-200"
+                      className={`text-base text-center ${
+                        index % 2 ? "  " : "bg-gray-100"
                       }`}
                       key={item.id}
                     >
-                      <td className="w-1/12 border-[1px] py-1 border-gray-300">
+                      <td className="w-1/12 border-s-[1px] py-0.5  border-gray-300">
                         {index + 1}
                       </td>
-                      <td className="w-4/6 border-[1px] py-1 border-gray-300">
+                      <td className="w-4/6 border-s-[1px] py-0.5 border-gray-300">
                         {item.nama_satuan}
                       </td>
-                      <td className="w-1/5 border-[1px] py-1 border-gray-300  text-sm">
+                      <td className="w-1/5 border-x-[1px] py-0.5 border-gray-300  text-sm">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditSatuan
                             id={item.id}
@@ -148,9 +148,9 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                 Showing 1 to {searchResults.length} of {searchResults.length}{" "}
                 entries
               </div>
-              <div className="space-x-1">
+              <div className="space-x-1 text-sm flex font-semibold">
                 <span
-                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1 font-semibold text-sm`}
+                  className={`bg-colorTwo cursor-pointer shadow-sm2 text-purple-600  border-[1px] border-colorTwo hover:border-[1px] hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1  `}
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -162,25 +162,25 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
 
         {!isSearching ? (
           <div>
-            <table className="w-full">
-              <thead className=" bg-colorTwo">
+            <table className="w-full my-5">
+              <thead className="border-[1px] border-gray-300 bg-colorTwo">
                 <tr className="text-center font-bold text-lg text-gray-900">
-                  <td className="w-1/12 py-2 border-[1px] border-gray-300 ">
+                  <td className="w-1/12 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
-                  <td className="w-4/6 py-2 border-[1px] border-gray-300">
+                  <td className="w-4/6 py-2 border-s-[1px] border-gray-300">
                     Satuan
                   </td>
-                  <td className="w-1/5 py-2 border-[1px] border-gray-300">
+                  <td className="w-1/5 py-2 border-x-[1px] border-gray-300">
                     Aksi
                   </td>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="border-b-[1px] border-gray-300">
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-1  border-gray-300 "
+                      className=" text-center border-[1px] py-2  border-gray-300 "
                       colSpan={3}
                     >
                       Tidak ada Data Tersedia
@@ -189,18 +189,18 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                 ) : (
                   currentItems.map((item, index) => (
                     <tr
-                      className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-200"
-                      }  font-normal text-base text-gray-900`}
+                      className={`text-base text-center ${
+                        index % 2 ? "  " : "bg-gray-100"
+                      }  font-normal  text-gray-900`}
                       key={item.id}
                     >
-                      <td className="w-1/12 border-[1px] py-1 border-gray-300">
+                      <td className="w-1/12 border-s-[1px] py-0.5 border-gray-300">
                         {index + 1}
                       </td>
-                      <td className="w-4/6 border-[1px] py-1 border-gray-300">
+                      <td className="w-4/6 border-s-[1px] py-0.5 border-gray-300">
                         {item.nama_satuan}
                       </td>
-                      <td className="w-1/5 border-[1px] py-1 border-gray-300  text-sm">
+                      <td className="w-1/5 border-x-[1px] py-0.5 border-gray-300  text-sm">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditSatuan
                             id={item.id}
@@ -233,21 +233,21 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                 {Math.min(indexOfLastItem, satuans.length)} of {satuans.length}{" "}
                 entries
               </div>
-              <div className="space-x-1 flex">
+              <div className="space-x-1 flex text-sm font-semibold">
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-sm`}
+                  className={`bg-colorTwo cursor-pointer   text-purple-600   shadow-sm2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1  `}
                 >
                   Previous
                 </button>
-                <div className="bg-purple-600 px-3 py-[2px] border-[1px]  shadow-gray-300 font-bold border-gray-600 text-colorTwo rounded cursor-default">
+                <div className="bg-colorTwo  px-3 py-1  border-[1px] shadow-sm2 shadow-gray-300 border-purple-600 text-purple-600 rounded cursor-default">
                   {currentPage}
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={indexOfLastItem >= satuans.length}
-                  className={`bg-colorTwo cursor-pointer text-purple-600  border-[1px] border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-sm`}
+                  className={`bg-colorTwo cursor-pointer   text-purple-600 shadow-sm2  shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 `}
                 >
                   Next
                 </button>

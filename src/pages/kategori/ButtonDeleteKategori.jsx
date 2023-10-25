@@ -22,11 +22,11 @@ const ButtonDeleteKategori = ({
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
         buttonLabel={
-          <div className="flex items-center p-0.5">
-            <HiOutlineTrash className="text-xl " />
+          <div className="flex items-center">
+            <HiOutlineTrash className="text-lg " />
           </div>
         }
-        className={`bg-colorTwo text-purple-600 shadow-sm2 border-[1px] p-0.5 border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-red-700 hover:border-white rounded  group  font-semibold text-md`}
+        className={`bg-red-700 font-pt_Sans text-colorTwo border-[1px] p-1 border-red-700 transition-all ease-in  hover:scale-95  hover:bg-red-800 hover:border-colorTwo rounded  group font-semibold text-md`}
         modalContent={
           <DeleteConfirmKategori
             setKategoris={setKategoris}

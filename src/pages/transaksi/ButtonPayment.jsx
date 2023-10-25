@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons";
 import ModalPayment from "./ModalPayment";
 import { PaymentTable } from "./PaymentTable";
+import { PiCurrencyCircleDollar } from "react-icons/pi";
 
 const ButtonPayment = ({
   transaksiList,
@@ -33,15 +32,16 @@ const ButtonPayment = ({
         totalJumlah={totalJumlah}
         invoiceNumber={invoiceNumber}
         buttonLabel={
-          <div>
-            <FontAwesomeIcon
+          <div className="flex items-center ">
+            {/* <FontAwesomeIcon
               icon={faMoneyCheckDollar}
               className=" text-white me-2"
-            />
-            Bayar
+            /> */}
+            <PiCurrencyCircleDollar className=" text-white me-2 text-2xl" />
+            <div className="text-base">Bayar</div>
           </div>
         }
-        className={`bg-purple-600 text-white  hover:bg-purple-700 rounded hover:shadow-purple-700 group px-3 py-1 font-semibold text-md`}
+        className={`bg-purple-600 text-white px-2 py-1 shadow-cus2 hover:shadow-sm2 transition-shadow shadow-gray-500/70  hover:bg-purple-700 rounded hover:shadow-gray-400 group font-semibold text-lg`}
         modalContent={<PaymentTable transaksiList={transaksiList} />}
       />
     </div>

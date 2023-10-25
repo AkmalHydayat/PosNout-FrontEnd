@@ -5,13 +5,12 @@ import { NavLink } from "react-router-dom";
 // import { LiaUserSolid } from "react-icons/lia";
 // import { LuUser2 } from "react-icons/lu";
 import { PiUserThin, PiUser } from "react-icons/pi";
-// import { HiOutlineUser } from "react-icons/hi2";
+import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { FiChevronUp, FiChevronDown} from "react-icons/fi";
 import {
   BsActivity,
   BsBoxSeam,
   BsGrid,
-  BsCart2,
   BsFileEarmarkText,
   BsFileEarmarkSpreadsheet,
   BsFileEarmarkBarGraph,
@@ -56,7 +55,7 @@ const Sidebar = ({
       id: 4,
       list: "Transaksi",
       linkPath: "/Transaksi",
-      icon: BsCart2,
+      icon: HiOutlineShoppingCart,
     },
 
     {

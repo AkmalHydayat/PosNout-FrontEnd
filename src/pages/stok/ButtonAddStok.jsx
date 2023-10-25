@@ -3,6 +3,7 @@
 import FormAddStok from "./FormAddStok";
 import { useState } from "react";
 import ModalAddStok from "./ModalAddStok";
+import { FiPlusCircle } from "react-icons/fi";
 
 const ButtonAddStok = ({ setStoks, produks, setProduks }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,6 +15,8 @@ const ButtonAddStok = ({ setStoks, produks, setProduks }) => {
   const [idSelect, setIdSelect] = useState("");
   const [namaSelect, setNamaSelect] = useState("");
   const [jumlah, setJumlah] = useState("");
+  const [isBarcodeEmpty, setIsBarcodeEmpty] = useState(false);
+  const [isJumlahEmpty, setIsJumlahEmpty] = useState(false);
   const getIdName = (id, nama) => {
     setIdSelect(id);
     setNamaSelect(nama);
@@ -38,7 +41,15 @@ const ButtonAddStok = ({ setStoks, produks, setProduks }) => {
         setJumlah={setJumlah}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
-        buttonLabel={<div className="text-base font-semibold">Add</div>}
+        setIsBarcodeEmpty={setIsBarcodeEmpty}
+        setIsJumlahEmpty={setIsJumlahEmpty}
+        buttonLabel={
+          <div className="flex items-center space-x-2">
+            <FiPlusCircle className="text-lg" />
+            <div className="text-base font-semibold font-pt_Sans">Add</div>
+          </div>
+        }
+        className={`bg-purple-600 text-colorTwo shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
         modalContent={
           <FormAddStok
             setProduks={setProduks}
@@ -52,9 +63,12 @@ const ButtonAddStok = ({ setStoks, produks, setProduks }) => {
             setStoks={setStoks}
             setJumlah={setJumlah}
             jumlah={jumlah}
+            isBarcodeEmpty={isBarcodeEmpty}
+            isJumlahEmpty={isJumlahEmpty}
+            setIsBarcodeEmpty={setIsBarcodeEmpty}
+            setIsJumlahEmpty={setIsJumlahEmpty}
           />
         }
-        className={`bg-purple-600 text-white hover:bg-purple-700 rounded hover:shadow-purple-700 group px-3 py-1 font-semibold text-md`}
       ></ModalAddStok>
     </div>
   );

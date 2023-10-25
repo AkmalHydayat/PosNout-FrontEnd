@@ -14,7 +14,7 @@ const FormEditSatuan = ({
   setSearchResults,
   searchResults,
   setSatuans,
-  AlertMessage
+  AlertMessage,
 }) => {
   if (!isVisible) return null;
 
@@ -70,9 +70,11 @@ const FormEditSatuan = ({
   };
 
   return (
-    <div className="">
+    <div className="font-pt_Sans">
       <div className="border-b-[1px] border-gray-300">
-        <div className="px-6 py-3 text-2xl text-gray-900">Edit Data</div>
+        <div className="px-6 py-3 text-start text-2xl text-purple-600">
+          Edit Data
+        </div>
       </div>
       <form
         action=""
@@ -84,12 +86,12 @@ const FormEditSatuan = ({
         }}
       >
         <div className="px-6 py-4 space-y-2 text-start ">
-          <label htmlFor="" className="text-gray-900 ">
+          <label htmlFor="" className="text-gray-900 font-medium">
             Satuan
           </label>
           <input
             type="text"
-            className="w-full h-10 focus:outline-none bg-white border-[1px] border-gray-300 text-gray-900 rounded px-2 text-base"
+            className="w-full h-10 font-pt_Sans focus:outline-none   focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne  ease-in border-gray-300 focus:border-none transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-sm placeholder:text-sm placeholder:font-normal placeholder:text-gray-600"
             value={namaNewSatuan}
             onChange={(e) => setNamaNewSatuan(e.target.value.toLowerCase())}
             placeholder="inputkan satuan"
@@ -100,7 +102,7 @@ const FormEditSatuan = ({
         <div className="px-6 pb-4 space-x-2 text-base flex justify-end">
           <button
             type="submit"
-            className="bg-purple-600 text-white font-semibold px-2 py-1 rounded  hover:bg-purple-700"
+            className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
           >
             Edit
           </button>

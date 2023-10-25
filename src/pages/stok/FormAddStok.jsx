@@ -1,9 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { BiSearchAlt } from "react-icons/bi";
 import axios from "axios";
-import { useState } from "react";
 import { getProduks, getStoks } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import DateNow from "../../components/Date";
@@ -20,14 +17,16 @@ const FormAddStok = ({
   setStoks,
   setJumlah,
   jumlah,
+  isBarcodeEmpty,
+  setIsBarcodeEmpty,
+  isJumlahEmpty,
+  setIsJumlahEmpty,
 }) => {
   const AlertMessage = (message, width, icon) => {
     AlertShow(message, width, icon);
   };
   const { hari, month, year } = DateNow();
 
-  const [isBarcodeEmpty, setIsBarcodeEmpty] = useState(false);
-  const [isJumlahEmpty, setIsJumlahEmpty] = useState(false);
   const emptyBarcodeStyle = isBarcodeEmpty ? "border-[1px] border-red-500" : "";
   const emptyJumlahStyle = isJumlahEmpty ? "border-[1px] border-red-500" : "";
   const tanggalSekarang = `${hari}-${month}-${year}`;
@@ -55,9 +54,11 @@ const FormAddStok = ({
   // Panggil fungsi dengan barcodeProduk dan jumlah yang sesuai
 
   return (
-    <div className={` `}>
+    <div className={` font-pt_Sans`}>
       <div className="border-b-[1px] border-gray-300">
-        <div className="px-6 py-3 text-2xl text-gray-900">Add Data</div>
+        <div className="px-6 py-3 text-2xl  font-semibold  text-purple-600">
+          Add Data
+        </div>
       </div>
       <form
         action=""
@@ -78,7 +79,7 @@ const FormAddStok = ({
       >
         <div className="space-y-2">
           <div className="px-6 mt-2">
-            <label htmlFor="" className="text-gray-900 text-base">
+            <label htmlFor="" className="text-gray-900 font-medium text-lg">
               Tanggal
             </label>
             <input
@@ -90,7 +91,7 @@ const FormAddStok = ({
             />
           </div>
           <div className="px-6   ">
-            <label htmlFor="" className="text-gray-900 text-base">
+            <label htmlFor="" className="text-gray-900 font-medium text-lg">
               Barcode
             </label>
             <div className="flex w-full " onClick={() => setIsHide(!isHide)}>
@@ -102,32 +103,29 @@ const FormAddStok = ({
                 value={idSelect ? idSelect : "-"}
               />
               <div className="w-10 bg-purple-600  rounded-e flex justify-center items-center cursor-pointer">
-                <FontAwesomeIcon
-                  icon={faMagnifyingGlass}
-                  className="text-white "
-                />
+                <BiSearchAlt className="text-colorTwo  text-2xl" />
               </div>
             </div>
           </div>
           <div className="px-6 ">
-            <label htmlFor="" className="text-gray-900 text-base">
+            <label htmlFor="" className="text-gray-900 font-medium text-lg">
               Nama Produk
             </label>
             <input
               type="text"
-              className="w-full h-10 focus:outline-none bg-gray-300 border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 cursor-default"
+              className="w-full h-10 focus:outline-none  bg-gray-300 border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 cursor-default"
               placeholder=""
               readOnly
               value={namaSelect ? namaSelect : "-"}
             />
           </div>
           <div className="px-6 ">
-            <label htmlFor="" className="text-gray-900 text-base">
+            <label htmlFor="" className="text-gray-900 font-medium text-lg">
               Jumlah
             </label>
             <input
               type="text"
-              className={`${emptyJumlahStyle} w-full h-10 focus:outline-none bg-white border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 mb-4`}
+              className={`${emptyJumlahStyle} w-full h-10 font-pt_Sans focus:outline-none  focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne ease-in border-gray-300 focus:border-none  transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 `}
               placeholder="Jumlah"
               value={jumlah}
               onChange={(e) => {
@@ -137,10 +135,10 @@ const FormAddStok = ({
           </div>
         </div>
 
-        <div className="px-6 py-4 border-t-[1px] border-gray-300 space-x-2 text-base flex justify-end ">
+        <div className="px-6 py-4  space-x-2 text-base flex justify-end ">
           <button
+            className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
             type="submit"
-            className="bg-purple-600 text-white font-semibold px-2 py-1 rounded  hover:bg-purple-700 "
           >
             Add
           </button>

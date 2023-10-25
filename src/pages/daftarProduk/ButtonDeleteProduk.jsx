@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { HiOutlineTrash } from "react-icons/hi";
 import { useState } from "react";
 import Modal from "../../components/ui/Modal";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import DeleteConfirmProduk from "./DeleteConfirmProduk";
 
 const ButtonDeleteSatuan = ({
@@ -24,9 +23,10 @@ const ButtonDeleteSatuan = ({
         onClose={() => setShowModal(false)}
         buttonLabel={
           <div className="flex items-center ">
-            <FontAwesomeIcon icon={faTrash} />
+            <HiOutlineTrash className="text-lg " />
           </div>
         }
+        className={`bg-red-700 font-pt_Sans text-colorTwo border-[1px] p-1 border-red-700 transition-all ease-in  hover:scale-95  hover:bg-red-800 hover:border-colorTwo rounded  group font-semibold text-md`}
         modalContent={
           <DeleteConfirmProduk
             setProduks={setProduks}
@@ -41,7 +41,6 @@ const ButtonDeleteSatuan = ({
             AlertMessage={AlertMessage}
           />
         }
-        className={`bg-red-600 text-white hover:bg-red-700 rounded group px-3 py-1 font-semibold text-base`}
       ></Modal>
     </div>
   );

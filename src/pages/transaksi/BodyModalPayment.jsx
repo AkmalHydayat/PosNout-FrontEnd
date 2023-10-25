@@ -64,7 +64,7 @@ const BodyModalGetProduk = ({
     <div
       className={`fixed inset-0 ${
         isVisible ? "visible bg-black/30" : "invisible"
-      } flex items-center justify-center font-titilium  backdrop-blur-sm transition-colors`}
+      } flex items-center justify-center font-pt_Sans  backdrop-blur-sm transition-colors`}
       id="wrapper"
     >
       <div
@@ -75,7 +75,7 @@ const BodyModalGetProduk = ({
         }`}
       >
         <div
-          className={`w-[650px] relative text-base  font-semibold bg-colorTwo rounded-md`}
+          className={`w-[650px] relative text-base  font-semibold bg-colorOne rounded-md`}
         >
           {/* children berisi formAddStok  */}
           <div className="">{children}</div>
@@ -83,7 +83,11 @@ const BodyModalGetProduk = ({
         <div className={`w-[400px] relative`}>
           {/* Button Close Modal   */}
           <button
-            className="text-colorTwo absolute z-20 -end-2 -top-2 bg-purple-600 px-2 rounded-lg  hover:bg-purple-700 hover:shadow-sm"
+            className={`text-colorTwo ${
+              isVisible
+                ? "scale-100 opacity-100  duration-300"
+                : "scale-75 opacity-0"
+            } absolute z-20 -end-[10px] -top-[10px] bg-purple-600 text-colorTwo px-[7px] hover:bg-purple-700 hover:text-colorTwo rounded-lg  shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  `}
             onClick={() => {
               onClose();
               setKembalian(0);
@@ -93,11 +97,11 @@ const BodyModalGetProduk = ({
             <FontAwesomeIcon icon={faXmark} />
           </button>
           <div
-            className={` relative text-xl font-bold transition-all ease-out text-purple-600 border-b-2 border-purple-600 bg-colorTwo rounded-t-md py-4 text-center `}
+            className={` relative text-xl font-bold bg-colorOne transition-all ease-out text-purple-600 border-b-[1px] border-purple-600  rounded-t-md py-4 text-center `}
           >
             Data Transaksi
           </div>
-          <div className="bg-colorTwo text-base font-semibold p-5 rounded-b space-y-3">
+          <div className="bg-colorOne text-base font-semibold p-5 rounded-b space-y-3">
             <div className="flex border-b-[1px] pb-2 border-purple-200 ">
               <div className="w-32">Invoice</div>
               <div className="text-end w-10">:</div>
@@ -136,9 +140,9 @@ const BodyModalGetProduk = ({
               <div className="text-end w-10">:</div>
               <div className="text-end  w-72">{kembalian}</div>
             </div>
-            <div className="flex justify-evenly py-2">
+            <div className="flex justify-center gap-9 py-2">
               <button
-                className="px-3 py-1 w-32 bg-purple-600 rounded text-white"
+                className={`bg-colorOne text-purple-600 w-20 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
                 onClick={() => {
                   addTransaksiDetail();
                   addLaporanTransaksi();
@@ -147,7 +151,8 @@ const BodyModalGetProduk = ({
               >
                 Proses
               </button>
-              <button className="px-3 py-1 w-32 bg-purple-600 rounded text-white">
+              <button className={`bg-colorOne text-purple-600 w-20 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+          >
                 Selesai
               </button>
             </div>

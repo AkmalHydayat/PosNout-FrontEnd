@@ -17,21 +17,21 @@ const Dashboard = () => {
     <LayoutPage>
       <div className="">
         <div
-          className={`p-6 space-y-6 font-pt_Sans text-base font-medium text-gray-950 `}
+          className={`p-6 space-y-6 font-pt_Sans text-base font-medium text-gray-950`}
         >
           <div className="h-44 flex space-x-6 ">
             <div
-              className={` shadow-lg shadow-gray-300 bg-gradient-to-br from-emerald-500 to-indigo-500 p-3 w-full rounded-md border-[1px] border-gray-300 `}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-emerald-500 to-indigo-500 p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Transaksi/ Hari</div>
-                <div className={`   rounded me-3`}>
-                  <BsArrowLeftRight className="text-[33px] rounded    p-[6px] relative text-gray-900" />
+                <div className={`rounded me-3`}>
+                  <BsArrowLeftRight className="text-[33px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
             </div>
             <div
-              className={` shadow-lg shadow-gray-300 bg-gradient-to-br from-amber-500 to-lime-500 p-3 w-full rounded-md border-[1px] border-gray-300`}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-amber-500 to-lime-500 p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Total Penjualan/ Hari</div>
@@ -42,7 +42,7 @@ const Dashboard = () => {
             </div>
 
             <div
-              className={` shadow-lg shadow-gray-300 bg-gradient-to-br from-lime-500 to-emerald-500 p-3 w-full rounded-md border-[1px] border-gray-300`}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-lime-500 to-emerald-500 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Keuntungan/ Hari</div>
@@ -52,7 +52,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
-              className={` shadow-lg shadow-gray-300 bg-gradient-to-br from-violet-500 to-rose-500 p-3 w-full rounded-md border-[1px] border-gray-300`}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-violet-500 to-rose-500 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Kas Toko</div>
@@ -64,7 +64,7 @@ const Dashboard = () => {
           </div>
           <div className="h-44 flex space-x-6 ">
             <div
-              className={` shadow-lg shadow-gray-300 bg-gradient-to-br from-rose-500 to-orange-500 p-3 w-full rounded-md border-[1px] border-gray-300`}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-rose-500 to-orange-500 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Barang Terlaris/ Hari</div>
@@ -74,7 +74,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
-              className={` shadow-lg shadow-gray-300 bg-gradient-to-br from-violet-500 to-teal-500 p-3 w-full rounded-md border-[1px] border-gray-300`}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-violet-500 to-teal-500 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Barang Terlaris/ Bulan</div>
@@ -84,7 +84,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
-              className={` shadow-lg shadow-gray-300 bg-gradient-to-br from-emerald-500 to-cyan-500 p-3 w-full rounded-md border-[1px] border-gray-300`}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-emerald-500 to-cyan-500 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between ">
                 <div className="w-2/3 ">Stok Minimum</div>
@@ -97,56 +97,56 @@ const Dashboard = () => {
 
           <div className="h-44 flex space-x-6">
             <div
-              className={` shadow-lg shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={` shadow-md shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
             >
               <div className="flex justify-between ">
                 <span>Grafik Penjualan/Hari</span>
                 <span
-                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-300`}
+                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200`}
                 >
                   {" "}
-                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600 " />
+                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600 border-[1px] " />
                 </span>
               </div>
             </div>
             <div
-              className={` shadow-lg shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={` shadow-md shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
             >
               <div className="flex justify-between">
                 <span>Grafik Laba/Hari</span>
                 <span
-                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-300`}
+                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200`}
                 >
                   {" "}
-                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600 " />
+                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600 border-[1px] " />
                 </span>
               </div>
             </div>
           </div>
           <div className="h-96 flex space-x-6">
             <div
-              className={` shadow-lg shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={` shadow-md shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
             >
               <div className="flex justify-between">
                 <span>Grafik Penjualan/Hari</span>
                 <span
-                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-300`}
+                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200`}
                 >
                   {" "}
-                  <PiChartBarLight className="text-[39px] rounded p-[6px] relative text-purple-600 " />
+                  <PiChartBarLight className="text-[39px] rounded p-[6px] relative text-purple-600 border-[1px] " />
                 </span>
               </div>
             </div>
             <div
-              className={` shadow-lg shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={` shadow-md shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
             >
               <div className="flex justify-between">
                 <span>Grafik Penjualan/Hari</span>
                 <span
-                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-300`}
+                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200`}
                 >
                   {" "}
-                  <PiChartBarLight className="text-[39px] rounded    p-[6px] relative text-purple-600 " />
+                  <PiChartBarLight className="text-[39px] rounded    p-[6px] relative text-purple-600 border-[1px] " />
                 </span>
               </div>
             </div>

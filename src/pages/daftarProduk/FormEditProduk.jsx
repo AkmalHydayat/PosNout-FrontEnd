@@ -83,7 +83,7 @@ const FormEditProduk = ({
         kategori: newKategoriProduk,
         harga_beli: newHargaBeliProduk,
         harga_jual: newHargaJualProduk,
-        stok: 0,
+        stok: stok,
       });
       navigate("/DaftarProduk");
       const updatedProduks = await getProduks(); // Panggil fungsi getKategoris untuk memperbarui data
@@ -167,7 +167,9 @@ const FormEditProduk = ({
   return (
     <div className="">
       <div className="border-b-[1px] border-gray-300">
-        <div className="px-6 py-3 text-2xl text-gray-900">Edit Data</div>
+        <div className="px-6 py-3 text-2xl font-semibold font-pt_Sans text-start text-purple-600">
+          Edit Data
+        </div>
       </div>
       <form action="" onSubmit={setSubmit}>
         <FormInputProduk
@@ -196,10 +198,9 @@ const FormEditProduk = ({
         />
         <p className="text-center text-fnd text-sm">{msg}</p>
 
-        <div className="px-6 pb-4 space-x-2 text-base flex justify-end border-t-[1px] border-gray-300">
+        <div className="px-6 py-4 space-x-2 text-base flex border-t-[1px] border-gray-300 justify-end ">
           <button
-            type="submit"
-            className="bg-purple-600 text-white font-semibold px-2 py-1 rounded  hover:bg-purple-700 mt-4"
+            className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
           >
             Edit
           </button>

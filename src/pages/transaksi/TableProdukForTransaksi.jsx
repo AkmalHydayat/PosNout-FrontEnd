@@ -1,26 +1,37 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import SearchGroup from "../../components/ui/SearchGroup";
 import ButtonSelect from "../../components/ui/ButtonSelect";
 import { getProduks } from "../../utils/api";
+import { BiSearchAlt } from "react-icons/bi";
+import { BsCheck } from "react-icons/bs";
 
 const TableprodukForTransaksi = ({
   getSelected,
   onClose,
   setIsSearching,
-  setSearchTerm,
   setSearchResults,
+  setSearchTerm,
   searchTerm,
   searchResults,
   isSearching,
-  currentPage,
-  setCurrentPage,
-  perPage,
-  setPerPage,
 }) => {
   const [produks, setProduks] = useState([]);
+
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+
+    // Mengatur isSearching menjadi true saat pencarian aktif
+    setIsSearching(true);
+
+    // Melakukan pencarian dan menyimpan hasil dalam searchResults
+    const filteredProduks = produks.filter((produk) =>
+      produk.nama_produk.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setSearchResults(filteredProduks);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,90 +47,50 @@ const TableprodukForTransaksi = ({
     fetchData();
   }, []);
 
-  // Fungsi untuk mencari Produk berdasarkan nama
-  const searchProduk = () => {
-    const results = produks.filter((item) => {
-      return item.nama_produk.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-
-    setSearchResults(results);
-    setIsSearching(true);
-  };
-
-  // Fungsi untuk menutup table pecarian
-  const stopSearch = () => {
-    setIsSearching(false);
-    setSearchTerm(""); // Mengosongkan input pencarian saat pencarian dihentikan
-    setSearchResults([]);
-  };
-
-  const indexOfLastItem = currentPage * perPage;
-  const indexOfFirstItem = indexOfLastItem - perPage;
-
-  const currentItems = produks.slice(indexOfFirstItem, indexOfLastItem);
   return (
-    <div>
-      <div className="bg-colorTwo p-6 space-y-3 rounded font-normal">
-        <div className="flex justify-between h-full ">
-          <div className="space-x-1 flex ">
-            <label htmlFor="" className="my-auto ">
-              Show
-            </label>
-            <div className="flex border border-gray-300 rounded">
-              <div className="">
-                <input
-                  type="text"
-                  className="w-8 text-center rounded font-semibold focus:outline-none h-full cursor-default"
-                  value={perPage}
-                  readOnly
-                />
-              </div>
-              <div className="flex flex-col items-center justify-center space-y-[1px]">
-                <FontAwesomeIcon
-                  icon={faCaretUp}
-                  className="h-3 text-xs px-[3px] rounded-tr-sm cursor-pointer bg-purple-600  text-white"
-                  onClick={() => setPerPage(perPage + 1)}
-                />
-                <FontAwesomeIcon
-                  icon={faCaretDown}
-                  className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 text-white cursor-pointer "
-                  onClick={() =>
-                    setPerPage(perPage > 5 ? perPage - 1 : perPage)
-                  }
-                />
-              </div>
-            </div>
-            <div className="my-auto">entries</div>
-          </div>
-          <SearchGroup
-            onSubmit={searchProduk}
+    <div className="bg-colorOne">
+      <div className=" p-6 space-y-3 font-pt_Sans rounded font-normal">
+        <div className="flex px-3 justify-end h-[30px] mb-5">
+          <label htmlFor="" className="me-2 font-medium text-gray-900"></label>
+          <input
+            type="text"
+            placeholder="Cari item"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder={"item"}
+            onChange={handleSearch}
+            className="rounded-l border-[1px]  bg-colorOne  focus:bg-white transition-colors border-purple-600 font-medium w-48 focus:outline-none ps-2 placeholder:text-sm"
+            required
           />
+
+          <button className="bg-purple-600 px-2  border-[1px] border-s-0 border-purple-600 rounded-r  cursor-default hover:border-purple-700">
+            <BiSearchAlt className="text-colorTwo  text-xl" />
+          </button>
         </div>
         {isSearching ? (
-          <div>
-            <table className="w-full">
-              <thead className="border-[1px] border-gray-300 ">
-                <tr className="text-center font-semibold text-base text-gray-900">
-                  <td className="w-36 py-2 border-[1px] border-gray-300">
+          <div
+            className={`${
+              searchResults.length > 13 ? "h-[460px] overflow-y-scroll" : ""
+            }   px-3`}
+          >
+            <table className="w-full  border-b-[1px] border-gray-900">
+              <thead className="border-y-[1px]  border-gray-900">
+                <tr className="text-center font-semibold sticky -top-[1px] transition-all ease-in  bg-purple-600 text-base text-colorTwo">
+                  <td className="w-36 py-2 border-s-[1px] border-gray-900">
                     Barcode
                   </td>
-                  <td className="w-96 py-2 border-[1px] border-gray-300">
+                  <td className="w-96 py-2 border-s-[1px] border-gray-900">
                     Nama
                   </td>
-                  <td className="w-32 py-2 border-[1px] border-gray-300">
+                  <td className="w-32 py-2 border-s-[1px] border-gray-900">
                     Satuan
                   </td>
-                  <td className="w-40 py-2 border-[1px] border-gray-300">
+                  <td className="w-40 py-2 border-s-[1px] border-gray-900">
                     Harga Jual
                   </td>
-                  <td className="w-16 py-2 border-[1px] border-gray-300">
+                  <td className="w-[75px] py-2 border-s-[1px] border-gray-900">
                     Stok
                   </td>
-                  <td className="w-28 py-2 border-[1px] border-gray-300">
-                    Aksi
+                  <td className="w-[75px] py-2 border-x-[1px] border-gray-900">
+                    Pilih
                   </td>
                 </tr>
               </thead>
@@ -127,145 +98,40 @@ const TableprodukForTransaksi = ({
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-1 border-gray-300"
-                      colSpan={7}
-                    >
-                      Tidak ada hasil pencarian.
-                    </td>
-                  </tr>
-                ) : (
-                  searchResults.map((item, index) => (
-                    <tr
-                      className={`text-center text-gray-900 ${
-                        index % 2 ? "  " : "bg-gray-200"
-                      }`}
-                      key={index}
-                    >
-                      <td className="w-36 py-1 border-[1px] border-gray-300">
-                        {item.barcode}
-                      </td>
-                      <td className="w-96 py-1 border-[1px] border-gray-300">
-                        {item.nama_produk}
-                      </td>
-                      <td className="w-32 py-1 border-[1px] border-gray-300">
-                        {item.satuan}
-                      </td>
-
-                      <td className="w-40 py-1 border-[1px] border-gray-300">
-                        {item.harga_jual}
-                      </td>
-                      <td className="w-16 py-1 border-[1px] border-gray-300">
-                        {item.stok}
-                      </td>
-                      <td className="w-28 py-1  border-[1px] border-gray-300">
-                        <ButtonSelect
-                          className={`bg-gray-100 px-2 hover:bg-purple-600 hover:text-white py-[1px] rounded text-purple-600 border-[1px] border-purple-600 font-semibold text-sm`}
-                          onClick={() => {
-                            getSelected(
-                              item.barcode,
-                              item.nama_produk,
-                              item.harga_jual,
-                              item.stok
-                            );
-                            onClose();
-                            setTimeout(() => {
-                              setCurrentPage(1);
-                              setIsSearching("");
-                              setSearchTerm([]);
-                              setSearchResults(false);
-                            }, 1000);
-                          }}
-                        >
-                          Select
-                        </ButtonSelect>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-            <div className={`flex justify-between   mt-3`}>
-              <div className="text-sm">
-                Showing 1 to {searchResults.length} of {searchResults.length}{" "}
-                entries
-              </div>
-              <div className="space-x-1">
-                <span
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
-                  onClick={stopSearch}
-                >
-                  Stop Search
-                </span>
-              </div>
-            </div>
-          </div>
-        ) : null}
-
-        {!isSearching ? (
-          <div>
-            <table className="w-full">
-              <thead className="border-[1px] border-gray-300 ">
-                <tr className="text-center font-semibold text-base text-gray-900">
-                  <td className="w-36 py-2 border-[1px] border-gray-300">
-                    Barcode
-                  </td>
-                  <td className="w-96 py-2 border-[1px] border-gray-300">
-                    Nama
-                  </td>
-                  <td className="w-32 py-2 border-[1px] border-gray-300">
-                    Satuan
-                  </td>
-
-                  <td className="w-40 py-2 border-[1px] border-gray-300">
-                    Harga Jual
-                  </td>
-
-                  <td className="w-16 py-2 border-[1px] border-gray-300">
-                    Stok
-                  </td>
-                  <td className="w-28 py-2 border-[1px] border-gray-300">
-                    Aksi
-                  </td>
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems.length === 0 ? (
-                  <tr>
-                    <td
-                      className=" text-center border-[1px] py-1  border-gray-300 "
+                      className=" text-center border-[1px] py-2  border-gray-900 "
                       colSpan={7}
                     >
                       Tidak ada Data Tersedia
                     </td>
                   </tr>
                 ) : (
-                  currentItems.map((item, index) => (
+                  searchResults.map((item, index) => (
                     <tr
                       className={`text-center ${
                         index % 2 ? "  " : "bg-gray-200"
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
-                      <td className="w-36 py-1 border-[1px] border-gray-300">
+                      <td className="w-36 py-1 border-s-[1px] border-gray-900">
                         {item.barcode}
                       </td>
-                      <td className="w-96 py-1 border-[1px] border-gray-300">
+                      <td className="w-96 py-1 border-s-[1px] border-gray-900">
                         {item.nama_produk}
                       </td>
-                      <td className="w-32 py-1 border-[1px] border-gray-300">
+                      <td className="w-32 py-1 border-s-[1px] border-gray-900">
                         {item.satuan}
                       </td>
 
-                      <td className="w-40 py-1 border-[1px] border-gray-300 break-words">
+                      <td className="w-40 py-1 border-s-[1px] border-gray-900 break-words">
                         {item.harga_jual}
                       </td>
 
-                      <td className="w-16 py-1 border-[1px] border-gray-300">
+                      <td className="w-[75px] py-1 border-s-[1px] border-gray-900">
                         {item.stok}
                       </td>
-                      <td className="w-28 py-1 border-[1px] border-gray-300">
+                      <td className="w-[75px] py-1 border-x-[1px] border-gray-900">
                         <ButtonSelect
-                          className={`bg-gray-100 px-2 hover:bg-purple-600 hover:text-white py-[1px] rounded text-purple-600 border-[1px] border-purple-600 font-semibold text-sm`}
+                          className={`bg-colorTwo text-purple-600  border-[1px] p-1 border-purple-600  transition-colors ease-in hover:scale-110 hover:bg-purple-700 hover:text-colorTwo rounded  group  `}
                           onClick={() => {
                             getSelected(
                               item.barcode,
@@ -275,14 +141,13 @@ const TableprodukForTransaksi = ({
                             );
                             onClose();
                             setTimeout(() => {
-                              setCurrentPage(1);
                               setIsSearching("");
                               setSearchTerm([]);
                               setSearchResults(false);
                             }, 1000);
                           }}
                         >
-                          Select
+                          <BsCheck className="text-base " />
                         </ButtonSelect>
                       </td>
                     </tr>
@@ -290,32 +155,99 @@ const TableprodukForTransaksi = ({
                 )}
               </tbody>
             </table>
-            <div className="flex justify-between mt-3">
-              <div className="text-sm">
-                Showing {indexOfFirstItem + 1} to{" "}
-                {Math.min(indexOfLastItem, produks.length)} of {produks.length}{" "}
-                entries
-              </div>
-              <div className="space-x-1 flex">
-                <button
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
-                >
-                  Previous
-                </button>
-                <div className="bg-colorTwo px-3 py-[2px] border-[1px] font-bold border-gray-300 text-purple-600 rounded cursor-default">
-                  {currentPage}
-                </div>
-                <button
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                  disabled={indexOfLastItem >= produks.length}
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-[2px] hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
+          </div>
+        ) : null}
+
+        {!isSearching ? (
+          <div
+            className={`${
+              produks.length > 13 ? "h-[460px] overflow-y-scroll " : ""
+            }  px-3 `}
+          >
+            <table className="w-full  border-b-[1px] border-gray-900">
+              <thead className=" ">
+                <tr className="text-center font-semibold  border-b-[1px] border-gray-900 sticky -top-[0] transition-all ease-in  bg-purple-600 text-base text-colorTwo">
+                  <td className="w-36 py-2 border-s-[1px] border-gray-900">
+                    Barcode
+                  </td>
+                  <td className="w-96 py-2 border-s-[1px] border-gray-900">
+                    Nama
+                  </td>
+                  <td className="w-32 py-2 border-s-[1px] border-gray-900">
+                    Satuan
+                  </td>
+                  <td className="w-40 py-2 border-s-[1px] border-gray-900">
+                    Harga Jual
+                  </td>
+                  <td className="w-[75px] py-2 border-s-[1px] border-gray-900">
+                    Stok
+                  </td>
+                  <td className="w-[75px] py-2 border-x-[1px] border-gray-900">
+                    Pilih
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                {produks.length === 0 ? (
+                  <tr>
+                    <td
+                      className=" text-center border-[1px] py-2  border-gray-900 "
+                      colSpan={7}
+                    >
+                      Tidak ada Data Tersedia
+                    </td>
+                  </tr>
+                ) : (
+                  produks.map((item, index) => (
+                    <tr
+                      className={`text-center ${
+                        index % 2 ? "  " : "bg-gray-200"
+                      }  font-normal text-base text-gray-900`}
+                      key={index}
+                    >
+                      <td className="w-36 py-1 border-s-[1px] border-gray-900">
+                        {item.barcode}
+                      </td>
+                      <td className="w-96 py-1 border-s-[1px] border-gray-900">
+                        {item.nama_produk}
+                      </td>
+                      <td className="w-32 py-1 border-s-[1px] border-gray-900">
+                        {item.satuan}
+                      </td>
+
+                      <td className="w-40 py-1 border-s-[1px] border-gray-900 break-words">
+                        {item.harga_jual}
+                      </td>
+
+                      <td className="w-[75px] py-1 border-s-[1px] border-gray-900">
+                        {item.stok}
+                      </td>
+                      <td className="w-[75px] py-1 border-x-[1px] border-gray-900">
+                        <ButtonSelect
+                          className={`bg-colorTwo text-purple-600  border-[1px] p-1 border-purple-600  transition-colors ease-in hover:scale-110 hover:bg-purple-700 hover:text-colorTwo rounded  group  `}
+                          onClick={() => {
+                            getSelected(
+                              item.barcode,
+                              item.nama_produk,
+                              item.harga_jual,
+                              item.stok
+                            );
+                            onClose();
+                            setTimeout(() => {
+                              setIsSearching("");
+                              setSearchTerm([]);
+                              setSearchResults(false);
+                            }, 1000);
+                          }}
+                        >
+                          <BsCheck className="text-base " />
+                        </ButtonSelect>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
         ) : null}
       </div>

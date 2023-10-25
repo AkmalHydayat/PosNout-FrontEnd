@@ -38,7 +38,7 @@ const DeleteConfirmSatuan = ({
   return (
     <div className="">
       <div className="border-b-[1px] border-gray-300">
-        <div className="px-6 py-3 text-2xl text-secondary">Hapus Data</div>
+        <div className="px-6 py-3 text-2xl text-purple-600">Hapus Data</div>
       </div>
       <div className="py-8 text-base  font-normal px-3">
         Apakah anda yakin ingin menghapus{" "}
@@ -46,9 +46,7 @@ const DeleteConfirmSatuan = ({
       </div>
       <div className="border-t-[1px] border-gray-300 py-3 space-x-3">
         <ButtonBgSec
-          className={
-            "text-center w-16 py-[2px] bg-purple-600 hover:bg-purple-700 rounded text-white"
-          }
+          className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
           onClick={() => {
             handleDelete(id);
             AlertMessage("berhasil menghapus", 310, "success");
@@ -57,9 +55,7 @@ const DeleteConfirmSatuan = ({
           Ya
         </ButtonBgSec>
         <ButtonBgSec
-          className={
-            "text-center w-16 py-[2px] rounded text-white bg-gray-600 hover:bg-gray-700"
-          }
+          className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
           onClick={() => onClose()}
         >
           Tidak
