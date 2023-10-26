@@ -6,6 +6,7 @@ import BodyModalPayment from "./BodyModalPayment";
 
 const ModalPayment = ({
   className,
+  setTransaksiList,
   buttonLabel,
   modalContent,
   isVisible,
@@ -15,7 +16,10 @@ const ModalPayment = ({
   totalJumlah,
   transaksiList,
   tanggalSekarang,
-  generateInvoice,
+  handlePaymentClick,
+  setInvoiceNumber,
+  generateInvoiceNumber,
+  setTotalJumlah,
 }) => {
   return (
     <div>
@@ -23,13 +27,17 @@ const ModalPayment = ({
         {buttonLabel}
       </ButtonModal>
       <BodyModalPayment
-        generateInvoice={generateInvoice}
+        setInvoiceNumber={setInvoiceNumber}
+        setTotalJumlah={setTotalJumlah}
+        handlePaymentClick={handlePaymentClick}
+        setTransaksiList={setTransaksiList}
         isVisible={isVisible}
         onClose={onClose}
         totalJumlah={totalJumlah}
         invoiceNumber={invoiceNumber}
         transaksiList={transaksiList}
         tanggalSekarang={tanggalSekarang}
+        generateInvoiceNumber={generateInvoiceNumber}
       >
         {/* modal content berisi formAddStok */}
         {modalContent}

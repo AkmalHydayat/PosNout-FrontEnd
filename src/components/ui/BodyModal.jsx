@@ -2,13 +2,7 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BodyModal = ({
-  children,
-  isVisible,
-  onClose,
-  setNamaNewKategori,
-  setErrorInput,
-}) => {
+const BodyModal = ({ children, isVisible, onClose }) => {
   return (
     <div
       className={`fixed inset-0 ${

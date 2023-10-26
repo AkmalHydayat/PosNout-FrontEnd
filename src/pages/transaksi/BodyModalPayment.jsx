@@ -3,20 +3,27 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
+import AlertShow from "../../components/ui/Alert";
 
 const BodyModalGetProduk = ({
   children,
   isVisible,
   onClose,
   totalJumlah,
+  setTotalJumlah,
+  setTransaksiList,
   invoiceNumber,
   transaksiList,
   tanggalSekarang,
-  generateInvoice,
+  setInvoiceNumber,
+  generateInvoiceNumber,
 }) => {
   const [pembayaran, setPembayaran] = useState("");
   const [kembalian, setKembalian] = useState(0);
 
+  const AlertMessage = (message, width, icon) => {
+    AlertShow(message, width, icon);
+  };
   const addLaporanTransaksi = async () => {
     try {
       await axios.post("http://localhost:3000/laporanTransaksi", {
@@ -30,12 +37,9 @@ const BodyModalGetProduk = ({
   };
 
   const addTransaksiDetail = async () => {
-    const invoice = invoiceNumber; // Gantilah invoiceNumber dengan nilai sesuai kebutuhan
-
     const transaksiListWithInvoice = transaksiList.map((item) => {
       return {
         ...item,
-        invoice: invoice,
       };
     });
 
@@ -75,7 +79,7 @@ const BodyModalGetProduk = ({
         }`}
       >
         <div
-          className={`w-[650px] relative text-base  font-semibold bg-colorOne rounded-md`}
+          className={`w-[650px] relative text-base  font-semibold bg-colorTwo rounded-md`}
         >
           {/* children berisi formAddStok  */}
           <div className="">{children}</div>
@@ -97,28 +101,28 @@ const BodyModalGetProduk = ({
             <FontAwesomeIcon icon={faXmark} />
           </button>
           <div
-            className={` relative text-xl font-bold bg-colorOne transition-all ease-out text-purple-600 border-b-[1px] border-purple-600  rounded-t-md py-4 text-center `}
+            className={` relative text-xl font-bold bg-colorTwo transition-all ease-out text-purple-600 border-b-[1px] border-purple-600  rounded-t-md py-4 text-center `}
           >
             Data Transaksi
           </div>
-          <div className="bg-colorOne text-base font-semibold p-5 rounded-b space-y-3">
+          <div className="bg-colorTwo text-base p-5 font-medium rounded-b space-y-3">
             <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 ">
               <div className="w-32">Invoice</div>
               <div className="text-end w-10">:</div>
-              <div className="text-end w-72">{invoiceNumber}</div>
+              <div className="text-end w-72 ">{invoiceNumber}</div>
             </div>
             <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 ">
               <div className="w-32 ">Total Belanja</div>
               <div className="text-end w-10">:</div>
-              <div className="text-end w-72">{totalJumlah}</div>
+              <div className="text-end w-72 ">{totalJumlah}</div>
             </div>
             <div className="flex border-b-[1px] pb-2  border-purple-200 ">
               <div className="w-32">Bayar</div>
               <div className="text-end w-10">:</div>
-              <div className="text-end w-72">
+              <div className="text-end w-72 ">
                 <input
                   type="text"
-                  className="bg-transparent py-0.5 px-2 text-end focus:outline-none placeholder:font-medium focus:bg-white focus:shadow-sm2 rounded focus:shadow-gray-400"
+                  className="bg-transparent py-0.5 px-2 text-end focus:outline-none placeholder:font-medium focus:bg-white  rounded focus:border-[1px] focus:border-purple-600"
                   placeholder="bayar"
                   value={pembayaran}
                   onChange={(e) => {
@@ -141,26 +145,34 @@ const BodyModalGetProduk = ({
             <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 ">
               <div className="w-32">Kembalian</div>
               <div className="text-end w-10">:</div>
-              <div className="text-end  w-72">{kembalian}</div>
+              <div className="text-end  w-72 ">{kembalian}</div>
             </div>
             <div className="flex justify-center gap-9 py-2">
               <button
-                className={`bg-colorOne text-purple-600 w-20 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+                className={`bg-colorTwo text-purple-600 w-20 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
                 onClick={() => {
                   if (pembayaran === "") {
-                    // buat alert disini
-                    return;
+                    AlertMessage("Masukkan nominal pembayaran", 400, "warning");
                   } else {
+                    // stok barang yang dipilih akan berkurang
                     addTransaksiDetail();
                     addLaporanTransaksi();
-                    generateInvoice();
+                    onClose();
+                    setTimeout(() => {
+                      const newInvoice = generateInvoiceNumber();
+                      setInvoiceNumber(newInvoice);
+                      setTotalJumlah(0);
+                      setTransaksiList([]);
+                      setPembayaran("");
+                      setKembalian(0);
+                    }, 500);
                   }
                 }}
               >
                 Proses
               </button>
               <button
-                className={`bg-colorOne text-purple-600 w-20 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+                className={`bg-colorTwo text-purple-600 w-20 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
               >
                 Selesai
               </button>

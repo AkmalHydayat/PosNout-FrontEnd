@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import LayoutPage from "../../layout/PageLayout";
 import DateNow from "../../components/Date";
@@ -19,6 +20,10 @@ const Transaksi = () => {
   const [jumlah, setJumlah] = useState("");
   const [isBarcodeEmpty, setIsBarcodeEmpty] = useState(false);
   const [isJumlahEmpty, setIsJumlahEmpty] = useState(false);
+  const [totalJumlah, setTotalJumlah] = useState(0);
+  const [invoiceNumber, setInvoiceNumber] = useState(
+    localStorage.getItem("invoiceNumber") || generateInvoiceNumber()
+  );
   const emptyBarcodeStyle = isBarcodeEmpty
     ? "border-[1px] border-red-500"
     : "border-[1px] border-gray-400";
@@ -31,10 +36,26 @@ const Transaksi = () => {
     AlertShow(message, width, icon);
   };
 
-  const totalJumlah = transaksiList.reduce((accumulator, transaksi) => {
-    return accumulator + transaksi.total;
-  }, 0);
-  // const totalJumlah = totalJumlah.toLocaleString("id-ID");
+  useEffect(() => {
+    const storedInvoiceNumber = localStorage.getItem("invoiceNumber");
+    if (storedInvoiceNumber) {
+      setInvoiceNumber(storedInvoiceNumber);
+    }
+  }, []);
+
+  const calculateTotalJumlah = () => {
+    // Hitung ulang total jumlah dari transaksi
+    const newTotalJumlah = transaksiList.reduce((accumulator, transaksi) => {
+      return accumulator + transaksi.total;
+    }, 0);
+
+    // Perbarui totalJumlah
+    setTotalJumlah(newTotalJumlah);
+  };
+  useEffect(() => {
+    // Ketika ada perubahan pada transaksiList, hitung ulang totalJumlah
+    calculateTotalJumlah();
+  }, [transaksiList]);
 
   const addTransaksi = () => {
     const existingTransaksi = transaksiList.find(
@@ -71,6 +92,7 @@ const Transaksi = () => {
     } else {
       // Jika produk belum ada, tambahkan sebagai transaksi baru
       const newTransaksiList = {
+        invoice: invoiceNumber,
         barcode: produkBarcodeSelect,
         namaProduk: produkSelect,
         harga: produkHargaSelect,
@@ -94,32 +116,48 @@ const Transaksi = () => {
     setProdukStokSelect(stok);
   };
 
-  const [invoiceNumber, setInvoiceNumber] = useState("");
+  // Buat fungsi untuk menghasilkan nomor invoice
+  let invoiceNumberCounter =
+    parseInt(localStorage.getItem("invoiceNumberCounter")) || 1;
+  const generateInvoiceNumber = () => {
+    const uniqueCode = "PP";
+    const currentDate = new Date();
+    const formattedDate = currentDate
+      .toLocaleDateString("id-ID", {
+        year: "2-digit",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .split("/")
+      .join(""); // Format tanggal YYMMDD
 
-  const generateInvoice = () => {
-    const formattedDate = `PP${hari}${month}${year}`;
-    let newInvoiceNumber = "";
-    // periksa apakah invoiceNumber kosong atau tanggalnya sudah berganti
-    if (!invoiceNumber || formattedDate !== invoiceNumber.substring(0, 8)) {
-      // jika ia reset menjadi 0001
-      newInvoiceNumber = `${formattedDate}0001`;
-    } else {
-      // jika tanggalnya masih sama lakukan penambahan pada invoiceNumber
-      const currentCount = parseInt(invoiceNumber.substring(8), 10);
-      const newCount = (currentCount + 1).toString().padStart(4, "0");
-      newInvoiceNumber = `${formattedDate}${newCount}`;
+    // Cek apakah tanggal berubah
+    const lastFormattedDate = localStorage.getItem("lastFormattedDate");
+    if (formattedDate !== lastFormattedDate) {
+      // Jika tanggal berubah, atur ulang counter ke 1
+      localStorage.setItem("invoiceNumberCounter", "1");
+      localStorage.setItem("lastFormattedDate", formattedDate);
     }
-    setInvoiceNumber(newInvoiceNumber);
-  };
 
-  useEffect(() => {
-    // Panggil generate Invoice hanya saat komponen pertama kali dirender
-    generateInvoice();
-  }, []);
+    let invoiceNumberCounter =
+      parseInt(localStorage.getItem("invoiceNumberCounter")) || 1;
+    const newInvoiceNumber = `${uniqueCode}${formattedDate}${String(
+      invoiceNumberCounter
+    ).padStart(4, "0")}`;
+    invoiceNumberCounter++;
+    localStorage.setItem(
+      "invoiceNumberCounter",
+      invoiceNumberCounter.toString()
+    );
+
+    // Simpan nilai invoice ke penyimpanan lokal
+    localStorage.setItem("invoiceNumber", newInvoiceNumber);
+
+    return newInvoiceNumber;
+  };
 
   const setSubmit = (e) => {
     e.preventDefault();
-
     // Inisialisasi variabel kesalahan
     let hasErrors = false;
 
@@ -131,7 +169,6 @@ const Transaksi = () => {
     } else {
       setIsBarcodeEmpty(false);
     }
-
     // Validasi jumlah
     if (jumlah === "") {
       AlertMessage("input tidak boleh kosong", 350, "warning");
@@ -237,10 +274,6 @@ const Transaksi = () => {
                       type="submit"
                       className="bg-purple-600 hover:bg-purple-700 w-1/4 px-2 shadow-cus2 shadow-gray-400 hover:shadow-sm2 hover:shadow-gray-400  rounded text-sm flex justify-center items-center"
                     >
-                      {/* <FontAwesomeIcon
-                        icon={faCartArrowDown}
-                        className=" text-white me-2 font-bold"
-                      /> */}
                       <TbShoppingCartPlus className="text-colorTwo text-lg" />
                       <span className="text-white font-bold ms-1">Add</span>
                     </button>
@@ -256,11 +289,14 @@ const Transaksi = () => {
                 </div>
                 <ButtonPayment
                   transaksiList={transaksiList}
+                  setTransaksiList={setTransaksiList}
                   invoiceNumber={invoiceNumber}
                   totalJumlah={totalJumlah}
                   AlertMessage={AlertMessage}
                   tanggalSekarang={tanggalSekarang}
-                  generateInvoice={generateInvoice}
+                  generateInvoiceNumber={generateInvoiceNumber}
+                  setTotalJumlah={setTotalJumlah}
+                  setInvoiceNumber={setInvoiceNumber}
                 />
               </div>
               <div className="text-5xl mt-6 font-acme text-end">
@@ -283,29 +319,3 @@ const Transaksi = () => {
 };
 
 export default Transaksi;
-
-// const editJumlah = (newJumlah, barcode) => {
-//   const updatedTransaksiList = transaksiList.map((list) => {
-//     if (list.barcode === barcode) {
-//       list.jumlah = newJumlah;
-//       // Update total based on the new jumlah
-//       list.total = list.harga * newJumlah;
-//     }
-
-//     return list;
-//   });
-
-//   setJumlah(updatedTransaksiList);
-//   // Perbarui juga searchResults jika id ada dalam hasil pencarian
-//   if (isSearching) {
-//     const updatedSearchResults = searchResults.map((list) => {
-//       if (list.barcode === barcode) {
-//         list.jumlah = newJumlah;
-//         // Update total based on the new jumlah
-//         list.total = list.harga * newJumlah;
-//       }
-//       return list;
-//     });
-//     setSearchResults(updatedSearchResults);
-//   }
-// };

@@ -162,14 +162,14 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                             editHargaBeli={item.hargaBeli}
                             editHargaJual={item.hargaJual}
                             isSearching={isSearching}
-                            setSearchResults={setSearchResults}
                             searchResults={searchResults}
                             setProduks={setProduks}
                             id={item.id}
                             produks={produks}
+
                             AlertMessage={AlertMessage}
                             stok={item.stok}
-                          />
+                            />
                           <ButtonDeleteProduk
                             setProduks={setProduks}
                             id={item.id}

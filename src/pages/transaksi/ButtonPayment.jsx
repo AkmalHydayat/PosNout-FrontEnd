@@ -6,21 +6,28 @@ import { PiCurrencyCircleDollar } from "react-icons/pi";
 
 const ButtonPayment = ({
   transaksiList,
+  setTransaksiList,
   invoiceNumber,
   totalJumlah,
   AlertMessage,
   tanggalSekarang,
-  generateInvoice,
+  handlePaymentClick,setInvoiceNumber,
+  generateInvoiceNumber,
+  setTotalJumlah,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
       <ModalPayment
+      setInvoiceNumber={setInvoiceNumber}
         isVisible={showModal}
-        generateInvoice={generateInvoice}
+        handlePaymentClick={handlePaymentClick}
         tanggalSekarang={tanggalSekarang}
         transaksiList={transaksiList}
+        setTransaksiList={setTransaksiList}
+        setTotalJumlah={setTotalJumlah}
+        generateInvoiceNumber={generateInvoiceNumber}
         onClick={() => {
           if (transaksiList.length === 0) {
             AlertMessage("tidak ada barang yang diinputkan!", 400, "warning");
@@ -33,10 +40,6 @@ const ButtonPayment = ({
         invoiceNumber={invoiceNumber}
         buttonLabel={
           <div className="flex items-center ">
-            {/* <FontAwesomeIcon
-              icon={faMoneyCheckDollar}
-              className=" text-white me-2"
-            /> */}
             <PiCurrencyCircleDollar className=" text-white me-2 text-2xl" />
             <div className="text-base">Bayar</div>
           </div>
