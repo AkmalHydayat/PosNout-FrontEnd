@@ -26,15 +26,14 @@ const ButtonAddSatuan = ({ satuans, setSatuans, AlertMessage }) => {
         className={`bg-purple-600 text-colorTwo shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
         modalContent={
           <FormAddSatuan
-            satuans={satuans}
-            setSatuans={setSatuans}
-            isVisible={showModal}
-            onClose={() => setShowModal(false)}
             AlertMessage={AlertMessage}
-            namaNewSatuan={namaNewSatuan}
-            setNamaNewSatuan={setNamaNewSatuan}
+            setSatuans={setSatuans}
+            satuans={satuans}
+            onClose={() => setShowModal(false)}
             errorInput={errorInput}
             setErrorInput={setErrorInput}
+            namaNewSatuan={namaNewSatuan}
+            setNamaNewSatuan={setNamaNewSatuan}
           />
         }
       ></Modal>

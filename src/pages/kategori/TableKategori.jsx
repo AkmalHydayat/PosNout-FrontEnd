@@ -79,7 +79,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
         </div>
         {isSearching ? (
           <div>
-            <table className="w-full">
+            <table className="w-full my-5">
               <thead className="border-[1px]  border-gray-300 ">
                 <tr className="text-center font-bold text-lg">
                   <td className="w-1/12 py-2 border-s-[1px] border-gray-300">
@@ -120,6 +120,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
                       <td className="w-1/5 border-x-[1px] py-0.5 border-gray-300 text-sm">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditKategori
+                            kategoris={kategoris}
                             id={item.id}
                             namaKategori={item.nama_kategori}
                             isSearching={isSearching}
@@ -204,6 +205,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
                       <td className="w-1/5 border-x-[1px] py-0.5 border-gray-300 text-sm">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditKategori
+                            kategoris={kategoris}
                             id={item.id}
                             namaKategori={item.nama_kategori}
                             isSearching={isSearching}

@@ -2,11 +2,11 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BodyModal = ({
+const BodyModalEditSatuan = ({
   children,
   isVisible,
   onClose,
-  setNamaNewKategori,
+  setNamaNewSatuan,
   setErrorInput,
 }) => {
   return (
@@ -32,6 +32,8 @@ const BodyModal = ({
           } absolute z-20 -end-3 -top-3 bg-purple-600 text-colorTwo px-[7px] hover:bg-purple-700 hover:text-colorTwo rounded-lg  shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  `}
           onClick={() => {
             onClose();
+            setNamaNewSatuan("");
+            setErrorInput("");
           }}
         >
           <FontAwesomeIcon icon={faXmark} />
@@ -43,4 +45,4 @@ const BodyModal = ({
   );
 };
 
-export default BodyModal;
+export default BodyModalEditSatuan;

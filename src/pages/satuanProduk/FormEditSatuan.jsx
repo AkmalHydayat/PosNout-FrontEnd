@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -6,28 +7,28 @@ import { getSatuans } from "../../utils/api";
 
 /* eslint-disable react/prop-types */
 const FormEditSatuan = ({
-  isVisible,
   onClose,
   id,
-  namaSatuan,
   isSearching,
   setSearchResults,
   searchResults,
   setSatuans,
   AlertMessage,
+  errorInput,
+  namaNewSatuan,
+  setNamaNewSatuan,
+  setErrorInput,
+  satuans,
+  namaSatuan,
 }) => {
-  if (!isVisible) return null;
-
-  const [namaNewSatuan, setNamaNewSatuan] = useState(namaSatuan || "");
   const [msg, setMsg] = useState("");
-
   const navigate = useNavigate();
 
   useEffect(() => {
     const getSatuanById = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/satuan/${id}`);
-        setNamaNewSatuan(response.data.satuan);
+        setNamaNewSatuan(response.data.nama_satuan);
       } catch (error) {
         if (error.response) {
           console.error(error.response); // Tambahkan log untuk melihat kesalahan server
@@ -69,6 +70,27 @@ const FormEditSatuan = ({
     }
   };
 
+  const setSubmit = (e) => {
+    e.preventDefault();
+    // console.log(namaNewSatuan);
+    if (namaNewSatuan.trim() === "") {
+      setErrorInput("Input tidak boleh kosong.");
+    } else if (
+      satuans.some(
+        (satuan) =>
+          satuan.nama_satuan.toLowerCase() === namaNewSatuan.toLowerCase()
+      )
+    ) {
+      setErrorInput("Kategori sudah ada dalam daftar.");
+    } else {
+      updateSatuan();
+      onClose();
+      AlertMessage("berhasil memperbarui", 310, "success");
+      setNamaNewSatuan("");
+      setErrorInput("");
+    }
+  };
+
   return (
     <div className="font-pt_Sans">
       <div className="border-b-[1px] border-gray-300">
@@ -76,15 +98,7 @@ const FormEditSatuan = ({
           Edit Data
         </div>
       </div>
-      <form
-        action=""
-        onSubmit={(e) => {
-          e.preventDefault();
-          updateSatuan();
-          onClose();
-          AlertMessage("berhasil memperbarui", 310, "success");
-        }}
-      >
+      <form action="" onSubmit={setSubmit}>
         <div className="px-6 py-4 space-y-2 text-start ">
           <label htmlFor="" className="text-gray-900 font-medium">
             Satuan
@@ -92,17 +106,20 @@ const FormEditSatuan = ({
           <input
             type="text"
             className="w-full h-10 font-pt_Sans focus:outline-none   focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne  ease-in border-gray-300 focus:border-none transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-sm placeholder:text-sm placeholder:font-normal placeholder:text-gray-600"
-            value={namaNewSatuan}
+            value={namaNewSatuan ? namaNewSatuan : ""}
             onChange={(e) => setNamaNewSatuan(e.target.value.toLowerCase())}
-            placeholder="inputkan satuan"
+            placeholder={namaSatuan}
             autoFocus
           />
+          {errorInput && (
+            <div className="text-fnd text-xs -mt-3 px-2">{errorInput}</div>
+          )}
           <p className="text-center text-fnd text-sm">{msg}</p>
         </div>
         <div className="px-6 pb-4 space-x-2 text-base flex justify-end">
           <button
             type="submit"
-            className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+            className={`bg-colorTwo text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
           >
             Edit
           </button>

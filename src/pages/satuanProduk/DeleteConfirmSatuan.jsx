@@ -11,14 +11,11 @@ const DeleteConfirmSatuan = ({
   isSearching,
   searchResults,
   setSearchResults,
-  isVisible,
   onClose,
   id,
   list,
   AlertMessage,
 }) => {
-  if (!isVisible) return null;
-
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3000/satuan/${id}`);
     const updatedSatuans = await getSatuans();

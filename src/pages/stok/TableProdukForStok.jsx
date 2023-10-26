@@ -45,8 +45,8 @@ const Tableproduks = ({
             required
           />
 
-          <button className="bg-purple-600 px-2  border-[1px] border-s-0 border-purple-600 rounded-r  cursor-default hover:border-purple-700">
-            <BiSearchAlt className="text-colorTwo  text-xl" />
+          <button className="bg-purple-600 px-2 border-[1px] border-s-0 border-purple-600 rounded-r  cursor-default hover:border-purple-700">
+            <BiSearchAlt className="text-colorTwo text-xl" />
           </button>
         </div>
         {isSearching ? (
@@ -82,7 +82,7 @@ const Tableproduks = ({
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center font-medium text-base border-[1px] py-1 border-gray-900"
+                      className=" text-center font-medium text-base border-[1px] py-2 border-gray-900"
                       colSpan={7}
                     >
                       Tidak ada hasil pencarian.
@@ -169,7 +169,7 @@ const Tableproduks = ({
                 {produks.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-1  border-gray-900 "
+                      className=" text-center border-[1px] py-2 font-medium  border-gray-900 "
                       colSpan={7}
                     >
                       Tidak ada Data Tersedia

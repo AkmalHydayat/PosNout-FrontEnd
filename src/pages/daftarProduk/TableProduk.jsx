@@ -115,7 +115,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-1 border-gray-300"
+                      className=" text-center border-[1px] py-2 border-gray-300"
                       colSpan={9}
                     >
                       Tidak ada hasil pencarian.
@@ -241,7 +241,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-1  border-gray-300 "
+                      className=" text-center border-[1px] py-2  border-gray-300 "
                       colSpan={9}
                     >
                       Tidak ada Data Tersedia

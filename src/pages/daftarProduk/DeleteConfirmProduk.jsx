@@ -10,15 +10,12 @@ const DeleteConfirmProduk = ({
   isSearching,
   setSearchResults,
   searchResults,
-  isVisible,
   onClose,
   itemToDelete,
   id,
   list,
   AlertMessage,
 }) => {
-  if (!isVisible) return null;
-
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3000/produk/${id}`);
     const updatedProduks = await getProduks();

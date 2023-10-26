@@ -126,6 +126,7 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                             searchResults={searchResults}
                             setSatuans={setSatuans}
                             AlertMessage={AlertMessage}
+                            satuans={satuans}
                           />
                           <ButtonDeleteSatuan
                             setSatuans={setSatuans}
@@ -210,6 +211,7 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                             searchResults={searchResults}
                             setSatuans={setSatuans}
                             AlertMessage={AlertMessage}
+                            satuans={satuans}
                           />
                           <ButtonDeleteSatuan
                             setSatuans={setSatuans}

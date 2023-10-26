@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import Modal from "../../components/ui/Modal";
 import DeleteConfirmSatuan from "./DeleteConfirmSatuan";
 import { HiOutlineTrash } from "react-icons/hi";
+import ModalDelete from "../../components/ui/ModalDelete";
 
 const ButtonDeleteSatuan = ({
   setSatuans,
@@ -17,7 +17,7 @@ const ButtonDeleteSatuan = ({
 
   return (
     <div>
-      <Modal
+      <ModalDelete
         isVisible={showModal}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
@@ -41,7 +41,7 @@ const ButtonDeleteSatuan = ({
             AlertMessage={AlertMessage}
           />
         }
-      ></Modal>
+      ></ModalDelete>
     </div>
   );
 };

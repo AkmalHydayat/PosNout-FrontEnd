@@ -1,8 +1,5 @@
 /* eslint-disable react/prop-types */
-import {
-  faCaretDown,
-  faCaretUp,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import SearchGroup from "../../components/ui/SearchGroup";
@@ -91,7 +88,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
         </div>
         {isSearching ? (
           <div>
-            <table className="w-full border-b-[1px] border-gray-900 text-gray-900">
+            <table className="w-full my-5 border-b-[1px] border-gray-900 text-gray-900">
               <thead className="border-[1px] border-gray-900 bg-colorTwo">
                 <tr className="text-center font-bold text-lg text-gray-900 bor">
                   <td className="w-10 py-2 border-s-[1px] border-gray-900 ">
@@ -158,10 +155,6 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                           className="bg-red-700 hover:bg-red-800 hover:scale-95 rounded p-1"
                           onClick={() => deleteData(item.barcode)}
                         >
-                          {/* <FontAwesomeIcon
-                            className="py-1 px-2 text-sm text-colorTwo"
-                            icon={faTrash}
-                          /> */}
                           <HiOutlineTrash className="text-xl text-colorTwo" />
                         </button>
                       </td>
@@ -189,7 +182,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
 
         {!isSearching ? (
           <div>
-            <table className="w-full border-b-[1px] border-gray-900">
+            <table className="w-full my-5 border-b-[1px] border-gray-900">
               <thead className="border-[1px] border-gray-900 ">
                 <tr className="text-center font-bold text-lg text-gray-900 ">
                   <td className="w-10 py-2 border-s-[1px] border-gray-900 ">

@@ -11,14 +11,11 @@ const DeleteConfirmKategori = ({
   isSearching,
   searchResults,
   setSearchResults,
-  isVisible,
   onClose,
   id,
   list,
   AlertMessage,
 }) => {
-  if (!isVisible) return null;
-
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3000/kategori/${id}`);
     const updatedKategoris = await getKategoris();
@@ -48,7 +45,7 @@ const DeleteConfirmKategori = ({
       </div>
       <div className="border-t-[1px] border-gray-300 py-3 space-x-3">
         <ButtonBgSec
-          className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+          className={`bg-colorTwo text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
           onClick={() => {
             handleDelete(id);
             AlertMessage("berhasil menghapus", 310, "success");
@@ -57,7 +54,7 @@ const DeleteConfirmKategori = ({
           Ya
         </ButtonBgSec>
         <ButtonBgSec
-          className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+          className={`bg-colorTwo text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
           onClick={() => onClose()}
         >
           Tidak

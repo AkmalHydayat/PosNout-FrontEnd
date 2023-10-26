@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 
-import ButtonModal from "./ButtonModal";
-import BodyModal from "./BodyModal";
+import ButtonModal from "../../components/ui/ButtonModal";
+import BodyModalEditSatuan from "./BodyModalEditSatuan";
 
-const Modal = ({
+const ModalEditSatuan = ({
   className,
   buttonLabel,
   modalContent,
@@ -12,24 +12,23 @@ const Modal = ({
   onClose,
   onClick,
   setErrorInput,
-  setItem,
-  setNamaNewKategori,
+  setNamaNewSatuan
 }) => {
   return (
     <div>
       <ButtonModal onClick={onClick} className={className}>
         {buttonLabel}
       </ButtonModal>
-      <BodyModal
+      <BodyModalEditSatuan
         isVisible={isVisible}
         onClose={onClose}
         setErrorInput={setErrorInput}
-        
+        setNamaNewSatuan={setNamaNewSatuan}
       >
         {modalContent}
-      </BodyModal>
+      </BodyModalEditSatuan>
     </div>
   );
 };
 
-export default Modal;
+export default ModalEditSatuan;

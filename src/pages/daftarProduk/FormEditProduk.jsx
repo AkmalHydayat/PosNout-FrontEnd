@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from "react";
 import FormInputProduk from "./FormInputProduk";
@@ -6,7 +7,6 @@ import axios from "axios";
 import { getProduks } from "../../utils/api";
 /* eslint-disable react/prop-types */
 const FormEditProduk = ({
-  isVisible,
   onClose,
   id,
   isSearching,
@@ -16,35 +16,29 @@ const FormEditProduk = ({
   produks,
   stok,
   AlertMessage,
+  newNamaProduk,
+  setNewNamaProduk,
+  newSatuanProduk,
+  setNewSatuanProduk,
+  newKategoriProduk,
+  setNewKategoriProduk,
+  newHargaBeliProduk,
+  setNewHargaBeliProduk,
+  newHargaJualProduk,
+  setNewHargaJualProduk,
+  setIsNamaProdukEmpty,
+  setIsSatuanProdukEmpty,
+  setIsKategoriProdukEmpty,
+  setIsHargaBeliProdukEmpty,
+  setIsHargaJualProdukEmpty,
+  emptyNamaProdukStyle,
+  emptySatuanProdukStyle,
+  emptyKategoriProdukStyle,
+  emptyHargaBeliProdukStyle,
+  emptyHargaJualProdukStyle,
+  setErrorInput,
+  errorInput,
 }) => {
-  if (!isVisible) return null;
-  const [newNamaProduk, setNewNamaProduk] = useState("");
-  const [newSatuanProduk, setNewSatuanProduk] = useState("");
-  const [newKategoriProduk, setNewKategoriProduk] = useState("");
-  const [newHargaBeliProduk, setNewHargaBeliProduk] = useState("");
-  const [newHargaJualProduk, setNewHargaJualProduk] = useState("");
-  const [isNamaProdukEmpty, setIsNamaProdukEmpty] = useState(false);
-  const [isSatuanProdukEmpty, setIsSatuanProdukEmpty] = useState(false);
-  const [isKategoriProdukEmpty, setIsKategoriProdukEmpty] = useState(false);
-  const [isHargaBeliProdukEmpty, setIsHargaBeliProdukEmpty] = useState(false);
-  const [isHargaJualProdukEmpty, setIsHargaJualProdukEmpty] = useState(false);
-  const emptyNamaProdukStyle = isNamaProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
-  const emptySatuanProdukStyle = isSatuanProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
-  const emptyKategoriProdukStyle = isKategoriProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
-  const emptyHargaBeliProdukStyle = isHargaBeliProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
-  const emptyHargaJualProdukStyle = isHargaJualProdukEmpty
-    ? "border-[1px] border-red-500"
-    : "";
-  const [errorInput, setErrorInput] = useState("");
-
   const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();

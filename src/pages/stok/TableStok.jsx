@@ -73,7 +73,7 @@ const TableStok = ({ stoks }) => {
         </div>
         {isSearching ? (
           <div>
-            <table className="w-full text-gray-900">
+            <table className="w-full  my-5 text-gray-900">
               <thead className="border-[1px] border-gray-300 bg-colorTwo">
                 <tr className="text-center font-bold text-lg ">
                   <td className="w-10 py-2 border-s-[1px] border-gray-300 ">
@@ -97,7 +97,7 @@ const TableStok = ({ stoks }) => {
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-s-[1px] py-0.5 border-gray-300"
+                      className=" text-center border-x-[1px] py-2 border-gray-300"
                       colSpan={5}
                     >
                       Tidak ada hasil pencarian.
@@ -150,7 +150,7 @@ const TableStok = ({ stoks }) => {
 
         {!isSearching ? (
           <div>
-            <table className="w-full">
+            <table className="w-full  my-5">
               <thead className="border-[1px] border-gray-300 ">
                 <tr className="text-center font-bold text-lg text-gray-900">
                   <td className="w-10 py-2 border-s-[1px] border-gray-300 ">
@@ -174,7 +174,7 @@ const TableStok = ({ stoks }) => {
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-s-[1px] py-1  border-gray-300 "
+                      className=" text-center border-x-[1px] py-2 border-gray-300 "
                       colSpan={5}
                     >
                       Tidak ada Data Tersedia

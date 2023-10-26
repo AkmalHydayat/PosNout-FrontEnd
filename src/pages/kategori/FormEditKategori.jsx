@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -6,7 +7,6 @@ import { getKategoris } from "../../utils/api";
 
 /* eslint-disable react/prop-types */
 const FormEditKategori = ({
-  isVisible,
   onClose,
   id,
   namaKategori,
@@ -15,10 +15,12 @@ const FormEditKategori = ({
   searchResults,
   AlertMessage,
   setKategoris,
+  setErrorInput,
+  namaNewKategori,
+  setNamaNewKategori,
+  errorInput,
+  kategoris,
 }) => {
-  if (!isVisible) return null;
-
-  const [namaNewKategori, setNamaNewKategori] = useState(namaKategori || "");
   const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
@@ -71,6 +73,27 @@ const FormEditKategori = ({
     }
   };
 
+  const setSubmit = (e) => {
+    e.preventDefault();
+    // console.log(namaNewKategori);
+    if (namaNewKategori.trim() === "") {
+      setErrorInput("Input tidak boleh kosong.");
+    } else if (
+      kategoris.some(
+        (kategori) =>
+          kategori.nama_kategori.toLowerCase() === namaNewKategori.toLowerCase()
+      )
+    ) {
+      setErrorInput("Kategori sudah ada dalam daftar.");
+    } else {
+      updateKategori();
+      onClose();
+      AlertMessage("berhasil memperbarui", 310, "success");
+      setNamaNewKategori("");
+      setErrorInput("");
+    }
+  };
+
   return (
     <div className="">
       <div className="border-b-[1px] border-gray-300">
@@ -78,15 +101,7 @@ const FormEditKategori = ({
           Edit Data
         </div>
       </div>
-      <form
-        action=""
-        onSubmit={(e) => {
-          e.preventDefault();
-          updateKategori();
-          onClose();
-          AlertMessage("berhasil memperbarui", 310, "success");
-        }}
-      >
+      <form action="" onSubmit={setSubmit}>
         <div className="px-6 py-4 space-y-2 text-start ">
           <label
             htmlFor=""
@@ -97,17 +112,20 @@ const FormEditKategori = ({
           <input
             type="text"
             className="w-full h-10 font-pt_Sans focus:outline-none   focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne  ease-in border-gray-300 focus:border-none transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-sm placeholder:text-sm placeholder:font-normal placeholder:text-gray-600"
-            value={namaNewKategori}
-            placeholder="kategori"
+            value={namaNewKategori ? namaNewKategori : ""}
+            placeholder={namaKategori}
             onChange={(e) => setNamaNewKategori(e.target.value.toLowerCase())}
             autoFocus
           />
+          {errorInput && (
+            <div className="text-fnd text-xs -mt-3 px-2">{errorInput}</div>
+          )}
           <p className="text-center text-fnd text-sm">{msg}</p>
         </div>
         <div className="px-6 pb-4 space-x-2 text-base flex justify-end">
           <button
             type="submit"
-            className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+            className={`bg-colorTwo text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
           >
             Edit
           </button>

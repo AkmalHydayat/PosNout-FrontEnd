@@ -43,7 +43,7 @@ const Stok = () => {
         <div className="font-medium text-3xl  mb-3 text-gray-900">
           Stok Produk
         </div>
-        <div className="rounded bg-colorTwo shadow-lg border-[1px] border-gray-200 shadow-gray-300 ">
+        <div className="rounded bg-colorTwo shadow-md border-[1px] border-gray-200 shadow-gray-300 ">
           <div className="px-6 py-3 border-b-[1px]  border-purple-300 ">
             <ButtonAddStok
               setStoks={setStoks}

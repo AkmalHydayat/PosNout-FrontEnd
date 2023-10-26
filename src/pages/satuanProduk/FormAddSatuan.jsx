@@ -46,7 +46,7 @@ const FormAddSatuan = ({
     ) {
       setErrorInput("Kategori sudah ada dalam daftar.");
     } else {
-      newSatuan(namaNewSatuan);
+      newSatuan();
       setNamaNewSatuan("");
       setErrorInput("");
       onClose();
@@ -82,7 +82,7 @@ const FormAddSatuan = ({
         <p className="text-center text-fnd text-sm">{msg}</p>
         <div className="px-6 pb-4 space-x-2 text-base flex justify-end ">
           <button
-            className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+            className={`bg-colorTwo text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
             type="submit"
           >
             Add

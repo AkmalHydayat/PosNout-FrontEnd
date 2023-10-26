@@ -4,32 +4,24 @@
 import ButtonModal from "./ButtonModal";
 import BodyModal from "./BodyModal";
 
-const Modal = ({
+const ModalDelete = ({
   className,
   buttonLabel,
   modalContent,
   isVisible,
   onClose,
   onClick,
-  setErrorInput,
-  setItem,
-  setNamaNewKategori,
 }) => {
   return (
     <div>
       <ButtonModal onClick={onClick} className={className}>
         {buttonLabel}
       </ButtonModal>
-      <BodyModal
-        isVisible={isVisible}
-        onClose={onClose}
-        setErrorInput={setErrorInput}
-        
-      >
+      <BodyModal isVisible={isVisible} onClose={onClose}>
         {modalContent}
       </BodyModal>
     </div>
   );
 };
 
-export default Modal;
+export default ModalDelete;

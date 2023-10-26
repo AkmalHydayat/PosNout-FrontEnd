@@ -16,9 +16,9 @@ const ButtonAddKategori = ({ kategoris, setKategoris, AlertMessage }) => {
         setItem={setNamaNewKategori}
         setErrorInput={setErrorInput}
         buttonLabel={
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center  space-x-2">
             <FiPlusCircle className="text-lg" />
-            <div className="text-base font-semibold font-pt_Sans">Add</div>
+            <div className="text-base  font-semibold font-pt_Sans">Add</div>
           </div>
         }
         className={`bg-purple-600 text-colorTwo shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
