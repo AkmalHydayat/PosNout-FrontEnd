@@ -11,22 +11,25 @@ const ButtonPayment = ({
   totalJumlah,
   AlertMessage,
   tanggalSekarang,
-  handlePaymentClick,setInvoiceNumber,
+  handlePaymentClick,
+  setInvoiceNumber,
   generateInvoiceNumber,
   setTotalJumlah,
+  setProduks,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
       <ModalPayment
-      setInvoiceNumber={setInvoiceNumber}
+        setInvoiceNumber={setInvoiceNumber}
         isVisible={showModal}
         handlePaymentClick={handlePaymentClick}
         tanggalSekarang={tanggalSekarang}
         transaksiList={transaksiList}
         setTransaksiList={setTransaksiList}
         setTotalJumlah={setTotalJumlah}
+        setProduks={setProduks}
         generateInvoiceNumber={generateInvoiceNumber}
         onClick={() => {
           if (transaksiList.length === 0) {

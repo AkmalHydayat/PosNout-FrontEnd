@@ -5,7 +5,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import ModalGetProduk from "./ModalGetProduk";
 import TableProdukForTransaksi from "./TableProdukForTransaksi";
 
-const ButtonGetProduk = ({ getSelected }) => {
+const ButtonGetProduk = ({ getSelected, produks, setProduks }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -40,6 +40,8 @@ const ButtonGetProduk = ({ getSelected }) => {
             setCurrentPage={setCurrentPage}
             perPage={perPage}
             setPerPage={setPerPage}
+            produks={produks}
+            setProduks={setProduks}
           />
         }
       ></ModalGetProduk>

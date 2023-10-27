@@ -16,7 +16,6 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
     setTransaksiList(updatedTransaksiList);
     // Perbarui juga searchResults jika id dihapus dari hasil pencarian
     if (isSearching) {
-      console.log("hello from is searching");
       const updatedSearchResults = searchResults.filter(
         (item) => item.barcode !== barcode
       );
@@ -26,17 +25,23 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
-    setSearchTerm(searchTerm);
 
-    // Mengatur isSearching menjadi true saat pencarian aktif
-    setIsSearching(true);
+    if (searchTerm == "") {
+      setIsSearching(false);
+      setSearchTerm(searchTerm);
+    } else {
+      setSearchTerm(searchTerm);
 
-    // Melakukan pencarian dan menyimpan hasil dalam searchResults
-    const filteredProduks = transaksiList.filter((item) =>
-      item.namaProduk.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+      // Mengatur isSearching menjadi true saat pencarian aktif
+      setIsSearching(true);
 
-    setSearchResults(filteredProduks);
+      // Melakukan pencarian dan menyimpan hasil dalam searchResults
+      const filteredProduks = transaksiList.filter((item) =>
+        item.namaProduk.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      setSearchResults(filteredProduks);
+    }
   };
 
   return (
@@ -49,7 +54,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
             placeholder="Cari item"
             value={searchTerm}
             onChange={handleSearch}
-            className="rounded-l border-[1px]  bg-colorOne  focus:bg-white transition-colors border-purple-600 font-medium w-48 focus:outline-none ps-2 placeholder:text-sm"
+            className="rounded-l border-[1px]  bg-colorTwo  focus:bg-white transition-colors border-purple-600 font-medium w-48 focus:outline-none ps-2 placeholder:text-sm"
             required
           />
 
@@ -206,7 +211,6 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                           className="bg-red-700 hover:bg-red-800 hover:scale-95 rounded p-1"
                           onClick={() => deleteData(item.barcode)}
                         >
-                        
                           <HiOutlineTrash className="text-xl text-colorTwo" />
                         </button>
                       </td>

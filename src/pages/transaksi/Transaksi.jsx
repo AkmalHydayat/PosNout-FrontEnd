@@ -9,6 +9,7 @@ import ButtonGetProduk from "./ButtonGetProduk";
 import ButtonPayment from "./ButtonPayment";
 import AlertShow from "../../components/ui/Alert";
 import { TbShoppingCartPlus } from "react-icons/tb";
+import axios from "axios";
 
 const Transaksi = () => {
   const { hari, month, year } = DateNow();
@@ -21,6 +22,7 @@ const Transaksi = () => {
   const [isBarcodeEmpty, setIsBarcodeEmpty] = useState(false);
   const [isJumlahEmpty, setIsJumlahEmpty] = useState(false);
   const [totalJumlah, setTotalJumlah] = useState(0);
+  const [produks, setProduks] = useState([]);
   const [invoiceNumber, setInvoiceNumber] = useState(
     localStorage.getItem("invoiceNumber") || generateInvoiceNumber()
   );
@@ -117,8 +119,7 @@ const Transaksi = () => {
   };
 
   // Buat fungsi untuk menghasilkan nomor invoice
-  let invoiceNumberCounter =
-    parseInt(localStorage.getItem("invoiceNumberCounter")) || 1;
+
   const generateInvoiceNumber = () => {
     const uniqueCode = "PP";
     const currentDate = new Date();
@@ -131,16 +132,16 @@ const Transaksi = () => {
       .split("/")
       .join(""); // Format tanggal YYMMDD
 
-    // Cek apakah tanggal berubah
-    const lastFormattedDate = localStorage.getItem("lastFormattedDate");
-    if (formattedDate !== lastFormattedDate) {
-      // Jika tanggal berubah, atur ulang counter ke 1
-      localStorage.setItem("invoiceNumberCounter", "1");
-      localStorage.setItem("lastFormattedDate", formattedDate);
-    }
-
+    const lastResetDate = localStorage.getItem("lastResetDate");
     let invoiceNumberCounter =
       parseInt(localStorage.getItem("invoiceNumberCounter")) || 1;
+
+    if (lastResetDate !== formattedDate) {
+      // Jika tanggal terakhir reset bukan sama dengan tanggal saat ini, atur ulang counter ke 1
+      invoiceNumberCounter = 1;
+      localStorage.setItem("lastResetDate", formattedDate);
+    }
+
     const newInvoiceNumber = `${uniqueCode}${formattedDate}${String(
       invoiceNumberCounter
     ).padStart(4, "0")}`;
@@ -244,7 +245,11 @@ const Transaksi = () => {
                         : "font-titilium font-bold"
                     } cursor-default px-2 bg-gray-300 focus:outline-none ${emptyBarcodeStyle}  w-3/4 rounded-s `}
                   />
-                  <ButtonGetProduk getSelected={getSelected} />
+                  <ButtonGetProduk
+                    getSelected={getSelected}
+                    produks={produks}
+                    setProduks={setProduks}
+                  />
                 </div>
                 <form action="" className="" onSubmit={setSubmit}>
                   <div className=" flex h-8">
@@ -297,6 +302,7 @@ const Transaksi = () => {
                   generateInvoiceNumber={generateInvoiceNumber}
                   setTotalJumlah={setTotalJumlah}
                   setInvoiceNumber={setInvoiceNumber}
+                  setProduks={setProduks}
                 />
               </div>
               <div className="text-5xl mt-6 font-acme text-end">

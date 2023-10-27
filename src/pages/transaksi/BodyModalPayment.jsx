@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
 import AlertShow from "../../components/ui/Alert";
+import { getProduks } from "../../utils/api";
 
 const BodyModalGetProduk = ({
   children,
@@ -17,6 +18,7 @@ const BodyModalGetProduk = ({
   tanggalSekarang,
   setInvoiceNumber,
   generateInvoiceNumber,
+  setProduks,
 }) => {
   const [pembayaran, setPembayaran] = useState("");
   const [kembalian, setKembalian] = useState(0);
@@ -24,6 +26,50 @@ const BodyModalGetProduk = ({
   const AlertMessage = (message, width, icon) => {
     AlertShow(message, width, icon);
   };
+
+  const updateStok = async () => {
+    try {
+      for (const transaksiItem of transaksiList) {
+        const { barcode, jumlah } = transaksiItem;
+
+        // Ambil stok saat ini dari database berdasarkan barcode
+        const responseGet = await axios.get(
+          `http://localhost:3000/getproduk/${barcode}`
+        );
+
+        if (responseGet.status !== 200) {
+          console.error(`Gagal mendapatkan produk dengan barcode ${barcode}`);
+          continue;
+        }
+        const currentProdukStok = responseGet.data.stok;
+
+        // Kurangi stok saat ini dengan jumlah yang dimasukkan
+        const updatedStokProduk = currentProdukStok - jumlah;
+
+        // Buat permintaan ke endpoint /putproduk untuk mengupdate stok produk
+        // const responseUpdate =
+        await axios.put(`http://localhost:3000/putproduk/${barcode}`, {
+          stok: updatedStokProduk,
+        });
+        const updatedProduks = await getProduks(); // Panggil fungsi getKategoris untuk memperbarui data
+        setProduks(updatedProduks);
+        // if (responseUpdate.status === 200) {
+        //   // Handle sukses
+        //   console.log(
+        //     `Stok produk dengan barcode ${barcode} berhasil diperbarui.`
+        //   );
+        // } else {
+        //   // Handle gagal
+        //   console.error(
+        //     `Gagal memperbarui stok produk dengan barcode ${barcode}`
+        //   );
+        // }
+      }
+    } catch (error) {
+      console.error("Terjadi kesalahan: " + error.message);
+    }
+  };
+
   const addLaporanTransaksi = async () => {
     try {
       await axios.post("http://localhost:3000/laporanTransaksi", {
@@ -47,7 +93,7 @@ const BodyModalGetProduk = ({
       await axios.post("http://localhost:3000/orderDetail", {
         transaksiList: transaksiListWithInvoice,
       });
-      console.log("Data transaksi berhasil disimpan ke database.");
+      // console.log("Data transaksi berhasil disimpan ke database.");
     } catch (error) {
       console.error("Gagal menyimpan data transaksi ke database:", error);
     }
@@ -158,6 +204,7 @@ const BodyModalGetProduk = ({
                     addTransaksiDetail();
                     addLaporanTransaksi();
                     onClose();
+                    updateStok();
                     setTimeout(() => {
                       const newInvoice = generateInvoiceNumber();
                       setInvoiceNumber(newInvoice);

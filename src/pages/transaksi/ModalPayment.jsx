@@ -20,6 +20,7 @@ const ModalPayment = ({
   setInvoiceNumber,
   generateInvoiceNumber,
   setTotalJumlah,
+  setProduks,
 }) => {
   return (
     <div>
@@ -38,6 +39,7 @@ const ModalPayment = ({
         transaksiList={transaksiList}
         tanggalSekarang={tanggalSekarang}
         generateInvoiceNumber={generateInvoiceNumber}
+        setProduks={setProduks}
       >
         {/* modal content berisi formAddStok */}
         {modalContent}

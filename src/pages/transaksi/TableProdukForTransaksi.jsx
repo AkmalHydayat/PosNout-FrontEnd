@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ButtonSelect from "../../components/ui/ButtonSelect";
 import { getProduks } from "../../utils/api";
 import { BiSearchAlt } from "react-icons/bi";
@@ -15,9 +15,9 @@ const TableprodukForTransaksi = ({
   searchTerm,
   searchResults,
   isSearching,
+  produks,
+  setProduks,
 }) => {
-  const [produks, setProduks] = useState([]);
-
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
