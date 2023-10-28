@@ -5,18 +5,17 @@ import { NavLink } from "react-router-dom";
 // import { LiaUserSolid } from "react-icons/lia";
 // import { LuUser2 } from "react-icons/lu";
 import { PiUserThin, PiUser } from "react-icons/pi";
-import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { FiChevronUp, FiChevronDown} from "react-icons/fi";
+import { HiOutlineShoppingCart, HiOutlineArchiveBox } from "react-icons/hi2";
+import { FiChevronUp, FiChevronDown } from "react-icons/fi";
 import {
-  BsActivity,
+  BsHouse,
   BsBoxSeam,
-  BsGrid,
   BsFileEarmarkText,
   BsFileEarmarkSpreadsheet,
   BsFileEarmarkBarGraph,
   BsTags,
   BsPass,
-  BsBoxes,
+  BsInboxes,
 } from "react-icons/bs";
 const Sidebar = ({
   widthUserImg,
@@ -37,13 +36,13 @@ const Sidebar = ({
       id: 1,
       list: "Dashboard",
       linkPath: "/Dashboard",
-      icon: BsActivity,
+      icon: BsHouse,
     },
     {
       id: 2,
       list: "Produk",
       linkPath: "/Produk",
-      icon: BsGrid,
+      icon: HiOutlineArchiveBox,
     },
     {
       id: 3,
@@ -84,13 +83,12 @@ const Sidebar = ({
       list: "Satuan",
       linkPath: "/SatuanProduk",
       icon: BsPass,
-      BsBoxes,
     },
     {
       id: 3,
       list: "Daftar",
       linkPath: "/DaftarProduk",
-      icon: BsBoxes,
+      icon: BsInboxes,
     },
   ];
 

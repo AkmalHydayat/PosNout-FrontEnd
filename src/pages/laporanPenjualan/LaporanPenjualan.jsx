@@ -6,11 +6,12 @@ import TableLaporan from "./TableLaporan";
 import { useEffect, useState } from "react";
 import transaksiListData from "../transaksi/TransaksiListData";
 
-const LaporanPenjualan = () => {
+const LaporanPenjualan = ({ widthLogFilter }) => {
   const { transaksiList } = transaksiListData();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [searchInvoice, setSearchInvoice] = useState("");
 
   // const addTransaksi = () => {
   //   const existingTransaksi = transaksiList.find(
@@ -93,54 +94,56 @@ const LaporanPenjualan = () => {
 
   return (
     <LayoutPage>
-      <div className={` p-6 font-titilium`}>
-        <div className=" text-3xl mb-3 text-gray-900 font-semibold">
+      <div className={` p-6 font-pt_Sans`}>
+        <div className=" text-3xl mb-3 text-gray-900 font-medium">
           Laporan Penjualan
         </div>
         <div className="space-y-7">
-          <div className="pb-6 rounded shadow-lg  shadow-gray-400 bg-colorTwo">
-            <div className="font-semibold text-xl py-3.5 mb-4 px-6  border-b-2 border-gray-400">
+          <div className="pb-6 rounded shadow-md  border-[1px] border-gray-200 shadow-gray-300 bg-colorTwo">
+            <div className="font-semibold text-purple-600 text-xl py-3.5 mb-4 px-6  border-b-[1px] border-purple-300">
               Filter Data
             </div>
-            <div className="  px-6  ">
+            <div className="flex justify-center py-3">
               <form action="">
-                <div className="flex justify-between">
-                  <div className="space-x-5">
-                    <label>
-                      Tanggal
-                      <input
-                        type="date"
-                        className="ms-10 h-10 border-[1px] border-gray-300 rounded-sm w-36 px-2"
-                      />
-                    </label>
-                    <label>
-                      s/d
-                      <input
-                        className="ms-5 w-36 px-2 h-10 border-[1px] border-gray-300 rounded-sm"
-                        type="date"
-                      />
-                    </label>
-                  </div>
-                  <label className="space-x-5">
-                    invoice
+                <div className="flex w-full space-x-12">
+                  <div className=" space-x-3  ">
+                    <label className="">Tanggal</label>
                     <input
-                      className="ms-10 w-54 px-2 h-10 border-[1px] border-gray-300 rounded-sm"
+                      type="date"
+                      className={` border-[1px] h-10 border-gray-300 rounded transition-all ${widthLogFilter} px-2`}
+                    />
+                    <label>s/d</label>
+                    <input
+                      className={` border-[1px] h-10 border-gray-300 rounded ${widthLogFilter}  px-2`}
+                      type="date"
+                    />
+                  </div>
+                  <label className="">
+                    Invoice
+                    <input
+                      className={`border-[1px] focus:outline-none focus:border-[1px] focus:border-purple-600 ms-3 h-10 px-2 ${widthLogFilter} border-gray-300 rounded`}
                       type="text"
+                      value={searchInvoice}
+                      onChange={(e) => {
+                        const value = e.target.value.toLocaleUpperCase();
+                        setSearchInvoice(value);
+                      }}
+                      placeholder="PP0609200001"
                     />
                   </label>
-                  <div className="flex space-x-5">
-                    <div className="h-8 my-auto flex px-4  items-center rounded-md bg-purple-600 text-white hover:bg-purple-700 cursor-pointer">
-                      reset
+                  <div className="flex justify-center items-center space-x-3 ">
+                    <div className=" flex px-4 h-9 w-16 justify-center items-center rounded bg-purple-600 text-colorTwo font-semibold shadow-sm2 shadow-gray-300 hover:bg-purple-700 hover:shadow-cus2 hover:shadow-gray-500 transition-all ease-in cursor-pointer">
+                      Cari
                     </div>
-                    <div className="h-8 my-auto flex px-4  items-center rounded-md bg-purple-600 text-white hover:bg-purple-700 cursor-pointer">
-                      cari
+                    <div className=" flex px-4 h-9 w-16 justify-center  items-center rounded bg-colorTwo text-purple-600 font-semibold shadow-sm2 shadow-gray-300 hover:bg-purple-600 hover:text-colorTwo transition-all ease-in cursor-pointer">
+                      Reset
                     </div>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <div className=" shadow-lg rounded  shadow-gray-400">
+          <div className=" shadow-md border-[1px]  border-gray-200 rounded  shadow-gray-300">
             <TableLaporan
               searchTerm={searchTerm}
               stopSearch={stopSearch}

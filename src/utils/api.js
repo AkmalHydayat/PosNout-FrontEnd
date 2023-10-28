@@ -39,3 +39,14 @@ export const getStoks = async () => {
     throw error; // atau Anda dapat menangani error di tempat lain
   }
 };
+
+export const getTransaksiLogs = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/laporanTransaksi");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // atau Anda dapat menangani error di tempat lain
+  }
+};
+

@@ -12,7 +12,6 @@ import Satuan from "./pages/satuanProduk/Satuan";
 import Produk from "./pages/daftarProduk/Produk";
 import ButtonSide from "./components/ButtonSide";
 import Sidebar from "./layout/Sidebar";
-import FormEditKategori from "./pages/kategori/FormEditKategori";
 
 function App() {
   const [
@@ -32,6 +31,7 @@ function App() {
     pb,
     ps,
     hidenBlock,
+    widthLogFilter,
   ] = ButtonSide();
   const isHomePage = window.location.pathname === "/";
   return (
@@ -65,15 +65,14 @@ function App() {
             <Route path="/" element={<LoginPage />} />
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/KategoriProduk" element={<Kategori />} />
-            <Route
-              path="/KategoriProduk/:id/edit"
-              element={<FormEditKategori />}
-            />
             <Route path="/Stok" element={<Stok />} />
             <Route path="/Transaksi" element={<Transaksi />} />
             <Route path="/SatuanProduk" element={<Satuan />} />
             <Route path="/DaftarProduk" element={<Produk />} />
-            <Route path="/LaporanPenjualan" element={<LaporanPenjualan />} />
+            <Route
+              path="/LaporanPenjualan"
+              element={<LaporanPenjualan widthLogFilter={widthLogFilter} />}
+            />
             <Route path="/LaporanStok" element={<LaporanStok />} />
             <Route path="/Karyawan" element={<User />} />
           </Routes>

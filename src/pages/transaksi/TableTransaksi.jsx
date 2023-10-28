@@ -146,7 +146,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
           <div>
             <table className="w-full my-5 border-b-[1px] border-gray-300">
               <thead className="border-[1px] border-gray-300 ">
-                <tr className="text-center font-bold text-lg text-gray-900 ">
+                <tr className="text-center font-bold text-lg text-gray-900 " >
                   <td className="w-10 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>

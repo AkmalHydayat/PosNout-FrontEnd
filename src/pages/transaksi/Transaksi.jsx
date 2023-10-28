@@ -38,13 +38,6 @@ const Transaksi = () => {
     AlertShow(message, width, icon);
   };
 
-  useEffect(() => {
-    const storedInvoiceNumber = localStorage.getItem("invoiceNumber");
-    if (storedInvoiceNumber) {
-      setInvoiceNumber(storedInvoiceNumber);
-    }
-  }, []);
-
   const calculateTotalJumlah = () => {
     // Hitung ulang total jumlah dari transaksi
     const newTotalJumlah = transaksiList.reduce((accumulator, transaksi) => {
@@ -156,6 +149,35 @@ const Transaksi = () => {
 
     return newInvoiceNumber;
   };
+
+  const useAutoUpdateInvoiceNumber = () => {
+    useEffect(() => {
+      const storedInvoiceNumber = localStorage.getItem("invoiceNumber");
+      if (storedInvoiceNumber) {
+        setInvoiceNumber(storedInvoiceNumber);
+      }
+
+      const currentDate = new Date();
+      const formattedDate = currentDate
+        .toLocaleDateString("id-ID", {
+          year: "2-digit",
+          month: "2-digit",
+          day: "2-digit",
+        })
+        .split("/")
+        .join(""); // Format tanggal YYMMDD
+
+      const lastResetDate = localStorage.getItem("lastResetDate");
+
+      if (lastResetDate !== formattedDate) {
+        // Jika tanggal berubah, perbarui nomor faktur
+        const newInvoiceNumber = generateInvoiceNumber();
+        setInvoiceNumber(newInvoiceNumber);
+      }
+    }, []); // Pastikan useEffect hanya dijalankan sekali pada awal render
+  };
+
+  useAutoUpdateInvoiceNumber();
 
   const setSubmit = (e) => {
     e.preventDefault();
