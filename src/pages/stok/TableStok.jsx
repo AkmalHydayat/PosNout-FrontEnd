@@ -181,7 +181,7 @@ const TableStok = ({ stoks }) => {
                     </td>
                   </tr>
                 ) : (
-                  currentItems.map((item, index) => (
+                  currentItems.reverse().map((item, index) => (
                     <tr
                       className={`text-center ${
                         index % 2 ? "  " : "bg-gray-100"

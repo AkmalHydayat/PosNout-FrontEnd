@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AiOutlineFileSearch } from "react-icons/ai";
+import { BiPrinter } from "react-icons/bi";
 import ModalDetailTransaksiLog from "./ModalDetailTransaksiLog";
 
 const ButtonDetail = ({ invoice, tanggal, daftarBarang, totalTransaksi }) => {
@@ -26,8 +27,14 @@ const ButtonDetail = ({ invoice, tanggal, daftarBarang, totalTransaksi }) => {
             Detail Transaksi
           </div>
         </div>
-        <div className="px-6">
-          <div className="text-start font-medium px-5 mt-3 pb-5">
+        <div className="px-6 ">
+          <div className="text-start relative font-medium px-5 mt-3 pb-5">
+            <button className="absolute end-0 px-3  flex items-center bg-colorTwo text-purple-600 font-semibold hover:bg-purple-600 hover:text-colorTwo hover:shadow-sm transition-all ease-in hover:shadow-gray-500 py-0.5 shadow-sm2 shadow-gray-300  rounded space-x-2 ">
+              <div>
+                <BiPrinter />
+              </div>
+              <div>Print</div>
+            </button>
             <div className="flex ">
               <span className="w-32">Invoice</span>
               <span className="">: {invoice}</span>

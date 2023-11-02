@@ -25,6 +25,7 @@ const Dashboard = () => {
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Transaksi/ Hari</div>
+                {/* gunakan transaksilog, lalu transaksiLog.length dengan menggunakan filter di hari atau tanggal yang sedang berlangsung */}
                 <div className={`rounded me-3`}>
                   <BsArrowLeftRight className="text-[33px] rounded p-[6px] relative text-gray-900" />
                 </div>
@@ -34,7 +35,8 @@ const Dashboard = () => {
               className={` shadow-md shadow-gray-300 bg-gradient-to-br from-amber-500 to-lime-500 p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
-                <div className="w-2/3 ">Total Penjualan/ Hari</div>
+                <div className="w-2/3">Total Penjualan/ Hari</div>
+                {/* gunakan transaksiLog, lalu ambil filter table sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
                 <div className={`   rounded me-3`}>
                   <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div>

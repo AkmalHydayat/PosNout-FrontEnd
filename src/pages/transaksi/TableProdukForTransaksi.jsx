@@ -37,6 +37,7 @@ const TableprodukForTransaksi = ({
     const fetchData = async () => {
       try {
         const data = await getProduks();
+
         setProduks(data);
       } catch (error) {
         // Handle error jika diperlukan

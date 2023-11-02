@@ -94,7 +94,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                   <td className="w-32 py-2 border-s-[1px] border-gray-300">
                     Satuan
                   </td>
-                  <td className="w-40 py-2 border-s-[1px] border-gray-300">
+                  <td className="w-60 py-2 border-s-[1px] border-gray-300">
                     Kategori
                   </td>
                   <td className="w-40 py-2 border-s-[1px] border-gray-300">
@@ -141,7 +141,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                       <td className="w-32 py-0.5 border-s-[1px] border-gray-300">
                         {item.satuan}
                       </td>
-                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
+                      <td className="w-60 py-0.5 border-s-[1px] border-gray-300">
                         {item.kategori}
                       </td>
                       <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
@@ -166,10 +166,9 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                             setProduks={setProduks}
                             id={item.id}
                             produks={produks}
-
                             AlertMessage={AlertMessage}
                             stok={item.stok}
-                            />
+                          />
                           <ButtonDeleteProduk
                             setProduks={setProduks}
                             id={item.id}
@@ -220,7 +219,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                   <td className="w-32 py-2 border-s-[1px] border-gray-300">
                     Satuan
                   </td>
-                  <td className="w-40 py-2 border-s-[1px] border-gray-300">
+                  <td className="w-60 py-2 border-s-[1px] border-gray-300">
                     Kategori
                   </td>
                   <td className="w-40 py-2 border-s-[1px] border-gray-300">
@@ -248,7 +247,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                     </td>
                   </tr>
                 ) : (
-                  currentItems.map((item, index) => (
+                  currentItems.reverse().map((item, index) => (
                     <tr
                       className={`text-center ${
                         index % 2 ? "  " : "bg-gray-100"
@@ -267,7 +266,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                       <td className="w-32 py-0.5 border-s-[1px] border-gray-300">
                         {item.satuan}
                       </td>
-                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
+                      <td className="w-60 py-0.5 border-s-[1px] border-gray-300">
                         {item.kategori}
                       </td>
                       <td className="w-40 py-0.5 border-s-[1px] border-gray-300 break-words">

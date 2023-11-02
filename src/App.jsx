@@ -12,6 +12,8 @@ import Satuan from "./pages/satuanProduk/Satuan";
 import Produk from "./pages/daftarProduk/Produk";
 import ButtonSide from "./components/ButtonSide";
 import Sidebar from "./layout/Sidebar";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 function App() {
   const [
@@ -34,51 +36,54 @@ function App() {
     widthLogFilter,
   ] = ButtonSide();
   const isHomePage = window.location.pathname === "/";
+
   return (
-    <BrowserRouter>
-      <div className="flex w-full overflow-hidden">
-        {isHomePage ? null : (
-          <div
-            className={`${sideWidth}  bg-colorTwo border-[1px] shadow-md shadow-gray-300 border-gray-200 h-screen fixed`}
-          >
-            <Sidebar
-              iconToggle={iconToggle}
-              sideWidth={sideWidth}
-              widthUserImg={widthUserImg}
-              inlineHiden={inlineHiden}
-              fontSize={fontSize}
-              textCenter={textCenter}
-              fontSize6xl={fontSize6xl}
-              mSDrop={mSDrop}
-              me4={me4}
-              sideActive={sideActive}
-              rounded={rounded}
-              w45={w45}
-              pb={pb}
-              hidenBlock={hidenBlock}
-            />
-            <div>{iconToggle}</div>
+    <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"en-gb"}>
+      <BrowserRouter>
+        <div className="flex w-full overflow-hidden">
+          {isHomePage ? null : (
+            <div
+              className={`${sideWidth}  bg-colorTwo border-[1px] shadow-md shadow-gray-300 border-gray-200 h-screen fixed`}
+            >
+              <Sidebar
+                iconToggle={iconToggle}
+                sideWidth={sideWidth}
+                widthUserImg={widthUserImg}
+                inlineHiden={inlineHiden}
+                fontSize={fontSize}
+                textCenter={textCenter}
+                fontSize6xl={fontSize6xl}
+                mSDrop={mSDrop}
+                me4={me4}
+                sideActive={sideActive}
+                rounded={rounded}
+                w45={w45}
+                pb={pb}
+                hidenBlock={hidenBlock}
+              />
+              <div>{iconToggle}</div>
+            </div>
+          )}
+          <div className={`${contentWidth} ${isHomePage ? "" : ps}`}>
+            <Routes>
+              <Route path="/" element={<LoginPage />} />
+              <Route path="/Dashboard" element={<Dashboard />} />
+              <Route path="/KategoriProduk" element={<Kategori />} />
+              <Route path="/Stok" element={<Stok />} />
+              <Route path="/Transaksi" element={<Transaksi />} />
+              <Route path="/SatuanProduk" element={<Satuan />} />
+              <Route path="/DaftarProduk" element={<Produk />} />
+              <Route
+                path="/LaporanPenjualan"
+                element={<LaporanPenjualan widthLogFilter={widthLogFilter} />}
+              />
+              <Route path="/LaporanStok" element={<LaporanStok />} />
+              <Route path="/Karyawan" element={<User />} />
+            </Routes>
           </div>
-        )}
-        <div className={`${contentWidth} ${isHomePage ? "" : ps}`}>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/Dashboard" element={<Dashboard />} />
-            <Route path="/KategoriProduk" element={<Kategori />} />
-            <Route path="/Stok" element={<Stok />} />
-            <Route path="/Transaksi" element={<Transaksi />} />
-            <Route path="/SatuanProduk" element={<Satuan />} />
-            <Route path="/DaftarProduk" element={<Produk />} />
-            <Route
-              path="/LaporanPenjualan"
-              element={<LaporanPenjualan widthLogFilter={widthLogFilter} />}
-            />
-            <Route path="/LaporanStok" element={<LaporanStok />} />
-            <Route path="/Karyawan" element={<User />} />
-          </Routes>
         </div>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </LocalizationProvider>
   );
 }
 

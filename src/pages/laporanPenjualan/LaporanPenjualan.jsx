@@ -1,96 +1,134 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 
+import axios from "axios";
 import LayoutPage from "../../layout/PageLayout";
 import TableLaporan from "./TableLaporan";
 import { useEffect, useState } from "react";
-import transaksiListData from "../transaksi/TransaksiListData";
+import { getTransaksiLogs } from "../../utils/api";
+import AlertShow from "../../components/ui/Alert";
 
 const LaporanPenjualan = ({ widthLogFilter }) => {
-  const { transaksiList } = transaksiListData();
-  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchInvoice, setSearchInvoice] = useState("");
+  const [rangeDateFrom, setRangeDateFrom] = useState("");
+  const [rangeDateTo, setRangeDateTo] = useState("");
+  const [transaksiLog, setTransaksiLog] = useState([]);
+  const [daftarBarang, setDaftarBarang] = useState([]);
 
-  // const addTransaksi = () => {
-  //   const existingTransaksi = transaksiList.find(
-  //     (transaksi) => transaksi.barcode === produkBarcodeSelect
-  //   );
-
-  //   const jumlahToAdd = parseInt(jumlah, 10); // Mengonversi jumlah ke tipe data number
-
-  //   if (existingTransaksi) {
-  //     // Jika produk dengan barcode yang sama sudah ada,
-  //     // tambahkan jumlahnya
-  //     existingTransaksi.jumlah += jumlahToAdd;
-
-  //     // Hitung ulang totalnya
-  //     existingTransaksi.total =
-  //       existingTransaksi.harga * existingTransaksi.jumlah;
-
-  //     // Update transaksiList
-  //     setTransaksiList([...transaksiList]);
-  //   } else {
-  //     // Jika produk belum ada, tambahkan sebagai transaksi baru
-  //     const newTransaksiList = {
-  //       barcode: produkBarcodeSelect,
-  //       namaProduk: produkSelect,
-  //       harga: produkHargaSelect,
-  //       jumlah: jumlahToAdd,
-  //       total: 0,
-  //     };
-
-  //     // Menghitung total berdasarkan harga dan jumlah
-  //     newTransaksiList.total = newTransaksiList.harga * newTransaksiList.jumlah;
-
-  //     // Menambahkan transaksi ke dalam transaksiList
-  //     setTransaksiList([...transaksiList, newTransaksiList]);
-  //   }
-  // };
-
-  // const searchTransaksi = () => {
-  //   const results = transaksiList.filter((item) =>
-  //     item.namaProduk.toLowerCase().includes(searchTerm.toLowerCase())
-  //   );
-
-  //   setSearchResults(results);
-  //   setIsSearching(true);
-  // };
-
-  // Fungsi untuk menutup table pecarian
-  const stopSearch = () => {
-    setIsSearching(false);
-    setSearchTerm(""); // Mengosongkan input pencarian saat pencarian dihentikan
-    setSearchResults([]);
+  const AlertMessage = (message, width, icon) => {
+    AlertShow(message, width, icon);
   };
 
-  const [invoiceNumber, setInvoiceNumber] = useState("");
-
-  const generateInvoice = () => {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear().toString().slice(-2);
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    const day = currentDate.getDate().toString().padStart(2, "0");
-
-    const formattedDate = `PP${day}${month}${year}`;
-
-    // periksa apakah invoiceNumber kosong atau tanggalnya sudah berganti
-    if (!invoiceNumber || formattedDate !== invoiceNumber.substring(0, 8)) {
-      // jika ia reset menjadi 0001
-      setInvoiceNumber(`${formattedDate}0001`);
-    } else {
-      // jika tanggalnya masih sama lakukan penambahan pada invoiceNumber
-      const currentCount = parseInt(invoiceNumber.substring(8), 10);
-      const newCount = (currentCount + 1).toString().padStart(4, "0");
-      setInvoiceNumber(`${formattedDate}${newCount}`);
+  const getDaftarBarang = async (invoice) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/getOrderDetail/${invoice}`
+      );
+      setDaftarBarang(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error; // atau Anda dapat menangani error di tempat lain
     }
   };
 
   useEffect(() => {
-    // Panggil generate Invoice hanya saat komponen pertama kali dirender
-    generateInvoice();
+    const fetchData = async () => {
+      try {
+        const data = await getTransaksiLogs();
+        setTransaksiLog(data);
+      } catch (error) {
+        // Handle error jika diperlukan
+        console.error("Error in component:", error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  const handleSearch = () => {
+    //  jika inputan tidak di isi
+    if (!rangeDateFrom && !rangeDateTo && !searchInvoice) {
+      AlertMessage("Masukkan Filter Data pada Inputan", 390, "warning");
+    }
+    // jika hanya inputan searchInvoice yang diisi
+    else if (!rangeDateFrom && !rangeDateTo && searchInvoice) {
+      const filteredData = transaksiLog.filter((log) => {
+        return log.invoice.includes(searchInvoice);
+      });
+      setSearchResults(filteredData);
+      setIsSearching(true);
+    }
+    // jika hanya inputan rangeDateFrom yang diisi
+    else if (rangeDateFrom && !rangeDateTo && !searchInvoice) {
+      const filteredData = transaksiLog.filter((log) => {
+        const logDate = log.waktuTransaksi;
+        const dateParts = logDate.split("-");
+        const formattedDateLog = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+
+        return formattedDateLog >= rangeDateFrom;
+      });
+      setSearchResults(filteredData);
+      setIsSearching(true);
+    }
+    // jika hanya inputan rangeDateTo yang diisi
+    else if (!rangeDateFrom && rangeDateTo && !searchInvoice) {
+      const filteredData = transaksiLog.filter((log) => {
+        const logDate = log.waktuTransaksi;
+        const dateParts = logDate.split("-");
+        const formattedDateLog = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+
+        return formattedDateLog == rangeDateTo;
+      });
+      setSearchResults(filteredData);
+      setIsSearching(true);
+    }
+    // jika hanya inputan rangeDateFrom dan rangeDateTo yang diisi
+    else if (rangeDateFrom && rangeDateTo && !searchInvoice) {
+      if (rangeDateFrom > rangeDateTo) {
+        AlertMessage("periksa inputan.", 460, "error");
+      } else {
+        const filteredData = transaksiLog.filter((log) => {
+          const logDate = log.waktuTransaksi;
+          const dateParts = logDate.split("-");
+          const formattedDateLog = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+          const startDate = rangeDateFrom;
+          const endDate = rangeDateTo;
+
+          return formattedDateLog >= startDate && formattedDateLog <= endDate;
+        });
+        setSearchResults(filteredData);
+        setIsSearching(true);
+      }
+    }
+    // jika semua inputan yang diisi
+    else {
+      const filteredData = transaksiLog.filter((log) => {
+        const logDate = log.waktuTransaksi;
+        const dateParts = logDate.split("-");
+        const formattedDateLog = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+        const startDate = rangeDateFrom;
+        const endDate = rangeDateTo;
+
+        return (
+          formattedDateLog >= startDate &&
+          formattedDateLog <= endDate &&
+          log.invoice.includes(searchInvoice)
+        );
+      });
+      setSearchResults(filteredData);
+      setIsSearching(true);
+    }
+  };
+
+  const stopSearch = () => {
+    setIsSearching(false);
+    setSearchResults([]);
+    setSearchInvoice("");
+    setRangeDateFrom("");
+    setRangeDateTo("");
+  };
 
   return (
     <LayoutPage>
@@ -103,40 +141,89 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
             <div className="font-semibold text-purple-600 text-xl py-3.5 mb-4 px-6  border-b-[1px] border-purple-300">
               Filter Data
             </div>
-            <div className="flex justify-center py-3">
-              <form action="">
-                <div className="flex w-full space-x-12">
-                  <div className=" space-x-3  ">
+            <div className="py-3">
+              <form action="" className="flex justify-center">
+                <div className="flex justify-center">
+                  <div className=" space-x-3 flex items-center w-2/4 ">
                     <label className="">Tanggal</label>
                     <input
                       type="date"
-                      className={` border-[1px] h-10 border-gray-300 rounded transition-all ${widthLogFilter} px-2`}
+                      className={` border-[1px] focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2  focus:border-purple-600 h-10 border-gray-300 ${widthLogFilter} rounded px-2`}
+                      value={rangeDateFrom}
+                      onChange={(e) => {
+                        const inputDate = new Date(e.target.value);
+                        const currentDate = new Date();
+
+                        if (inputDate > currentDate) {
+                          AlertMessage(
+                            "Tidak dapat memilih tanggal di masa depan.",
+                            460,
+                            "error"
+                          );
+                          e.target.value = ""; // Mengosongkan input
+                        } else {
+                          setRangeDateFrom(e.target.value);
+                        }
+                      }}
                     />
                     <label>s/d</label>
+
                     <input
-                      className={` border-[1px] h-10 border-gray-300 rounded ${widthLogFilter}  px-2`}
+                      className={` border-[1px] h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 border-gray-300 rounded ${widthLogFilter}  px-2`}
                       type="date"
+                      value={rangeDateTo}
+                      onChange={(e) => {
+                        const inputDate = new Date(e.target.value);
+                        const currentDate = new Date();
+
+                        if (inputDate > currentDate) {
+                          AlertMessage(
+                            "Tidak dapat memilih tanggal di masa depan.",
+                            460,
+                            "error"
+                          );
+                          e.target.value = ""; // Mengosongkan input
+                        } else {
+                          setRangeDateTo(e.target.value);
+                        }
+                      }}
                     />
                   </div>
-                  <label className="">
-                    Invoice
-                    <input
-                      className={`border-[1px] focus:outline-none focus:border-[1px] focus:border-purple-600 ms-3 h-10 px-2 ${widthLogFilter} border-gray-300 rounded`}
-                      type="text"
-                      value={searchInvoice}
-                      onChange={(e) => {
-                        const value = e.target.value.toLocaleUpperCase();
-                        setSearchInvoice(value);
-                      }}
-                      placeholder="PP0609200001"
-                    />
-                  </label>
-                  <div className="flex justify-center items-center space-x-3 ">
-                    <div className=" flex px-4 h-9 w-16 justify-center items-center rounded bg-purple-600 text-colorTwo font-semibold shadow-sm2 shadow-gray-300 hover:bg-purple-700 hover:shadow-cus2 hover:shadow-gray-500 transition-all ease-in cursor-pointer">
-                      Cari
-                    </div>
-                    <div className=" flex px-4 h-9 w-16 justify-center  items-center rounded bg-colorTwo text-purple-600 font-semibold shadow-sm2 shadow-gray-300 hover:bg-purple-600 hover:text-colorTwo transition-all ease-in cursor-pointer">
-                      Reset
+                  <div className="w-2/4 flex space-x-5 justify-end">
+                    <label className="">
+                      Invoice
+                      <input
+                        className={`border-[1px] px-3 focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 ${widthLogFilter} focus:border-purple-600 ms-3 h-10 px- border-gray-300 rounded`}
+                        type="text"
+                        value={searchInvoice}
+                        onChange={(e) => {
+                          const value = e.target.value.toLocaleUpperCase();
+                          setSearchInvoice(value);
+                        }}
+                        placeholder="PP0609200001"
+                      />
+                    </label>
+                    <div className="flex justify-center items-center space-x-3">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleSearch();
+                        }}
+                        className=" flex px-4 h-9 w-16 justify-center items-center rounded bg-purple-600 text-colorTwo font-semibold shadow-sm2 shadow-gray-300 hover:bg-purple-700 hover:shadow-cus2 hover:shadow-gray-500 transition-all ease-in cursor-pointer"
+                      >
+                        Cari
+                      </button>
+                      <button
+                        className=" flex px-4 h-9 w-16 justify-center  items-center rounded bg-colorTwo text-purple-600 font-semibold shadow-sm2 shadow-gray-300 hover:bg-purple-600 hover:text-colorTwo transition-all ease-in cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSearchInvoice("");
+                          setRangeDateFrom("");
+                          setRangeDateTo("");
+                        }}
+                      >
+                        Reset
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -145,12 +232,12 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
           </div>
           <div className=" shadow-md border-[1px]  border-gray-200 rounded  shadow-gray-300">
             <TableLaporan
-              searchTerm={searchTerm}
               stopSearch={stopSearch}
-              setSearchTerm={setSearchTerm}
+              transaksiLog={transaksiLog}
+              daftarBarang={daftarBarang}
+              getDaftarBarang={getDaftarBarang}
               searchResults={searchResults}
               isSearching={isSearching}
-              transaksiList={transaksiList}
             />
           </div>
         </div>

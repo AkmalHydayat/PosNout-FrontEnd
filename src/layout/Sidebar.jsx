@@ -149,38 +149,101 @@ const Sidebar = ({
           {listNav.map((item) => (
             <React.Fragment key={item.id}>
               {item.list === "Produk" ? (
-                <div
-                  onClick={toggleProdukDropdown}
-                  className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
-                >
-                  <span className="">
-                    <item.icon className={` ${w45} me-4`} />
-                  </span>
+                <div>
+                  <div
+                    onClick={toggleProdukDropdown}
+                    className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
+                  >
+                    <span className="">
+                      <item.icon className={` ${w45} me-4`} />
+                    </span>
 
-                  <span className={inlineHiden}>{item.list}</span>
-                  <span className={`ms-[60px] ${inlineHiden} mt-1`}>
-                    {showProdukDropdown ? <FiChevronUp /> : <FiChevronDown />}
-                  </span>
-                  <span className={`${hidenBlock} ms-12 -mt-1   `}>
-                    {item.list}
-                  </span>
+                    <span className={inlineHiden}>{item.list}</span>
+                    <span className={`ms-[60px] ${inlineHiden} mt-1`}>
+                      {showProdukDropdown ? <FiChevronUp /> : <FiChevronDown />}
+                    </span>
+                    <span className={`${hidenBlock} ms-12 -mt-1`}>
+                      {item.list}
+                    </span>
+                  </div>
+
+                  {produk.map((ProdukItem) => (
+                    <NavLink
+                      to={ProdukItem.linkPath}
+                      key={ProdukItem.id}
+                      className={({ isActive }) => {
+                        return `ps-3 py-2   ${
+                          showProdukDropdown
+                            ? "visible relative transition-all ease-in translate-y-0 opacity-100"
+                            : "invisible absolute transition-none -translate-y-2 opacity-0 "
+                        }   group hover:text-purple-600  ${textCenter} flex  ${mSDrop} ms-1 ${
+                          isActive
+                            ? `bg-gray-200 border-e-4 ${rounded}  border-purple-600 border-box  text-purple-600`
+                            : `bg-colorTwo `
+                        }`;
+                      }}
+                    >
+                      <span className="">
+                        <ProdukItem.icon className={`${w45} me-3`} />
+                      </span>
+                      <span className={`${inlineHiden}`}>
+                        {ProdukItem.list}
+                      </span>
+                      <span className={`${hidenBlock} ms-12 -mt-1 `}>
+                        {ProdukItem.list}
+                      </span>
+                    </NavLink>
+                  ))}
                 </div>
               ) : item.list === "Laporan" ? (
-                <div
-                  onClick={toggleLaporanDropdown}
-                  className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl  cursor-pointer ms-1 ${me4} flex`}
-                >
-                  <span className="">
-                    <item.icon className={`  ${w45} me-4`} />
-                  </span>
-                  <span className={inlineHiden}>{item.list}</span>
+                <div>
+                  <div
+                    onClick={toggleLaporanDropdown}
+                    className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl  cursor-pointer ms-1 ${me4} flex`}
+                  >
+                    <span className="">
+                      <item.icon className={`${w45} me-4`} />
+                    </span>
+                    <span className={inlineHiden}>{item.list}</span>
 
-                  <span className={`ms-[50px] ${inlineHiden} mt-1`}>
-                    {showLaporanDropdown ? <FiChevronUp /> : <FiChevronDown />}
-                  </span>
-                  <span className={`${hidenBlock} ms-12 -mt-1  `}>
-                    {item.list}
-                  </span>
+                    <span className={`ms-[50px] ${inlineHiden} mt-1`}>
+                      {showLaporanDropdown ? (
+                        <FiChevronUp />
+                      ) : (
+                        <FiChevronDown />
+                      )}
+                    </span>
+                    <span className={`${hidenBlock} ms-12 -mt-1  `}>
+                      {item.list}
+                    </span>
+                  </div>
+                  {laporan.map((laporanItem) => (
+                    <NavLink
+                      to={laporanItem.linkPath}
+                      key={laporanItem.id}
+                      className={({ isActive }) => {
+                        return `ps-3 py-2 scale-100 transition-all group flex ${
+                          showLaporanDropdown
+                            ? "visible relative transition-all ease-in translate-y-0 opacity-100"
+                            : "invisible absolute transition-none -translate-y-2 opacity-0 "
+                        }  hover:text-purple-600 rounded-s-xl  ${textCenter} ${mSDrop} ms-1 ${
+                          isActive
+                            ? `bg-gray-200 border-e-4 ${rounded} border-purple-600 border-box  text-purple-600`
+                            : "bg-colorTwo"
+                        }`;
+                      }}
+                    >
+                      <span className="">
+                        <laporanItem.icon className={`  ${w45} me-3`} />
+                      </span>
+                      <span className={`${inlineHiden} `}>
+                        {laporanItem.list}
+                      </span>
+                      <span className={`${hidenBlock} ms-12 -mt-1 `}>
+                        {laporanItem.list}
+                      </span>
+                    </NavLink>
+                  ))}
                 </div>
               ) : (
                 <NavLink
@@ -209,14 +272,18 @@ const Sidebar = ({
               )}
 
               {/* Dropdown "Produk" yang akan tampil jika showProdukDropdown adalah true */}
-              {item.list === "Produk" && showProdukDropdown && (
+              {/* {item.list === "Produk" && showProdukDropdown && (
                 <React.Fragment>
                   {produk.map((ProdukItem) => (
                     <NavLink
                       to={ProdukItem.linkPath}
                       key={ProdukItem.id}
                       className={({ isActive }) => {
-                        return ` ps-3 py-2  transition-all relative group hover:text-purple-600 block ${textCenter} flex  ${mSDrop} ms-1 ${
+                        return ` ps-3 py-2 transition-all ease-in ${
+                          showProdukDropdown
+                            ? "visible bg-red-900 opacity-100"
+                            : "invisible bg-blue-700 opacity-0 -translate-y-10"
+                        }  relative group hover:text-purple-600 block ${textCenter} flex  ${mSDrop} ms-1 ${
                           isActive
                             ? `bg-gray-200 border-e-4 ${rounded}  border-purple-600 border-box  text-purple-600`
                             : `bg-colorTwo `
@@ -235,8 +302,8 @@ const Sidebar = ({
                     </NavLink>
                   ))}
                 </React.Fragment>
-              )}
-              {item.list === "Laporan" && showLaporanDropdown && (
+              )} */}
+              {/* {item.list === "Laporan" && showLaporanDropdown && (
                 <React.Fragment>
                   {laporan.map((laporanItem) => (
                     <NavLink
@@ -262,7 +329,7 @@ const Sidebar = ({
                     </NavLink>
                   ))}
                 </React.Fragment>
-              )}
+              )} */}
             </React.Fragment>
           ))}
         </div>

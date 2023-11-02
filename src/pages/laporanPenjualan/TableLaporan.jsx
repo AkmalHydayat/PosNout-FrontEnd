@@ -1,45 +1,21 @@
 /* eslint-disable react/prop-types */
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
-import { getTransaksiLogs } from "../../utils/api";
+import { useState } from "react";
 import ButtonDetail from "../transaksi/ButtonDetail";
-import axios from "axios";
-
-const TableLaporan = ({ stopSearch, searchResults, isSearching }) => {
+const TableLaporan = ({
+  stopSearch,
+  searchResults,
+  isSearching,
+  transaksiLog,
+  daftarBarang,
+  getDaftarBarang,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(15); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
-  const [transaksiLog, setTransaksiLog] = useState([]);
 
-  const [daftarBarang, setDaftarBarang] = useState([]);
-
-  const getDaftarBarang = async (invoice) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/getOrderDetail/${invoice}`
-      );
-      setDaftarBarang(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error; // atau Anda dapat menangani error di tempat lain
-    }
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getTransaksiLogs();
-        setTransaksiLog(data);
-      } catch (error) {
-        // Handle error jika diperlukan
-        console.error("Error in component:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
   // Fungsi untuk mencari stok berdasarkan nama
   const currentItems = transaksiLog.slice(indexOfFirstItem, indexOfLastItem);
 
@@ -80,7 +56,7 @@ const TableLaporan = ({ stopSearch, searchResults, isSearching }) => {
         </div>
         {isSearching ? (
           <div>
-            <table className="w-full">
+            <table className="w-full my-5">
               <thead className="border-[1px] border-gray-300 ">
                 <tr className="text-center font-bold text-lg text-gray-900">
                   <td className="w-10 py-2 border-[1px] border-gray-300 ">
@@ -101,7 +77,7 @@ const TableLaporan = ({ stopSearch, searchResults, isSearching }) => {
                 </tr>
               </thead>
               <tbody>
-                {currentItems.length === 0 ? (
+                {searchResults.length === 0 ? (
                   <tr>
                     <td
                       className=" text-center border-[1px] py-2  border-gray-300 "
@@ -111,7 +87,7 @@ const TableLaporan = ({ stopSearch, searchResults, isSearching }) => {
                     </td>
                   </tr>
                 ) : (
-                  currentItems.map((item, index) => (
+                  searchResults.map((item, index) => (
                     <tr
                       className={`text-center ${
                         index % 2 ? "  " : "bg-gray-100"
@@ -152,7 +128,7 @@ const TableLaporan = ({ stopSearch, searchResults, isSearching }) => {
               </div>
               <div className="space-x-1">
                 <span
-                  className="border-[1px] bg-purple-600 hover:bg-purple-700 border-gray-200 text-white hover:border-purple-600 rounded px-2 py-1 hover:shadow-gray-400 hover:shadow-sm text-sm cursor-pointer"
+                  className={`bg-colorTwo cursor-pointer font-semibold  text-purple-600   shadow-sm2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1.5  `}
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -163,8 +139,8 @@ const TableLaporan = ({ stopSearch, searchResults, isSearching }) => {
         ) : null}
 
         {!isSearching ? (
-          <div>
-            <table className="w-full">
+          <div className="">
+            <table className="w-full my-5">
               <thead className="border-[1px] border-gray-300 ">
                 <tr className="text-center font-bold text-lg text-gray-900">
                   <td className="w-10 py-2 border-[1px] border-gray-300 ">
@@ -195,7 +171,7 @@ const TableLaporan = ({ stopSearch, searchResults, isSearching }) => {
                     </td>
                   </tr>
                 ) : (
-                  currentItems.map((item, index) => (
+                  currentItems.reverse().map((item, index) => (
                     <tr
                       className={`text-center ${
                         index % 2 ? "  " : "bg-gray-100"
