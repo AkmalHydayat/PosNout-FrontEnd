@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import LayoutPage from "../../layout/PageLayout";
-import { BsBagCheck, BsArrowLeftRight } from "react-icons/bs";
+import { BsBagCheck } from "react-icons/bs";
 // import { BiLineChart } from "react-icons/bi";
 import {
   PiChartLineUpLight,
@@ -11,8 +12,66 @@ import {
   LiaMoneyBillWaveSolid,
   LiaDollySolid,
 } from "react-icons/lia";
+import { useEffect, useState } from "react";
+import { getTransaksiLogs } from "../../utils/api";
+import DateNow from "../../components/Date";
 
 const Dashboard = () => {
+  const [transaksiLog, setTransaksiLog] = useState([]);
+  // const [transaksiPerHari, setTransaksiPerHari] = useState([]);
+  const [penjualanPerHari, setPenjualanPerHari] = useState([]);
+  const [keuntunganPerHari, setKeuntunganPerHari] = useState([]);
+  const [kas, setKas] = useState(0);
+  const { hari, month, year } = DateNow();
+  const tanggalSekarang = hari + "-" + month + "-" + year;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getTransaksiLogs();
+        setTransaksiLog(data);
+      } catch (error) {
+        // Handle error jika diperlukan
+        console.error("Error in component:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const transaksiHariIni = () => {
+    if (transaksiLog.length > 0) {
+      // Pastikan transaksiLog tidak kosong
+      const filteredData = transaksiLog.filter((log) => {
+        const logDate = log.waktuTransaksi;
+        return logDate === tanggalSekarang;
+      });
+      setPenjualanPerHari(
+        filteredData.reduce((accumulator, transaksi) => {
+          return accumulator + transaksi.totalTransaksi;
+        }, 0) // Inisialisasi accumulator dengan 0
+      );
+      setKeuntunganPerHari(
+        filteredData.reduce((accumulator, transaksi) => {
+          return accumulator + transaksi.totalKeuntunganPerTransaksi;
+        }, 0) // Inisialisasi accumulator dengan 0
+      );
+    }
+  };
+  const kasToko = () => {
+    const totalUangMasuk = transaksiLog.reduce((accumulator, transaksi) => {
+      return accumulator + transaksi.totalTransaksi;
+    }, 0);
+    const totalLaba = transaksiLog.reduce((accumulator, transaksi) => {
+      return accumulator + transaksi.totalKeuntunganPerTransaksi;
+    }, 0);
+    setKas(totalUangMasuk - totalLaba);
+  };
+
+  useEffect(() => {
+    transaksiHariIni();
+    kasToko();
+  }, [transaksiLog, tanggalSekarang]);
+
   return (
     <LayoutPage>
       <div className="">
@@ -20,75 +79,103 @@ const Dashboard = () => {
           className={`p-6 space-y-6 font-pt_Sans text-base font-medium text-gray-950`}
         >
           <div className="h-44 flex space-x-6 ">
-            <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-emerald-500 to-indigo-500 p-3 w-full rounded-md`}
+            {/* <div
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-red-500 to-rose-600  p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
-                <div className="w-2/3 ">Transaksi/ Hari</div>
-                {/* gunakan transaksilog, lalu transaksiLog.length dengan menggunakan filter di hari atau tanggal yang sedang berlangsung */}
+                <div className="w-2/3 " onClick={() => transaksiHariIni()}>
+                  Transaksi/ Hari
+                </div>
+
                 <div className={`rounded me-3`}>
                   <BsArrowLeftRight className="text-[33px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
-            </div>
+              <div className="text-[45px] font-medium  mt-12 text-gray-900 ps-3">
+                {transaksiPerHari}
+              </div>
+            </div> */}
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-amber-500 to-lime-500 p-3 w-full rounded-md`}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br  from-orange-500 to-rose-600 p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
                 <div className="w-2/3">Total Penjualan/ Hari</div>
-                {/* gunakan transaksiLog, lalu ambil filter table sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
+                {/* gunakan transaksiLog, lalu filter table sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
                 <div className={`   rounded me-3`}>
                   <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
+              <div className="text-[40px] mt-8 font-semibold   text-gray-900 ">
+                {" "}
+                <span className="me-3">Rp.</span>
+                {penjualanPerHari.toLocaleString("id-ID")}
+              </div>
             </div>
 
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-lime-500 to-emerald-500 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-lime-500 to-teal-600 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
+                {/* gunakan transaksiLog, lalu filter table berdasarkan transaksilog.keuntungan  sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
+
                 <div className="w-2/3 ">Keuntungan/ Hari</div>
                 <div className={`   rounded me-3`}>
                   <LiaFileInvoiceDollarSolid className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
+              <div className="text-[40px] mt-8 font-semibold   text-gray-900 ">
+                {" "}
+                <span className="me-3">Rp.</span>
+                {keuntunganPerHari.toLocaleString("id-ID")}
+              </div>
             </div>
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-violet-500 to-rose-500 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-sky-500 to-purple-600 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
+                {/* gunakan table produk, lalu ambil harga beli kalikan dengan stok lalu jumlahkan semua barang yang ada*/}
                 <div className="w-2/3 ">Kas Toko</div>
                 <div className={`rounded me-3`}>
                   <LiaMoneyBillWaveSolid className="text-[39px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
+              <div className="text-[40px] mt-8 font-semibold   text-gray-900 ">
+                {" "}
+                <span className="me-3">Rp.</span>
+                {kas.toLocaleString("id-ID")}
+              </div>
             </div>
           </div>
-          <div className="h-44 flex space-x-6 ">
+          <div className="h-60 flex space-x-6 ">
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-rose-500 to-orange-500 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 border-[1px] border-gray-200 bg-colorTwo p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
-                <div className="w-2/3 ">Barang Terlaris/ Hari</div>
+                {/* gunakan orderdetail, lalu cari nama produk atau barcode yang paling banyak yang ada pada table orderdetail, gunakan filter/hari /minggu /bulan */}
+
+                <div className="w-2/3 ">Barang Paling Laku</div>
                 <div className={`   rounded me-3`}>
                   <LiaDollySolid className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
             </div>
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-violet-500 to-teal-500 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 border-[1px] border-gray-200 bg-colorTwo p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
-                <div className="w-2/3 ">Barang Terlaris/ Bulan</div>
+                {/* gunakan orderdetail dan daftarproduk, lalu cari nama produk yang ada di daftarproduk tetapi tidak ada didalam order detail*/}
+
+                <div className="w-2/3 ">Barang Kurang Laku</div>
                 <div className={`   rounded me-3`}>
                   <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
             </div>
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-emerald-500 to-cyan-500 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 border-[1px] border-gray-200 bg-colorTwo p-3 w-full rounded-md `}
             >
               <div className="flex justify-between ">
+                {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
                 <div className="w-2/3 ">Stok Minimum</div>
                 <div className={`   rounded me-3`}>
                   <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />

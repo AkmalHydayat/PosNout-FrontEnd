@@ -16,6 +16,8 @@ const ButtonPayment = ({
   generateInvoiceNumber,
   setTotalJumlah,
   setProduks,
+  totalKeuntunganPerTransaksi,
+  setTotalKeuntunganPerTransaksi,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -31,6 +33,8 @@ const ButtonPayment = ({
         setTotalJumlah={setTotalJumlah}
         setProduks={setProduks}
         generateInvoiceNumber={generateInvoiceNumber}
+        totalKeuntunganPerTransaksi={totalKeuntunganPerTransaksi}
+        setTotalKeuntunganPerTransaksi={setTotalKeuntunganPerTransaksi}
         onClick={() => {
           if (transaksiList.length === 0) {
             AlertMessage("tidak ada barang yang diinputkan!", 400, "warning");

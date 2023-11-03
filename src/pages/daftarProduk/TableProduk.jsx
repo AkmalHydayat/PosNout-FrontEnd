@@ -103,10 +103,13 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                   <td className="w-40 py-2 border-s-[1px] border-gray-300">
                     Harga Jual
                   </td>
+                  <td className="w-32 py-2 border-s-[1px] border-gray-300">
+                    Keuntungan
+                  </td>
                   <td className="w-16 py-2 border-s-[1px] border-gray-300">
                     Stok
                   </td>
-                  <td className="w-48 py-2 border-x-[1px] border-gray-300">
+                  <td className="w-36 py-2 border-x-[1px] border-gray-300">
                     Aksi
                   </td>
                 </tr>
@@ -116,7 +119,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                   <tr>
                     <td
                       className=" text-center border-[1px] py-2 border-gray-300"
-                      colSpan={9}
+                      colSpan={10}
                     >
                       Tidak ada hasil pencarian.
                     </td>
@@ -150,10 +153,13 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                       <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
                         {item.harga_jual}
                       </td>
+                      <td className="w-32 py-0.5 border-s-[1px] border-gray-300">
+                        {item.keuntungan}
+                      </td>
                       <td className="w-16 py-0.5 border-s-[1px] border-gray-300">
                         {item.stok}
                       </td>
-                      <td className="w-48 py-0.5 border-x-[1px] border-gray-300">
+                      <td className="w-36 py-0.5 border-x-[1px] border-gray-300">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditProduk
                             editNama={item.nama_produk}
@@ -228,10 +234,13 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                   <td className="w-40 py-2 border-s-[1px] border-gray-300">
                     Harga Jual
                   </td>
+                  <td className="w-32 py-2 border-s-[1px] border-gray-300">
+                    Keuntungan
+                  </td>
                   <td className="w-16 py-2 border-s-[1px] border-gray-300">
                     Stok
                   </td>
-                  <td className="w-48 py-2 border-x-[1px] border-gray-300">
+                  <td className="w-36 py-2 border-x-[1px] border-gray-300">
                     Aksi
                   </td>
                 </tr>
@@ -241,7 +250,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                   <tr>
                     <td
                       className=" text-center border-[1px] py-2  border-gray-300 "
-                      colSpan={9}
+                      colSpan={10}
                     >
                       Tidak ada Data Tersedia
                     </td>
@@ -275,10 +284,13 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                       <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
                         {item.harga_jual}
                       </td>
+                      <td className="w-32 py-0.5 border-s-[1px] border-gray-300">
+                        {item.keuntungan}
+                      </td>
                       <td className="w-16 py-0.5 border-s-[1px] border-gray-300">
                         {item.stok}
                       </td>
-                      <td className="w-48 py-0.5 border-x-[1px] border-gray-300">
+                      <td className="w-36 py-0.5 border-x-[1px] border-gray-300">
                         <div className="flex justify-center space-x-3">
                           <ButtonEditProduk
                             editNama={item.nama_produk}

@@ -18,10 +18,13 @@ const Transaksi = () => {
   const [produkStokSelect, setProdukStokSelect] = useState(0);
   const [produkBarcodeSelect, setProdukBarcodeSelect] = useState("");
   const [produkHargaSelect, setProdukHargaSelect] = useState("");
+  const [keuntunganProdukSelect, setKeuntunganProdukSelect] = useState("");
   const [jumlah, setJumlah] = useState("");
   const [isBarcodeEmpty, setIsBarcodeEmpty] = useState(false);
   const [isJumlahEmpty, setIsJumlahEmpty] = useState(false);
   const [totalJumlah, setTotalJumlah] = useState(0);
+  const [totalKeuntunganPerTransaksi, setTotalKeuntunganPerTransaksi] =
+    useState(0);
   const [produks, setProduks] = useState([]);
   const [invoiceNumber, setInvoiceNumber] = useState(
     localStorage.getItem("invoiceNumber") || generateInvoiceNumber()
@@ -47,9 +50,24 @@ const Transaksi = () => {
     // Perbarui totalJumlah
     setTotalJumlah(newTotalJumlah);
   };
+
+  const calculateTotalKeuntunganPerTransaksi = () => {
+    // Hitung ulang total jumlah dari transaksi
+    const newTotalKeuntungan = transaksiList.reduce(
+      (accumulator, transaksi) => {
+        return accumulator + transaksi.totalKeuntunganPerItem;
+      },
+      0
+    );
+
+    // Perbarui totalJumlah
+    setTotalKeuntunganPerTransaksi(newTotalKeuntungan);
+  };
+
   useEffect(() => {
     // Ketika ada perubahan pada transaksiList, hitung ulang totalJumlah
     calculateTotalJumlah();
+    calculateTotalKeuntunganPerTransaksi();
   }, [transaksiList]);
 
   const addTransaksi = () => {
@@ -93,22 +111,29 @@ const Transaksi = () => {
         harga: produkHargaSelect,
         jumlah: jumlahToAdd,
         total: 0,
+        keuntungan: keuntunganProdukSelect,
+        totalKeuntunganPerItem: 0,
         waktuTransaksi: tanggalSekarang,
       };
 
       // Menghitung total berdasarkan harga dan jumlah
       newTransaksiList.total = newTransaksiList.harga * newTransaksiList.jumlah;
 
+      // Menghitung keuntungan berdasarkan keuntungan per item dan jumlah
+      newTransaksiList.totalKeuntunganPerItem =
+        newTransaksiList.keuntungan * newTransaksiList.jumlah;
+
       // Menambahkan transaksi ke dalam transaksiList
       setTransaksiList([...transaksiList, newTransaksiList]);
     }
   };
 
-  const getSelected = (barcode, nama, harga, stok) => {
+  const getSelected = (barcode, nama, harga, stok, keuntungan) => {
     setProdukSelect(nama);
     setProdukBarcodeSelect(barcode);
     setProdukHargaSelect(harga);
     setProdukStokSelect(stok);
+    setKeuntunganProdukSelect(keuntungan);
   };
 
   // Buat fungsi untuk menghasilkan nomor invoice
@@ -325,6 +350,8 @@ const Transaksi = () => {
                   setTotalJumlah={setTotalJumlah}
                   setInvoiceNumber={setInvoiceNumber}
                   setProduks={setProduks}
+                  totalKeuntunganPerTransaksi={totalKeuntunganPerTransaksi}
+                  setTotalKeuntunganPerTransaksi={setTotalKeuntunganPerTransaksi}
                 />
               </div>
               <div className="text-5xl mt-6 font-acme text-end">

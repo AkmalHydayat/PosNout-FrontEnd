@@ -19,6 +19,8 @@ const BodyModalGetProduk = ({
   setInvoiceNumber,
   generateInvoiceNumber,
   setProduks,
+  totalKeuntunganPerTransaksi,
+  setTotalKeuntunganPerTransaksi,
 }) => {
   const [pembayaran, setPembayaran] = useState("");
   const [kembalian, setKembalian] = useState(0);
@@ -76,6 +78,9 @@ const BodyModalGetProduk = ({
         invoice: invoiceNumber,
         totalTransaksi: totalJumlah,
         waktuTransaksi: tanggalSekarang,
+        nominalPembayaran: pembayaran,
+        kembalian: kembalian,
+        totalKeuntunganPerTransaksi: totalKeuntunganPerTransaksi,
       });
     } catch (error) {
       console.error("Gagal menyimpan data transaksi ke database:", error);
@@ -209,6 +214,7 @@ const BodyModalGetProduk = ({
                       const newInvoice = generateInvoiceNumber();
                       setInvoiceNumber(newInvoice);
                       setTotalJumlah(0);
+                      setTotalKeuntunganPerTransaksi(0);
                       setTransaksiList([]);
                       setPembayaran("");
                       setKembalian(0);

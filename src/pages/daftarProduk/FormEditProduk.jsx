@@ -77,6 +77,7 @@ const FormEditProduk = ({
         kategori: newKategoriProduk,
         harga_beli: newHargaBeliProduk,
         harga_jual: newHargaJualProduk,
+        keuntungan: newHargaJualProduk - newHargaBeliProduk,
         stok: stok,
       });
       navigate("/DaftarProduk");
@@ -93,6 +94,7 @@ const FormEditProduk = ({
               kategori: newKategoriProduk,
               harga_beli: newHargaBeliProduk,
               harga_jual: newHargaJualProduk,
+              keuntungan: newHargaJualProduk - newHargaBeliProduk,
             };
           }
           return produk;
@@ -117,10 +119,10 @@ const FormEditProduk = ({
     } else if (newKategoriProduk.trim() === "") {
       setIsKategoriProdukEmpty(true);
       setErrorInput("Input tidak boleh kosong.");
-    } else if (newHargaBeliProduk.trim() === "") {
+    } else if (newHargaBeliProduk == "") {
       setIsHargaBeliProdukEmpty(true);
       setErrorInput("Input tidak boleh kosong.");
-    } else if (newHargaJualProduk.trim() === "") {
+    } else if (newHargaJualProduk == "") {
       setIsHargaJualProdukEmpty(true);
       setErrorInput("Input tidak boleh kosong.");
     } else if (
@@ -141,13 +143,11 @@ const FormEditProduk = ({
       ) &&
       produks.some(
         (produk) =>
-          produk.harga_beli &&
-          produk.harga_beli.toLowerCase() === newHargaBeliProduk.toLowerCase()
+          produk.harga_beli && produk.harga_beli === newHargaBeliProduk
       ) &&
       produks.some(
         (produk) =>
-          produk.harga_jual &&
-          produk.harga_jual.toLowerCase() === newHargaJualProduk.toLowerCase()
+          produk.harga_jual && produk.harga_jual === newHargaJualProduk
       )
     ) {
       setErrorInput("Produk sudah ada dalam daftar.");

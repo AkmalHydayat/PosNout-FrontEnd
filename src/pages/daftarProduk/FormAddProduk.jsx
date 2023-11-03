@@ -58,6 +58,7 @@ const FormAddProduk = ({
         kategori: newKategoriProduk,
         harga_beli: newHargaBeliProduk,
         harga_jual: newHargaJualProduk,
+        keuntungan: newHargaJualProduk - newHargaBeliProduk,
         stok: 0,
       });
 

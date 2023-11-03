@@ -126,7 +126,8 @@ const TableprodukForTransaksi = ({
                               item.barcode,
                               item.nama_produk,
                               item.harga_jual,
-                              item.stok
+                              item.stok,
+                              item.keuntungan
                             );
                             onClose();
                             setTimeout(() => {
@@ -207,7 +208,8 @@ const TableprodukForTransaksi = ({
                               item.barcode,
                               item.nama_produk,
                               item.harga_jual,
-                              item.stok
+                              item.stok,
+                              item.keuntungan
                             );
                             onClose();
                             setTimeout(() => {
