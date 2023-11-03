@@ -72,7 +72,7 @@ const TableprodukForTransaksi = ({
               searchResults.length > 13 ? "h-[445px] overflow-y-scroll" : ""
             } px-3  `}
           >
-            <table className="w-full ">
+            <table className="w-full border-b-[1px] border-gray-900">
               <thead className="">
                 <tr className="text-center shadow-sm shadow-gray-900   font-semibold sticky -top-[0] transition-all ease-in  bg-purple-600 text-base text-colorTwo">
                   <td className="w-40 py-2">Barcode</td>
@@ -112,7 +112,7 @@ const TableprodukForTransaksi = ({
                       </td>
 
                       <td className="w-44 py-0.5 border-s-[1px] border-gray-900  break-words">
-                        {item.harga_jual}
+                        {item.harga_jual.toLocaleString("id-ID")}
                       </td>
 
                       <td className="w-24 py-0.5 border-s-[1px] border-gray-900 ">
@@ -154,7 +154,7 @@ const TableprodukForTransaksi = ({
               produks.length > 13 ? "h-[445px] overflow-y-scroll" : ""
             } px-3  `}
           >
-            <table className="w-full ">
+            <table className="w-full border-b-[1px] border-gray-900">
               <thead className="">
                 <tr className="text-center shadow-sm shadow-gray-900   font-semibold sticky -top-[0] transition-all ease-in  bg-purple-600 text-base text-colorTwo">
                   <td className="w-40 py-2">Barcode</td>
@@ -194,7 +194,7 @@ const TableprodukForTransaksi = ({
                       </td>
 
                       <td className="w-44 py-0.5 border-s-[1px] border-gray-900  break-words">
-                        {item.harga_jual}
+                        {item.harga_jual.toLocaleString("id-ID")}
                       </td>
 
                       <td className="w-24 py-0.5 border-s-[1px] border-gray-900 ">

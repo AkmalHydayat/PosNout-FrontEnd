@@ -103,8 +103,8 @@ const TableLaporan = ({
                       <td className="w-40 py-0.5 border-[1px] border-gray-300">
                         {item.waktuTransaksi}
                       </td>
-                      <td className="w-36 py-0.5 border-[1px] border-gray-300">
-                        {item.totalTransaksi}
+                      <td className="w-36 py-0.5 border-[1px] border-gray-300 ">
+                        {item.totalTransaksi.toLocaleString("id-ID")}
                       </td>
                       <td className="w-32 py-0.5 border-[1px] border-gray-300">
                         <div onClick={() => getDaftarBarang(item.invoice)}>
@@ -187,8 +187,8 @@ const TableLaporan = ({
                       <td className="w-40 py-0.5 border-[1px] border-gray-300">
                         {item.waktuTransaksi}
                       </td>
-                      <td className="w-36 py-0.5 border-[1px] border-gray-300">
-                        {item.totalTransaksi}
+                      <td className="w-36 py-0.5 border-[1px] border-gray-300 ">
+                        {item.totalTransaksi.toLocaleString("id-ID")}
                       </td>
                       <td className="w-32 py-0.5 border-[1px] border-gray-300">
                         <div onClick={() => getDaftarBarang(item.invoice)}>

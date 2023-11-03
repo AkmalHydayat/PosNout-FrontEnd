@@ -147,14 +147,14 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                       <td className="w-60 py-0.5 border-s-[1px] border-gray-300">
                         {item.kategori}
                       </td>
-                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
-                        {item.harga_beli}
+                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300 text-end pe-6">
+                        {item.harga_beli.toLocaleString("id-ID")}
                       </td>
-                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
-                        {item.harga_jual}
+                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300 text-end pe-6">
+                        {item.harga_jual.toLocaleString("id-ID")}
                       </td>
-                      <td className="w-32 py-0.5 border-s-[1px] border-gray-300">
-                        {item.keuntungan}
+                      <td className="w-32 py-0.5 border-s-[1px] border-gray-300 text-end pe-6">
+                        {item.keuntungan.toLocaleString("id-ID")}
                       </td>
                       <td className="w-16 py-0.5 border-s-[1px] border-gray-300">
                         {item.stok}
@@ -278,14 +278,14 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                       <td className="w-60 py-0.5 border-s-[1px] border-gray-300">
                         {item.kategori}
                       </td>
-                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300 break-words">
-                        {item.harga_beli}
+                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300 text-end pe-6 break-words">
+                        {item.harga_beli.toLocaleString("id-ID")}
                       </td>
-                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
-                        {item.harga_jual}
+                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300 text-end pe-6">
+                        {item.harga_jual.toLocaleString("id-ID")}
                       </td>
-                      <td className="w-32 py-0.5 border-s-[1px] border-gray-300">
-                        {item.keuntungan}
+                      <td className="w-32 py-0.5 border-s-[1px] border-gray-300 text-end pe-6">
+                        {item.keuntungan.toLocaleString("id-ID")}
                       </td>
                       <td className="w-16 py-0.5 border-s-[1px] border-gray-300">
                         {item.stok}

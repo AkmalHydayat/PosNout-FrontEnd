@@ -96,7 +96,7 @@ const Dashboard = () => {
               </div>
             </div> */}
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br  from-orange-500 to-rose-600 p-3 w-full rounded-md`}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br  from-orange-500 to-rose-500 p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
                 <div className="w-2/3">Total Penjualan/ Hari</div>
@@ -105,7 +105,7 @@ const Dashboard = () => {
                   <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
-              <div className="text-[40px] mt-8 font-semibold   text-gray-900 ">
+              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 ">
                 {" "}
                 <span className="me-3">Rp.</span>
                 {penjualanPerHari.toLocaleString("id-ID")}
@@ -113,7 +113,7 @@ const Dashboard = () => {
             </div>
 
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-lime-500 to-teal-600 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-emerald-500 to-indigo-600  p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan transaksiLog, lalu filter table berdasarkan transaksilog.keuntungan  sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
@@ -123,14 +123,14 @@ const Dashboard = () => {
                   <LiaFileInvoiceDollarSolid className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
-              <div className="text-[40px] mt-8 font-semibold   text-gray-900 ">
+              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 ">
                 {" "}
                 <span className="me-3">Rp.</span>
                 {keuntunganPerHari.toLocaleString("id-ID")}
               </div>
             </div>
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-sky-500 to-purple-600 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-amber-500 to-green-600 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan table produk, lalu ambil harga beli kalikan dengan stok lalu jumlahkan semua barang yang ada*/}
@@ -139,7 +139,7 @@ const Dashboard = () => {
                   <LiaMoneyBillWaveSolid className="text-[39px] rounded p-[6px] relative text-gray-900" />
                 </div>
               </div>
-              <div className="text-[40px] mt-8 font-semibold   text-gray-900 ">
+              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 ">
                 {" "}
                 <span className="me-3">Rp.</span>
                 {kas.toLocaleString("id-ID")}
