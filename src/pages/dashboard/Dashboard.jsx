@@ -207,12 +207,12 @@ const Dashboard = () => {
           </div>
           <div className="h-72 flex space-x-6 ">
             <div
-              className={` shadow-md shadow-gray-300 border-[1px] border-gray-200 bg-colorTwo p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 border-[1px] border-gray-200 bg-colorTwo p-3  w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan orderdetail, lalu cari nama produk atau barcode yang paling banyak yang ada pada table orderdetail, gunakan filter/hari /minggu /bulan */}
 
-                <div className="w-2/3 mb-2">Barang Paling Laku</div>
+                <div className="w-2/3 mb-2 px-3">Barang Paling Laku</div>
                 {/* <div className={`rounded me-3`}>
                   <LiaDollySolid className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div> */}
@@ -223,7 +223,7 @@ const Dashboard = () => {
                 } px-3 `}
               >
                 <table className="w-full border-[1px] border-gray-900">
-                  <thead className="bg-gradient-to-br from-green-500 to-amber-500">
+                  <thead className="bg-gradient-to-br  from-orange-500 to-rose-500">
                     <tr className="text-center border-[1px] border-gray-900 w-2/12">
                       <td className=" py-1 border-e-[1px]  border-gray-900 w-10/12 ">
                         Nama Barang
@@ -256,7 +256,7 @@ const Dashboard = () => {
               <div className="flex justify-between">
                 {/* gunakan orderdetail dan daftarproduk, lalu cari nama produk yang ada di daftarproduk tetapi tidak ada didalam order detail*/}
 
-                <div className="w-2/3 mb-2">Barang Kurang Laku</div>
+                <div className="w-2/3 mb-2 px-3">Barang Kurang Laku</div>
                 {/* <div className={`rounded me-3`}>
                   <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div> */}
@@ -299,7 +299,7 @@ const Dashboard = () => {
             >
               <div className="flex justify-between ">
                 {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
-                <div className="w-2/3 mb-2">Stok Minimum</div>
+                <div className="w-2/3 mb-2 px-3 ">Stok Minimum</div>
                 {/* <div className={`rounded me-3`}>
                   <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />
                 </div> */}
@@ -310,7 +310,7 @@ const Dashboard = () => {
                 } px-3 `}
               >
                 <table className="w-full border-[1px] border-gray-900">
-                  <thead className="bg-gradient-to-br   from-orange-500 to-rose-500">
+                  <thead className="bg-gradient-to-br   from-green-500 to-amber-500">
                     <tr className="text-center border-[1px] border-gray-900 w-2/12">
                       <td className=" py-1 border-e-[1px]  border-gray-900 w-10/12 ">
                         Nama Barang

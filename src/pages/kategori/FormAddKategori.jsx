@@ -70,7 +70,7 @@ const FormAddKategori = ({
           <input
             type="text"
             autoFocus
-            className="w-full h-10 font-pt_Sans focus:outline-none  focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne ease-in border-gray-300 focus:border-none  transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600"
+            className="w-full h-10 font-pt_Sans focus:outline-none  focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorTwo ease-in border-gray-300 focus:border-none  transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600"
             placeholder="Makanan, Minuman, Snack, etc"
             value={namaNewKategori}
             onChange={(e) => setNamaNewKategori(e.target.value.toLowerCase())}
