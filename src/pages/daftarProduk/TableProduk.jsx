@@ -50,7 +50,17 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                   type="text"
                   className="w-8 text-center  bg-colorTwo rounded font-semibold focus:outline-none h-full cursor-default"
                   value={perPage}
-                  readOnly
+                  onChange={(e) => {
+                    const inputValue = e.target.value;
+                    const sanitizedValue = inputValue.replace(/[^0-9]/g, "");
+
+                    if (sanitizedValue === "0") {
+                      // Angka 0 berada di awal inputan, jadi kita menghapusnya
+                      setPerPage(sanitizedValue.slice(1));
+                    } else {
+                      setPerPage(sanitizedValue);
+                    }
+                  }}
                 />
               </div>
               <div className="flex flex-col items-center justify-center space-y-[1px]">

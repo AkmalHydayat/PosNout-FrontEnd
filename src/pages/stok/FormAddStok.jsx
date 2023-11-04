@@ -2,7 +2,6 @@
 import { BiSearchAlt } from "react-icons/bi";
 import axios from "axios";
 import { getProduks, getStoks } from "../../utils/api";
-import { useNavigate } from "react-router-dom";
 import DateNow from "../../components/Date";
 import AlertShow from "../../components/ui/Alert";
 /* eslint-disable react/prop-types */
@@ -30,7 +29,7 @@ const FormAddStok = ({
   const emptyBarcodeStyle = isBarcodeEmpty ? "border-[1px] border-red-500" : "";
   const emptyJumlahStyle = isJumlahEmpty ? "border-[1px] border-red-500" : "";
   const tanggalSekarang = `${hari}-${month}-${year}`;
-  const navigate = useNavigate();
+
   // Definisikan fungsi untuk menambah stok pada
   const tambahStok = async (barcodeProduk, jumlah, namaProduk, tanggal) => {
     try {
@@ -42,7 +41,6 @@ const FormAddStok = ({
       });
       const updatedStoks = await getStoks();
       setStoks(updatedStoks);
-      navigate("/Stok"); // <-- Gunakan hook di dalam fungsi komponen
       const updatedProduks = await getProduks();
       setProduks(updatedProduks);
       console.log(response.data.message);
@@ -129,7 +127,15 @@ const FormAddStok = ({
               placeholder="Jumlah"
               value={jumlah}
               onChange={(e) => {
-                setJumlah(e.target.value.toLowerCase());
+                const inputValue = e.target.value;
+                const sanitizedValue = inputValue.replace(/[^0-9]/g, "");
+
+                if (sanitizedValue.charAt(0) === "0") {
+                  // Angka 0 berada di awal inputan, jadi kita menghapusnya
+                  setJumlah(sanitizedValue.slice(1));
+                } else {
+                  setJumlah(sanitizedValue.toLowerCase());
+                }
               }}
             />
           </div>

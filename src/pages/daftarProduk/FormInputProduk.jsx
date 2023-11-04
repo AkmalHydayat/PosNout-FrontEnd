@@ -151,8 +151,16 @@ const FormInputProduk = ({
               placeholder="Harga Beli"
               value={newHargaBeliProduk}
               onChange={(e) => {
-                setNewHargaBeliProduk(e.target.value.toLowerCase());
-                setIsHargaBeliProdukEmpty(false);
+                const inputValue = e.target.value;
+                const sanitizedValue = inputValue.replace(/[^0-9]/g, "");
+
+                if (sanitizedValue.charAt(0) === "0") {
+                  // Angka 0 berada di awal inputan, jadi kita menghapusnya
+                  setNewHargaBeliProduk(sanitizedValue.slice(1));
+                } else {
+                  setNewHargaBeliProduk(sanitizedValue.toLowerCase());
+                  setIsHargaBeliProdukEmpty(false);
+                }
               }}
             />
           </div>
@@ -170,8 +178,16 @@ const FormInputProduk = ({
               placeholder="Harga Jual"
               value={newHargaJualProduk}
               onChange={(e) => {
-                setNewHargaJualProduk(e.target.value.toLowerCase());
-                setIsHargaJualProdukEmpty(false);
+                const inputValue = e.target.value;
+                const sanitizedValue = inputValue.replace(/[^0-9]/g, "");
+
+                if (sanitizedValue.charAt(0) === "0") {
+                  // Angka 0 berada di awal inputan, jadi kita menghapusnya
+                  setNewHargaJualProduk(sanitizedValue.slice(1));
+                } else {
+                  setNewHargaJualProduk(sanitizedValue.toLowerCase());
+                  setIsHargaJualProdukEmpty(false);
+                }
               }}
             />
           </div>
