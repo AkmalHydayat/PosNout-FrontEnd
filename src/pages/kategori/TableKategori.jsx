@@ -38,7 +38,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
 
   return (
     <div>
-      <div className="bg-colorTwo p-6  space-y-3 rounded-b">
+      <div className="bg-colorTwo dark:bg-colorDarkTwo p-6 dark:text-colorTwo  space-y-3 rounded-b">
         <div className="flex justify-between h-full">
           <div className="space-x-1.5 flex">
             <label htmlFor="" className="my-auto">
@@ -48,7 +48,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
               <div className="">
                 <input
                   type="text"
-                  className="w-8 text-center  bg-colorTwo rounded font-semibold focus:outline-none h-full cursor-default"
+                  className="w-8 text-center dark:bg-colorDarkTwo  bg-colorTwo rounded-s font-semibold focus:outline-none h-full cursor-default"
                   value={perPage}
                   readOnly
                 />
@@ -107,7 +107,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
                   currentItems.map((item, index) => (
                     <tr
                       className={`text-center text-base${
-                        index % 2 ? "" : "bg-gray-100"
+                        index % 2 ? "" : "bg-gray-100 dark:bg-colorDarkOne/50"
                       }`}
                       key={item.id}
                     >
@@ -165,8 +165,8 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
         {!isSearching ? (
           <div>
             <table className="w-full my-5">
-              <thead className="border-[1px]  border-gray-300 bg-colorTwo ">
-                <tr className="text-center font-bold text-lg text-gray-900">
+              <thead className="border-[1px]  border-gray-300 bg-colorTwo dark:bg-colorDarkTwo">
+                <tr className="text-center font-bold text-lg text-gray-900 dark:text-colorTwo">
                   <td className="w-1/12 py-2 border-s-[1px] border-gray-300">
                     No
                   </td>
@@ -192,7 +192,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
                   currentItems.map((item, index) => (
                     <tr
                       className={`text-center text-base ${
-                        index % 2 ? "" : "bg-gray-100"
+                        index % 2 ? "" : "bg-gray-100 dark:bg-colorDarkOne/50"
                       }`}
                       key={item.id}
                     >

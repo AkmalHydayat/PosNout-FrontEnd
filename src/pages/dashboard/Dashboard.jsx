@@ -192,16 +192,16 @@ const Dashboard = () => {
         >
           <div className="h-44 flex space-x-6 ">
             <div
-              className={` shadow-md shadow-gray-300  dark:shadow-black bg-gradient-to-br  from-orange-500 to-rose-500 p-3 w-full rounded-md`}
+              className={` shadow-md shadow-gray-300  dark:shadow-black bg-gradient-to-br  from-orange-600 to-rose-600 p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Total Penjualan/ Hari</div>
                 {/* gunakan transaksiLog, lalu filter table sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
                 <div className={`   rounded me-3`}>
-                  <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />
+                  <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo" />
                 </div>
               </div>
-              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 ">
+              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 dark:text-colorTwo ">
                 {" "}
                 <span className="me-3">Rp.</span>
                 {penjualanPerHari.length === 0
@@ -211,17 +211,19 @@ const Dashboard = () => {
             </div>
 
             <div
-              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-emerald-500 to-indigo-500  p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-emerald-600 to-indigo-600  p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan transaksiLog, lalu filter table berdasarkan transaksilog.keuntungan  sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
 
-                <div className="w-2/3 ">Keuntungan/ Hari</div>
+                <div className="w-2/3 text-gray-900 dark:text-colorTwo">
+                  Keuntungan/ Hari
+                </div>
                 <div className={`   rounded me-3`}>
-                  <LiaFileInvoiceDollarSolid className="text-[36px] rounded p-[6px] relative text-gray-900" />
+                  <LiaFileInvoiceDollarSolid className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo" />
                 </div>
               </div>
-              <div className="text-[40px] text-end me-4 mt-10 font-semibold text-gray-900 ">
+              <div className="text-[40px] text-end me-4 mt-10 font-semibold text-gray-900 dark:text-colorTwo ">
                 {" "}
                 <span className="me-3">Rp.</span>
                 {keuntunganPerHari.length === 0
@@ -230,16 +232,16 @@ const Dashboard = () => {
               </div>
             </div>
             <div
-              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-green-500 to-amber-500 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-green-600 to-yellow-600 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan table produk, lalu ambil harga beli kalikan dengan stok lalu jumlahkan semua barang yang ada*/}
                 <div className="w-2/3 ">Kas Toko</div>
                 <div className={`rounded me-3`}>
-                  <LiaMoneyBillWaveSolid className="text-[39px] rounded p-[6px] relative text-gray-900" />
+                  <LiaMoneyBillWaveSolid className="text-[39px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo" />
                 </div>
               </div>
-              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 ">
+              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 dark:text-colorTwo ">
                 {" "}
                 <span className="me-3">Rp.</span>
                 {kas.toLocaleString("id-ID")}
@@ -260,10 +262,10 @@ const Dashboard = () => {
                   barang_Terlaris.length >= 8 ? "h-56 overflow-y-scroll" : ""
                 } px-3 `}
               >
-                <table className="w-full border-[1px] border-gray-900 dark:border-colorDarkOne">
-                  <thead className="bg-gradient-to-br  from-orange-500 to-rose-500">
-                    <tr className="text-center border-[1px] border-gray-900 dark:border-colorDarkOne w-2/12">
-                      <td className=" py-1 border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12 ">
+                <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
+                  <thead className="bg-gradient-to-br  from-orange-600 to-rose-600">
+                    <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
+                      <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang
                       </td>
                       <td className="py-1">Total</td>
@@ -289,7 +291,7 @@ const Dashboard = () => {
                                 : "bg-gray-200 dark:bg-colorDarkOne/50"
                             }`}
                           >
-                            <td className="border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12">
+                            <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
                               {item.namaProduk}
                             </td>
                             <td className="">{item.jumlah}</td>
@@ -312,10 +314,10 @@ const Dashboard = () => {
                   barang_KurangLaris.length >= 8 ? "h-56 overflow-y-scroll" : ""
                 } px-3 `}
               >
-                <table className="w-full border-[1px] border-gray-900 dark:border-colorDarkOne">
-                  <thead className="bg-gradient-to-br   from-emerald-500 to-indigo-500">
-                    <tr className="text-center border-[1px] border-gray-900 dark:border-colorDarkOne w-2/12">
-                      <td className=" py-1 border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12 ">
+                <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
+                  <thead className="bg-gradient-to-br   from-emerald-600 to-indigo-600">
+                    <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
+                      <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang
                       </td>
                       {/* <td className="py-1">Total</td> */}
@@ -337,7 +339,7 @@ const Dashboard = () => {
                               : "bg-gray-200 dark:bg-colorDarkOne/50"
                           }`}
                         >
-                          <td className="border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12">
+                          <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
                             {item}
                           </td>
                           {/* <td className="">{item.jumlah}</td> */}
@@ -355,7 +357,7 @@ const Dashboard = () => {
                 {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
                 <div className="w-2/3 mb-2 px-3 ">Stok Minimum</div>
                 {/* <div className={`rounded me-3`}>
-                  <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />
+                  <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo" />
                 </div> */}
               </div>
               <div
@@ -363,10 +365,10 @@ const Dashboard = () => {
                   minimumStok.length >= 8 ? "h-56 overflow-y-scroll" : ""
                 } px-3 `}
               >
-                <table className="w-full border-[1px] border-gray-900 dark:border-colorDarkOne">
-                  <thead className="bg-gradient-to-br   from-green-500 to-amber-500">
-                    <tr className="text-center border-[1px] border-gray-900 dark:border-colorDarkOne w-2/12">
-                      <td className=" py-1 border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12 ">
+                <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
+                  <thead className="bg-gradient-to-br   from-green-600 to-yellow-600">
+                    <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
+                      <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang
                       </td>
                       <td className="py-1">Stok</td>
@@ -392,7 +394,7 @@ const Dashboard = () => {
                                 : "bg-gray-200 dark:bg-colorDarkOne/50"
                             }`}
                           >
-                            <td className="border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12">
+                            <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
                               {item.nama_produk}
                             </td>
                             <td className="">{item.stok}</td>

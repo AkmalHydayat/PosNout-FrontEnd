@@ -5,7 +5,10 @@ import { useEffect, useState } from "react";
 /* eslint-disable react/prop-types */
 const NavTop = () => {
   const { day, hari, month, year } = DateNow();
-  const [theme, setTheme] = useState("light");
+
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") === "dark" ? "dark" : "light"
+  );
 
   useEffect(() => {
     if (theme === "dark") {
@@ -13,11 +16,14 @@ const NavTop = () => {
     } else {
       document.documentElement.classList.remove("dark");
     }
+
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const handleThemeChange = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
+
   return (
     <div className="">
       <div

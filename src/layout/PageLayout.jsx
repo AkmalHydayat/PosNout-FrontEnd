@@ -1,21 +1,21 @@
 /* eslint-disable react/prop-types */
 
 import React, { useState } from "react";
-import ButtonSide from "../components/ButtonSide";
 import PopUpModalUser from "../components/PopUpModalUser";
 
 import NavTop from "./NavTop";
 
 const LayoutPage = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
-  const [sideWidth, contentWidth] = ButtonSide();
+  const [theme, setTheme] = useState("light");
 
+ 
   return (
     <React.Fragment>
       <div className="">
         <div className="">
           {/* NavTop */}
-          <NavTop sideWidth={sideWidth} contentWidth={contentWidth} />
+          <NavTop setTheme={setTheme} theme={theme} />
           {/* Page */}
           <main className="">{children}</main>
         </div>

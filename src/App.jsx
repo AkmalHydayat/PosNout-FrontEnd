@@ -36,7 +36,7 @@ function App() {
     widthLogFilter,
   ] = ButtonSide();
   const isHomePage = window.location.pathname === "/";
-
+  
   return (
     <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"en-gb"}>
       <BrowserRouter>
