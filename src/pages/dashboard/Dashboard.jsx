@@ -188,11 +188,11 @@ const Dashboard = () => {
     <LayoutPage>
       <div className="">
         <div
-          className={`p-6 space-y-6 font-pt_Sans text-base font-medium text-gray-950`}
+          className={`p-6 space-y-6 font-pt_Sans text-base font-medium text-gray-950 `}
         >
           <div className="h-44 flex space-x-6 ">
             <div
-              className={` shadow-md shadow-gray-300  dark:shadow-black bg-gradient-to-br  from-orange-600 to-rose-600 p-3 w-full rounded-md`}
+              className={` shadow-md shadow-gray-300  dark:shadow-black bg-gradient-to-br  from-teal-600 to-fuchsia-600 p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Total Penjualan/ Hari</div>
@@ -211,14 +211,12 @@ const Dashboard = () => {
             </div>
 
             <div
-              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-emerald-600 to-indigo-600  p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-fuchsia-600 to-amber-600  p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan transaksiLog, lalu filter table berdasarkan transaksilog.keuntungan  sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
 
-                <div className="w-2/3 text-gray-900 dark:text-colorTwo">
-                  Keuntungan/ Hari
-                </div>
+                <div className="w-2/3  ">Keuntungan/ Hari</div>
                 <div className={`   rounded me-3`}>
                   <LiaFileInvoiceDollarSolid className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo" />
                 </div>
@@ -232,7 +230,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
-              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-green-600 to-yellow-600 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-teal-600 to-lime-500 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan table produk, lalu ambil harga beli kalikan dengan stok lalu jumlahkan semua barang yang ada*/}
@@ -263,7 +261,7 @@ const Dashboard = () => {
                 } px-3 `}
               >
                 <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
-                  <thead className="bg-gradient-to-br  from-orange-600 to-rose-600">
+                  <thead className="bg-gradient-to-br  from-orange-600/80 to-orange-600/80">
                     <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
                       <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang
@@ -315,7 +313,7 @@ const Dashboard = () => {
                 } px-3 `}
               >
                 <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
-                  <thead className="bg-gradient-to-br   from-emerald-600 to-indigo-600">
+                  <thead className="bg-gradient-to-br   from-teal-600/80 to-teal-600/80">
                     <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
                       <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang
@@ -366,7 +364,7 @@ const Dashboard = () => {
                 } px-3 `}
               >
                 <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
-                  <thead className="bg-gradient-to-br   from-green-600 to-yellow-600">
+                  <thead className="bg-gradient-to-br   from-fuchsia-600/80 to-fuchsia-600/80">
                     <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
                       <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang

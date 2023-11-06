@@ -26,7 +26,7 @@ const ButtonDeleteKategori = ({
             <HiOutlineTrash className="text-lg " />
           </div>
         }
-        className={`bg-red-700 font-pt_Sans text-colorTwo border-[1px] p-1 border-red-700 transition-all ease-in  hover:scale-95  hover:bg-red-800 hover:border-colorTwo rounded  group font-semibold text-md`}
+        className={`bg-red-700 font-pt_Sans text-colorTwo p-1 transition-all ease-in  hover:scale-95  hover:bg-red-800  rounded  group font-semibold text-md`}
         modalContent={
           <DeleteConfirmKategori
             setKategoris={setKategoris}
