@@ -177,11 +177,6 @@ const Transaksi = () => {
 
   const useAutoUpdateInvoiceNumber = () => {
     useEffect(() => {
-      const storedInvoiceNumber = localStorage.getItem("invoiceNumber");
-      if (storedInvoiceNumber) {
-        setInvoiceNumber(storedInvoiceNumber);
-      }
-
       const currentDate = new Date();
       const formattedDate = currentDate
         .toLocaleDateString("id-ID", {
@@ -351,7 +346,9 @@ const Transaksi = () => {
                   setInvoiceNumber={setInvoiceNumber}
                   setProduks={setProduks}
                   totalKeuntunganPerTransaksi={totalKeuntunganPerTransaksi}
-                  setTotalKeuntunganPerTransaksi={setTotalKeuntunganPerTransaksi}
+                  setTotalKeuntunganPerTransaksi={
+                    setTotalKeuntunganPerTransaksi
+                  }
                 />
               </div>
               <div className="text-5xl mt-6 font-acme text-end">

@@ -55,17 +55,7 @@ const BodyModalGetProduk = ({
         });
         const updatedProduks = await getProduks(); // Panggil fungsi getKategoris untuk memperbarui data
         setProduks(updatedProduks);
-        // if (responseUpdate.status === 200) {
-        //   // Handle sukses
-        //   console.log(
-        //     `Stok produk dengan barcode ${barcode} berhasil diperbarui.`
-        //   );
-        // } else {
-        //   // Handle gagal
-        //   console.error(
-        //     `Gagal memperbarui stok produk dengan barcode ${barcode}`
-        //   );
-        // }
+
       }
     } catch (error) {
       console.error("Terjadi kesalahan: " + error.message);

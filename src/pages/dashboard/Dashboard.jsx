@@ -12,19 +12,25 @@ import {
   LiaMoneyBillWaveSolid,
 } from "react-icons/lia";
 import { useEffect, useState } from "react";
-import { getOrderDetail, getProduks, getTransaksiLogs } from "../../utils/api";
+import {
+  getOrderDetail,
+  getProduks,
+  getSalesReport,
+  getTransaksiLogs,
+} from "../../utils/api";
 import DateNow from "../../components/Date";
+import axios from "axios";
 
 const Dashboard = () => {
   const [transaksiLog, setTransaksiLog] = useState([]);
   const [produks, setProduks] = useState([]);
   const [orderDetail, setOrderDetail] = useState([]);
-  // const [transaksiPerHari, setTransaksiPerHari] = useState([]);
   const [penjualanPerHari, setPenjualanPerHari] = useState([]);
   const [keuntunganPerHari, setKeuntunganPerHari] = useState([]);
   const [minimumStok, setMinimumStok] = useState([]);
   const [barang_Terlaris, setBarang_Terlaris] = useState([]);
-  const [barang_KurangTerlaris, setBarang_KurangTerlaris] = useState([]);
+  const [barang_KurangLaris, setBarang_KurangLaris] = useState([]);
+  const [salesReport, setSalesReport] = useState([]);
   const [kas, setKas] = useState(0);
   const { hari, month, year } = DateNow();
   const tanggalSekarang = hari + "-" + month + "-" + year;
@@ -35,9 +41,11 @@ const Dashboard = () => {
         const dataTransaksiLog = await getTransaksiLogs();
         const dataProduk = await getProduks();
         const dataOrder = await getOrderDetail();
+        const dataSales = await getSalesReport();
         setTransaksiLog(dataTransaksiLog);
         setProduks(dataProduk);
         setOrderDetail(dataOrder);
+        setSalesReport(dataSales);
       } catch (error) {
         // Handle error jika diperlukan
         console.error("Error in component:", error);
@@ -65,6 +73,51 @@ const Dashboard = () => {
       );
     }
   };
+
+  const addSalesReport = async () => {
+    if (salesReport.length > 0) {
+      const filteredData = transaksiLog.filter((log) => {
+        const logDate = log.waktuTransaksi;
+        return logDate === tanggalSekarang;
+      });
+      const totalTransaksi = filteredData.length;
+
+      const filter = salesReport.filter((report) => {
+        const reportData = report.tanggal;
+        return reportData === tanggalSekarang;
+      });
+      if (filter.length > 0) {
+        try {
+          await axios.put(
+            `http://localhost:3000/laporanPenjualan/${tanggalSekarang}`,
+            {
+              tanggal: tanggalSekarang,
+              totalTransaksi,
+              totalPenjualan: penjualanPerHari,
+              totalKeuntungan: keuntunganPerHari,
+            }
+          );
+        } catch (error) {
+          console.error("Gagal menyimpan data transaksi ke database:", error);
+        }
+      } else {
+        try {
+          await axios.post("http://localhost:3000/laporanPenjualan", {
+            tanggal: tanggalSekarang,
+            totalTransaksi,
+            totalPenjualan: penjualanPerHari,
+            totalKeuntungan: keuntunganPerHari,
+          });
+        } catch (error) {
+          console.error("Gagal menyimpan data transaksi ke database:", error);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    addSalesReport();
+  }, [penjualanPerHari, keuntunganPerHari]);
 
   const barangTerlaris = () => {
     if (produks.length > 0) {
@@ -99,7 +152,7 @@ const Dashboard = () => {
         (produk) => !arrayOrder.includes(produk)
       );
 
-      setBarang_KurangTerlaris(filteredData);
+      setBarang_KurangLaris(filteredData);
     }
   };
 
@@ -138,24 +191,8 @@ const Dashboard = () => {
           className={`p-6 space-y-6 font-pt_Sans text-base font-medium text-gray-950`}
         >
           <div className="h-44 flex space-x-6 ">
-            {/* <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-red-500 to-rose-600  p-3 w-full rounded-md`}
-            >
-              <div className="flex justify-between">
-                <div className="w-2/3 " onClick={() => transaksiHariIni()}>
-                  Transaksi/ Hari
-                </div>
-
-                <div className={`rounded me-3`}>
-                  <BsArrowLeftRight className="text-[33px] rounded p-[6px] relative text-gray-900" />
-                </div>
-              </div>
-              <div className="text-[45px] font-medium  mt-12 text-gray-900 ps-3">
-                {transaksiPerHari}
-              </div>
-            </div> */}
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br  from-orange-500 to-rose-500 p-3 w-full rounded-md`}
+              className={` shadow-md shadow-gray-300  dark:shadow-black bg-gradient-to-br  from-orange-500 to-rose-500 p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Total Penjualan/ Hari</div>
@@ -167,12 +204,14 @@ const Dashboard = () => {
               <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 ">
                 {" "}
                 <span className="me-3">Rp.</span>
-                {penjualanPerHari.toLocaleString("id-ID")}
+                {penjualanPerHari.length === 0
+                  ? 0
+                  : penjualanPerHari.toLocaleString("id-ID")}
               </div>
             </div>
 
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-emerald-500 to-indigo-500  p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-emerald-500 to-indigo-500  p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan transaksiLog, lalu filter table berdasarkan transaksilog.keuntungan  sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
@@ -185,11 +224,13 @@ const Dashboard = () => {
               <div className="text-[40px] text-end me-4 mt-10 font-semibold text-gray-900 ">
                 {" "}
                 <span className="me-3">Rp.</span>
-                {keuntunganPerHari.toLocaleString("id-ID")}
+                {keuntunganPerHari.length === 0
+                  ? 0
+                  : keuntunganPerHari.toLocaleString("id-ID")}
               </div>
             </div>
             <div
-              className={` shadow-md shadow-gray-300 bg-gradient-to-br from-green-500 to-amber-500 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 dark:shadow-black bg-gradient-to-br from-green-500 to-amber-500 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan table produk, lalu ambil harga beli kalikan dengan stok lalu jumlahkan semua barang yang ada*/}
@@ -207,25 +248,22 @@ const Dashboard = () => {
           </div>
           <div className="h-72 flex space-x-6 ">
             <div
-              className={` shadow-md shadow-gray-300 border-[1px] border-gray-200 bg-colorTwo p-3  w-full rounded-md `}
+              className={` shadow-md shadow-gray-300 dark:shadow-black border-[1px] border-gray-200 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3  w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan orderdetail, lalu cari nama produk atau barcode yang paling banyak yang ada pada table orderdetail, gunakan filter/hari /minggu /bulan */}
 
                 <div className="w-2/3 mb-2 px-3">Barang Paling Laku</div>
-                {/* <div className={`rounded me-3`}>
-                  <LiaDollySolid className="text-[36px] rounded p-[6px] relative text-gray-900" />
-                </div> */}
               </div>
               <div
                 className={`${
                   barang_Terlaris.length >= 8 ? "h-56 overflow-y-scroll" : ""
                 } px-3 `}
               >
-                <table className="w-full border-[1px] border-gray-900">
+                <table className="w-full border-[1px] border-gray-900 dark:border-colorDarkOne">
                   <thead className="bg-gradient-to-br  from-orange-500 to-rose-500">
-                    <tr className="text-center border-[1px] border-gray-900 w-2/12">
-                      <td className=" py-1 border-e-[1px]  border-gray-900 w-10/12 ">
+                    <tr className="text-center border-[1px] border-gray-900 dark:border-colorDarkOne w-2/12">
+                      <td className=" py-1 border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12 ">
                         Nama Barang
                       </td>
                       <td className="py-1">Total</td>
@@ -233,45 +271,51 @@ const Dashboard = () => {
                   </thead>
 
                   <tbody className="text-center text-base">
-                    {barang_Terlaris
-                      .sort((a, b) => b.jumlah - a.jumlah)
-                      .map((item, index) => (
-                        <tr
-                          key={index}
-                          className={`${index % 2 ? "" : "bg-gray-200"}`}
-                        >
-                          <td className="border-e-[1px]  border-gray-900 w-10/12">
-                            {item.namaProduk}
-                          </td>
-                          <td className="">{item.jumlah}</td>
-                        </tr>
-                      ))}
+                    {barang_Terlaris.length == 0 ? (
+                      <tr>
+                        <td className=" text-center py-1 " colSpan={2}>
+                          Tidak ada Data.
+                        </td>
+                      </tr>
+                    ) : (
+                      barang_Terlaris
+                        .sort((a, b) => b.jumlah - a.jumlah)
+                        .map((item, index) => (
+                          <tr
+                            key={index}
+                            className={`${
+                              index % 2
+                                ? ""
+                                : "bg-gray-200 dark:bg-colorDarkOne/50"
+                            }`}
+                          >
+                            <td className="border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12">
+                              {item.namaProduk}
+                            </td>
+                            <td className="">{item.jumlah}</td>
+                          </tr>
+                        ))
+                    )}
                   </tbody>
                 </table>
               </div>
             </div>
             <div
-              className={`shadow-md shadow-gray-300 border-[1px] border-gray-300 bg-colorTwo p-3 w-full rounded-md `}
+              className={`shadow-md shadow-gray-300 dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan orderdetail dan daftarproduk, lalu cari nama produk yang ada di daftarproduk tetapi tidak ada didalam order detail*/}
-
                 <div className="w-2/3 mb-2 px-3">Barang Kurang Laku</div>
-                {/* <div className={`rounded me-3`}>
-                  <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900" />
-                </div> */}
               </div>
               <div
                 className={`${
-                  barang_KurangTerlaris.length >= 8
-                    ? "h-56 overflow-y-scroll"
-                    : ""
+                  barang_KurangLaris.length >= 8 ? "h-56 overflow-y-scroll" : ""
                 } px-3 `}
               >
-                <table className="w-full border-[1px] border-gray-900">
+                <table className="w-full border-[1px] border-gray-900 dark:border-colorDarkOne">
                   <thead className="bg-gradient-to-br   from-emerald-500 to-indigo-500">
-                    <tr className="text-center border-[1px] border-gray-900 w-2/12">
-                      <td className=" py-1 border-e-[1px]  border-gray-900 w-10/12 ">
+                    <tr className="text-center border-[1px] border-gray-900 dark:border-colorDarkOne w-2/12">
+                      <td className=" py-1 border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12 ">
                         Nama Barang
                       </td>
                       {/* <td className="py-1">Total</td> */}
@@ -279,23 +323,33 @@ const Dashboard = () => {
                   </thead>
 
                   <tbody className="text-center text-base">
-                    {barang_KurangTerlaris.map((item, index) => (
-                      <tr
-                        key={index}
-                        className={`${index % 2 ? "" : "bg-gray-200"}`}
-                      >
-                        <td className="border-e-[1px]  border-gray-900 w-10/12">
-                          {item}
-                        </td>
-                        {/* <td className="">{item.jumlah}</td> */}
+                    {barang_KurangLaris.length == 0 ? (
+                      <tr>
+                        <td className=" text-center py-1 ">Tidak ada Data.</td>
                       </tr>
-                    ))}
+                    ) : (
+                      barang_KurangLaris.map((item, index) => (
+                        <tr
+                          key={index}
+                          className={`${
+                            index % 2
+                              ? ""
+                              : "bg-gray-200 dark:bg-colorDarkOne/50"
+                          }`}
+                        >
+                          <td className="border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12">
+                            {item}
+                          </td>
+                          {/* <td className="">{item.jumlah}</td> */}
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
             </div>
             <div
-              className={`shadow-md shadow-gray-300 border-[1px] border-gray-300 bg-colorTwo p-3 w-full rounded-md `}
+              className={`shadow-md shadow-gray-300 dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md `}
             >
               <div className="flex justify-between ">
                 {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
@@ -309,10 +363,10 @@ const Dashboard = () => {
                   minimumStok.length >= 8 ? "h-56 overflow-y-scroll" : ""
                 } px-3 `}
               >
-                <table className="w-full border-[1px] border-gray-900">
+                <table className="w-full border-[1px] border-gray-900 dark:border-colorDarkOne">
                   <thead className="bg-gradient-to-br   from-green-500 to-amber-500">
-                    <tr className="text-center border-[1px] border-gray-900 w-2/12">
-                      <td className=" py-1 border-e-[1px]  border-gray-900 w-10/12 ">
+                    <tr className="text-center border-[1px] border-gray-900 dark:border-colorDarkOne w-2/12">
+                      <td className=" py-1 border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12 ">
                         Nama Barang
                       </td>
                       <td className="py-1">Stok</td>
@@ -320,17 +374,31 @@ const Dashboard = () => {
                   </thead>
 
                   <tbody className="text-center text-base">
-                    {minimumStok.map((item, index) => (
-                      <tr
-                        key={index}
-                        className={`${index % 2 ? "" : "bg-gray-200"}`}
-                      >
-                        <td className="border-e-[1px]  border-gray-900 w-10/12">
-                          {item.nama_produk}
+                    {minimumStok.length == 0 ? (
+                      <tr>
+                        <td className=" text-center py-1 " colSpan={2}>
+                          Tidak ada Data.
                         </td>
-                        <td className="">{item.stok}</td>
                       </tr>
-                    ))}
+                    ) : (
+                      minimumStok
+                        .sort((a, b) => b.stok - a.stok)
+                        .map((item, index) => (
+                          <tr
+                            key={index}
+                            className={`${
+                              index % 2
+                                ? ""
+                                : "bg-gray-200 dark:bg-colorDarkOne/50"
+                            }`}
+                          >
+                            <td className="border-e-[1px]  border-gray-900 dark:border-colorDarkOne w-10/12">
+                              {item.nama_produk}
+                            </td>
+                            <td className="">{item.stok}</td>
+                          </tr>
+                        ))
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -339,56 +407,56 @@ const Dashboard = () => {
 
           <div className="h-44 flex space-x-6">
             <div
-              className={`shadow-md shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={`shadow-md shadow-gray-300 dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
             >
               <div className="flex justify-between ">
                 <span>Grafik Penjualan/Hari</span>
                 <span
-                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200`}
+                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200 dark:shadow-black`}
                 >
                   {" "}
-                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600 border-[1px] " />
+                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
                 </span>
               </div>
             </div>
             <div
-              className={` shadow-md shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={` shadow-md shadow-gray-300 dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
             >
               <div className="flex justify-between">
                 <span>Grafik Laba/Hari</span>
                 <span
-                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200`}
+                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200 dark:shadow-black`}
                 >
                   {" "}
-                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600 border-[1px] " />
+                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600 " />
                 </span>
               </div>
             </div>
           </div>
           <div className="h-96 flex space-x-6">
             <div
-              className={` shadow-md shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={` shadow-md shadow-gray-300 dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
             >
               <div className="flex justify-between">
                 <span>Grafik Penjualan/Hari</span>
                 <span
-                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200`}
+                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200 dark:shadow-black`}
                 >
                   {" "}
-                  <PiChartBarLight className="text-[39px] rounded p-[6px] relative text-purple-600 border-[1px] " />
+                  <PiChartBarLight className="text-[39px] rounded p-[6px] relative text-purple-600 " />
                 </span>
               </div>
             </div>
             <div
-              className={` shadow-md shadow-gray-300 bg-colorTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={` shadow-md shadow-gray-300 dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
             >
               <div className="flex justify-between">
                 <span>Grafik Penjualan/Hari</span>
                 <span
-                  className={`bg-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200`}
+                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-gray-200 dark:shadow-black`}
                 >
                   {" "}
-                  <PiChartBarLight className="text-[39px] rounded    p-[6px] relative text-purple-600 border-[1px] " />
+                  <PiChartBarLight className="text-[39px] rounded p-[6px] relative text-purple-600  " />
                 </span>
               </div>
             </div>
@@ -400,90 +468,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-{
-  /* <div
-          className={`p-6 space-y-6 font-pt_Sans text-base font-medium text-gray-950 `}
-        >
-          <div className="h-44 flex space-x-6 ">
-            <div
-              className={`bg-gradient-to-br from-emerald-500 to-indigo-500 shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300 `}
-            >
-              <div className="flex justify-between">
-                <div className="w-2/3 ">Total Transaksi Hari ini</div>
-                <div className="w-fit pe-3 rounded">
-                  <BsRobot className="text-4xl  relative text-gray-900" />
-                </div>
-              </div>
-            </div>
-            <div
-              className={`bg-gradient-to-br from-amber-500 to-lime-500 shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            >
-              <div>
-                <span>Total Penjualan/ Hari</span>
-                <span></span>
-              </div>
-            </div>
-
-            <div
-              className={`bg-gradient-to-br from-lime-500 to-emerald-500 shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            >
-              <div>
-                <span>Total Penjualan/ Minggu</span>
-                <span></span>
-              </div>
-            </div>
-            <div
-              className={`bg-gradient-to-br from-violet-500 to-rose-500 shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            >
-              <div>
-                <span>Total Penjualan/ Bulan</span>
-                <span></span>
-              </div>
-            </div>
-          </div>
-          <div className="h-44 flex space-x-6 ">
-            <div
-              className={`bg-gradient-to-br from-rose-500 to-orange-500 shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            >
-              <div>
-                <span>Total Penjualan Minggu ini</span>
-                <span></span>
-              </div>
-            </div>
-            <div
-              className={`bg-gradient-to-br from-violet-500 to-teal-500 shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            >
-              <div>
-                <span>Total Penjualan Minggu ini</span>
-                <span></span>
-              </div>
-            </div>
-            <div
-              className={`bg-gradient-to-br from-emerald-500 to-cyan-500 shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            >
-              <div>
-                <span>Total Penjualan Minggu ini</span>
-                <span></span>
-              </div>
-            </div>
-          </div>
-
-          <div className="h-44 flex space-x-6">
-            <div
-              className={`bg-colorTwo shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            ></div>
-            <div
-              className={`bg-colorTwo shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            ></div>
-          </div>
-          <div className="h-96 flex space-x-6">
-            <div
-              className={`bg-colorTwo shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            ></div>
-            <div
-              className={`bg-colorTwo shadow-lg shadow-gray-300 p-3 w-full rounded-md border-[1px] border-gray-300`}
-            ></div>
-          </div>
-        </div> */
-}

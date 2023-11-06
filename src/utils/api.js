@@ -59,3 +59,13 @@ export const getOrderDetail = async () => {
     throw error; // atau Anda dapat menangani error di tempat lain
   }
 };
+
+export const getSalesReport = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/laporanPenjualan`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // atau Anda dapat menangani error di tempat lain
+  }
+};

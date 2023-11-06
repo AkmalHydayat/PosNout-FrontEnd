@@ -9,7 +9,7 @@ const ButtonSide = () => {
       onClick={() => {
         setSideActive(!sideActive);
       }}
-      className="absolute -right-4 bottom-10 text-2xl px-1 py-1 rounded-full bg-purple-600 flex  text-white hover:shadow-sm2 hover:shadow-gray-400"
+      className="absolute -right-4 bottom-10 text-2xl px-1 py-1 rounded-full bg-purple-600 flex  text-white hover:shadow-sm2 hover:shadow-black"
     >
       {sideActive ? <BiChevronLeft /> : <BiChevronRight />}
     </button>
@@ -33,10 +33,10 @@ const ButtonSide = () => {
   const me4 = sideActive ? "ms-0.5" : "ms-0";
   const rounded = sideActive
     ? "rounded-s-xl"
-    : "rounded-xl border-none before:content-[''] before:absolute before:justify-center before:right-[1px] before:w-1 before:rounded-xl before:-mt-[1px] before:h-6 before:bg-purple-600";
+    : "rounded-xl border-none before:content-[''] before:absolute before:justify-center before:right-[0.5px] before:w-1 before:rounded-xl before:-mt-[1.5px] before:h-6 before:bg-purple-600";
   const w45 = sideActive ? "text-xl" : "text-xl";
   const pb = sideActive ? "pb-[18px]" : "pb-7";
-  const ps = sideActive ? "ms-[228px] " : "ps-16";
+  const ps = sideActive ? "ms-[225px] " : "ps-16";
 
   return [
     iconToggle,

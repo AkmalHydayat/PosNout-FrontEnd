@@ -40,10 +40,10 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"en-gb"}>
       <BrowserRouter>
-        <div className="flex w-full overflow-hidden">
+        <div className="flex w-full overflow-hidden bg-[#f7f7f7] dark:bg-colorDarkOne h-screen overflow-y-scroll">
           {isHomePage ? null : (
             <div
-              className={`${sideWidth}  bg-colorTwo border-[1px] shadow-md shadow-gray-300 border-gray-200 h-screen fixed`}
+              className={`${sideWidth}  bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black shadow-md shadow-gray-300 h-screen fixed`}
             >
               <Sidebar
                 iconToggle={iconToggle}
@@ -64,7 +64,9 @@ function App() {
               <div>{iconToggle}</div>
             </div>
           )}
-          <div className={`${contentWidth} ${isHomePage ? "" : ps}`}>
+          <div
+            className={`${contentWidth} ${isHomePage ? "" : ps}  w-full h-full`}
+          >
             <Routes>
               <Route path="/" element={<LoginPage />} />
               <Route path="/Dashboard" element={<Dashboard />} />

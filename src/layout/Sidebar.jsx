@@ -132,19 +132,21 @@ const Sidebar = ({
           >
             <div
               onClick={() => setShowModal(true)}
-              className={`mx-auto cursor-pointer mb-2 scale-105 transition-all rounded-full flex  justify-center items-center bg-gray-200  ${widthUserImg}`}
+              className={`mx-auto cursor-pointer mb-2 scale-105 transition-all rounded-full flex  justify-center items-center bg-gray-200 dark:bg-colorDarkOne/40  ${widthUserImg}`}
             >
-              <PiUserThin className={`my-auto text-gray-900 ${fontSize6xl}`} />
+              <PiUserThin
+                className={`my-auto text-gray-900 dark:text-colorTwo ${fontSize6xl}`}
+              />
             </div>
             <h1
-              className={`text-gray-900 font-acme font-semibold ${inlineHiden} `}
+              className={`text-gray-900 dark:text-colorTwo font-acme font-semibold ${inlineHiden} `}
             >
               Akmal Hydayat
             </h1>
           </div>
         </div>
         <div
-          className={`mt-4 space-y-1 flex flex-col ${textCenter} font-titilium font-semibold basis-4/6  text-gray-900`}
+          className={`mt-4 space-y-1 flex flex-col ${textCenter}  font-titilium font-semibold basis-4/6  text-gray-900 dark:text-colorTwo`}
         >
           {listNav.map((item) => (
             <React.Fragment key={item.id}>
@@ -152,7 +154,7 @@ const Sidebar = ({
                 <div>
                   <div
                     onClick={toggleProdukDropdown}
-                    className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
+                    className={`ps-3 py-2 translate-y-0.5 relative group transition-transform hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
                   >
                     <span className="">
                       <item.icon className={` ${w45} me-4`} />
@@ -174,12 +176,12 @@ const Sidebar = ({
                       className={({ isActive }) => {
                         return `ps-3 py-2   ${
                           showProdukDropdown
-                            ? "visible relative transition-all ease-in translate-y-0 opacity-100"
-                            : "invisible absolute transition-none -translate-y-2 opacity-0 "
+                            ? "visible relative transition-[opacity,transform] dark:bg-colorDarkTwo ease-in translate-y-0 opacity-100"
+                            : "invisible absolute transition-none -translate-y-5 opacity-0 "
                         }   group hover:text-purple-600  ${textCenter} flex  ${mSDrop} ms-1 ${
                           isActive
-                            ? `bg-gray-200 border-e-4 ${rounded}  border-purple-600 border-box  text-purple-600`
-                            : `bg-colorTwo `
+                            ? `bg-gray-200 dark:bg-colorDarkOne/60 border-e-4 ${rounded}  border-purple-600 border-box  text-purple-600`
+                            : `bg-colorTwo  `
                         }`;
                       }}
                     >
@@ -199,7 +201,7 @@ const Sidebar = ({
                 <div>
                   <div
                     onClick={toggleLaporanDropdown}
-                    className={`ps-3 py-2 translate-y-0.5 relative group transition-all hover:text-purple-600 rounded-s-xl  cursor-pointer ms-1 ${me4} flex`}
+                    className={`ps-3 py-2 translate-y-0.5  relative group transition-transform hover:text-purple-600 rounded-s-xl  cursor-pointer ms-1 ${me4} flex`}
                   >
                     <span className="">
                       <item.icon className={`${w45} me-4`} />
@@ -222,13 +224,13 @@ const Sidebar = ({
                       to={laporanItem.linkPath}
                       key={laporanItem.id}
                       className={({ isActive }) => {
-                        return `ps-3 py-2 scale-100 transition-all group flex ${
+                        return `ps-3 py-2 scale-100 transition-all dark:bg-colorDarkTwo  group flex ${
                           showLaporanDropdown
-                            ? "visible relative transition-all ease-in translate-y-0 opacity-100"
+                            ? "visible relative transition-[transform,opacity] ease-in translate-y-0 opacity-100"
                             : "invisible absolute transition-none -translate-y-2 opacity-0 "
                         }  hover:text-purple-600 rounded-s-xl  ${textCenter} ${mSDrop} ms-1 ${
                           isActive
-                            ? `bg-gray-200 border-e-4 ${rounded} border-purple-600 border-box  text-purple-600`
+                            ? `bg-gray-200 dark:bg-colorDarkOne/60 border-e-4 ${rounded} border-purple-600 border-box  text-purple-600`
                             : "bg-colorTwo"
                         }`;
                       }}
@@ -254,9 +256,9 @@ const Sidebar = ({
                   to={item.linkPath}
                   key={item.id}
                   className={({ isActive }) => {
-                    return `ps-3 py-2 hover:text-purple-600 translate-y-0.5 transition-all relative group ${me4}  flex ms-1 ${
+                    return `ps-3 py-2 hover:text-purple-600 dark:bg-colorDarkTwo translate-y-0.5 transition-transform relative group ${me4}  flex ms-1 ${
                       isActive
-                        ? `bg-gray-200 border-e-4 ${rounded} border-purple-600 group border-box text-purple-600`
+                        ? `bg-gray-200 dark:bg-colorDarkOne/60 border-e-4 ${rounded} border-purple-600 group border-box text-purple-600`
                         : "bg-colorTwo"
                     }`;
                   }}
@@ -270,66 +272,6 @@ const Sidebar = ({
                   </span>
                 </NavLink>
               )}
-
-              {/* Dropdown "Produk" yang akan tampil jika showProdukDropdown adalah true */}
-              {/* {item.list === "Produk" && showProdukDropdown && (
-                <React.Fragment>
-                  {produk.map((ProdukItem) => (
-                    <NavLink
-                      to={ProdukItem.linkPath}
-                      key={ProdukItem.id}
-                      className={({ isActive }) => {
-                        return ` ps-3 py-2 transition-all ease-in ${
-                          showProdukDropdown
-                            ? "visible bg-red-900 opacity-100"
-                            : "invisible bg-blue-700 opacity-0 -translate-y-10"
-                        }  relative group hover:text-purple-600 block ${textCenter} flex  ${mSDrop} ms-1 ${
-                          isActive
-                            ? `bg-gray-200 border-e-4 ${rounded}  border-purple-600 border-box  text-purple-600`
-                            : `bg-colorTwo `
-                        }`;
-                      }}
-                    >
-                      <span className="">
-                        <ProdukItem.icon className={`  ${w45} me-3`} />
-                      </span>
-                      <span className={`${inlineHiden}`}>
-                        {ProdukItem.list}
-                      </span>
-                      <span className={`${hidenBlock} ms-12 -mt-1 `}>
-                        {ProdukItem.list}
-                      </span>
-                    </NavLink>
-                  ))}
-                </React.Fragment>
-              )} */}
-              {/* {item.list === "Laporan" && showLaporanDropdown && (
-                <React.Fragment>
-                  {laporan.map((laporanItem) => (
-                    <NavLink
-                      to={laporanItem.linkPath}
-                      key={laporanItem.id}
-                      className={({ isActive }) => {
-                        return `ps-3 py-2 scale-100 transition-all relative group  hover:text-purple-600 rounded-s-xl flex ${textCenter} ${mSDrop} ms-1 ${
-                          isActive
-                            ? `bg-gray-200 border-e-4 ${rounded} border-purple-600 border-box  text-purple-600`
-                            : "bg-colorTwo"
-                        }`;
-                      }}
-                    >
-                      <span className="">
-                        <laporanItem.icon className={`  ${w45} me-3`} />
-                      </span>
-                      <span className={`${inlineHiden} `}>
-                        {laporanItem.list}
-                      </span>
-                      <span className={`${hidenBlock} ms-12 -mt-1 `}>
-                        {laporanItem.list}
-                      </span>
-                    </NavLink>
-                  ))}
-                </React.Fragment>
-              )} */}
             </React.Fragment>
           ))}
         </div>
