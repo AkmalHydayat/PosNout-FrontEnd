@@ -38,7 +38,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
 
   return (
     <div>
-      <div className="bg-colorTwo dark:bg-colorDarkTwo p-6 dark:text-colorTwo  space-y-3 rounded-b">
+      <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo p-6 dark:text-colorTwo  space-y-3 rounded-b">
         <div className="flex justify-between h-full">
           <div className="space-x-1.5 flex">
             <label htmlFor="" className="my-auto">
@@ -48,7 +48,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
               <div className="">
                 <input
                   type="text"
-                  className="w-8 text-center dark:bg-colorDarkTwo  bg-colorTwo rounded-s font-semibold focus:outline-none h-full cursor-default"
+                  className="w-8 text-center transition-all ease-in text-gray-900 dark:text-colorTwo dark:bg-colorDarkTwo  bg-colorTwo rounded-s font-semibold focus:outline-none h-full cursor-default"
                   value={perPage}
                   readOnly
                 />
@@ -165,7 +165,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
         {!isSearching ? (
           <div>
             <table className="w-full my-5">
-              <thead className="border-[1px]  border-gray-300 bg-colorTwo dark:bg-colorDarkTwo">
+              <thead className="border-[1px]  border-gray-300">
                 <tr className="text-center font-bold text-lg text-gray-900 dark:text-colorTwo">
                   <td className="w-1/12 py-2 border-s-[1px] border-gray-300">
                     No
@@ -244,7 +244,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
                 >
                   Previous
                 </button>
-                <div className="bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black  px-3 py-1  border-[1px] shadow-sm2 dark:shadow-cus2 shadow-gray-300 border-purple-600 dark:text-colorTwo text-purple-600 rounded cursor-default">
+                <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:shadow-black  px-3 py-1  border-[1px] shadow-sm2 dark:shadow-cus2 shadow-gray-300 border-purple-600 dark:text-colorTwo text-purple-600 rounded cursor-default">
                   {currentPage}
                 </div>
                 <button

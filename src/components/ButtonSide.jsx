@@ -14,8 +14,7 @@ const ButtonSide = () => {
       {sideActive ? <BiChevronLeft /> : <BiChevronRight />}
     </button>
   );
-  const delay = sideActive ? "delay-300" : "delay-0";
-  const delay2 = sideActive ? "delay-300" : "delay-150";
+  const delay = sideActive ? "delay-200" : "delay-100";
   const sideWidth = sideActive ? "w-2/12" : "w-[65px]";
   const widthUserImg = sideActive ? "w-24 h-24" : "w-10 h-10";
   const inlineHiden = sideActive
@@ -60,7 +59,6 @@ const ButtonSide = () => {
     hidenBlock,
     widthLogFilter,
     delay,
-    delay2,
   ];
 };
 

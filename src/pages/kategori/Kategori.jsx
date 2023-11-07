@@ -30,8 +30,8 @@ const Kategori = () => {
         <div className="font-medium text-3xl  mb-3 text-gray-900 dark:text-colorTwo">
           Kategori Produk
         </div>
-        <div className="rounded bg-colorTwo shadow-md border-[1px] border-gray-200 shadow-gray-300 dark:shadow-black dark:border-colorDarkOne dark:bg-colorDarkTwo ">
-          <div className="px-6 py-3 border-b-[1px]  border-purple-300 dark:border-colorDarkOne ">
+        <div className="rounded bg-colorTwo transition-all ease-in shadow-md border-[1px] border-gray-200 shadow-gray-300 dark:shadow-black dark:border-colorDarkOne dark:bg-colorDarkTwo ">
+          <div className="px-6 py-3 border-b-[1px] transition-all ease-in  border-purple-300 dark:border-colorDarkOne ">
             <ButtonAddKategori
               kategoris={kategoris}
               setKategoris={setKategoris}

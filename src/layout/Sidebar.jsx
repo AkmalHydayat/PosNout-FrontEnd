@@ -31,7 +31,6 @@ const Sidebar = ({
   w45,
   hidenBlock,
   delay,
-  delay2,
 }) => {
   const listNav = [
     {
@@ -127,52 +126,50 @@ const Sidebar = ({
   };
   return (
     <div className="my-10">
-      <div className={`flex flex-col transition-all ease-in-out text-gray-300`}>
-        <div className="text-center transition-all ease-in-out basis-1/6 ">
+      <div className={`flex flex-col text-gray-300`}>
+        <div className="text-center basis-1/6 ">
           <div
-            className={`-translate-y-0.5 transition-all ${pb} border-b-[1px] border-gray-300 dark:border-colorDarkOne`}
+            className={`-translate-y-0.5 transition-all ease-in ${pb} border-b-[1px] border-gray-300 dark:border-colorDarkOne`}
           >
             <div
               onClick={() => setShowModal(true)}
-              className={`mx-auto ${delay} cursor-pointer mb-2 scale-105 transition-all rounded-full flex  justify-center items-center bg-gray-200 dark:bg-colorDarkOne/40  ${widthUserImg}`}
+              className={`mx-auto  cursor-pointer mb-2 scale-105 transition-all ease-in rounded-full flex  justify-center items-center bg-gray-200 dark:bg-colorDarkOne/40  ${widthUserImg}`}
             >
               <PiUserThin
-                className={`my-auto text-gray-900 dark:text-colorTwo ${delay}  ${fontSize6xl}`}
+                className={`my-auto text-gray-900 dark:text-colorTwo transition-all ease-in  ${fontSize6xl}`}
               />
             </div>
             <h1
-              className={`text-gray-900 dark:text-colorTwo font-acme font-semibold ${inlineHiden} ${delay}  transition-all ease-in-out`}
+              className={`text-gray-900 dark:text-colorTwo font-acme font-semibold ${inlineHiden} transition-all ease-in`}
             >
               Akmal Hydayat
             </h1>
           </div>
         </div>
         <div
-          className={`mt-4 space-y-1 flex flex-col ${textCenter}  ${delay} ease-in-out transition-all font-titilium font-semibold basis-4/6  text-gray-900 dark:text-colorTwo`}
+          className={`mt-4 space-y-1 flex flex-col ${textCenter}   ease-in  font-titilium font-semibold basis-4/6  text-gray-900 dark:text-colorTwo`}
         >
           {listNav.map((item) => (
             <React.Fragment key={item.id}>
               {item.list === "Produk" ? (
-                <div className="transition-all ease-in-out">
+                <div className={`transition-all ease-in`}>
                   <div
                     onClick={toggleProdukDropdown}
-                    className={`ps-3 py-2 translate-y-0.5 relative group transition-transform ease-in-out hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
+                    className={`ps-3 py-2 translate-y-0.5 relative group  ease-in hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
                   >
                     <span className="">
                       <item.icon className={` ${w45} me-4`} />
                     </span>
 
-                    <span
-                      className={`${inlineHiden} ${delay}  transition-all ease-in-out `}
-                    >
+                    <span className={`${inlineHiden} ${delay} ease-in `}>
                       {item.list}
                     </span>
                     <span
-                      className={`ms-[60px] ${inlineHiden} ${delay}  transition-all ease-in-out mt-1`}
+                      className={`ms-[60px] ${inlineHiden} ${delay}   ease-in mt-1`}
                     >
                       {showProdukDropdown ? <FiChevronUp /> : <FiChevronDown />}
                     </span>
-                    <span className={`${hidenBlock} ms-12 -mt-1`}>
+                    <span className={`${hidenBlock}  ease-in ms-12 -mt-1`}>
                       {item.list}
                     </span>
                   </div>
@@ -182,51 +179,43 @@ const Sidebar = ({
                       to={ProdukItem.linkPath}
                       key={ProdukItem.id}
                       className={({ isActive }) => {
-                        return `ps-3 py-2 scale-100 transition-all ${delay2} dark:bg-colorDarkTwo  group flex ${
+                        return `ps-3 py-2 scale-100 text-gray-900 dark:text-colorTwo bg-colorTwo dark:bg-colorDarkTwo  group flex ${
                           showProdukDropdown
-                            ? "visible relative transition-[transform,opacity] ease-in translate-y-0 opacity-100"
-                            : "invisible absolute transition-none -translate-y-2 opacity-0 "
+                            ? `visible relative transition-all ease-in translate-y-0  opacity-100 `
+                            : "invisible absolute   -translate-y-2 opacity-0 "
                         }  hover:text-purple-600 rounded-s-xl ${textCenter} ${mSDrop} ms-1 ${
                           isActive
-                            ? `bg-gray-200 dark:bg-colorDarkOne/70 border-e-4 ${rounded} border-purple-600 border-box  text-purple-600`
-                            : "bg-colorTwo dark:bg-colorDarkTwo"
+                            ? `bg-gray-200 dark:bg-colorDarkOne/70 border-e-4 ${rounded} border-purple-600   text-purple-600`
+                            : " dark:bg-colorDarkTwo"
                         }`;
                       }}
                     >
                       <span className="">
                         <ProdukItem.icon className={`${w45} me-3`} />
                       </span>
-                      <span
-                        className={`${inlineHiden} ${delay}  transition-all ease-in-out`}
-                      >
+                      <span className={`${inlineHiden} ${delay}   ease-in`}>
                         {ProdukItem.list}
                       </span>
-                      <span
-                        className={`${hidenBlock} ms-12 -mt-1 transition-all ease-in-out`}
-                      >
+                      <span className={`${hidenBlock} ms-12 -mt-1  ease-in`}>
                         {ProdukItem.list}
                       </span>
                     </NavLink>
                   ))}
                 </div>
               ) : item.list === "Laporan" ? (
-                <div>
+                <div className={`transition-all ease-in`}>
                   <div
                     onClick={toggleLaporanDropdown}
-                    className={`ps-3 py-2 translate-y-0.5 ${delay} relative group transition-transform hover:text-purple-600 rounded-s-xl  cursor-pointer ms-1 ${me4} flex`}
+                    className={`ps-3 py-2 translate-y-0.5  relative group  hover:text-purple-600 rounded-s-xl  cursor-pointer ms-1 ${me4} flex`}
                   >
                     <span className="">
                       <item.icon className={`${w45} me-4`} />
                     </span>
-                    <span
-                      className={`${inlineHiden} ${delay}  transition-all ease-in-out`}
-                    >
+                    <span className={`${inlineHiden}  ${delay}  ease-in`}>
                       {item.list}
                     </span>
 
-                    <span
-                      className={`ms-[50px] ${inlineHiden} ${delay} transition-all ease-in-out mt-1`}
-                    >
+                    <span className={`ms-[50px] ${inlineHiden} ${delay}  ease-in mt-1`}>
                       {showLaporanDropdown ? (
                         <FiChevronUp />
                       ) : (
@@ -242,28 +231,24 @@ const Sidebar = ({
                       to={laporanItem.linkPath}
                       key={laporanItem.id}
                       className={({ isActive }) => {
-                        return `ps-3 py-2 scale-100 transition-all dark:bg-colorDarkTwo ${delay2}  group flex ${
+                        return `ps-3 py-2 scale-100  text-gray-900 dark:text-colorTwo bg-colorTwo dark:bg-colorDarkTwo group flex ${
                           showLaporanDropdown
-                            ? "visible relative transition-[transform,opacity] ease-in  translate-y-0 opacity-100"
-                            : "invisible absolute transition-none -translate-y-2 opacity-0 "
+                            ? `visible relative transition-all ease-in translate-y-0`
+                            : "invisible absolute  -translate-y-2 opacity-0 "
                         }  hover:text-purple-600 rounded-s-xl ${textCenter} ${mSDrop} ms-1 ${
                           isActive
-                            ? `bg-gray-200 dark:bg-colorDarkOne/70 border-e-4 ${rounded} border-purple-600 border-box  text-purple-600`
-                            : "bg-colorTwo dark:bg-colorDarkTwo"
+                            ? `bg-gray-200 dark:bg-colorDarkOne/70 border-e-4 ${rounded} border-purple-600   text-purple-600`
+                            : " dark:bg-colorDarkTwo"
                         }`;
                       }}
                     >
                       <span className="">
                         <laporanItem.icon className={`  ${w45} me-3`} />
                       </span>
-                      <span
-                        className={`${inlineHiden} ${delay}  transition-all ease-in-out`}
-                      >
+                      <span className={`${inlineHiden} ${delay}`}>
                         {laporanItem.list}
                       </span>
-                      <span
-                        className={`${hidenBlock} ms-12 -mt-1 transition-all ease-in-out`}
-                      >
+                      <span className={`${hidenBlock} ms-12 -mt-1 `}>
                         {laporanItem.list}
                       </span>
                     </NavLink>
@@ -278,24 +263,18 @@ const Sidebar = ({
                   to={item.linkPath}
                   key={item.id}
                   className={({ isActive }) => {
-                    return `ps-3 py-2 transition-all hover:text-purple-600 dark:bg-colorDarkTwo translate-y-0.5  relative group ${me4}  flex ms-1 ${
+                    return `ps-3 py-2  hover:text-purple-600 bg-colorTwo transition-all ease-in dark:bg-colorDarkTwo translate-y-0.5  relative group ${me4}  flex ms-1 ${
                       isActive
-                        ? `bg-gray-200 dark:bg-colorDarkOne/70 border-e-4 ${rounded} border-purple-600 group border-box text-purple-600`
-                        : "bg-colorTwo"
+                        ? `bg-gray-200 dark:bg-colorDarkOne/70 border-e-4 ${rounded} border-purple-600 group  text-purple-600`
+                        : " dark:bg-colorDarkTwo"
                     }`;
                   }}
                 >
                   <span className="">
                     <item.icon className={`  ${w45} me-4`} />
                   </span>
-                  <span
-                    className={`${inlineHiden} ${delay}  transition-all ease-in-out`}
-                  >
-                    {item.list}
-                  </span>
-                  <span
-                    className={`${hidenBlock} transition-all ease-in-out ms-12 -mt-1  `}
-                  >
+                  <span className={`${inlineHiden} ${delay}`}>{item.list}</span>
+                  <span className={`${hidenBlock}  ease-in ms-12 -mt-1  `}>
                     {item.list}
                   </span>
                 </NavLink>
