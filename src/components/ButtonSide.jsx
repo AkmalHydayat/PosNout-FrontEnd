@@ -14,10 +14,13 @@ const ButtonSide = () => {
       {sideActive ? <BiChevronLeft /> : <BiChevronRight />}
     </button>
   );
-
+  const delay = sideActive ? "delay-300" : "delay-0";
+  const delay2 = sideActive ? "delay-300" : "delay-150";
   const sideWidth = sideActive ? "w-2/12" : "w-[65px]";
   const widthUserImg = sideActive ? "w-24 h-24" : "w-10 h-10";
-  const inlineHiden = sideActive ? "inline" : "hidden";
+  const inlineHiden = sideActive
+    ? "visible opacity-100"
+    : "invisible opacity-0";
   const hidenBlock = sideActive
     ? "hidden"
     : "absolute  hidden group-hover:inline text-purple-600 shadow-lg bg-colorTwo text-base rounded font-semibold px-2 py-1";
@@ -35,7 +38,7 @@ const ButtonSide = () => {
     ? "rounded-s-xl"
     : "rounded-xl border-none before:content-[''] before:absolute before:justify-center before:right-[0.5px] before:w-1 before:rounded-xl before:-mt-[1.5px] before:h-6 before:bg-purple-600";
   const w45 = sideActive ? "text-xl" : "text-xl";
-  const pb = sideActive ? "pb-[18px]" : "pb-7";
+  const pb = sideActive ? "pb-[18px]" : "pb-0";
   const ps = sideActive ? "ms-[225px] " : "ps-16";
 
   return [
@@ -56,6 +59,8 @@ const ButtonSide = () => {
     ps,
     hidenBlock,
     widthLogFilter,
+    delay,
+    delay2,
   ];
 };
 

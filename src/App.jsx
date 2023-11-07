@@ -34,16 +34,18 @@ function App() {
     ps,
     hidenBlock,
     widthLogFilter,
+    delay,
+    delay2,
   ] = ButtonSide();
   const isHomePage = window.location.pathname === "/";
-  
+
   return (
     <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"en-gb"}>
       <BrowserRouter>
         <div className="flex w-full overflow-hidden bg-[#f7f7f7] dark:bg-colorDarkOne h-screen overflow-y-scroll">
           {isHomePage ? null : (
             <div
-              className={`${sideWidth}  bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black shadow-md shadow-gray-300 h-screen fixed`}
+              className={`${sideWidth} transition-all ease-in-out ${delay2}  bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black shadow-md shadow-gray-300 h-screen fixed`}
             >
               <Sidebar
                 iconToggle={iconToggle}
@@ -60,12 +62,16 @@ function App() {
                 w45={w45}
                 pb={pb}
                 hidenBlock={hidenBlock}
+                delay={delay}
+                delay2={delay2}
               />
               <div>{iconToggle}</div>
             </div>
           )}
           <div
-            className={`${contentWidth} ${isHomePage ? "" : ps}  w-full h-full`}
+            className={`${contentWidth} ${
+              isHomePage ? "" : ps
+            } transition-all ease-in-out ${delay2} w-full h-full`}
           >
             <Routes>
               <Route path="/" element={<LoginPage />} />
