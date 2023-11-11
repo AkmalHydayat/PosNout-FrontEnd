@@ -46,7 +46,7 @@ const NavTop = () => {
               <div className="relative -top-2 text-4xl dark:text-colorTwo text-gray-900 font-mouse transition-all ease-in">
                 Pos
               </div>
-              <div className="font-mouse -rotate-12 absolute right-[7px] top-0 text-4xl text-purple-600">
+              <div className="font-mouse -rotate-12 absolute right-[7px] top-0 text-4xl  text-purple-600">
                 Nout
               </div>
             </div>

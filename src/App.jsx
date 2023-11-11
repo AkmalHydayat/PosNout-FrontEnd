@@ -12,8 +12,6 @@ import Satuan from "./pages/satuanProduk/Satuan";
 import Produk from "./pages/daftarProduk/Produk";
 import ButtonSide from "./components/ButtonSide";
 import Sidebar from "./layout/Sidebar";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 function App() {
   const [
@@ -39,9 +37,9 @@ function App() {
   const isHomePage = window.location.pathname === "/";
 
   return (
-    <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"en-gb"}>
-      <BrowserRouter>
-        <div className="flex w-full transition-all ease-in bg-colorTwo dark:bg-colorDarkOne h-screen overflow-y-scroll">
+    <BrowserRouter>
+      <div className="h-screen transition-all ease-in bg-colorTwo dark:bg-colorDarkOne ">
+        <div className="flex w-full transition-all ease-in bg-colorTwo dark:bg-colorDarkOne">
           {isHomePage ? null : (
             <div
               className={`${sideWidth} border-[1px] border-gray-300 dark:border-colorDarkTwo  transition-all ease-in bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black shadow-sm2 shadow-black/20 h-screen fixed`}
@@ -88,8 +86,8 @@ function App() {
             </Routes>
           </div>
         </div>
-      </BrowserRouter>
-    </LocalizationProvider>
+      </div>
+    </BrowserRouter>
   );
 }
 

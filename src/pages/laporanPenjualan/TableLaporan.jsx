@@ -59,19 +59,19 @@ const TableLaporan = ({
             <table className="w-full my-5">
               <thead className="border-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
                 <tr className="text-center font-bold text-lg ">
-                  <td className="w-10 py-2 border-[1px] border-gray-300 ">
+                  <td className="w-10 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
-                  <td className="w-44 py-2 border-[1px] border-gray-300">
+                  <td className="w-44 py-2 border-s-[1px] border-gray-300">
                     Invoice
                   </td>
-                  <td className="w-40 py-2 border-[1px] border-gray-300">
+                  <td className="w-40 py-2 border-s-[1px] border-gray-300">
                     Tanggal
                   </td>
-                  <td className="w-36 py-2 border-[1px] border-gray-300">
+                  <td className="w-36 py-2 border-s-[1px] border-gray-300">
                     Total Transaksi
                   </td>
-                  <td className="w-32 py-2 border-[1px] border-gray-300">
+                  <td className="w-32 py-2 border-x-[1px] border-gray-300">
                     Aksi
                   </td>
                 </tr>
@@ -96,19 +96,19 @@ const TableLaporan = ({
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
-                      <td className="w-10 py-0.5 border-[1px] border-gray-300 ">
+                      <td className="w-10 py-0.5 border-s-[1px] border-gray-300 ">
                         {index + 1}
                       </td>
-                      <td className="w-44 py-0.5 border-[1px] border-gray-300">
+                      <td className="w-44 py-0.5 border-s-[1px] border-gray-300">
                         {item.invoice}
                       </td>
-                      <td className="w-40 py-0.5 border-[1px] border-gray-300">
+                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
                         {item.waktuTransaksi}
                       </td>
-                      <td className="w-36 py-0.5 border-[1px] border-gray-300 ">
+                      <td className="w-36 py-0.5 border-s-[1px] border-gray-300 ">
                         {item.totalTransaksi.toLocaleString("id-ID")}
                       </td>
-                      <td className="w-32 py-0.5 border-[1px] border-gray-300">
+                      <td className="w-32 py-0.5 border-x-[1px] border-gray-300">
                         <div onClick={() => getDaftarBarang(item.invoice)}>
                           <ButtonDetail
                             invoice={item.invoice}
@@ -145,19 +145,19 @@ const TableLaporan = ({
             <table className="w-full my-5">
               <thead className="border-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
                 <tr className="text-center font-bold text-lg ">
-                  <td className="w-10 py-2 border-[1px] border-gray-300 ">
+                  <td className="w-10 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
-                  <td className="w-44 py-2 border-[1px] border-gray-300">
+                  <td className="w-44 py-2 border-s-[1px] border-gray-300">
                     Invoice
                   </td>
-                  <td className="w-40 py-2 border-[1px] border-gray-300">
+                  <td className="w-40 py-2 border-s-[1px] border-gray-300">
                     Tanggal
                   </td>
-                  <td className="w-36 py-2 border-[1px] border-gray-300">
+                  <td className="w-36 py-2 border-s-[1px] border-gray-300">
                     Total Transaksi
                   </td>
-                  <td className="w-32 py-2 border-[1px] border-gray-300">
+                  <td className="w-32 py-2 border-x-[1px] border-gray-300">
                     Aksi
                   </td>
                 </tr>
@@ -182,19 +182,19 @@ const TableLaporan = ({
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
-                      <td className="w-10 py-0.5 border-[1px] border-gray-300 ">
+                      <td className="w-10 py-0.5 border-s-[1px] border-gray-300 ">
                         {index + 1}
                       </td>
-                      <td className="w-44 py-0.5 border-[1px] border-gray-300">
+                      <td className="w-44 py-0.5 border-s-[1px] border-gray-300">
                         {item.invoice}
                       </td>
-                      <td className="w-40 py-0.5 border-[1px] border-gray-300">
+                      <td className="w-40 py-0.5 border-s-[1px] border-gray-300">
                         {item.waktuTransaksi}
                       </td>
-                      <td className="w-36 py-0.5 border-[1px] border-gray-300 ">
+                      <td className="w-36 py-0.5 border-s-[1px] border-gray-300 ">
                         {item.totalTransaksi.toLocaleString("id-ID")}
                       </td>
-                      <td className="w-32 py-0.5 border-[1px] border-gray-300">
+                      <td className="w-32 py-0.5 border-x-[1px] border-gray-300">
                         <div onClick={() => getDaftarBarang(item.invoice)}>
                           <ButtonDetail
                             invoice={item.invoice}

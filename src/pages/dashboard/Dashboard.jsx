@@ -36,7 +36,6 @@ const Dashboard = (delay, active) => {
   const [kas, setKas] = useState(0);
   const { hari, month, year } = DateNow();
   const tanggalSekarang = hari + "-" + month + "-" + year;
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -267,7 +266,7 @@ const Dashboard = (delay, active) => {
                 } px-3 `}
               >
                 <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
-                  <thead className="bg-gradient-to-br  from-orange-600/80 to-orange-600/80">
+                  <thead className="">
                     <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
                       <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang
@@ -292,7 +291,7 @@ const Dashboard = (delay, active) => {
                             className={`${
                               index % 2
                                 ? ""
-                                : "bg-gray-200 dark:bg-colorDarkOne/50"
+                                : "bg-gray-200 dark:bg-colorDarkOne/50 transition-colors ease-in text-colorDarkOne dark:text-colorTwo"
                             }`}
                           >
                             <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
@@ -319,7 +318,7 @@ const Dashboard = (delay, active) => {
                 } px-3 `}
               >
                 <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
-                  <thead className="bg-gradient-to-br   from-teal-600/80 to-teal-600/80">
+                  <thead className="">
                     <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
                       <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang
@@ -339,10 +338,10 @@ const Dashboard = (delay, active) => {
                           className={`${
                             index % 2
                               ? ""
-                              : "bg-gray-200 dark:bg-colorDarkOne/50"
+                              : "bg-gray-200 dark:bg-colorDarkOne/50 transition-colors ease-in text-colorDarkOne dark:text-colorTwo"
                           }`}
                         >
-                          <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
+                          <td className="border-e-[1px]  border-gray-900 text-colorDarkOne dark:text-colorTwo transition-colors ease-in dark:border-gray-400 w-10/12">
                             {item}
                           </td>
                         </tr>
@@ -365,7 +364,7 @@ const Dashboard = (delay, active) => {
                 } px-3 `}
               >
                 <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
-                  <thead className="bg-gradient-to-br   from-fuchsia-600/80 to-fuchsia-600/80">
+                  <thead className="">
                     <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
                       <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang
@@ -390,7 +389,7 @@ const Dashboard = (delay, active) => {
                             className={`${
                               index % 2
                                 ? ""
-                                : "bg-gray-200 dark:bg-colorDarkOne/50"
+                                : "bg-gray-200 dark:bg-colorDarkOne/50 transition-colors ease-in text-colorDarkOne dark:text-colorTwo"
                             }`}
                           >
                             <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">

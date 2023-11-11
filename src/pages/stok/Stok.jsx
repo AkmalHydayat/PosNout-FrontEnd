@@ -9,7 +9,6 @@ import { getProduks, getStoks } from "../../utils/api";
 const Stok = () => {
   const [stoks, setStoks] = useState([]);
   const [produks, setProduks] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,7 +38,7 @@ const Stok = () => {
 
   return (
     <LayoutPage>
-      <div className={` p-6  font-pt_Sans`}>
+      <div className={` p-6  font-pt_Sans `}>
         <div className="font-medium text-3xl  mb-3 text-gray-900 dark:text-colorTwo transition-colors ease-in">
           Stok Produk
         </div>

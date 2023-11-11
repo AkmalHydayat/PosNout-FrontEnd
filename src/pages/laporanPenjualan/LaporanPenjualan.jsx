@@ -138,7 +138,7 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
         </div>
         <div className="space-y-7">
           <div className="pb-6 rounded shadow-md  border-[1px] border-gray-200 shadow-gray-300 bg-colorTwo dark:border-colorDarkOne dark:shadow-black  dark:bg-colorDarkTwo  transition-all ease-in">
-            <div className="font-semibold text-purple-600 text-xl py-3.5 mb-4 px-6  border-b-[1px] border-purple-300 dark:border-colorDarkOne">
+            <div className="font-semibold text-purple-600 text-xl py-3.5 mb-4 px-6  border-b-[1px] border-purple-300 dark:border-colorDarkOne transition-all ease-in">
               Filter Data
             </div>
             <div className="py-3">
@@ -172,7 +172,7 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
                     <label>s/d</label>
 
                     <input
-                      className={` border-[1px] h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 dark:bg-colorDarkTwo transition-all ease-in  text-gray-900 dark:text-colorTwo  border-gray-300 rounded ${widthLogFilter}  px-2 `}
+                      className={` border-[1px] accent-white h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 dark:bg-colorDarkTwo transition-all ease-in  text-gray-900 dark:text-colorTwo  border-gray-300 rounded ${widthLogFilter}  px-2 `}
                       type="date"
                       value={rangeDateTo}
                       onChange={(e) => {
@@ -217,7 +217,7 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
                         Cari
                       </button>
                       <button
-                        className={`bg-colorTwo dark:border-[1px]  dark:bg-colorDarkTwo dark:shadow-black  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black hover:dark:shadow-purple-600 dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  dark:border-purple-600 hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-black/30 hover: hover:text-purple-600   rounded group w-16 h-9 font-semibold py-1`}
+                        className={`bg-colorTwo dark:border-[1px]  dark:bg-colorDarkTwo dark:shadow-black  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black  dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  dark:border-colorDarkTwo hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-black/30 hover: hover:text-purple-600   rounded group w-16 h-9 font-semibold py-1`}
                         onClick={(e) => {
                           e.preventDefault();
                           setSearchInvoice("");

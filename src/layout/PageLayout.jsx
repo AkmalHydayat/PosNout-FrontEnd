@@ -9,7 +9,6 @@ const LayoutPage = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
   const [theme, setTheme] = useState("light");
 
- 
   return (
     <React.Fragment>
       <div className="">
