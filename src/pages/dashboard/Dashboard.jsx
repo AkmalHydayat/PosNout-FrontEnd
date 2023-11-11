@@ -200,10 +200,14 @@ const Dashboard = (delay, active) => {
                 <div className="w-2/3 ">Total Penjualan/ Hari</div>
                 {/* gunakan transaksiLog, lalu filter table sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
                 <div className={`   rounded me-3`}>
-                  <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo" />
+                  <BsBagCheck
+                    className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo transition-all ease-in"
+                    transition-all
+                    ease-in
+                  />
                 </div>
               </div>
-              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 dark:text-colorTwo ">
+              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 dark:text-colorTwo transition-all ease-in">
                 {" "}
                 <span className="me-3">Rp.</span>
                 {penjualanPerHari.length === 0
@@ -213,17 +217,17 @@ const Dashboard = (delay, active) => {
             </div>
 
             <div
-              className={` shadow-md shadow-black/20 dark:shadow-black transition-all ease-indark:shadow-black bg-gradient-to-br from-fuchsia-600 to-amber-600  p-3 w-full rounded-md `}
+              className={` shadow-md shadow-black/20 transition-all ease-in dark:shadow-black bg-gradient-to-br from-fuchsia-600 to-amber-600  p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan transaksiLog, lalu filter table berdasarkan transaksilog.keuntungan  sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
 
                 <div className="w-2/3  ">Keuntungan/ Hari</div>
                 <div className={`   rounded me-3`}>
-                  <LiaFileInvoiceDollarSolid className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo" />
+                  <LiaFileInvoiceDollarSolid className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo transition-all ease-in" />
                 </div>
               </div>
-              <div className="text-[40px] text-end me-4 mt-10 font-semibold text-gray-900 dark:text-colorTwo ">
+              <div className="text-[40px] text-end me-4 mt-10 font-semibold text-gray-900 dark:text-colorTwo transition-all ease-in ">
                 {" "}
                 <span className="me-3">Rp.</span>
                 {keuntunganPerHari.length === 0
@@ -232,16 +236,16 @@ const Dashboard = (delay, active) => {
               </div>
             </div>
             <div
-              className={` shadow-md shadow-black/20 dark:shadow-black transition-all ease-indark:shadow-black bg-gradient-to-br from-teal-600 to-lime-500 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-black/20 dark:shadow-black transition-all ease-in bg-gradient-to-br from-teal-600 to-lime-500 p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan table produk, lalu ambil harga beli kalikan dengan stok lalu jumlahkan semua barang yang ada*/}
                 <div className="w-2/3 ">Kas Toko</div>
                 <div className={`rounded me-3`}>
-                  <LiaMoneyBillWaveSolid className="text-[39px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo" />
+                  <LiaMoneyBillWaveSolid className="text-[39px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo transition-all ease-in" />
                 </div>
               </div>
-              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 dark:text-colorTwo ">
+              <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 dark:text-colorTwo transition-all ease-in ">
                 {" "}
                 <span className="me-3">Rp.</span>
                 {kas.toLocaleString("id-ID")}
@@ -250,7 +254,7 @@ const Dashboard = (delay, active) => {
           </div>
           <div className="h-72 flex space-x-6 ">
             <div
-              className={` shadow-md shadow-black/20 dark:shadow-black transition-all ease-indark:shadow-black border-[1px] border-gray-200 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3  w-full rounded-md `}
+              className={` shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3  w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan orderdetail, lalu cari nama produk atau barcode yang paling banyak yang ada pada table orderdetail, gunakan filter/hari /minggu /bulan */}
@@ -303,7 +307,7 @@ const Dashboard = (delay, active) => {
               </div>
             </div>
             <div
-              className={`shadow-md shadow-black/20 dark:shadow-black transition-all ease-indark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md `}
+              className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan orderdetail dan daftarproduk, lalu cari nama produk yang ada di daftarproduk tetapi tidak ada didalam order detail*/}
@@ -320,7 +324,6 @@ const Dashboard = (delay, active) => {
                       <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                         Nama Barang
                       </td>
-                      {/* <td className="py-1">Total</td> */}
                     </tr>
                   </thead>
 
@@ -342,7 +345,6 @@ const Dashboard = (delay, active) => {
                           <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
                             {item}
                           </td>
-                          {/* <td className="">{item.jumlah}</td> */}
                         </tr>
                       ))
                     )}
@@ -351,14 +353,11 @@ const Dashboard = (delay, active) => {
               </div>
             </div>
             <div
-              className={`shadow-md shadow-black/20 dark:shadow-black transition-all ease-indark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md `}
+              className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md `}
             >
               <div className="flex justify-between ">
                 {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
                 <div className="w-2/3 mb-2 px-3 ">Stok Minimum</div>
-                {/* <div className={`rounded me-3`}>
-                  <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo" />
-                </div> */}
               </div>
               <div
                 className={`${
@@ -409,12 +408,12 @@ const Dashboard = (delay, active) => {
 
           <div className="h-44 flex space-x-6">
             <div
-              className={`shadow-md shadow-black/20 dark:shadow-black transition-all ease-indark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-300`}
             >
               <div className="flex justify-between ">
                 <span>Grafik Penjualan/Hari</span>
                 <span
-                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
+                  className={`bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
                 >
                   {" "}
                   <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
@@ -422,43 +421,15 @@ const Dashboard = (delay, active) => {
               </div>
             </div>
             <div
-              className={` shadow-md shadow-black/20 dark:shadow-black transition-all ease-indark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
+              className={` shadow-md shadow-black/20 transition-all ease-in dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-300`}
             >
               <div className="flex justify-between">
                 <span>Grafik Laba/Hari</span>
                 <span
-                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
+                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40 transition-all ease-in`}
                 >
                   {" "}
                   <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600 " />
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="h-96 flex space-x-6">
-            <div
-              className={` shadow-md shadow-black/20 dark:shadow-black transition-all ease-indark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
-            >
-              <div className="flex justify-between">
-                <span>Grafik Penjualan/Hari</span>
-                <span
-                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
-                >
-                  {" "}
-                  <PiChartBarLight className="text-[39px] rounded p-[6px] relative text-purple-600 " />
-                </span>
-              </div>
-            </div>
-            <div
-              className={` shadow-md shadow-black/20 dark:shadow-black transition-all ease-indark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-200`}
-            >
-              <div className="flex justify-between">
-                <span>Grafik Penjualan/Hari</span>
-                <span
-                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
-                >
-                  {" "}
-                  <PiChartBarLight className="text-[39px] rounded p-[6px] relative text-purple-600  " />
                 </span>
               </div>
             </div>

@@ -55,7 +55,6 @@ const BodyModalGetProduk = ({
         });
         const updatedProduks = await getProduks(); // Panggil fungsi getKategoris untuk memperbarui data
         setProduks(updatedProduks);
-
       }
     } catch (error) {
       console.error("Terjadi kesalahan: " + error.message);
@@ -132,7 +131,7 @@ const BodyModalGetProduk = ({
               isVisible
                 ? "scale-100 opacity-100  duration-300"
                 : "scale-75 opacity-0"
-            } absolute z-20 -end-[10px] -top-[10px] bg-purple-600 text-colorTwo px-[7px] hover:bg-purple-700 hover:text-colorTwo rounded-lg  shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  `}
+            } absolute z-20 -end-[10px] -top-[10px] bg-purple-600 text-colorTwo px-[7px] hover:bg-purple-700 hover:text-colorTwo rounded-lg  shadow-cus2 hover:shadow-sm2 hover:shadow-black/40 shadow-black/20   `}
             onClick={() => {
               onClose();
               setKembalian(0);
@@ -142,28 +141,28 @@ const BodyModalGetProduk = ({
             <FontAwesomeIcon icon={faXmark} />
           </button>
           <div
-            className={` relative text-xl font-bold bg-colorTwo transition-all ease-out text-purple-600 border-b-[1px] border-purple-600  rounded-t-md py-4 text-center `}
+            className={` relative text-xl font-bold bg-colorTwo dark:bg-colorDarkTwo transition-all ease-out text-purple-600 border-b-[1px] border-purple-600  rounded-t-md py-4 text-center `}
           >
             Data Transaksi
           </div>
-          <div className="bg-colorTwo text-base p-5 font-medium rounded-b space-y-3">
-            <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 ">
+          <div className="bg-colorTwo dark:bg-colorDarkTwo text-base p-5 font-medium rounded-b space-y-3">
+            <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 dark:border-colorDarkOne/90  ">
               <div className="w-32">Invoice</div>
               <div className="text-end w-10">:</div>
-              <div className="text-end w-72 ">{invoiceNumber}</div>
+              <div className="text-end w-72 font-semibold">{invoiceNumber}</div>
             </div>
-            <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 ">
+            <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 dark:border-colorDarkOne/90  ">
               <div className="w-32 ">Total Belanja</div>
               <div className="text-end w-10">:</div>
               <div className="text-end w-72 ">{totalJumlah}</div>
             </div>
-            <div className="flex border-b-[1px] pb-2  border-purple-200 ">
+            <div className="flex border-b-[1px] pb-2  border-purple-200 dark:border-colorDarkOne/90  ">
               <div className="w-32">Bayar</div>
               <div className="text-end w-10">:</div>
               <div className="text-end w-72 ">
                 <input
                   type="text"
-                  className="bg-transparent py-0.5 px-2 text-end focus:outline-none placeholder:font-medium focus:bg-white  rounded focus:border-[1px] focus:border-purple-600"
+                  className="bg-transparent py-0.5 px-2 text-end focus:outline-none placeholder:font-medium focus:bg-white  rounded border-[1px] border-white dark:border-colorDarkTwo dark:hover:border-purple-600 dark:bg-colorDarkTwo dark:focus:border-purple-600  hover:border-purple-600 transition-colors ease-in focus:border-[1px] focus:border-purple-600"
                   placeholder="bayar"
                   value={pembayaran}
                   onChange={(e) => {
@@ -183,14 +182,14 @@ const BodyModalGetProduk = ({
                 />
               </div>
             </div>
-            <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 ">
+            <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 dark:border-colorDarkOne/90  ">
               <div className="w-32">Kembalian</div>
               <div className="text-end w-10">:</div>
               <div className="text-end  w-72 ">{kembalian}</div>
             </div>
             <div className="flex justify-center gap-9 py-2">
               <button
-                className={`bg-colorTwo text-purple-600 w-20 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+                className={`bg-colorTwo dark:border-[1px] w-[75px] dark:bg-colorDarkTwo dark:shadow-black  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 font-semibold dark:hover:shadow-black hover:dark:shadow-purple-600 dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  dark:border-purple-600 hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group py-1 `}
                 onClick={() => {
                   if (pembayaran === "") {
                     AlertMessage("Masukkan nominal pembayaran", 400, "warning");
@@ -215,7 +214,7 @@ const BodyModalGetProduk = ({
                 Proses
               </button>
               <button
-                className={`bg-colorTwo text-purple-600 w-20 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+                className={`bg-colorTwo dark:border-[1px] w-[75px] dark:bg-colorDarkTwo dark:shadow-black  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 font-semibold dark:hover:shadow-black hover:dark:shadow-purple-600 dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  dark:border-purple-600 hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group py-1 `}
               >
                 Selesai
               </button>

@@ -30,11 +30,11 @@ const Transaksi = () => {
     localStorage.getItem("invoiceNumber") || generateInvoiceNumber()
   );
   const emptyBarcodeStyle = isBarcodeEmpty
-    ? "border-[1px] border-red-500"
-    : "border-[1px] border-gray-400";
+    ? "border-[1px] border-red-500 dark:border-red-500 dark:bg-colorDarkTwo"
+    : "border-[1px] border-gray-400  dark:bg-colorDarkOne";
   const emptyJumlahStyle = isJumlahEmpty
-    ? "border-[1px] border-red-500"
-    : "border-[1px] border-gray-400";
+    ? "border-[1px] border-red-500 dark:border-red-500 dark:bg-colorDarkTwo"
+    : "border-[1px] border-gray-400 dark:bg-colorDarkOne";
   const tanggalSekarang = `${hari}-${month}-${year}`;
 
   const AlertMessage = (message, width, icon) => {
@@ -240,12 +240,12 @@ const Transaksi = () => {
   return (
     <LayoutPage>
       <div className={`p-6 font-pt_Sans`}>
-        <div className=" text-3xl mb-3 text-gray-900 font-medium">
+        <div className="font-medium text-3xl  mb-3 text-gray-900 dark:text-colorTwo transition-colors ease-in">
           Transaksi
         </div>
         <div className="space-y-7">
           <div className="flex justify-between gap-6 ">
-            <div className=" py-6 px-6 w-1/4 rounded shadow-md border-[1px] border-gray-200 shadow-gray-300 bg-colorTwo">
+            <div className=" py-6 px-6 w-1/4 rounded  shadow-md border-[1px] border-gray-200 shadow-black/20 transition-all ease-in dark:shadow-black dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkOne bg-colorTwo ">
               <form action="" className="space-y-8">
                 <div className="gap-2 flex h-8">
                   <label htmlFor="" className="w-1/4 ">
@@ -255,7 +255,7 @@ const Transaksi = () => {
                     type="text"
                     value={`${hari}/${month}/${year}`}
                     readOnly
-                    className="cursor-default px-2  bg-gray-300 font-bold focus:outline-none border-[1px] border-gray-400 w-3/4 rounded"
+                    className="cursor-default px-2  bg-gray-300 dark:bg-colorDarkOne dark:border-colorTwo text-colorDarkOne dark:text-colorTwo transition-colors ease-in font-bold focus:outline-none border-[1px] border-gray-400 w-3/4 rounded"
                   />
                 </div>
                 <div className="gap-2 flex h-8">
@@ -266,12 +266,12 @@ const Transaksi = () => {
                     type="text"
                     value={"Akmal Hydayat"}
                     readOnly
-                    className="cursor-default px-2  bg-gray-300  font-acme focus:outline-none border-[1px] border-gray-400 w-3/4  rounded"
+                    className="cursor-default px-2  bg-gray-300 dark:bg-colorDarkOne dark:border-colorTwo text-colorDarkOne dark:text-colorTwo transition-colors ease-in  font-acme focus:outline-none border-[1px] border-gray-400 w-3/4  rounded"
                   />
                 </div>
               </form>
             </div>
-            <div className="px-6 py-6 rounded bg-colorTwo shadow-md border-[1px] border-gray-200 shadow-gray-300">
+            <div className="px-6 py-6 rounded bg-colorTwo shadow-md border-[1px] border-gray-200 shadow-black/20 transition-all ease-in dark:shadow-black dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkOne">
               <div className="space-y-8">
                 <div className=" flex h-8">
                   <label htmlFor="" className="w-1/4 me-1">
@@ -285,7 +285,7 @@ const Transaksi = () => {
                       produkBarcodeSelect
                         ? "font-acme"
                         : "font-titilium font-bold"
-                    } cursor-default px-2 bg-gray-300 focus:outline-none ${emptyBarcodeStyle}  w-3/4 rounded-s `}
+                    } cursor-default px-2 dark:border-colorTwo text-colorDarkOne dark:text-colorTwo transition-colors ease-in focus:outline-none ${emptyBarcodeStyle}  w-3/4 rounded-s `}
                   />
                   <ButtonGetProduk
                     getSelected={getSelected}
@@ -315,11 +315,12 @@ const Transaksi = () => {
                         }
                       }}
                       placeholder="Jumlah Pesanan"
-                      className={`bg-white ${emptyJumlahStyle} focus:outline-none  font-acme placeholder:font-titilium placeholder:text-sm placeholder:text-gray-500 w-2/4 px-2 me-6 rounded`}
+                      className={`bg-white ${emptyJumlahStyle} focus:outline-none dark:hover:border-purple-600 hover:border-purple-600 dark:focus:bg-colorTwo dark:focus:border-purple-600 
+                      dark:focus:text-colorDarkTwo focus:border-purple-600 font-acme dark:bg-colorDarkTwo dark:border-colorTwo placeholder:font-titilium placeholder:text-sm transition-colors ease-in placeholder:text-gray-500 w-2/4 px-2 me-6 rounded`}
                     />
                     <button
                       type="submit"
-                      className="bg-purple-600 hover:bg-purple-700 w-1/4 px-2 shadow-cus2 shadow-gray-400 hover:shadow-sm2 hover:shadow-gray-400  rounded text-sm flex justify-center items-center"
+                      className={`bg-purple-600 dark:shadow-black text-colorTwo shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  transition-all ease-in flex items-center hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
                     >
                       <TbShoppingCartPlus className="text-colorTwo text-lg" />
                       <span className="text-white font-bold ms-1">Add</span>
@@ -328,7 +329,7 @@ const Transaksi = () => {
                 </form>
               </div>
             </div>
-            <div className="px-6 py-4 w-2/5 rounded bg-colorTwo shadow-md border-[1px] border-gray-200 shadow-gray-300 ">
+            <div className="px-6 py-4 w-2/5 rounded bg-colorTwo shadow-md border-[1px] border-gray-200 shadow-black/20 transition-all ease-in dark:shadow-black dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkOne ">
               <div className="flex justify-between">
                 <div className="">
                   <span className=" me-1 text-base font-medium">Invoice</span>
@@ -358,7 +359,7 @@ const Transaksi = () => {
               </div>
             </div>
           </div>
-          <div className="shadow-md border-[1px] border-gray-200 rounded shadow-gray-300">
+          <div className="shadow-md border-[1px] border-gray-200 rounded shadow-black/20 transition-all ease-in dark:shadow-black dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkOne">
             <TableTransaksi
               transaksiList={transaksiList}
               setTransaksiList={setTransaksiList}

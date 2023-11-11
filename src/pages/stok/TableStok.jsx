@@ -32,7 +32,7 @@ const TableStok = ({ stoks }) => {
   const currentItems = stoks.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <div>
-      <div className="bg-colorTwo p-6 space-y-3  rounded-b ">
+      <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo p-6 dark:text-colorTwo  space-y-3 rounded-b">
         <div className="flex justify-between h-full">
           <div className="space-x-1.5 flex">
             <label htmlFor="" className="my-auto">
@@ -42,7 +42,7 @@ const TableStok = ({ stoks }) => {
               <div className="">
                 <input
                   type="text"
-                  className="w-8 text-center  bg-colorTwo rounded font-semibold focus:outline-none h-full cursor-default"
+                  className="w-8 text-center transition-all ease-in text-gray-900 dark:text-colorTwo dark:bg-colorDarkTwo  bg-colorTwo rounded-s font-semibold focus:outline-none h-full cursor-default"
                   value={perPage}
                   readOnly
                 />
@@ -74,7 +74,7 @@ const TableStok = ({ stoks }) => {
         {isSearching ? (
           <div>
             <table className="w-full  my-5 text-gray-900">
-              <thead className="border-[1px] border-gray-300 bg-colorTwo">
+              <thead className="border-[1px]  border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
                 <tr className="text-center font-bold text-lg ">
                   <td className="w-10 py-2 border-s-[1px] border-gray-300 ">
                     No
@@ -107,7 +107,9 @@ const TableStok = ({ stoks }) => {
                   searchResults.map((item, index) => (
                     <tr
                       className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
+                        index % 2
+                          ? `bg-colorTwo dark:bg-colorDarkTwo text-colorDarkOne dark:text-colorTwo transition-all ease-in`
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 text-colorDarkOne dark:text-colorTwo transition-all ease-in`
                       }`}
                       key={index}
                     >
@@ -138,7 +140,7 @@ const TableStok = ({ stoks }) => {
               </div>
               <div className="space-x-1 flex text-sm font-semibold">
                 <span
-                  className={`bg-colorTwo cursor-pointer shadow-sm2 text-purple-600  border-[1px] border-colorTwo hover:border-[1px] hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1  `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black dark:border-colorDarkTwo  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  border-[1px] border-colorTwo hover:border-[1px] hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1  `}
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -151,8 +153,8 @@ const TableStok = ({ stoks }) => {
         {!isSearching ? (
           <div>
             <table className="w-full  my-5">
-              <thead className="border-[1px] border-gray-300 ">
-                <tr className="text-center font-bold text-lg text-gray-900">
+              <thead className="border-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
+                <tr className="text-center font-bold text-lg ">
                   <td className="w-10 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
@@ -170,7 +172,7 @@ const TableStok = ({ stoks }) => {
                   </td>
                 </tr>
               </thead>
-              <tbody className="border-b-[1px] border-gray-300">
+              <tbody className="border-b-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
@@ -184,8 +186,10 @@ const TableStok = ({ stoks }) => {
                   currentItems.reverse().map((item, index) => (
                     <tr
                       className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
-                      }  font-normal text-base text-gray-900`}
+                        index % 2
+                          ? `bg-colorTwo dark:bg-colorDarkTwo text-colorDarkOne dark:text-colorTwo transition-all ease-in`
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 text-colorDarkOne dark:text-colorTwo transition-all ease-in`
+                      }  `}
                       key={index}
                     >
                       <td className="w-10 border-s-[1px] py-1 border-gray-300">
@@ -218,17 +222,17 @@ const TableStok = ({ stoks }) => {
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`bg-colorTwo cursor-pointer   text-purple-600 shadow-sm2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1  `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black cursor-pointer   dark:text-colorTwo text-purple-600 shadow-sm2 dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1  `}
                 >
                   Previous
                 </button>
-                <div className="bg-colorTwo  px-3 py-1  border-[1px] shadow-sm2 shadow-gray-300 border-purple-600 text-purple-600 rounded cursor-default">
+                <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:shadow-black  px-3 py-1  border-[1px] shadow-sm2 dark:shadow-cus2 shadow-gray-300 border-purple-600 dark:text-colorTwo text-purple-600 rounded cursor-default">
                   {currentPage}
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={indexOfLastItem >= stoks.length}
-                  className={`bg-colorTwo cursor-pointer   text-purple-600 shadow-sm2  shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black cursor-pointer   dark:text-colorTwo text-purple-600 shadow-sm2 dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2  shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 `}
                 >
                   Next
                 </button>

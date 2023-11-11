@@ -37,7 +37,8 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
   };
   return (
     <div>
-      <div className="bg-colorTwo p-6 space-y-3  rounded-b">
+      {" "}
+      <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo p-6 dark:text-colorTwo  space-y-3 rounded-b">
         <div className="flex justify-between h-full">
           <div className="space-x-1.5 flex">
             <label htmlFor="" className="my-auto">
@@ -47,7 +48,7 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
               <div className="">
                 <input
                   type="text"
-                  className="w-8 text-center  bg-colorTwo rounded font-semibold focus:outline-none h-full cursor-default"
+                  className="w-8 text-center transition-all ease-in text-gray-900 dark:text-colorTwo dark:bg-colorDarkTwo  bg-colorTwo rounded-s font-semibold focus:outline-none h-full cursor-default"
                   value={perPage}
                   readOnly
                 />
@@ -79,8 +80,8 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
         {isSearching ? (
           <div>
             <table className="w-full my-5">
-              <thead className="border-[1px] border-gray-300 bg-colorTwo">
-                <tr className="text-center font-semibold text-lg">
+              <thead className="border-[1px] border-gray-300">
+                <tr className="text-center font-semibold text-lg transition-all ease-in bg-colorTwo dark:bg-colorDarkTwo">
                   <td className="w-1/12 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
@@ -105,8 +106,10 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                 ) : (
                   searchResults.map((item, index) => (
                     <tr
-                      className={`text-base text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
+                      className={`text-base text-center text-gray-900 transition-all ease-in dark:text-colorTwo ${
+                        index % 2
+                          ? ""
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 transition-all ease-in`
                       }`}
                       key={item.id}
                     >
@@ -151,7 +154,7 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
               </div>
               <div className="space-x-1 text-sm flex font-semibold">
                 <span
-                  className={`bg-colorTwo cursor-pointer shadow-sm2 text-purple-600  border-[1px] border-colorTwo hover:border-[1px] hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1  `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black dark:border-colorDarkTwo  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  border-[1px] border-colorTwo hover:border-[1px] hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1  `}
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -164,8 +167,8 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
         {!isSearching ? (
           <div>
             <table className="w-full my-5">
-              <thead className="border-[1px] border-gray-300 bg-colorTwo">
-                <tr className="text-center font-bold text-lg text-gray-900">
+              <thead className="border-[1px] border-gray-300">
+                <tr className="text-center font-bold text-lg text-gray-900 dark:text-colorTwo transition-all ease-in">
                   <td className="w-1/12 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
@@ -190,9 +193,11 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                 ) : (
                   currentItems.map((item, index) => (
                     <tr
-                      className={`text-base text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
-                      }  font-normal  text-gray-900`}
+                      className={`text-base text-center dark:text-colorTwo text-gray-900 transition-all ease-in ${
+                        index % 2
+                          ? "bg-colorTwo dark:bg-colorDarkTwo transition-all ease-in  "
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 transition-all ease-in`
+                      }  font-normal `}
                       key={item.id}
                     >
                       <td className="w-1/12 border-s-[1px] py-0.5 border-gray-300">
@@ -239,17 +244,17 @@ const TableSatuan = ({ satuans, setSatuans, AlertMessage }) => {
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`bg-colorTwo cursor-pointer   text-purple-600   shadow-sm2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1  `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black cursor-pointer   dark:text-colorTwo text-purple-600 shadow-sm2 dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1  `}
                 >
                   Previous
                 </button>
-                <div className="bg-colorTwo  px-3 py-1  border-[1px] shadow-sm2 shadow-gray-300 border-purple-600 text-purple-600 rounded cursor-default">
+                <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:shadow-black  px-3 py-1  border-[1px] shadow-sm2 dark:shadow-cus2 shadow-gray-300 border-purple-600 dark:text-colorTwo text-purple-600 rounded cursor-default">
                   {currentPage}
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={indexOfLastItem >= satuans.length}
-                  className={`bg-colorTwo cursor-pointer   text-purple-600 shadow-sm2  shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black cursor-pointer   dark:text-colorTwo text-purple-600 shadow-sm2 dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2  shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 `}
                 >
                   Next
                 </button>

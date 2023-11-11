@@ -21,7 +21,7 @@ const TableLaporan = ({
 
   return (
     <div>
-      <div className="bg-colorTwo p-6 space-y-3  rounded">
+      <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo p-6 dark:text-colorTwo  space-y-3 rounded-b">
         <div className="flex justify-between h-full">
           <div className="space-x-1 flex ">
             <label htmlFor="" className="my-auto ">
@@ -31,7 +31,7 @@ const TableLaporan = ({
               <div className="">
                 <input
                   type="text"
-                  className="w-8 text-center rounded font-semibold focus:outline-none h-full cursor-default"
+                  className="w-8 text-center transition-all ease-in text-gray-900 dark:text-colorTwo dark:bg-colorDarkTwo  bg-colorTwo rounded-s font-semibold focus:outline-none h-full cursor-default"
                   value={perPage}
                   readOnly
                 />
@@ -39,12 +39,12 @@ const TableLaporan = ({
               <div className="flex flex-col items-center justify-center space-y-[1px]">
                 <FontAwesomeIcon
                   icon={faCaretUp}
-                  className="h-3 text-xs px-[3px] rounded-tr-sm cursor-pointer bg-purple-600  text-color text-colorTwo"
+                  className="h-3 text-xs px-[3px] rounded-tr-sm cursor-pointer bg-purple-600 hover:bg-purple-700 text-white"
                   onClick={() => setPerPage(perPage + 1)}
                 />
                 <FontAwesomeIcon
                   icon={faCaretDown}
-                  className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 text-color text-colorTwo cursor-pointer "
+                  className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 hover:bg-purple-700 text-white cursor-pointer"
                   onClick={() =>
                     setPerPage(perPage > 5 ? perPage - 1 : perPage)
                   }
@@ -57,8 +57,8 @@ const TableLaporan = ({
         {isSearching ? (
           <div>
             <table className="w-full my-5">
-              <thead className="border-[1px] border-gray-300 ">
-                <tr className="text-center font-bold text-lg text-gray-900">
+              <thead className="border-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
+                <tr className="text-center font-bold text-lg ">
                   <td className="w-10 py-2 border-[1px] border-gray-300 ">
                     No
                   </td>
@@ -76,7 +76,7 @@ const TableLaporan = ({
                   </td>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="border-b-[1px] border-gray-300">
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
@@ -90,7 +90,9 @@ const TableLaporan = ({
                   searchResults.map((item, index) => (
                     <tr
                       className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
+                        index % 2
+                          ? `bg-colorTwo dark:bg-colorDarkTwo text-colorDarkOne dark:text-colorTwo transition-all ease-in`
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 text-colorDarkOne dark:text-colorTwo transition-all ease-in`
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
@@ -126,9 +128,9 @@ const TableLaporan = ({
                 Showing 1 to {searchResults.length} of {searchResults.length}{" "}
                 entries
               </div>
-              <div className="space-x-1">
+              <div className="space-x-1 flex text-sm font-semibold">
                 <span
-                  className={`bg-colorTwo cursor-pointer font-semibold  text-purple-600   shadow-sm2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1.5  `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black dark:border-colorDarkTwo  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  border-[1px] border-colorTwo hover:border-[1px] hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1  `}
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -141,8 +143,8 @@ const TableLaporan = ({
         {!isSearching ? (
           <div className="">
             <table className="w-full my-5">
-              <thead className="border-[1px] border-gray-300 ">
-                <tr className="text-center font-bold text-lg text-gray-900">
+              <thead className="border-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
+                <tr className="text-center font-bold text-lg ">
                   <td className="w-10 py-2 border-[1px] border-gray-300 ">
                     No
                   </td>
@@ -160,7 +162,7 @@ const TableLaporan = ({
                   </td>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="border-b-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
@@ -174,7 +176,9 @@ const TableLaporan = ({
                   currentItems.reverse().map((item, index) => (
                     <tr
                       className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
+                        index % 2
+                          ? `bg-colorTwo dark:bg-colorDarkTwo text-colorDarkOne dark:text-colorTwo transition-all ease-in`
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 text-colorDarkOne dark:text-colorTwo transition-all ease-in`
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
@@ -215,17 +219,17 @@ const TableLaporan = ({
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`bg-colorTwo cursor-pointer   text-purple-600   shadow-sm2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1  `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black cursor-pointer   dark:text-colorTwo text-purple-600 shadow-sm2 dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1  `}
                 >
                   Previous
                 </button>
-                <div className="bg-colorTwo  px-3 py-1  border-[1px] shadow-sm2 shadow-gray-300 border-purple-600 text-purple-600 rounded cursor-default">
+                <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:shadow-black  px-3 py-1  border-[1px] shadow-sm2 dark:shadow-cus2 shadow-gray-300 border-purple-600 dark:text-colorTwo text-purple-600 rounded cursor-default">
                   {currentPage}
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={indexOfLastItem >= transaksiLog.length}
-                  className={`bg-colorTwo cursor-pointer   text-purple-600 shadow-sm2  shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black cursor-pointer   dark:text-colorTwo text-purple-600 shadow-sm2 dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2  shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 `}
                 >
                   Next
                 </button>

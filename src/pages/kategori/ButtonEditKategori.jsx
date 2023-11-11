@@ -26,7 +26,7 @@ const ButtonEditKategori = ({
         setNamaNewKategori={setNamaNewKategori}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
-        className={`bg-sky-700 text-colorTwo border-[1px] p-1 border-sky-700  transition-colors ease-in hover:scale-95 hover:bg-sky-800 rounded  group font-semibold text-md`}
+        className={`bg-sky-700 font-pt_Sans text-colorTwo p-1 transition-all ease-in  hover:scale-95  hover:bg-sky-800  rounded  group font-semibold text-md`}
         buttonLabel={
           <div className="flex items-center ">
             <HiOutlinePencilAlt className="text-lg " />

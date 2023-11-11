@@ -38,7 +38,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
 
   return (
     <div>
-      <div className="bg-colorTwo p-6 space-y-3  rounded-b ">
+      <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo p-6 dark:text-colorTwo  space-y-3 rounded-b">
         <div className="flex justify-between h-full">
           <div className="space-x-1.5 flex">
             <label htmlFor="" className="my-auto">
@@ -48,7 +48,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
               <div className="">
                 <input
                   type="text"
-                  className="w-8 text-center  bg-colorTwo rounded font-semibold focus:outline-none h-full cursor-default"
+                  className="w-8 text-center transition-all ease-in text-gray-900 dark:text-colorTwo dark:bg-colorDarkTwo  bg-colorTwo rounded-s font-semibold focus:outline-none h-full cursor-default"
                   value={perPage}
                   onChange={(e) => {
                     const inputValue = e.target.value;
@@ -91,7 +91,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
           <div>
             <table className="w-full my-5">
               <thead className="border-[1px] border-gray-300 ">
-                <tr className="text-center  font-bold text-lg text-gray-900">
+                <tr className="text-gray-900 dark:text-colorTwo text-center font-semibold text-lg transition-all ease-in bg-colorTwo dark:bg-colorDarkTwo">
                   <td className="w-16 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
@@ -137,8 +137,10 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                 ) : (
                   searchResults.map((item, index) => (
                     <tr
-                      className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
+                      className={`text-center text-gray-900 dark:text-colorTwo transition-all ease-in ${
+                        index % 2
+                          ? "  "
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 transition-all ease-in`
                       }`}
                       key={item.id}
                     >
@@ -208,7 +210,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
               </div>
               <div className="space-x-1 text-sm flex font-semibold">
                 <span
-                  className={`bg-colorTwo cursor-pointer shadow-sm2 text-purple-600  border-[1px] border-colorTwo hover:border-[1px] hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1  `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black dark:border-colorDarkTwo  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  border-[1px] border-colorTwo hover:border-[1px] hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group px-2 py-1  `}
                   onClick={stopSearch}
                 >
                   Stop Search
@@ -222,7 +224,7 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
           <div>
             <table className="w-full my-5">
               <thead className="border-[1px] border-gray-300 ">
-                <tr className="text-center  font-bold text-lg text-gray-900">
+                <tr className="text-gray-900 dark:text-colorTwo text-center font-semibold text-lg transition-all ease-in bg-colorTwo dark:bg-colorDarkTwo">
                   <td className="w-16 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
@@ -268,8 +270,10 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                 ) : (
                   currentItems.reverse().map((item, index) => (
                     <tr
-                      className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
+                      className={`text-center dark:text-colorTwo  transition-all ease-in ${
+                        index % 2
+                          ? "  "
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 transition-all ease-in`
                       }  font-normal text-base text-gray-900`}
                       key={item.id}
                     >
@@ -343,17 +347,17 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`bg-colorTwo cursor-pointer   text-purple-600   shadow-sm2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1  `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black cursor-pointer   dark:text-colorTwo text-purple-600 shadow-sm2 dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2 shadow-gray-300 transition-all ease-in hover:shadow-gray-50  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1  `}
                 >
                   Previous
                 </button>
-                <div className="bg-colorTwo  px-3 py-1  border-[1px] shadow-sm2 shadow-gray-300 border-purple-600 text-purple-600 rounded cursor-default">
+                <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:shadow-black  px-3 py-1  border-[1px] shadow-sm2 dark:shadow-cus2 shadow-gray-300 border-purple-600 dark:text-colorTwo text-purple-600 rounded cursor-default">
                   {currentPage}
                 </div>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={indexOfLastItem >= produks.length}
-                  className={`bg-colorTwo cursor-pointer   text-purple-600 shadow-sm2  shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 `}
+                  className={`bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black cursor-pointer   dark:text-colorTwo text-purple-600 shadow-sm2 dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black dark:shadow-cus2  shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover:shadow-sm2 hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 `}
                 >
                   Next
                 </button>

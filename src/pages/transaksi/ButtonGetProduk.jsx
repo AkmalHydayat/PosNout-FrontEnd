@@ -25,7 +25,7 @@ const ButtonGetProduk = ({ getSelected, produks, setProduks }) => {
         buttonLabel={
           <FontAwesomeIcon icon={faSearch} className=" text-white " />
         }
-        className={`bg-purple-600 text-white  hover:bg-purple-700 rounded-e hover:shadow-purple-700 group px-3 py-1 font-semibold text-md`}
+        className={`bg-purple-600 text-colorTwo  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded-e  group px-3 py-1 font-semibold text-md`}
         modalContent={
           <TableProdukForTransaksi
             getSelected={getSelected}

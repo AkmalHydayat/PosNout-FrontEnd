@@ -41,10 +41,10 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={"en-gb"}>
       <BrowserRouter>
-        <div className="flex w-full transition-all ease-in dark:bg-colorDarkOne h-screen overflow-y-scroll">
+        <div className="flex w-full transition-all ease-in bg-colorTwo dark:bg-colorDarkOne h-screen overflow-y-scroll">
           {isHomePage ? null : (
             <div
-              className={`${sideWidth}  transition-all ease-in bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black shadow-sm2 shadow-black/20 h-screen fixed`}
+              className={`${sideWidth} border-[1px] border-gray-300 dark:border-colorDarkTwo  transition-all ease-in bg-colorTwo dark:bg-colorDarkTwo dark:shadow-black shadow-sm2 shadow-black/20 h-screen fixed`}
             >
               <Sidebar
                 iconToggle={iconToggle}

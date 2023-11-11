@@ -22,7 +22,7 @@ const SearchGroup = ({ onSubmit, value, onChange, placeholder }) => {
           placeholder={`Cari ${placeholder}`}
           value={value}
           onChange={onChange}
-          className="rounded-l border-[1px] transition-colors ease-in  bg-colorTwo dark:bg-colorDarkTwo focus:bg-white  border-purple-600 font-medium w-48 focus:outline-none ps-2 placeholder:text-sm"
+          className="rounded-l border-[1px] transition-colors ease-in text-gray-900 dark:text-colorTwo bg-colorTwo dark:bg-colorDarkTwo focus:bg-white  border-purple-600 font-medium w-48 focus:outline-none ps-2 placeholder:text-sm"
           required
         />
         <button

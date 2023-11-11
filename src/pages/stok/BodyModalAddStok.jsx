@@ -31,7 +31,7 @@ const BodyModalAddStok = ({
       }  flex items-center justify-center font-titilium  backdrop-blur-sm transition-colors`}
       id="wrapper"
     >
-      <div className="flex items-center  space-x-12 ">
+      <div className="flex items-center space-x-12 ">
         <div
           className={`${
             isVisible
@@ -39,7 +39,7 @@ const BodyModalAddStok = ({
               : "scale-75 opacity-0 delay-0 "
           } ${
             isHide ? "translate-x-0 duration-200" : "translate-x-[450px] "
-          } w-[350px] relative text-base transition-all ease-in-out font-semibold bg-colorOne rounded-md`}
+          } w-[350px] relative text-base transition-all ease-in-out font-semibold bg-colorOne dark:bg-colorDarkTwo rounded-md`}
         >
           {/* Button Close Modal */}
           <button
@@ -47,7 +47,7 @@ const BodyModalAddStok = ({
               isVisible
                 ? "scale-100 opacity-100  duration-300"
                 : "scale-75 opacity-0"
-            } absolute z-20 -end-3 -top-3 bg-purple-600 text-colorTwo px-[7px] hover:bg-purple-700 hover:text-colorTwo rounded-lg  shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  `}
+            } absolute z-20 -end-3 -top-3 bg-purple-600 text-colorTwo px-[7px] hover:bg-purple-700 hover:text-colorTwo rounded-lg  shadow-cus2 hover:shadow-sm2 hover:shadow-black/40 shadow-black/20  `}
             onClick={() => {
               onClose();
               setIsHide(false);
@@ -76,7 +76,7 @@ const BodyModalAddStok = ({
               isHide
                 ? "scale-100 opacity-100 delay-300 translate-y-0 "
                 : "scale-50 opacity-0 delay-50 translate-y-32 "
-            }  relative text-base transition-all ease-out font-semibold bg-colorTwo rounded-md`}
+            }  relative text-base transition-all ease-out font-semibold `}
           >
             <TableProdukList
               isVisible={isVisible}

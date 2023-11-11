@@ -49,7 +49,7 @@ const ButtonAddStok = ({ setStoks, produks, setProduks }) => {
             <div className="text-base font-semibold font-pt_Sans">Add</div>
           </div>
         }
-        className={`bg-purple-600 text-colorTwo shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+        className={`bg-purple-600 dark:shadow-black text-colorTwo shadow-cus2 hover:shadow-sm2 hover:shadow-gray-400 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
         modalContent={
           <FormAddStok
             setProduks={setProduks}

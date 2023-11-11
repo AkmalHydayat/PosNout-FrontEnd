@@ -133,22 +133,25 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
   return (
     <LayoutPage>
       <div className={` p-6 font-pt_Sans`}>
-        <div className=" text-3xl mb-3 text-gray-900 font-medium">
+        <div className="font-medium text-3xl  mb-3 text-gray-900 dark:text-colorTwo transition-colors ease-in">
           Laporan Penjualan
         </div>
         <div className="space-y-7">
-          <div className="pb-6 rounded shadow-md  border-[1px] border-gray-200 shadow-gray-300 bg-colorTwo">
-            <div className="font-semibold text-purple-600 text-xl py-3.5 mb-4 px-6  border-b-[1px] border-purple-300">
+          <div className="pb-6 rounded shadow-md  border-[1px] border-gray-200 shadow-gray-300 bg-colorTwo dark:border-colorDarkOne dark:shadow-black  dark:bg-colorDarkTwo  transition-all ease-in">
+            <div className="font-semibold text-purple-600 text-xl py-3.5 mb-4 px-6  border-b-[1px] border-purple-300 dark:border-colorDarkOne">
               Filter Data
             </div>
             <div className="py-3">
-              <form action="" className="flex justify-center">
+              <form
+                action=""
+                className="flex justify-center dark:text-colorTwo text-colorDarkTwo  transition-colors ease-in"
+              >
                 <div className="flex justify-center">
                   <div className=" space-x-3 flex items-center w-2/4 ">
                     <label className="">Tanggal</label>
                     <input
                       type="date"
-                      className={` border-[1px] focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2  focus:border-purple-600 h-10 border-gray-300 ${widthLogFilter} rounded px-2`}
+                      className={` border-[1px] focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 dark:bg-colorDarkTwo text-gray-900 dark:text-colorTwo transition-all ease-in   focus:border-purple-600 h-10 border-gray-300 ${widthLogFilter} rounded px-2`}
                       value={rangeDateFrom}
                       onChange={(e) => {
                         const inputDate = new Date(e.target.value);
@@ -169,7 +172,7 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
                     <label>s/d</label>
 
                     <input
-                      className={` border-[1px] h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 border-gray-300 rounded ${widthLogFilter}  px-2`}
+                      className={` border-[1px] h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 dark:bg-colorDarkTwo transition-all ease-in  text-gray-900 dark:text-colorTwo  border-gray-300 rounded ${widthLogFilter}  px-2 `}
                       type="date"
                       value={rangeDateTo}
                       onChange={(e) => {
@@ -193,7 +196,7 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
                     <label className="">
                       Invoice
                       <input
-                        className={`border-[1px] px-3 focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 ${widthLogFilter} focus:border-purple-600 ms-3 h-10 px- border-gray-300 rounded`}
+                        className={`border-[1px] px-3 focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 dark:bg-colorDarkTwo transition-all ease-in text-gray-900 dark:text-colorTwo ${widthLogFilter} focus:border-purple-600 ms-3 h-10 px- border-gray-300 rounded placeholder:text-gray-500 `}
                         type="text"
                         value={searchInvoice}
                         onChange={(e) => {
@@ -209,12 +212,12 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
                           e.preventDefault();
                           handleSearch();
                         }}
-                        className=" flex px-4 h-9 w-16 justify-center items-center rounded bg-purple-600 text-colorTwo font-semibold shadow-sm2 shadow-gray-300 hover:bg-purple-700 hover:shadow-cus2 hover:shadow-gray-500 transition-all ease-in cursor-pointer"
+                        className={`bg-purple-600 dark:shadow-black text-colorTwo shadow-cus2 hover:shadow-sm2 hover:shadow-black/30 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded w-16 h-9 group py-1 font-semibold text-md`}
                       >
                         Cari
                       </button>
                       <button
-                        className=" flex px-4 h-9 w-16 justify-center  items-center rounded bg-colorTwo text-purple-600 font-semibold shadow-sm2 shadow-gray-300 hover:bg-purple-600 hover:text-colorTwo transition-all ease-in cursor-pointer"
+                        className={`bg-colorTwo dark:border-[1px]  dark:bg-colorDarkTwo dark:shadow-black  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black hover:dark:shadow-purple-600 dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  dark:border-purple-600 hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-black/30 hover: hover:text-purple-600   rounded group w-16 h-9 font-semibold py-1`}
                         onClick={(e) => {
                           e.preventDefault();
                           setSearchInvoice("");
@@ -230,7 +233,7 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
               </form>
             </div>
           </div>
-          <div className=" shadow-md border-[1px]  border-gray-200 rounded  shadow-gray-300">
+          <div>
             <TableLaporan
               stopSearch={stopSearch}
               transaksiLog={transaksiLog}

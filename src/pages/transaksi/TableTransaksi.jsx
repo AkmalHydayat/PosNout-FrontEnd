@@ -46,7 +46,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
 
   return (
     <div>
-      <div className="bg-colorTwo p-6 space-y-3  rounded">
+      <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo p-6 dark:text-colorTwo  space-y-3 rounded-b">
         <div className="flex px-3 justify-end h-[30px] mb-5">
           <label htmlFor="" className="me-2 font-medium text-gray-900"></label>
           <input
@@ -54,7 +54,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
             placeholder="Cari item"
             value={searchTerm}
             onChange={handleSearch}
-            className="rounded-l border-[1px]  bg-colorTwo  focus:bg-white transition-colors border-purple-600 font-medium w-48 focus:outline-none ps-2 placeholder:text-sm"
+            className="rounded-l border-[1px] dark:bg-colorDarkTwo  ease-in  bg-colorTwo text-colorDarkTwo dark:text-colorTwo focus:bg-white transition-colors border-purple-600 font-medium w-48 focus:outline-none ps-2 placeholder:text-sm"
             required
           />
 
@@ -64,9 +64,9 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
         </div>
         {isSearching ? (
           <div>
-            <table className="w-full my-5 border-b-[1px] border-gray-300 text-gray-900">
-              <thead className="border-[1px] border-gray-300 bg-colorTwo">
-                <tr className="text-center font-bold text-lg text-gray-900 bor">
+            <table className="w-full my-5 border-b-[1px] border-gray-300 ">
+              <thead className="border-[1px]  border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
+                <tr className="text-center font-bold text-lg ">
                   <td className="w-10 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
@@ -94,7 +94,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                 {searchResults.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2 border-gray-300"
+                      className=" text-center border-[1px] py-2 border-gray-300 transition-colors ease-in text-colorDarkTwo dark:text-colorTwo"
                       colSpan={7}
                     >
                       Tidak ada hasil pencarian.
@@ -104,7 +104,9 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                   searchResults.map((item, index) => (
                     <tr
                       className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
+                        index % 2
+                          ? `bg-colorTwo dark:bg-colorDarkTwo text-colorDarkOne dark:text-colorTwo transition-all ease-in`
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 text-colorDarkOne dark:text-colorTwo transition-all ease-in`
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >
@@ -145,8 +147,8 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
         {!isSearching ? (
           <div>
             <table className="w-full my-5 border-b-[1px] border-gray-300">
-              <thead className="border-[1px] border-gray-300 ">
-                <tr className="text-center font-bold text-lg text-gray-900 " >
+              <thead className="border-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
+                <tr className="text-center font-bold text-lg">
                   <td className="w-10 py-2 border-s-[1px] border-gray-300 ">
                     No
                   </td>
@@ -174,7 +176,7 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                 {transaksiList.length === 0 ? (
                   <tr>
                     <td
-                      className=" text-center border-[1px] py-2  border-gray-300 "
+                      className=" text-center border-[1px] py-2 border-gray-300 transition-colors ease-in text-colorDarkTwo dark:text-colorTwo"
                       colSpan={7}
                     >
                       Tidak ada Data Tersedia
@@ -184,7 +186,9 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                   transaksiList.map((item, index) => (
                     <tr
                       className={`text-center ${
-                        index % 2 ? "  " : "bg-gray-100"
+                        index % 2
+                          ? `bg-colorTwo dark:bg-colorDarkTwo text-colorDarkOne dark:text-colorTwo transition-all ease-in`
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 text-colorDarkOne dark:text-colorTwo transition-all ease-in`
                       }  font-normal text-base text-gray-900`}
                       key={index}
                     >

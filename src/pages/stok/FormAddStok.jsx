@@ -54,7 +54,7 @@ const FormAddStok = ({
   return (
     <div className={` font-pt_Sans`}>
       <div className="border-b-[1px] border-gray-300">
-        <div className="px-6 py-3 text-2xl  font-semibold  text-purple-600">
+        <div className="px-6 py-3 text-2xl font-pt_Sans font-semibold text-purple-600">
           Add Data
         </div>
       </div>
@@ -75,55 +75,67 @@ const FormAddStok = ({
           }
         }}
       >
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="px-6 mt-2">
-            <label htmlFor="" className="text-gray-900 font-medium text-lg">
+            <label
+              htmlFor=""
+              className="text-gray-900 font-medium text-lg dark:text-colorTwo"
+            >
               Tanggal
             </label>
             <input
               type="text"
-              className="w-full h-10 focus:outline-none bg-gray-300 border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 cursor-default"
+              className="dark:border-[1px] dark:border-colorTwo cursor-default w-full h-10 focus:outline-none bg-gray-300 dark:bg-colorDarkOne font-medium dark:text-colorTwo text-gray-900 rounded px-2 text-base"
               placeholder=""
               value={tanggalSekarang}
               readOnly
             />
           </div>
           <div className="px-6   ">
-            <label htmlFor="" className="text-gray-900 font-medium text-lg">
+            <label
+              htmlFor=""
+              className="text-gray-900 dark:text-colorTwo font-medium text-lg"
+            >
               Barcode
             </label>
             <div className="flex w-full " onClick={() => setIsHide(!isHide)}>
               <input
                 type="text"
-                className={`${emptyBarcodeStyle} cursor-pointer w-full h-10 focus:outline-none bg-gray-300 border-gray-300 border-[1px] text-gray-900 rounded-s px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 `}
+                className={`${emptyBarcodeStyle} dark:border-[1px] dark:border-colorTwo dark:border-e-0 cursor-pointer w-full h-10 focus:outline-none bg-gray-300 dark:bg-colorDarkOne dark:text-colorTwo text-gray-900 font-semibold rounded-s px-2 text-base`}
                 placeholder=""
                 readOnly
                 value={idSelect ? idSelect : "-"}
               />
-              <div className="w-10 bg-purple-600  rounded-e flex justify-center items-center cursor-pointer">
+              <div className="w-10 bg-purple-600 dark:border-[1px] border-colorTwo dark:border-s-0 rounded-e flex justify-center items-center cursor-pointer">
                 <BiSearchAlt className="text-colorTwo  text-2xl" />
               </div>
             </div>
           </div>
           <div className="px-6 ">
-            <label htmlFor="" className="text-gray-900 font-medium text-lg">
+            <label
+              htmlFor=""
+              className="text-gray-900 dark:text-colorTwo font-medium text-lg"
+            >
               Nama Produk
             </label>
             <input
               type="text"
-              className="w-full h-10 focus:outline-none  bg-gray-300 border-gray-300 border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 cursor-default"
+              className="cursor-default w-full h-10 focus:outline-none bg-gray-300 dark:bg-colorDarkOne dark:text-colorTwo text-gray-900 rounded font-medium px-2 text-base dark:border-[1px] dark:border-colorTwo "
               placeholder=""
               readOnly
               value={namaSelect ? namaSelect : "-"}
             />
           </div>
           <div className="px-6 ">
-            <label htmlFor="" className="text-gray-900 font-medium text-lg">
+            <label
+              htmlFor=""
+              className="text-gray-900 dark:text-colorTwo font-medium text-lg"
+            >
               Jumlah
             </label>
             <input
               type="text"
-              className={`${emptyJumlahStyle} w-full h-10 font-pt_Sans focus:outline-none  focus:shadow-sm2 focus:bg-colorTwo focus:shadow-gray-300 bg-colorOne ease-in border-gray-300 focus:border-none  transition-all  font-medium border-[1px] text-gray-900 rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600 `}
+              className={`${emptyJumlahStyle} w-full h-10 font-pt_Sans focus:outline-none   focus:bg-colorTwo  hover:border-[1px] hover:border-purple-600 dark:focus:shadow-black/50 focus:scale-[1.01] bg-colorTwo dark:focus:bg-colorTwo dark:bg-colorDarkTwo dark:text-colorTwo/80 focus:dark:text-colorDarkOne border-gray-300 focus:border-purple-600  transition-transform ease-in  font-medium border-[1px]  rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600  `}
               placeholder="Jumlah"
               value={jumlah}
               onChange={(e) => {
@@ -143,7 +155,7 @@ const FormAddStok = ({
 
         <div className="px-6 py-4  space-x-2 text-base flex justify-end ">
           <button
-            className={`bg-colorOne text-purple-600 w-16 shadow-cus2 hover:shadow-cus2 hover:shadow-gray-500 shadow-gray-400  transition-all ease-in  hover:text-white  hover:bg-purple-700 rounded  group px-3 py-1 font-semibold text-md`}
+            className={`bg-colorTwo dark:border-[1px]  dark:bg-colorDarkTwo dark:shadow-black  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black hover:dark:shadow-purple-600 dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  dark:border-purple-600 hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded group px-4 py-1`}
             type="submit"
           >
             Add

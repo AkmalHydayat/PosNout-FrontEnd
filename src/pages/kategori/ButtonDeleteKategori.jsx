@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
 import { useState } from "react";
-import Modal from "../../components/ui/Modal";
 import DeleteConfirmKategori from "./DeleteConfirmKategori";
 import { HiOutlineTrash } from "react-icons/hi";
+import ModalDelete from "../../components/ui/ModalDelete";
 const ButtonDeleteKategori = ({
   setKategoris,
   id,
@@ -17,7 +17,7 @@ const ButtonDeleteKategori = ({
 
   return (
     <div>
-      <Modal
+      <ModalDelete
         isVisible={showModal}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
@@ -41,7 +41,7 @@ const ButtonDeleteKategori = ({
             AlertMessage={AlertMessage}
           />
         }
-      ></Modal>
+      ></ModalDelete>
     </div>
   );
 };

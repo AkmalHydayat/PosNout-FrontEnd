@@ -80,8 +80,8 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
         {isSearching ? (
           <div>
             <table className="w-full my-5">
-              <thead className="border-[1px]  border-gray-300 ">
-                <tr className="text-center font-bold text-lg">
+              <thead className="border-[1px]  border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
+                <tr className="text-center font-semibold text-lg ">
                   <td className="w-1/12 py-2 border-s-[1px] border-gray-300">
                     No
                   </td>
@@ -106,8 +106,10 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
                 ) : (
                   currentItems.map((item, index) => (
                     <tr
-                      className={`text-center text-base${
-                        index % 2 ? "" : "bg-gray-100 dark:bg-colorDarkOne/50"
+                      className={`text-center text-base ${
+                        index % 2
+                          ? `bg-colorTwo dark:bg-colorDarkTwo text-colorDarkOne dark:text-colorTwo transition-all ease-in`
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 text-colorDarkOne dark:text-colorTwo transition-all ease-in`
                       }`}
                       key={item.id}
                     >
@@ -165,8 +167,8 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
         {!isSearching ? (
           <div>
             <table className="w-full my-5">
-              <thead className="border-[1px]  border-gray-300">
-                <tr className="text-center font-bold text-lg text-gray-900 dark:text-colorTwo">
+              <thead className="border-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
+                <tr className="text-center font-semibold text-lg  ">
                   <td className="w-1/12 py-2 border-s-[1px] border-gray-300">
                     No
                   </td>
@@ -178,7 +180,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
                   </td>
                 </tr>
               </thead>
-              <tbody className="border-b-[1px] border-gray-300">
+              <tbody className="border-b-[1px] border-gray-300 bg-colorTwo text-colorDarkOne dark:text-colorTwo dark:bg-colorDarkTwo transition-colors ease-in">
                 {currentItems.length === 0 ? (
                   <tr>
                     <td
@@ -192,7 +194,9 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
                   currentItems.map((item, index) => (
                     <tr
                       className={`text-center text-base ${
-                        index % 2 ? "" : "bg-gray-100 dark:bg-colorDarkOne/50"
+                        index % 2
+                          ? `bg-colorTwo dark:bg-colorDarkTwo text-colorDarkOne dark:text-colorTwo transition-all ease-in`
+                          : `bg-gray-100 dark:bg-colorDarkOne/50 text-colorDarkOne dark:text-colorTwo transition-all ease-in`
                       }`}
                       key={item.id}
                     >
