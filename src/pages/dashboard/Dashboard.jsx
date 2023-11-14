@@ -23,7 +23,7 @@ import {
 import DateNow from "../../components/Date";
 import axios from "axios";
 
-const Dashboard = (delay, active) => {
+const Dashboard = () => {
   const [transaksiLog, setTransaksiLog] = useState([]);
   const [produks, setProduks] = useState([]);
   const [orderDetail, setOrderDetail] = useState([]);

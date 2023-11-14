@@ -24,6 +24,7 @@ export default {
       },
       fontFamily: {
         titilium: ["Titillium Web", "sans-serif"],
+        play: ["Play", "sans-serif"],
         acme: ["Acme", "sans-serif"],
         mouse: ["Mouse Memoirs", "sans-serif"],
         Roboto: ["Roboto", "sans-serif"],

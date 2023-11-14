@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 /* eslint-disable react/prop-types */
 const NavTop = () => {
   const { day, hari, month, year } = DateNow();
-
+ 
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") === "dark" ? "dark" : "light"
   );

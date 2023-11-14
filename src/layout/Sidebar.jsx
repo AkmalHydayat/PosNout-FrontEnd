@@ -24,7 +24,6 @@ const Sidebar = ({
   textCenter,
   fontSize6xl,
   mSDrop,
-  setShowModal,
   pb,
   rounded,
   me4,
@@ -132,8 +131,7 @@ const Sidebar = ({
             className={`-translate-y-0.5 transition-all ease-in ${pb} border-b-[1px] border-gray-300 dark:border-colorDarkOne`}
           >
             <div
-              onClick={() => setShowModal(true)}
-              className={`mx-auto  cursor-pointer mb-2 scale-105 text-gray-900 dark:text-colorTwo transition-all ease-in rounded-full flex  justify-center items-center bg-gray-200 dark:bg-colorDarkOne/40  ${widthUserImg}`}
+              className={`mx-auto mb-2 scale-105 text-gray-900 dark:text-colorTwo transition-all ease-in rounded-full flex  justify-center items-center bg-gray-200 dark:bg-colorDarkOne/40  ${widthUserImg}`}
             >
               <PiUserThin className={`my-auto ${fontSize6xl}`} />
             </div>
