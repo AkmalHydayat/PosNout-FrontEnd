@@ -2,28 +2,7 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BodyModalEditProduk = ({
-  children,
-  isVisible,
-  onClose,
-  setIsNamaProdukEmpty,
-  setIsSatuanProdukEmpty,
-  setIsKategoriProdukEmpty,
-  setIsHargaBeliProdukEmpty,
-  setIsHargaJualProdukEmpty,
-  setErrorInput,
-  setNewSatuanProduk,
-  setNewKategoriProduk,
-  setNewNamaProduk,
-  setNewHargaBeliProduk,
-  setNewHargaJualProduk,
-  editNama,
-  editSatuan,
-  editKategori,
-  editHargaBeli,
-  editHargaJual,
-}) => {
-
+const BodyModalAddSatuan = ({ children, isVisible, onClose, setItem }) => {
   return (
     <div
       className={`fixed inset-0 ${
@@ -47,17 +26,7 @@ const BodyModalEditProduk = ({
           } absolute z-20 -end-3 -top-3 bg-purple-600 text-colorTwo px-[7px] hover:bg-purple-700 hover:text-colorTwo rounded-lg  shadow-cus2 hover:shadow-sm2 hover:shadow-black/40 shadow-black/20  `}
           onClick={() => {
             onClose();
-            setIsNamaProdukEmpty(false);
-            setIsSatuanProdukEmpty(false);
-            setIsKategoriProdukEmpty(false);
-            setIsHargaBeliProdukEmpty(false);
-            setIsHargaJualProdukEmpty(false);
-            setNewSatuanProduk(editSatuan);
-            setNewKategoriProduk(editKategori);
-            setNewNamaProduk(editNama);
-            setNewHargaBeliProduk(editHargaBeli);
-            setNewHargaJualProduk(editHargaJual);
-            setErrorInput("");
+            setItem("");
           }}
         >
           <FontAwesomeIcon icon={faXmark} />
@@ -69,4 +38,4 @@ const BodyModalEditProduk = ({
   );
 };
 
-export default BodyModalEditProduk;
+export default BodyModalAddSatuan;

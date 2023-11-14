@@ -112,7 +112,7 @@ const FormEditKategori = ({
           <input
             type="text"
             className="w-full h-10 font-pt_Sans focus:outline-none   focus:bg-colorTwo  hover:border-[1px] hover:border-purple-600 dark:focus:shadow-black/50 focus:scale-[1.01] bg-colorTwo dark:focus:bg-colorTwo dark:bg-colorDarkTwo dark:text-colorTwo/80 focus:dark:text-colorDarkOne border-gray-300 focus:border-purple-600  transition-transform ease-in  font-medium border-[1px] rounded px-2 text-base placeholder:text-sm placeholder:font-normal placeholder:text-gray-600"
-            value={namaNewKategori ? namaNewKategori : ""}
+            value={namaNewKategori ? namaNewKategori : namaKategori}
             placeholder={namaKategori}
             onChange={(e) => setNamaNewKategori(e.target.value.toLowerCase())}
             autoFocus

@@ -177,8 +177,8 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                             editNama={item.nama_produk}
                             editSatuan={item.satuan}
                             editKategori={item.kategori}
-                            editHargaBeli={item.hargaBeli}
-                            editHargaJual={item.hargaJual}
+                            editHargaBeli={item.harga_beli}
+                            editHargaJual={item.harga_jual}
                             isSearching={isSearching}
                             searchResults={searchResults}
                             setProduks={setProduks}
@@ -310,8 +310,8 @@ const TableProduk = ({ produks, setProduks, AlertMessage }) => {
                             editNama={item.nama_produk}
                             editSatuan={item.satuan}
                             editKategori={item.kategori}
-                            editHargaBeli={item.hargaBeli}
-                            editHargaJual={item.hargaJual}
+                            editHargaBeli={item.harga_beli}
+                            editHargaJual={item.harga_jual}
                             isSearching={isSearching}
                             setSearchResults={setSearchResults}
                             searchResults={searchResults}

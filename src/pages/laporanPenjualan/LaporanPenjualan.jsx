@@ -172,7 +172,7 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
                     <label>s/d</label>
 
                     <input
-                      className={` border-[1px] accent-white h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 dark:bg-colorDarkTwo transition-all ease-in  text-gray-900 dark:text-colorTwo  border-gray-300 rounded ${widthLogFilter}  px-2 `}
+                      className={` border-[1px] h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 dark:bg-colorDarkTwo transition-all ease-in  text-gray-900 dark:text-colorTwo  border-gray-300 rounded ${widthLogFilter}  px-2 `}
                       type="date"
                       value={rangeDateTo}
                       onChange={(e) => {

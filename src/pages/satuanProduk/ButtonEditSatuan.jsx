@@ -27,6 +27,7 @@ const ButtonEditSatuan = ({
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
         setNamaNewSatuan={setNamaNewSatuan}
+        namaSatuan={namaSatuan}
         className={`bg-sky-700 font-pt_Sans text-colorTwo p-1 transition-all ease-in  hover:scale-95  hover:bg-sky-800  rounded  group font-semibold text-md`}
         buttonLabel={
           <div className="flex items-center ">

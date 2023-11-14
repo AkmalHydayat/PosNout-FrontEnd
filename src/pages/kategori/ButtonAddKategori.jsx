@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import FormAddKategori from "./FormAddKategori";
-import Modal from "../../components/ui/Modal";
 import { useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
+import ModalAddKategori from "./ModalAddKategori";
 const ButtonAddKategori = ({ kategoris, setKategoris, AlertMessage }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorInput, setErrorInput] = useState("");
   const [namaNewKategori, setNamaNewKategori] = useState("");
   return (
     <div>
-      <Modal
+      <ModalAddKategori
         isVisible={showModal}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}

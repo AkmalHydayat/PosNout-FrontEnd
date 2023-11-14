@@ -2,35 +2,32 @@
 /* eslint-disable no-unused-vars */
 
 import ButtonModal from "../../components/ui/ButtonModal";
-import BodyModalEditKategori from "./BodyModalEditKategori";
+import BodyModalAddKategori from "./BodyModalAddKategori";
 
-const ModalEditKategori = ({
+const ModalAddKategori = ({
   className,
   buttonLabel,
   modalContent,
   isVisible,
   onClose,
   onClick,
-  setErrorInput,
-  setNamaNewKategori,namaKategori
+  setErrorInput,setItem
 }) => {
   return (
     <div>
-      <ButtonModal onClick={onClick} className={className}>
+      <ButtonModal onClick={onClick} className={className} >
         {buttonLabel}
       </ButtonModal>
-      <BodyModalEditKategori
+      <BodyModalAddKategori
         isVisible={isVisible}
         onClose={onClose}
         setErrorInput={setErrorInput}
-        setNamaNewKategori={setNamaNewKategori}
-        namaKategori={namaKategori}
+        setItem={setItem}
       >
-        {" "}
         {modalContent}
-      </BodyModalEditKategori>
+      </BodyModalAddKategori>
     </div>
   );
 };
 
-export default ModalEditKategori;
+export default ModalAddKategori;

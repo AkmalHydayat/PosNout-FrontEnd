@@ -8,6 +8,7 @@ const BodyModalEditSatuan = ({
   onClose,
   setNamaNewSatuan,
   setErrorInput,
+  namaSatuan,
 }) => {
   return (
     <div
@@ -32,7 +33,7 @@ const BodyModalEditSatuan = ({
           } absolute z-20 -end-3 -top-3 bg-purple-600 text-colorTwo px-[7px] hover:bg-purple-700 hover:text-colorTwo rounded-lg  shadow-cus2 hover:shadow-sm2 hover:shadow-black/40 shadow-black/20  `}
           onClick={() => {
             onClose();
-            setNamaNewSatuan("");
+            setNamaNewSatuan(namaSatuan);
             setErrorInput("");
           }}
         >

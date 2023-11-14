@@ -17,6 +17,16 @@ const ModalEditProduk = ({
   setIsKategoriProdukEmpty,
   setIsHargaBeliProdukEmpty,
   setIsHargaJualProdukEmpty,
+  setNewSatuanProduk,
+  setNewKategoriProduk,
+  setNewNamaProduk,
+  setNewHargaBeliProduk,
+  setNewHargaJualProduk,
+  editNama,
+  editSatuan,
+  editKategori,
+  editHargaBeli,
+  editHargaJual,
 }) => {
   return (
     <div>
@@ -32,6 +42,16 @@ const ModalEditProduk = ({
         setIsKategoriProdukEmpty={setIsKategoriProdukEmpty}
         setIsHargaBeliProdukEmpty={setIsHargaBeliProdukEmpty}
         setIsHargaJualProdukEmpty={setIsHargaJualProdukEmpty}
+        setNewSatuanProduk={setNewSatuanProduk}
+        setNewKategoriProduk={setNewKategoriProduk}
+        setNewNamaProduk={setNewNamaProduk}
+        setNewHargaBeliProduk={setNewHargaBeliProduk}
+        setNewHargaJualProduk={setNewHargaJualProduk}
+        editNama={editNama}
+        editSatuan={editSatuan}
+        editKategori={editKategori}
+        editHargaBeli={editHargaBeli}
+        editHargaJual={editHargaJual}
       >
         {modalContent}
       </BodyModalEditProduk>

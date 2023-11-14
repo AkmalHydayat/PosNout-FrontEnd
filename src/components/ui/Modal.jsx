@@ -12,8 +12,6 @@ const Modal = ({
   onClose,
   onClick,
   setErrorInput,
-  setItem,
-  setNamaNewKategori,
 }) => {
   return (
     <div>
@@ -24,7 +22,6 @@ const Modal = ({
         isVisible={isVisible}
         onClose={onClose}
         setErrorInput={setErrorInput}
-        
       >
         {modalContent}
       </BodyModal>

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
 import FormAddSatuan from "./FormAddSatuan";
-import Modal from "../../components/ui/Modal";
 import { useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
+import ModalAddSatuanProduk from "./ModalAddSatuanProduk";
 
 const ButtonAddSatuan = ({ satuans, setSatuans, AlertMessage }) => {
   const [showModal, setShowModal] = useState(false);
@@ -11,7 +11,7 @@ const ButtonAddSatuan = ({ satuans, setSatuans, AlertMessage }) => {
   const [namaNewSatuan, setNamaNewSatuan] = useState("");
   return (
     <div>
-      <Modal
+      <ModalAddSatuanProduk
         isVisible={showModal}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
@@ -36,7 +36,7 @@ const ButtonAddSatuan = ({ satuans, setSatuans, AlertMessage }) => {
             setNamaNewSatuan={setNamaNewSatuan}
           />
         }
-      ></Modal>
+      ></ModalAddSatuanProduk>
     </div>
   );
 };

@@ -24,6 +24,7 @@ const ButtonEditKategori = ({
         isVisible={showModal}
         setErrorInput={setErrorInput}
         setNamaNewKategori={setNamaNewKategori}
+        namaKategori={namaKategori}
         onClick={() => setShowModal(true)}
         onClose={() => setShowModal(false)}
         className={`bg-sky-700 font-pt_Sans text-colorTwo p-1 transition-all ease-in  hover:scale-95  hover:bg-sky-800  rounded  group font-semibold text-md`}

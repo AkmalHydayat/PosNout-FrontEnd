@@ -12,7 +12,8 @@ const ModalEditSatuan = ({
   onClose,
   onClick,
   setErrorInput,
-  setNamaNewSatuan
+  setNamaNewSatuan,
+  namaSatuan,
 }) => {
   return (
     <div>
@@ -24,6 +25,7 @@ const ModalEditSatuan = ({
         onClose={onClose}
         setErrorInput={setErrorInput}
         setNamaNewSatuan={setNamaNewSatuan}
+        namaSatuan={namaSatuan}
       >
         {modalContent}
       </BodyModalEditSatuan>

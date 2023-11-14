@@ -20,8 +20,8 @@ const TableLaporan = ({
   const currentItems = transaksiLog.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div>
-      <div className="bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo p-6 dark:text-colorTwo  space-y-3 rounded-b">
+    <div className="pb-6 rounded shadow-md  border-[1px] dark:text-colorTwo border-gray-200 shadow-gray-300 bg-colorTwo dark:border-colorDarkOne dark:shadow-black  dark:bg-colorDarkTwo  transition-all ease-in">
+      <div className=" p-6 space-y-3 rounded-b">
         <div className="flex justify-between h-full">
           <div className="space-x-1 flex ">
             <label htmlFor="" className="my-auto ">
