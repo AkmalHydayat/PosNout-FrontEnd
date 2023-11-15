@@ -42,10 +42,10 @@ export default {
       keyframes: {
         zoomInv: {
           "0%,100%": {
-            transform: "scale(1.2) rotate(6deg)",
+            transform: "scale(1.3) rotate(6deg)",
             color: "black",
           },
-          "50%": { transform: "scale(1.4) rotate(6deg)", color: "white" },
+          "50%": { transform: "scale(1.6) rotate(6deg)", color: "white" },
           "33%,66%": {  color: "#c026d3" },
         },
         blink: {
