@@ -40,6 +40,14 @@ export default {
         glasses: "0 4px 30px rgba(0, 0, 0, 0.1)",
       },
       keyframes: {
+        zoomInv: {
+          "0%,100%": {
+            transform: "scale(1.2) rotate(6deg)",
+            color: "black",
+          },
+          "50%": { transform: "scale(1.4) rotate(6deg)", color: "white" },
+          "33%,66%": {  color: "#c026d3" },
+        },
         blink: {
           "0%, 100%": { border: "2px solid #f77f00" },
           "33%": { border: "2px solid #d62828" },
@@ -54,6 +62,24 @@ export default {
             transform: "rotate(360deg)",
           },
         },
+        flip: {
+          "0%": {
+            transform: "rotate(0)",
+          },
+
+          "100%": {
+            transform: "rotateY(180deg)",
+          },
+        },
+        flipBack: {
+          "0%": {
+            transform: "rotateY(180deg)",
+          },
+
+          "100%": {
+            transform: "rotate(0deg)",
+          },
+        },
         slideDown: {
           "0%": {
             transform: "translateY(-100%)",
@@ -66,9 +92,12 @@ export default {
       },
       animation: {
         blink: "blink 8s ease-in-out infinite",
+        zoomInv: "zoomInv 4s ease-in infinite",
         rotates: "rotates 4s linear infinite",
         rotatesIn: "rotates 4s ease-in-out",
         slideDown: "slideDown 0.5s ease-in-out",
+        flip: "flip 0.5s ease-in-out",
+        flipBack: "flipBack 0.5s ease-in-out",
       },
     },
   },
