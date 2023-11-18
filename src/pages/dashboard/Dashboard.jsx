@@ -3,10 +3,8 @@
 import {} from "react-router-dom";
 import LayoutPage from "../../layout/PageLayout";
 import { BsBagCheck } from "react-icons/bs";
-// import { BiLineChart } from "react-icons/bi";
 import {
   PiChartLineUpLight,
-  // PiChartPieSlice,
   PiChartBarLight,
 } from "react-icons/pi";
 import {

@@ -32,7 +32,6 @@ const BodyModalGetProduk = ({
   const [transaksiPerHari, setTransaksiPerHari] = useState(0);
 
   useEffect(() => {
-    // console.log("hellofromone");
     // transaksiHariIni akan dijalankan setelah setTransaksiLog selesai
     const fetchData = async () => {
       try {
@@ -49,7 +48,6 @@ const BodyModalGetProduk = ({
 
   // sales report
   useEffect(() => {
-    // console.log("hello from add");
     const addSalesReport = async () => {
       // jika salesReport tidak kosong jalankan ini
       if (salesReport.length > 0) {
