@@ -38,7 +38,9 @@ const LoginPage = () => {
       </div>
       <div
         className={`relative w-1/4 z-50 rounded flex transition-all ease-in  bg-colorTwo/70 backdrop-blur-md shadow-cus2 shadow-black/40 ${
-          translate ? "animate-flip " : "animate-flipBack opacity-100"
+          translate
+            ? "animate-flip ease-in-out duration-100 delay-200"
+            : "animate-flipBack delay-200"
         } `}
       >
         <div
@@ -94,7 +96,7 @@ const LoginPage = () => {
         <div
           className={`w-full px-6 py-10 transition-all ease-in-out  ${
             translate
-              ? " visible animate-flip delay-300"
+              ? " visible opacity-100 animate-flip delay-300"
               : " invisible opacity-0 absolute animate-flipBack"
           }`}
         >
@@ -124,7 +126,6 @@ const LoginPage = () => {
                 Password
               </label>
             </div>
-
             <div className="pt-5">
               <button className="  px-4 py-2 mx-auto font-semibold bg-gradient-to-r from-teal-600 to-fuchsia-600 hover:bg-gradient-to-r hover:from-teal-700 hover:to-fuchsia-700 transition-all ease-in-out rounded-sm text-colorTwo w-full ">
                 SignUp

@@ -46,7 +46,7 @@ export default {
             color: "black",
           },
           "50%": { transform: "scale(1.6) rotate(6deg)", color: "white" },
-          "33%,66%": {  color: "#c026d3" },
+          "33%,66%": { color: "#c026d3" },
         },
         blink: {
           "0%, 100%": { border: "2px solid #f77f00" },

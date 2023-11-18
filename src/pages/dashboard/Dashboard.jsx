@@ -14,17 +14,10 @@ import {
   LiaMoneyBillWaveSolid,
 } from "react-icons/lia";
 import { useEffect, useState } from "react";
-import {
-  getOrderDetail,
-  getProduks,
-  getSalesReport,
-  getTransaksiLogs,
-} from "../../utils/api";
+import { getOrderDetail, getProduks, getSalesReport } from "../../utils/api";
 import DateNow from "../../components/Date";
-import axios from "axios";
 
 const Dashboard = () => {
-  const [transaksiLog, setTransaksiLog] = useState([]);
   const [produks, setProduks] = useState([]);
   const [orderDetail, setOrderDetail] = useState([]);
   const [penjualanPerHari, setPenjualanPerHari] = useState([]);
@@ -36,14 +29,13 @@ const Dashboard = () => {
   const [kas, setKas] = useState(0);
   const { hari, month, year } = DateNow();
   const tanggalSekarang = hari + "-" + month + "-" + year;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dataTransaksiLog = await getTransaksiLogs();
         const dataProduk = await getProduks();
         const dataOrder = await getOrderDetail();
         const dataSales = await getSalesReport();
-        setTransaksiLog(dataTransaksiLog);
         setProduks(dataProduk);
         setOrderDetail(dataOrder);
         setSalesReport(dataSales);
@@ -54,71 +46,25 @@ const Dashboard = () => {
     };
     fetchData();
   }, []);
-
   const transaksiHariIni = () => {
-    if (transaksiLog.length > 0) {
-      // Pastikan transaksiLog tidak kosong
-      const filteredData = transaksiLog.filter((log) => {
-        const logDate = log.waktuTransaksi;
-        return logDate === tanggalSekarang;
+    if (salesReport.length > 0) {
+      // Pastikan salesReport tidak kosong
+      const filteredData = salesReport.filter((sales) => {
+        const salesDate = sales.tanggal;
+        return salesDate === tanggalSekarang;
       });
       setPenjualanPerHari(
-        filteredData.reduce((accumulator, transaksi) => {
-          return accumulator + transaksi.totalTransaksi;
+        filteredData.reduce((accumulator, sales) => {
+          return accumulator + sales.totalPenjualan;
         }, 0) // Inisialisasi accumulator dengan 0
       );
       setKeuntunganPerHari(
-        filteredData.reduce((accumulator, transaksi) => {
-          return accumulator + transaksi.totalKeuntunganPerTransaksi;
+        filteredData.reduce((accumulator, sales) => {
+          return accumulator + sales.totalKeuntungan;
         }, 0) // Inisialisasi accumulator dengan 0
       );
     }
   };
-
-  const addSalesReport = async () => {
-    if (salesReport.length > 0) {
-      const filteredData = transaksiLog.filter((log) => {
-        const logDate = log.waktuTransaksi;
-        return logDate === tanggalSekarang;
-      });
-      const totalTransaksi = filteredData.length;
-
-      const filter = salesReport.filter((report) => {
-        const reportData = report.tanggal;
-        return reportData === tanggalSekarang;
-      });
-      if (filter.length > 0) {
-        try {
-          await axios.put(
-            `http://localhost:3000/laporanPenjualan/${tanggalSekarang}`,
-            {
-              tanggal: tanggalSekarang,
-              totalTransaksi,
-              totalPenjualan: penjualanPerHari,
-              totalKeuntungan: keuntunganPerHari,
-            }
-          );
-        } catch (error) {
-          console.error("Gagal menyimpan data transaksi ke database:", error);
-        }
-      } else {
-        try {
-          await axios.post("http://localhost:3000/laporanPenjualan", {
-            tanggal: tanggalSekarang,
-            totalTransaksi,
-            totalPenjualan: penjualanPerHari,
-            totalKeuntungan: keuntunganPerHari,
-          });
-        } catch (error) {
-          console.error("Gagal menyimpan data transaksi ke database:", error);
-        }
-      }
-    }
-  };
-
-  useEffect(() => {
-    addSalesReport();
-  }, [penjualanPerHari, keuntunganPerHari]);
 
   const barangTerlaris = () => {
     if (produks.length > 0) {
@@ -168,11 +114,11 @@ const Dashboard = () => {
   };
 
   const kasToko = () => {
-    const totalUangMasuk = transaksiLog.reduce((accumulator, transaksi) => {
-      return accumulator + transaksi.totalTransaksi;
+    const totalUangMasuk = salesReport.reduce((accumulator, sales) => {
+      return accumulator + sales.totalPenjualan;
     }, 0);
-    const totalLaba = transaksiLog.reduce((accumulator, transaksi) => {
-      return accumulator + transaksi.totalKeuntunganPerTransaksi;
+    const totalLaba = salesReport.reduce((accumulator, sales) => {
+      return accumulator + sales.totalKeuntungan;
     }, 0);
     setKas(totalUangMasuk - totalLaba);
   };
@@ -183,7 +129,7 @@ const Dashboard = () => {
     stokMinimum();
     barangTerlaris();
     barangKurangTerlaris();
-  }, [transaksiLog, tanggalSekarang, produks]);
+  }, [tanggalSekarang, salesReport]);
 
   return (
     <LayoutPage>
@@ -199,11 +145,7 @@ const Dashboard = () => {
                 <div className="w-2/3 ">Total Penjualan/ Hari</div>
                 {/* gunakan transaksiLog, lalu filter table sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
                 <div className={`   rounded me-3`}>
-                  <BsBagCheck
-                    className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo transition-all ease-in"
-                    transition-all
-                    ease-in
-                  />
+                  <BsBagCheck className="text-[36px] rounded p-[6px] relative text-gray-900 dark:text-colorTwo transition-all ease-in" />
                 </div>
               </div>
               <div className="text-[40px] text-end me-4 mt-10 font-semibold   text-gray-900 dark:text-colorTwo transition-all ease-in">

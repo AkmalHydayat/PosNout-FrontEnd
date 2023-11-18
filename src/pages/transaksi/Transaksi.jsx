@@ -36,7 +36,6 @@ const Transaksi = () => {
     ? "border-[1px] border-red-500 dark:border-red-500 dark:bg-colorDarkTwo"
     : "border-[1px] border-gray-400 dark:bg-colorDarkOne";
   const tanggalSekarang = `${hari}-${month}-${year}`;
-
   const AlertMessage = (message, width, icon) => {
     AlertShow(message, width, icon);
   };

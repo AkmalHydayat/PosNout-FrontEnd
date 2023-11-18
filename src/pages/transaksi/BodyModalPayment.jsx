@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AlertShow from "../../components/ui/Alert";
-import { getProduks } from "../../utils/api";
+import { getProduks, getSalesReport, getTransaksiLogs } from "../../utils/api";
 
 const BodyModalGetProduk = ({
   children,
@@ -24,6 +25,108 @@ const BodyModalGetProduk = ({
 }) => {
   const [pembayaran, setPembayaran] = useState("");
   const [kembalian, setKembalian] = useState(0);
+  const [transaksiLog, setTransaksiLog] = useState([]);
+  const [salesReport, setSalesReport] = useState([]);
+  const [penjualanPerHari, setPenjualanPerHari] = useState(0);
+  const [keuntunganPerHari, setKeuntunganPerHari] = useState(0);
+  const [transaksiPerHari, setTransaksiPerHari] = useState(0);
+
+  useEffect(() => {
+    // console.log("hellofromone");
+    // transaksiHariIni akan dijalankan setelah setTransaksiLog selesai
+    const fetchData = async () => {
+      try {
+        const dataSales = await getSalesReport();
+        setSalesReport(dataSales);
+      } catch (error) {
+        // Handle error jika diperlukan
+        console.error("Error in component:", error);
+      }
+    };
+    fetchData();
+    transaksiHariIni();
+  }, [transaksiLog]);
+
+  // sales report
+  useEffect(() => {
+    // console.log("hello from add");
+    const addSalesReport = async () => {
+      // jika salesReport tidak kosong jalankan ini
+      if (salesReport.length > 0) {
+        //cari semua salesreport yang dilakukan hari ini
+        const filter = salesReport.filter((report) => {
+          const reportData = report.tanggal;
+          return reportData === tanggalSekarang;
+        });
+        // jika ada tanggalnya sama maka tambahkan data pada database, jika tidak ada buat field baru pada database
+        if (filter.length > 0) {
+          try {
+            await axios.put(
+              `http://localhost:3000/laporanPenjualan/${tanggalSekarang}`,
+              {
+                tanggal: tanggalSekarang,
+                totalTransaksi: transaksiPerHari,
+                totalPenjualan: penjualanPerHari,
+                totalKeuntungan: keuntunganPerHari,
+              }
+            );
+          } catch (error) {
+            console.error("Gagal menyimpan data transaksi ke database:", error);
+          }
+        } else {
+          try {
+            await axios.post("http://localhost:3000/laporanPenjualan", {
+              tanggal: tanggalSekarang,
+              totalTransaksi: transaksiPerHari,
+              totalPenjualan: penjualanPerHari,
+              totalKeuntungan: keuntunganPerHari,
+            });
+          } catch (error) {
+            console.error("Gagal menyimpan data transaksi ke database:", error);
+          }
+        }
+      }
+    };
+    addSalesReport();
+  }, [transaksiPerHari, keuntunganPerHari, penjualanPerHari]);
+
+  const addLaporanTransaksi = async () => {
+    try {
+      await axios.post("http://localhost:3000/laporanTransaksi", {
+        invoice: invoiceNumber,
+        totalTransaksi: totalJumlah,
+        waktuTransaksi: tanggalSekarang,
+        nominalPembayaran: pembayaran,
+        kembalian: kembalian,
+        totalKeuntunganPerTransaksi: totalKeuntunganPerTransaksi,
+      });
+      const updatedTransaksi = await getTransaksiLogs();
+      setTransaksiLog(updatedTransaksi);
+    } catch (error) {
+      console.error("Gagal menyimpan data transaksi ke database:", error);
+    }
+  };
+
+  const transaksiHariIni = () => {
+    if (transaksiLog.length > 0) {
+      // Pastikan transaksiLog tidak kosong
+      const filteredData = transaksiLog.filter((log) => {
+        const logDate = log.waktuTransaksi;
+        return logDate === tanggalSekarang;
+      });
+      setTransaksiPerHari(filteredData.length);
+      setPenjualanPerHari(
+        filteredData.reduce((accumulator, transaksi) => {
+          return accumulator + transaksi.totalTransaksi;
+        }, 0) // Inisialisasi accumulator dengan 0
+      );
+      setKeuntunganPerHari(
+        filteredData.reduce((accumulator, transaksi) => {
+          return accumulator + transaksi.totalKeuntunganPerTransaksi;
+        }, 0) // Inisialisasi accumulator dengan 0
+      );
+    }
+  };
 
   const AlertMessage = (message, width, icon) => {
     AlertShow(message, width, icon);
@@ -58,21 +161,6 @@ const BodyModalGetProduk = ({
       }
     } catch (error) {
       console.error("Terjadi kesalahan: " + error.message);
-    }
-  };
-
-  const addLaporanTransaksi = async () => {
-    try {
-      await axios.post("http://localhost:3000/laporanTransaksi", {
-        invoice: invoiceNumber,
-        totalTransaksi: totalJumlah,
-        waktuTransaksi: tanggalSekarang,
-        nominalPembayaran: pembayaran,
-        kembalian: kembalian,
-        totalKeuntunganPerTransaksi: totalKeuntunganPerTransaksi,
-      });
-    } catch (error) {
-      console.error("Gagal menyimpan data transaksi ke database:", error);
     }
   };
 
@@ -200,6 +288,7 @@ const BodyModalGetProduk = ({
                     onClose();
                     updateStok();
                     setTimeout(() => {
+                      // addSalesReport();
                       const newInvoice = generateInvoiceNumber();
                       setInvoiceNumber(newInvoice);
                       setTotalJumlah(0);
