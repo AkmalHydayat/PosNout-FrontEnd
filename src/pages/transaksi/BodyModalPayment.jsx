@@ -32,7 +32,7 @@ const BodyModalGetProduk = ({
   const [transaksiPerHari, setTransaksiPerHari] = useState(0);
 
   useEffect(() => {
-    // transaksiHariIni akan dijalankan setelah setTransaksiLog selesai
+    transaksiHariIni();
     const fetchData = async () => {
       try {
         const dataSales = await getSalesReport();
@@ -43,6 +43,11 @@ const BodyModalGetProduk = ({
       }
     };
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    // transaksiHariIni akan dijalankan setelah setTransaksiLog selesai
+
     transaksiHariIni();
   }, [transaksiLog]);
 

@@ -3,10 +3,7 @@
 import {} from "react-router-dom";
 import LayoutPage from "../../layout/PageLayout";
 import { BsBagCheck } from "react-icons/bs";
-import {
-  PiChartLineUpLight,
-  PiChartBarLight,
-} from "react-icons/pi";
+import { PiChartLineUpLight, PiChartBarLight } from "react-icons/pi";
 import {
   LiaFileInvoiceDollarSolid,
   LiaMoneyBillWaveSolid,
@@ -14,8 +11,40 @@ import {
 import { useEffect, useState } from "react";
 import { getOrderDetail, getProduks, getSalesReport } from "../../utils/api";
 import DateNow from "../../components/Date";
+import LineChart from "../../components/LineChart";
+import BarChart from "../../components/BarChart";
 
 const Dashboard = () => {
+  const datas = [
+    {
+      id: 1,
+      tanggal: "11/11/2023",
+      totalTransaksi: 2,
+      totalPenjualan: 15000,
+      totalKeuntungan: 0,
+    },
+    {
+      id: 13,
+      tanggal: "12/11/2023",
+      totalTransaksi: 5,
+      totalPenjualan: 102000,
+      totalKeuntungan: 1000,
+    },
+    {
+      id: 14,
+      tanggal: "13/11/2023",
+      totalTransaksi: 1,
+      totalPenjualan: 0,
+      totalKeuntungan: 600,
+    },
+    {
+      id: 15,
+      tanggal: "14/11/2023",
+      totalTransaksi: 1,
+      totalPenjualan: 207000,
+      totalKeuntungan: 8000,
+    },
+  ];
   const [produks, setProduks] = useState([]);
   const [orderDetail, setOrderDetail] = useState([]);
   const [penjualanPerHari, setPenjualanPerHari] = useState([]);
@@ -24,6 +53,25 @@ const Dashboard = () => {
   const [barang_Terlaris, setBarang_Terlaris] = useState([]);
   const [barang_KurangLaris, setBarang_KurangLaris] = useState([]);
   const [salesReport, setSalesReport] = useState([]);
+
+  const [chartDatasSale, setChartDatasSale] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: "Total Penjualan/Hari",
+        data: [],
+      },
+    ],
+  });
+  // const [chartDatasMargin, setChartDatasMargin] = useState({
+  //   labels: [],
+  //   datasets: [
+  //     {
+  //       label: "Total Penjualan/Hari",
+  //       data: [],
+  //     },
+  //   ],
+  // });
   const [kas, setKas] = useState(0);
   const { hari, month, year } = DateNow();
   const tanggalSekarang = hari + "-" + month + "-" + year;
@@ -37,6 +85,53 @@ const Dashboard = () => {
         setProduks(dataProduk);
         setOrderDetail(dataOrder);
         setSalesReport(dataSales);
+
+        // Update chartDatas after getting salesReport
+        setChartDatasSale({
+          labels: dataSales.map((data) => {
+            // Memecah string tanggal menjadi array dengan "/" sebagai pemisah
+            const parts = data.tanggal.split("-");
+
+            // Mengambil bagian bulan dan tanggal saja (tanpa tahun)
+            const formattedDate = `${parts[0]}/${parts[1]}`;
+
+            return formattedDate;
+          }),
+          datasets: [
+            {
+              label: "Total Penjualan/Hari",
+              data: dataSales.map((data) => data.totalPenjualan),
+              backgroundColor: "rgba(147, 51, 234, 1)",
+              borderColor: "rgba(147, 51, 234, 1)",
+            },
+            {
+              label: "Keuntungan/Hari",
+              data: dataSales.map((data) => data.totalKeuntungan),
+              backgroundColor: "#e11d48",
+              borderColor: "#e11d48",
+            },
+          ],
+        });
+
+        // setChartDatasMargin({
+        //   labels: dataSales.map((data) => {
+        //     // Memecah string tanggal menjadi array dengan "/" sebagai pemisah
+        //     const parts = data.tanggal.split("-");
+
+        //     // Mengambil bagian bulan dan tanggal saja (tanpa tahun)
+        //     const formattedDate = `${parts[0]}/${parts[1]}`;
+
+        //     return formattedDate;
+        //   }),
+        //   datasets: [
+        //     {
+        //       label: "Total keuntungan/Hari",
+        //       data: dataSales.map((data) => data.totalKeuntungan),
+        //       backgroundColor: "#ea580c",
+        //       borderColor: "rgba(147, 51, 234, 1)",
+        //     },
+        //   ],
+        // });
       } catch (error) {
         // Handle error jika diperlukan
         console.error("Error in component:", error);
@@ -44,6 +139,7 @@ const Dashboard = () => {
     };
     fetchData();
   }, []);
+
   const transaksiHariIni = () => {
     if (salesReport.length > 0) {
       // Pastikan salesReport tidak kosong
@@ -137,7 +233,7 @@ const Dashboard = () => {
         >
           <div className="h-44 flex space-x-6 ">
             <div
-              className={` shadow-md shadow-black/20  transition-all ease-in dark:shadow-black bg-gradient-to-br  from-teal-600 to-fuchsia-600 p-3 w-full rounded-md`}
+              className={` shadow-md shadow-black/20  transition-all ease-in dark:shadow-black bg-gradient-to-br  from-fuchsia-600 dark:to-cyan-600/60 to-cyan-600 p-3 w-full rounded-md`}
             >
               <div className="flex justify-between">
                 <div className="w-2/3 ">Total Penjualan/ Hari</div>
@@ -156,7 +252,7 @@ const Dashboard = () => {
             </div>
 
             <div
-              className={` shadow-md shadow-black/20 transition-all ease-in dark:shadow-black bg-gradient-to-br from-fuchsia-600 to-amber-600  p-3 w-full rounded-md `}
+              className={` shadow-md shadow-black/20 transition-all ease-in dark:shadow-black bg-gradient-to-br from-rose-600 dark:to-orange-600/60 to-orange-600  p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan transaksiLog, lalu filter table berdasarkan transaksilog.keuntungan  sesuai dengan hari atau tanggal yang berlangsung (karena /hari), lalu ambil properti total pada semua data filteran tersebut dan jumlahkan semuanya */}
@@ -175,7 +271,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div
-              className={` shadow-md shadow-black/20 dark:shadow-black transition-all ease-in bg-gradient-to-br from-teal-600 to-lime-500 p-3 w-full rounded-md `}
+              className={` shadow-md shadow-black/20 dark:shadow-black transition-all ease-in bg-gradient-to-br  from-green-600 to-teal-600 dark:to-teal-600/60  p-3 w-full rounded-md `}
             >
               <div className="flex justify-between">
                 {/* gunakan table produk, lalu ambil harga beli kalikan dengan stok lalu jumlahkan semua barang yang ada*/}
@@ -188,6 +284,146 @@ const Dashboard = () => {
                 {" "}
                 <span className="me-3">Rp.</span>
                 {kas.toLocaleString("id-ID")}
+              </div>
+            </div>
+          </div>
+
+          <div className=" flex space-x-6 w-full">
+            <div
+              className={`shadow-md shadow-black/20 w-7/12  transition-all ease-in dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 rounded-md border-[1px] border-gray-300`}
+            >
+              <div className="flex justify-between ">
+                <span>Grafik Penjualan/Hari</span>
+                <span
+                  className={`bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
+                >
+                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
+                </span>
+              </div>
+              <div className="h-72 w-12/12 px-4 flex justify-center">
+                <LineChart chartDatas={chartDatasSale} />
+              </div>
+            </div>
+            <div
+              className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-5/12 rounded-md `}
+            >
+              <div className="flex justify-between ">
+                {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
+                <div className="w-2/3 mb-2 px-3 ">Stok Minimum</div>
+              </div>
+              <div
+                className={`${
+                  minimumStok.length > 12 ? "h-72 overflow-y-scroll" : ""
+                } px-3 `}
+              >
+                <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
+                  <thead className="">
+                    <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
+                      <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
+                        Nama Barang
+                      </td>
+                      <td className="py-1">Stok</td>
+                    </tr>
+                  </thead>
+
+                  <tbody className="text-center text-base">
+                    {minimumStok.length == 0 ? (
+                      <tr>
+                        <td className=" text-center py-1 " colSpan={2}>
+                          Tidak ada Data.
+                        </td>
+                      </tr>
+                    ) : (
+                      minimumStok
+                        .sort((a, b) => b.stok - a.stok)
+                        .map((item, index) => (
+                          <tr
+                            key={index}
+                            className={`${
+                              index % 2
+                                ? ""
+                                : "bg-gray-200 dark:bg-colorDarkOne/50 transition-colors ease-in text-colorDarkOne dark:text-colorTwo"
+                            }`}
+                          >
+                            <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
+                              {item.nama_produk}
+                            </td>
+                            <td className="">{item.stok}</td>
+                          </tr>
+                        ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div className=" flex space-x-6 w-full">
+            <div
+              className={`shadow-md shadow-black/20 w-7/12  transition-all ease-in dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 rounded-md border-[1px] border-gray-300`}
+            >
+              <div className="flex justify-between ">
+                <span>Grafik Penjualan/Hari</span>
+                <span
+                  className={`bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
+                >
+                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
+                </span>
+              </div>
+              <div className="h-72 w-12/12 px-4 flex justify-center">
+                <BarChart chartDatas={chartDatasSale} />
+              </div>
+            </div>
+            <div
+              className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-5/12 rounded-md `}
+            >
+              <div className="flex justify-between">
+                {/* gunakan orderdetail, lalu cari nama produk atau barcode yang paling banyak yang ada pada table orderdetail, gunakan filter/hari /minggu /bulan */}
+
+                <div className="w-2/3 mb-2 px-3">Barang Paling Laku</div>
+              </div>
+              <div
+                className={`${
+                  minimumStok.length > 12 ? "h-72 overflow-y-scroll" : ""
+                } px-3 `}
+              >
+                <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
+                  <thead className="">
+                    <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
+                      <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
+                        Nama Barang
+                      </td>
+                      <td className="py-1">Stok</td>
+                    </tr>
+                  </thead>
+
+                  <tbody className="text-center text-base">
+                    {minimumStok.length == 0 ? (
+                      <tr>
+                        <td className=" text-center py-1 " colSpan={2}>
+                          Tidak ada Data.
+                        </td>
+                      </tr>
+                    ) : (
+                      minimumStok
+                        .sort((a, b) => b.stok - a.stok)
+                        .map((item, index) => (
+                          <tr
+                            key={index}
+                            className={`${
+                              index % 2
+                                ? ""
+                                : "bg-gray-200 dark:bg-colorDarkOne/50 transition-colors ease-in text-colorDarkOne dark:text-colorTwo"
+                            }`}
+                          >
+                            <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
+                              {item.nama_produk}
+                            </td>
+                            <td className="">{item.stok}</td>
+                          </tr>
+                        ))
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -341,35 +577,6 @@ const Dashboard = () => {
                     )}
                   </tbody>
                 </table>
-              </div>
-            </div>
-          </div>
-
-          <div className="h-44 flex space-x-6">
-            <div
-              className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-300`}
-            >
-              <div className="flex justify-between ">
-                <span>Grafik Penjualan/Hari</span>
-                <span
-                  className={`bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
-                >
-                  {" "}
-                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
-                </span>
-              </div>
-            </div>
-            <div
-              className={` shadow-md shadow-black/20 transition-all ease-in dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full rounded-md border-[1px] border-gray-300`}
-            >
-              <div className="flex justify-between">
-                <span>Grafik Laba/Hari</span>
-                <span
-                  className={`bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40 transition-all ease-in`}
-                >
-                  {" "}
-                  <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600 " />
-                </span>
               </div>
             </div>
           </div>

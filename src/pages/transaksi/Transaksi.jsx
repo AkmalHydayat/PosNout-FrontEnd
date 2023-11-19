@@ -284,7 +284,7 @@ const Transaksi = () => {
                       produkBarcodeSelect
                         ? "font-acme"
                         : "font-titilium font-bold"
-                    } cursor-default px-2 dark:border-colorTwo text-colorDarkOne dark:text-colorTwo transition-colors ease-in focus:outline-none ${emptyBarcodeStyle}  w-3/4 rounded-s `}
+                    } cursor-default px-2 bg-gray-300 dark:border-colorTwo text-colorDarkOne dark:text-colorTwo transition-colors ease-in focus:outline-none ${emptyBarcodeStyle}  w-3/4 rounded-s `}
                   />
                   <ButtonGetProduk
                     getSelected={getSelected}

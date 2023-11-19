@@ -11,7 +11,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(8);
+  const [perPage, setPerPage] = useState(7);
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
 
@@ -63,7 +63,7 @@ const TableKategori = ({ kategoris, setKategoris, AlertMessage }) => {
                   icon={faCaretDown}
                   className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 hover:bg-purple-700 text-white cursor-pointer"
                   onClick={() =>
-                    setPerPage(perPage > 5 ? perPage - 1 : perPage)
+                    setPerPage(perPage > 7 ? perPage - 1 : perPage)
                   }
                 />
               </div>

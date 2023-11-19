@@ -13,10 +13,8 @@ const TableLaporan = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(15); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
-  const indexOfLastItem = currentPage * perPage;
-  const indexOfFirstItem = indexOfLastItem - perPage;
-
-  // Fungsi untuk mencari stok berdasarkan nama
+  const indexOfLastItem = currentPage * perPage; // 15
+  const indexOfFirstItem = indexOfLastItem - perPage; //0
   const currentItems = transaksiLog.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
@@ -46,7 +44,7 @@ const TableLaporan = ({
                   icon={faCaretDown}
                   className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 hover:bg-purple-700 text-white cursor-pointer"
                   onClick={() =>
-                    setPerPage(perPage > 5 ? perPage - 1 : perPage)
+                    setPerPage(perPage > 10 ? perPage - 1 : perPage)
                   }
                 />
               </div>
@@ -173,7 +171,7 @@ const TableLaporan = ({
                     </td>
                   </tr>
                 ) : (
-                  currentItems.reverse().map((item, index) => (
+                  currentItems.map((item, index) => (
                     <tr
                       className={`text-center ${
                         index % 2

@@ -10,7 +10,7 @@ const TableStok = ({ stoks }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(8); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
+  const [perPage, setPerPage] = useState(7); // Sesuaikan dengan jumlah baris yang ingin ditampilkan per halaman
   const indexOfLastItem = currentPage * perPage;
   const indexOfFirstItem = indexOfLastItem - perPage;
   // Fungsi untuk mencari stok berdasarkan nama
@@ -57,7 +57,7 @@ const TableStok = ({ stoks }) => {
                   icon={faCaretDown}
                   className="h-3 text-xs px-[3px] rounded-br-sm bg-purple-600 hover:bg-purple-700 text-white cursor-pointer"
                   onClick={() =>
-                    setPerPage(perPage > 5 ? perPage - 1 : perPage)
+                    setPerPage(perPage > 7 ? perPage - 1 : perPage)
                   }
                 />
               </div>
@@ -183,7 +183,7 @@ const TableStok = ({ stoks }) => {
                     </td>
                   </tr>
                 ) : (
-                  currentItems.reverse().map((item, index) => (
+                  currentItems.map((item, index) => (
                     <tr
                       className={`text-center ${
                         index % 2
