@@ -3,8 +3,8 @@
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
-const LineChart = ({ chartDatas }) => {
-  return <Line data={chartDatas} />;
+const LineChart = ({ chartDatas, options }) => {
+  return <Line data={chartDatas} options={options} />;
 };
 
 export default LineChart;

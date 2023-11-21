@@ -44,7 +44,6 @@ const BodyModalGetProduk = ({
     };
     fetchData();
   }, []);
-
   useEffect(() => {
     // transaksiHariIni akan dijalankan setelah setTransaksiLog selesai
 
@@ -52,44 +51,48 @@ const BodyModalGetProduk = ({
   }, [transaksiLog]);
 
   // sales report
-  useEffect(() => {
-    const addSalesReport = async () => {
-      // jika salesReport tidak kosong jalankan ini
-      if (salesReport.length > 0) {
-        //cari semua salesreport yang dilakukan hari ini
-        const filter = salesReport.filter((report) => {
-          const reportData = report.tanggal;
-          return reportData === tanggalSekarang;
-        });
-        // jika ada tanggalnya sama maka tambahkan data pada database, jika tidak ada buat field baru pada database
-        if (filter.length > 0) {
-          try {
-            await axios.put(
-              `http://localhost:3000/laporanPenjualan/${tanggalSekarang}`,
-              {
-                tanggal: tanggalSekarang,
-                totalTransaksi: transaksiPerHari,
-                totalPenjualan: penjualanPerHari,
-                totalKeuntungan: keuntunganPerHari,
-              }
-            );
-          } catch (error) {
-            console.error("Gagal menyimpan data transaksi ke database:", error);
-          }
-        } else {
-          try {
-            await axios.post("http://localhost:3000/laporanPenjualan", {
+
+  const addSalesReport = async () => {
+    // jika salesReport tidak kosong jalankan ini
+    if (salesReport.length > 0) {
+      //cari semua salesreport yang dilakukan hari ini
+      const filter = salesReport.filter((report) => {
+        const reportData = report.tanggal;
+        return reportData === tanggalSekarang;
+      });
+      // jika ada tanggalnya sama maka tambahkan data pada database, jika tidak ada buat field baru pada database
+      if (filter.length > 0) {
+        try {
+          await axios.put(
+            `http://localhost:3000/laporanPenjualan/${tanggalSekarang}`,
+            {
               tanggal: tanggalSekarang,
               totalTransaksi: transaksiPerHari,
               totalPenjualan: penjualanPerHari,
               totalKeuntungan: keuntunganPerHari,
-            });
-          } catch (error) {
-            console.error("Gagal menyimpan data transaksi ke database:", error);
-          }
+            }
+          );
+        } catch (error) {
+          console.error("Gagal menyimpan data transaksi ke database:", error);
+        }
+      } else {
+        try {
+          await axios.post("http://localhost:3000/laporanPenjualan", {
+            tanggal: tanggalSekarang,
+            totalTransaksi: transaksiPerHari,
+            totalPenjualan: penjualanPerHari,
+            totalKeuntungan: keuntunganPerHari,
+          });
+        } catch (error) {
+          console.error("Gagal menyimpan data transaksi ke database:", error);
         }
       }
-    };
+    }
+  };
+  // useEffect(() => {
+  //   addSalesReport();
+  // }, []);
+  useEffect(() => {
     addSalesReport();
   }, [transaksiPerHari, keuntunganPerHari, penjualanPerHari]);
 

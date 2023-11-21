@@ -3,8 +3,8 @@
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
-const BarChart = ({ chartDatas }) => {
-  return <Bar data={chartDatas} />;
+const BarChart = ({ chartDatas, options }) => {
+  return <Bar data={chartDatas} options={options} />;
 };
 
 export default BarChart;
