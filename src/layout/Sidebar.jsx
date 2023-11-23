@@ -1,26 +1,14 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
-
 import { NavLink } from "react-router-dom";
-// import { LiaUserSolid } from "react-icons/lia";
-// import { LuUser2 } from "react-icons/lu";
+import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 import { PiUserThin, PiUser } from "react-icons/pi";
 import { HiOutlineShoppingCart, HiOutlineArchiveBox } from "react-icons/hi2";
 import { FiChevronUp, FiChevronDown } from "react-icons/fi";
-import {
-  BsHouse,
-  BsBoxSeam,
-  BsFileEarmarkText,
-  BsFileEarmarkSpreadsheet,
-  BsFileEarmarkBarGraph,
-  BsTags,
-  BsPass,
-  BsInboxes,
-} from "react-icons/bs";
+import { BsHouse, BsBoxSeam, BsTags, BsPass, BsInboxes } from "react-icons/bs";
 const Sidebar = ({
   widthUserImg,
   inlineHiden,
-  // fontSize,
   textCenter,
   fontSize6xl,
   mSDrop,
@@ -60,8 +48,8 @@ const Sidebar = ({
     {
       id: 5,
       list: "Laporan",
-      linkPath: "/Laporan",
-      icon: BsFileEarmarkText,
+      linkPath: "/LaporanPenjualan",
+      icon: LiaFileInvoiceDollarSolid,
     },
     {
       id: 6,
@@ -92,37 +80,29 @@ const Sidebar = ({
     },
   ];
 
-  const laporan = [
-    {
-      id: 1,
-      list: "Penjualan",
-      linkPath: "/LaporanPenjualan",
-      icon: BsFileEarmarkBarGraph,
-    },
-    {
-      id: 2,
-      list: "Stok",
-      linkPath: "/LaporanStok",
-      icon: BsFileEarmarkSpreadsheet,
-    },
-  ];
+  // const laporan = [
+  //   {
+  //     id: 1,
+  //     list: "Penjualan",
+  //     linkPath: "/LaporanPenjualan",
+  //     icon: BsFileEarmarkBarGraph,
+  //   },
+  //   {
+  //     id: 2,
+  //     list: "Stok",
+  //     linkPath: "/LaporanStok",
+  //     icon: BsFileEarmarkSpreadsheet,
+  //   },
+  // ];
 
   const [showProdukDropdown, setShowProdukDropdown] = useState(false);
 
   // Handler untuk mengaktifkan dropdown sesuai item produk yang di-klik
 
-  // State untuk mengendalikan tampilan dropdown "Laporan"
-  const [showLaporanDropdown, setShowLaporanDropdown] = useState(false);
-
   const toggleProdukDropdown = () => {
     setShowProdukDropdown(!showProdukDropdown);
-    setShowLaporanDropdown(false); // Menonaktifkan dropdown Laporan
   };
 
-  const toggleLaporanDropdown = () => {
-    setShowLaporanDropdown(!showLaporanDropdown);
-    setShowProdukDropdown(false); // Menonaktifkan dropdown Product
-  };
   return (
     <div className="my-10">
       <div className={`flex flex-col text-gray-300`}>
@@ -181,8 +161,8 @@ const Sidebar = ({
                             : "invisible absolute   -translate-y-2 opacity-0 "
                         }  hover:text-purple-600 rounded-s-xl ${textCenter} ${mSDrop} ms-1 ${
                           isActive
-                            ? `bg-gray-200 dark:bg-colorDarkOne/60 border-e-4 ${rounded} border-purple-600   text-purple-600`
-                            : " dark:bg-colorDarkTwo"
+                            ? `bg-gray-200 dark:bg-[#121212] border-e-4 ${rounded} border-purple-600 text-purple-600`
+                            : ""
                         }`;
                       }}
                     >
@@ -198,72 +178,17 @@ const Sidebar = ({
                     </NavLink>
                   ))}
                 </div>
-              ) : item.list === "Laporan" ? (
-                <div className={`transition-all ease-in`}>
-                  <div
-                    onClick={toggleLaporanDropdown}
-                    className={`ps-3 py-2 translate-y-0.5  relative group  hover:text-purple-600 rounded-s-xl  cursor-pointer ms-1 ${me4} flex`}
-                  >
-                    <span className="">
-                      <item.icon className={`${w45} me-4 ${delay}`} />
-                    </span>
-                    <span className={`${inlineHiden}  ${delay}  ease-in`}>
-                      {item.list}
-                    </span>
-
-                    <span
-                      className={`ms-[50px] ${inlineHiden} ${delay}  ease-in mt-1`}
-                    >
-                      {showLaporanDropdown ? (
-                        <FiChevronUp />
-                      ) : (
-                        <FiChevronDown />
-                      )}
-                    </span>
-                    <span className={`${hidenBlock} ms-12 -mt-1  `}>
-                      {item.list}
-                    </span>
-                  </div>
-                  {laporan.map((laporanItem) => (
-                    <NavLink
-                      to={laporanItem.linkPath}
-                      key={laporanItem.id}
-                      className={({ isActive }) => {
-                        return `ps-3 py-2 scale-100  text-gray-900 dark:text-colorTwo bg-colorTwo dark:bg-colorDarkTwo group flex ${
-                          showLaporanDropdown
-                            ? `visible relative transition-all ease-in translate-y-0`
-                            : "invisible absolute  -translate-y-2 opacity-0 "
-                        }  hover:text-purple-600 rounded-s-xl ${textCenter} ${mSDrop} ms-1 ${
-                          isActive
-                            ? `bg-gray-200 dark:bg-colorDarkOne/60 border-e-4 ${rounded} border-purple-600   text-purple-600`
-                            : " dark:bg-colorDarkTwo"
-                        }`;
-                      }}
-                    >
-                      <span className="">
-                        <laporanItem.icon className={` ${delay} ${w45} me-3`} />
-                      </span>
-                      <span className={`${inlineHiden} ${delay}`}>
-                        {laporanItem.list}
-                      </span>
-                      <span className={`${hidenBlock} ms-12 -mt-1 `}>
-                        {laporanItem.list}
-                      </span>
-                    </NavLink>
-                  ))}
-                </div>
               ) : (
                 <NavLink
                   onClick={() => {
                     setShowProdukDropdown(false);
-                    setShowLaporanDropdown(false);
                   }}
                   to={item.linkPath}
                   key={item.id}
                   className={({ isActive }) => {
                     return `ps-3 py-2   hover:text-purple-600 bg-colorTwo transition-all ease-in dark:bg-colorDarkTwo translate-y-0.5  relative group ${me4}  flex ms-1 ${
                       isActive
-                        ? `bg-gray-200 dark:bg-colorDarkOne/60 border-e-4 ${rounded} border-purple-600   text-purple-600`
+                        ? `bg-gray-200 dark:bg-[#121212] border-e-4 ${rounded} border-purple-600   text-purple-600`
                         : `bg-colorTwo transition-all ease-in dark:bg-colorDarkTwo`
                     }`;
                   }}

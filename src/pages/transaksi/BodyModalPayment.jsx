@@ -89,9 +89,9 @@ const BodyModalGetProduk = ({
       }
     }
   };
-  // useEffect(() => {
-  //   addSalesReport();
-  // }, []);
+  useEffect(() => {
+    addSalesReport();
+  }, []);
   useEffect(() => {
     addSalesReport();
   }, [transaksiPerHari, keuntunganPerHari, penjualanPerHari]);

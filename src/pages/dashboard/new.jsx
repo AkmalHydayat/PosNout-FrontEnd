@@ -440,3 +440,58 @@
     </div>
   </div>
 </div>;
+
+<div
+  className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-10/12 rounded-md `}
+>
+  <div className="flex justify-between mb-4 items-center">
+    {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
+    <div className="w-2/3 mb-2 px-3 ">Barang Kurang Laku</div>
+    <span
+      className={`bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
+    >
+      <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
+    </span>
+  </div>
+  <div
+    className={`${
+      barang_KurangLaris.length > 12 ? "h-80 overflow-y-scroll" : ""
+    } px-3 `}
+  >
+    <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
+      <thead className="">
+        <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
+          <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
+            Nama Barang
+          </td>
+        </tr>
+      </thead>
+
+      <tbody className="text-center text-base">
+        {barang_KurangLaris.length == 0 ? (
+          <tr>
+            <td className=" text-center py-1 " colSpan={2}>
+              Tidak ada Data.
+            </td>
+          </tr>
+        ) : (
+          barang_KurangLaris.map((item, index) => (
+            <tr
+              key={index}
+              className={` ${
+                index % 2
+                  ? ""
+                  : "bg-gray-200 dark:bg-colorDarkOne/50  transition-colors ease-in text-colorDarkOne dark:text-colorTwo"
+              }`}
+            >
+              <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
+                {item}
+              </td>
+              {/* <td className="">{item.jumlah}</td> */}
+            </tr>
+          ))
+        )}
+      </tbody>
+    </table>
+  </div>
+</div>;

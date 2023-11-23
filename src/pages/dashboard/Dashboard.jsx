@@ -14,6 +14,7 @@ import DateNow from "../../components/Date";
 import LineChart from "../../components/LineChart";
 import BarChart from "../../components/BarChart";
 import { Chart } from "chart.js";
+import PolarAreaChart from "../../components/PolarAreaChart";
 
 const Dashboard = () => {
   const [produks, setProduks] = useState([]);
@@ -38,7 +39,15 @@ const Dashboard = () => {
       },
     ],
   });
-
+  const [chartDatasPolarArea, setChartDatasPolarArea] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: "Total Penjualan/Hari",
+        data: [],
+      },
+    ],
+  });
   const [kas, setKas] = useState(0);
   const { hari, month, year } = DateNow();
   const tanggalSekarang = hari + "-" + month + "-" + year;
@@ -47,7 +56,7 @@ const Dashboard = () => {
     plugins: {
       legend: {
         position: "top",
-        align:"end",
+        align: "end",
 
         labels: {
           pointStyle: "rectRounded",
@@ -124,7 +133,6 @@ const Dashboard = () => {
       );
     }
   };
-
   const barangTerlaris = () => {
     if (produks.length > 0) {
       const filteredData = orderDetail.filter((detail) =>
@@ -171,7 +179,7 @@ const Dashboard = () => {
       setMinimumStok(filteredData);
     }
   };
-
+  console.log(minimumStok);
   const kasToko = () => {
     const totalUangMasuk = salesReport.reduce((accumulator, sales) => {
       return accumulator + sales.totalPenjualan;
@@ -188,6 +196,35 @@ const Dashboard = () => {
     stokMinimum();
     barangTerlaris();
     barangKurangTerlaris();
+    setChartDatasPolarArea({
+      labels: barang_Terlaris.slice(0, 8).map((data) => data.namaProduk),
+      datasets: [
+        {
+          label: "Penjualan",
+          data: barang_Terlaris.slice(0, 8).map((data) => data.jumlah),
+          backgroundColor: [
+            "#c026d3",
+            "rgb(8 145 178) ",
+            "#e11d48",
+            "#f97316",
+            "#16a34a",
+            "rgb(13 148 136)",
+            "#ca8a04",
+            "#84cc16",
+          ],
+          borderColor: [
+            "#c026d3",
+            "rgb(8 145 178)",
+            "#e11d48",
+            "#f97316",
+            "#16a34a",
+            "rgb(13 148 136)",
+            "#ca8a04",
+            "#84cc16",
+          ],
+        },
+      ],
+    });
   }, [tanggalSekarang, salesReport]);
 
   return (
@@ -197,7 +234,7 @@ const Dashboard = () => {
           className={`p-6 space-y-6 font-pt_Sans text-base font-medium text-gray-950 opacity-100 `}
         >
           {/* row 1 */}
-          <div className="h-80 flex space-x-6 ">
+          <div className="h-[350px] flex space-x-6 ">
             <div className="w-6/12 flex flex-col space-y-6 ">
               <div className="flex space-x-6 h-full">
                 <div
@@ -274,7 +311,7 @@ const Dashboard = () => {
             </div>
             <div className="w-6/12">
               <div
-                className={`shadow-md shadow-black/20 h-full space-y-4 transition-all ease-in dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 rounded-md border-[1px] border-gray-300`}
+                className={`shadow-md shadow-black/20 h-full space-y-6 transition-all ease-in dark:shadow-black bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 rounded-md border-[1px] border-gray-300`}
               >
                 <div className="flex justify-between items-center ">
                   <span>Grafik Penjualan</span>
@@ -326,7 +363,7 @@ const Dashboard = () => {
                 </div>
 
                 {harian ? (
-                  <div className="h-[236px] w-full px-4 flex justify-center transition-all ease-in opacity-100">
+                  <div className="max-w-[505px] mx-auto px-4 flex justify-center transition-all ease-in opacity-100">
                     <LineChart chartDatas={chartDatasSale} options={options} />
                   </div>
                 ) : (
@@ -334,7 +371,7 @@ const Dashboard = () => {
                 )}
 
                 {mingguan ? (
-                  <div className="h-[236px] w-full px-4 visible flex justify-center transition-all ease-in opacity-100">
+                  <div className="max-w-[505px] mx-auto px-4 visible flex justify-center transition-all ease-in opacity-100">
                     <BarChart chartDatas={chartDatasSale} options={options} />
                   </div>
                 ) : (
@@ -342,7 +379,7 @@ const Dashboard = () => {
                 )}
 
                 {bulanan ? (
-                  <div className="h-[236px] w-full px-4 flex justify-center transition-all ease-in opacity-100">
+                  <div className="max-w-[505px] mx-auto px-4 flex justify-center transition-all ease-in opacity-100">
                     <LineChart chartDatas={chartDatasSale} options={options} />
                   </div>
                 ) : (
@@ -355,9 +392,9 @@ const Dashboard = () => {
           <div className="flex space-x-6 w-full">
             <div className="w-full  flex space-x-6">
               <div
-                className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-10/12 rounded-md `}
+                className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-10/12 rounded-md `}
               >
-                <div className="flex justify-between mb-5 items-center">
+                <div className="flex justify-between mb-4 items-center">
                   {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
                   <div className="w-2/3 mb-2 px-3 ">Barang Paling Laku</div>
                   <span
@@ -368,8 +405,8 @@ const Dashboard = () => {
                 </div>
                 <div
                   className={`${
-                    barang_Terlaris.length > 10
-                      ? "h-[200px] overflow-y-scroll"
+                    barang_Terlaris.length > 12
+                      ? "h-[345px] overflow-y-scroll"
                       : ""
                   } px-3 `}
                 >
@@ -413,10 +450,11 @@ const Dashboard = () => {
                   </table>
                 </div>
               </div>
+
               <div
                 className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-10/12 rounded-md `}
               >
-                <div className="flex justify-between mb-5 items-center">
+                <div className="flex justify-between mb-4 items-center">
                   {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
                   <div className="w-2/3 mb-2 px-3 ">Barang Paling Laku</div>
                   <span
@@ -427,9 +465,7 @@ const Dashboard = () => {
                 </div>
                 <div
                   className={`${
-                    barang_Terlaris.length > 10
-                      ? "h-[210px] overflow-y-scroll"
-                      : ""
+                    minimumStok.length > 12 ? "h-[345px] overflow-y-scroll" : ""
                   } px-3 `}
                 >
                   <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
@@ -438,19 +474,19 @@ const Dashboard = () => {
                         <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
                           Nama Barang
                         </td>
-                        <td className="py-1">Total</td>
+                        <td className="py-1">Stok</td>
                       </tr>
                     </thead>
 
                     <tbody className="text-center text-base">
-                      {barang_Terlaris.length == 0 ? (
+                      {minimumStok.length == 0 ? (
                         <tr>
                           <td className=" text-center py-1 " colSpan={2}>
                             Tidak ada Data.
                           </td>
                         </tr>
                       ) : (
-                        barang_Terlaris
+                        minimumStok
                           .sort((a, b) => b.jumlah - a.jumlah)
                           .map((item, index) => (
                             <tr
@@ -462,9 +498,9 @@ const Dashboard = () => {
                               }`}
                             >
                               <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
-                                {item.namaProduk}
+                                {item.nama_produk}
                               </td>
-                              <td className="">{item.jumlah}</td>
+                              <td className="">{item.stok}</td>
                             </tr>
                           ))
                       )}
@@ -472,6 +508,7 @@ const Dashboard = () => {
                   </table>
                 </div>
               </div>
+              {/* char pie */}
               <div
                 className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-10/12 rounded-md `}
               >
@@ -484,51 +521,8 @@ const Dashboard = () => {
                     <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
                   </span>
                 </div>
-                <div
-                  className={`${
-                    barang_Terlaris.length > 10
-                      ? "h-[210px] overflow-y-scroll"
-                      : ""
-                  } px-3 `}
-                >
-                  <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
-                    <thead className="">
-                      <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
-                        <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
-                          Nama Barang
-                        </td>
-                        <td className="py-1">Total</td>
-                      </tr>
-                    </thead>
-
-                    <tbody className="text-center text-base">
-                      {barang_Terlaris.length == 0 ? (
-                        <tr>
-                          <td className=" text-center py-1 " colSpan={2}>
-                            Tidak ada Data.
-                          </td>
-                        </tr>
-                      ) : (
-                        barang_Terlaris
-                          .sort((a, b) => b.jumlah - a.jumlah)
-                          .map((item, index) => (
-                            <tr
-                              key={index}
-                              className={`${
-                                index % 2
-                                  ? ""
-                                  : "bg-gray-200 dark:bg-colorDarkOne/50 transition-colors ease-in text-colorDarkOne dark:text-colorTwo"
-                              }`}
-                            >
-                              <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
-                                {item.namaProduk}
-                              </td>
-                              <td className="">{item.jumlah}</td>
-                            </tr>
-                          ))
-                      )}
-                    </tbody>
-                  </table>
+                <div className="max-w-[350px] mx-auto">
+                  <PolarAreaChart chartDatas={chartDatasPolarArea} />
                 </div>
               </div>
             </div>

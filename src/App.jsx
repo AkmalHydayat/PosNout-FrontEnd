@@ -12,6 +12,7 @@ import Satuan from "./pages/satuanProduk/Satuan";
 import Produk from "./pages/daftarProduk/Produk";
 import ButtonSide from "./components/ButtonSide";
 import Sidebar from "./layout/Sidebar";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const [
@@ -83,6 +84,7 @@ function App() {
               />
               <Route path="/LaporanStok" element={<LaporanStok />} />
               <Route path="/Karyawan" element={<User />} />
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
           </div>
         </div>
