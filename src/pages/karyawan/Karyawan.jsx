@@ -23,7 +23,11 @@ const Karyawan = () => {
                 setTable(false);
               }}
               icon={faGrip}
-              className="h-6 cursor-pointer hover:text-purple-600  transition-all ease-in duration-150 text-colorDarkOne dark:text-colorTwo dark:hover:text-purple-600"
+              className={`h-6 cursor-pointer hover:text-purple-600  transition-all ease-in duration-150 ${
+                grid
+                  ? "text-purple-600"
+                  : "text-colorDarkOne dark:text-colorTwo"
+              } dark:hover:text-purple-600`}
             />
 
             <FontAwesomeIcon
@@ -32,7 +36,11 @@ const Karyawan = () => {
                 setGrid(false);
               }}
               icon={faGripLines}
-              className="h-6 cursor-pointer hover:text-purple-600   transition-all ease-in duration-150 text-colorDarkOne dark:text-colorTwo dark:hover:text-purple-600"
+              className={`h-6 cursor-pointer hover:text-purple-600  transition-all ease-in duration-150 ${
+                table
+                  ? "text-purple-600"
+                  : "text-colorDarkOne dark:text-colorTwo"
+              } dark:hover:text-purple-600`}
             />
           </div>
           {grid ? (

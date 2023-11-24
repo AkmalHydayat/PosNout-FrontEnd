@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 /* eslint-disable react/prop-types */
 const NavTop = () => {
   const { day, hari, month, year } = DateNow();
- 
+  const [showModal, setShowModal] = useState(false);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") === "dark" ? "dark" : "light"
   );
@@ -60,7 +60,10 @@ const NavTop = () => {
             >
               <BsMoon className="text-xl text-gray-900 dark:text-colorTwo group-hover:text-purple-600 group-hover:scale-110 transition-all ease-in" />
             </button>
-            <button className="group   p-2 rounded-xl">
+            <button
+              className="group   p-2 rounded-xl"
+              onClick={() => setShowModal(true)}
+            >
               <BsGear className="text-xl text-gray-900 dark:text-colorTwo group-hover:text-purple-600 group-hover:scale-110 transition-all ease-in" />
             </button>
             <button className="group  p-2 rounded-xl">

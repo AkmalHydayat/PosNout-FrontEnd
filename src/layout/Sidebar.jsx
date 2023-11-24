@@ -80,24 +80,7 @@ const Sidebar = ({
     },
   ];
 
-  // const laporan = [
-  //   {
-  //     id: 1,
-  //     list: "Penjualan",
-  //     linkPath: "/LaporanPenjualan",
-  //     icon: BsFileEarmarkBarGraph,
-  //   },
-  //   {
-  //     id: 2,
-  //     list: "Stok",
-  //     linkPath: "/LaporanStok",
-  //     icon: BsFileEarmarkSpreadsheet,
-  //   },
-  // ];
-
   const [showProdukDropdown, setShowProdukDropdown] = useState(false);
-
-  // Handler untuk mengaktifkan dropdown sesuai item produk yang di-klik
 
   const toggleProdukDropdown = () => {
     setShowProdukDropdown(!showProdukDropdown);

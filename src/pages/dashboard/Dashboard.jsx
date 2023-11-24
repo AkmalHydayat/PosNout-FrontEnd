@@ -169,7 +169,6 @@ const Dashboard = () => {
       setBarang_KurangLaris(filteredData);
     }
   };
-
   const stokMinimum = () => {
     if (produks.length > 0) {
       const filteredData = produks.filter((produk) => {
@@ -179,7 +178,6 @@ const Dashboard = () => {
       setMinimumStok(filteredData);
     }
   };
-  console.log(minimumStok);
   const kasToko = () => {
     const totalUangMasuk = salesReport.reduce((accumulator, sales) => {
       return accumulator + sales.totalPenjualan;
@@ -363,7 +361,7 @@ const Dashboard = () => {
                 </div>
 
                 {harian ? (
-                  <div className="max-w-[505px] mx-auto px-4 flex justify-center transition-all ease-in opacity-100">
+                  <div className="max-w-[520px] mx-auto px-4 flex justify-center transition-all ease-in opacity-100">
                     <LineChart chartDatas={chartDatasSale} options={options} />
                   </div>
                 ) : (
@@ -371,7 +369,7 @@ const Dashboard = () => {
                 )}
 
                 {mingguan ? (
-                  <div className="max-w-[505px] mx-auto px-4 visible flex justify-center transition-all ease-in opacity-100">
+                  <div className="max-w-[520px] mx-auto px-4 visible flex justify-center transition-all ease-in opacity-100">
                     <BarChart chartDatas={chartDatasSale} options={options} />
                   </div>
                 ) : (
@@ -379,7 +377,7 @@ const Dashboard = () => {
                 )}
 
                 {bulanan ? (
-                  <div className="max-w-[505px] mx-auto px-4 flex justify-center transition-all ease-in opacity-100">
+                  <div className="max-w-[520px] mx-auto px-4 flex justify-center transition-all ease-in opacity-100">
                     <LineChart chartDatas={chartDatasSale} options={options} />
                   </div>
                 ) : (
@@ -389,48 +387,95 @@ const Dashboard = () => {
             </div>
           </div>
           {/* row 2 */}
-          <div className="flex space-x-6 w-full">
-            <div className="w-full  flex space-x-6">
-              <div
-                className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-10/12 rounded-md `}
-              >
-                <div className="flex justify-between mb-4 items-center">
-                  {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
-                  <div className="w-2/3 mb-2 px-3 ">Barang Paling Laku</div>
-                  <span
-                    className={`bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
-                  >
-                    <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
-                  </span>
-                </div>
+          <div className="h-[500px] flex space-x-6 ">
+            <div className="w-4/12 flex flex-col space-y-6 ">
+              <div className="w-full h-1/2">
                 <div
-                  className={`${
-                    barang_Terlaris.length > 12
-                      ? "h-[345px] overflow-y-scroll"
-                      : ""
-                  } px-3 `}
+                  className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 h-full rounded-md `}
                 >
-                  <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
-                    <thead className="">
-                      <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
-                        <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
-                          Nama Barang
-                        </td>
-                        <td className="py-1">Total</td>
-                      </tr>
-                    </thead>
+                  <div className="flex justify-between items-center">
+                    {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
+                    <div className="w-2/3 mb-2 px-3 ">Stok Minimum</div>
+                  </div>
+                  <div
+                    className={`${
+                      minimumStok.length > 5 ? "h-44 overflow-y-scroll" : ""
+                    } px-3 `}
+                  >
+                    <table className="w-full border-x-[1px] border-b-[1px] border-gray-900  dark:border-gray-400">
+                      <thead className="sticky top-0 bg-colorTwo dark:text-colorTwo text-colorDarkOne dark:bg-colorDarkTwo after:content-[''] after:absolute after:bottom-0 after:w-full after:h-[1px] after:bg-gray-900 dark:after:bg-gray-400 before:content-[''] before:absolute before:top-0 before:w-full before:h-[1px] before:bg-gray-900 dark:before:bg-gray-400 transition-all ease-in">
+                        <tr className="text-center border-x-[1px] border-gray-900  dark:border-gray-400 w-2/12">
+                          <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
+                            Nama Barang
+                          </td>
+                          <td className="py-1">Stok</td>
+                        </tr>
+                      </thead>
 
-                    <tbody className="text-center text-base">
-                      {barang_Terlaris.length == 0 ? (
-                        <tr>
-                          <td className=" text-center py-1 " colSpan={2}>
-                            Tidak ada Data.
+                      <tbody className="text-center text-base">
+                        {minimumStok.length == 0 ? (
+                          <tr>
+                            <td className=" text-center py-1 " colSpan={2}>
+                              Tidak ada Data.
+                            </td>
+                          </tr>
+                        ) : (
+                          minimumStok
+                            .sort((a, b) => b.jumlah - a.jumlah)
+                            .map((item, index) => (
+                              <tr
+                                key={index}
+                                className={`${
+                                  index % 2
+                                    ? ""
+                                    : "bg-gray-200 dark:bg-colorDarkOne/50 transition-colors ease-in text-colorDarkOne dark:text-colorTwo"
+                                }`}
+                              >
+                                <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
+                                  {item.nama_produk}
+                                </td>
+                                <td className="">{item.stok}</td>
+                              </tr>
+                            ))
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full h-1/2">
+                <div
+                  className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 h-full rounded-md `}
+                >
+                  <div className="flex justify-between items-center">
+                    {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
+                    <div className="w-2/3 mb-2 px-3 ">Barang Kurang Laku</div>
+                  </div>
+                  <div
+                    className={`${
+                      barang_KurangLaris.length > 5
+                        ? "h-44 overflow-y-scroll"
+                        : ""
+                    } px-3 `}
+                  >
+                    <table className="w-full border-x-[1px] border-b-[1px] border-gray-900  dark:border-gray-400">
+                      <thead className="sticky top-0 bg-colorTwo dark:text-colorTwo text-colorDarkOne dark:bg-colorDarkTwo after:content-[''] after:absolute after:bottom-0 after:w-full after:h-[1px] after:bg-gray-900 dark:after:bg-gray-400 before:content-[''] before:absolute before:top-0 before:w-full before:h-[1px] before:bg-gray-900 dark:before:bg-gray-400 transition-all ease-in">
+                        <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
+                          <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
+                            Nama Barang
                           </td>
                         </tr>
-                      ) : (
-                        barang_Terlaris
-                          .sort((a, b) => b.jumlah - a.jumlah)
-                          .map((item, index) => (
+                      </thead>
+
+                      <tbody className="text-center text-base">
+                        {barang_KurangLaris.length == 0 ? (
+                          <tr>
+                            <td className=" text-center py-1 ">
+                              Tidak ada Data.
+                            </td>
+                          </tr>
+                        ) : (
+                          barang_KurangLaris.map((item, index) => (
                             <tr
                               key={index}
                               className={`${
@@ -440,77 +485,20 @@ const Dashboard = () => {
                               }`}
                             >
                               <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
-                                {item.namaProduk}
+                                {item}
                               </td>
-                              <td className="">{item.jumlah}</td>
                             </tr>
                           ))
-                      )}
-                    </tbody>
-                  </table>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-
+            </div>
+            <div className="w-5/12">
               <div
-                className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-10/12 rounded-md `}
-              >
-                <div className="flex justify-between mb-4 items-center">
-                  {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
-                  <div className="w-2/3 mb-2 px-3 ">Barang Paling Laku</div>
-                  <span
-                    className={`bg-colorTwo transition-all ease-in  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo rounded me-3 mt-1 shadow-sm2 shadow-black/20 dark:shadow-black/40`}
-                  >
-                    <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
-                  </span>
-                </div>
-                <div
-                  className={`${
-                    minimumStok.length > 12 ? "h-[345px] overflow-y-scroll" : ""
-                  } px-3 `}
-                >
-                  <table className="w-full border-[1px] border-gray-900  dark:border-gray-400">
-                    <thead className="">
-                      <tr className="text-center border-[1px] border-gray-900  dark:border-gray-400 w-2/12">
-                        <td className=" py-1 border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12 ">
-                          Nama Barang
-                        </td>
-                        <td className="py-1">Stok</td>
-                      </tr>
-                    </thead>
-
-                    <tbody className="text-center text-base">
-                      {minimumStok.length == 0 ? (
-                        <tr>
-                          <td className=" text-center py-1 " colSpan={2}>
-                            Tidak ada Data.
-                          </td>
-                        </tr>
-                      ) : (
-                        minimumStok
-                          .sort((a, b) => b.jumlah - a.jumlah)
-                          .map((item, index) => (
-                            <tr
-                              key={index}
-                              className={`${
-                                index % 2
-                                  ? ""
-                                  : "bg-gray-200 dark:bg-colorDarkOne/50 transition-colors ease-in text-colorDarkOne dark:text-colorTwo"
-                              }`}
-                            >
-                              <td className="border-e-[1px]  border-gray-900  dark:border-gray-400 w-10/12">
-                                {item.nama_produk}
-                              </td>
-                              <td className="">{item.stok}</td>
-                            </tr>
-                          ))
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              {/* char pie */}
-              <div
-                className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-10/12 rounded-md `}
+                className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 w-full h-full rounded-md `}
               >
                 <div className="flex justify-between mb-5 items-center">
                   {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
@@ -521,8 +509,40 @@ const Dashboard = () => {
                     <PiChartLineUpLight className="text-[39px] rounded  p-[6px] relative text-purple-600  " />
                   </span>
                 </div>
-                <div className="max-w-[350px] mx-auto">
+                <div className="max-w-[410px] mx-auto">
                   <PolarAreaChart chartDatas={chartDatasPolarArea} />
+                </div>
+              </div>
+            </div>
+            <div className="w-3/12 flex flex-col space-y-6">
+              <div className="w-full h-1/4">
+                <div
+                  className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 h-full rounded-md `}
+                >
+                  <div className="flex justify-between items-center">
+                    {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
+                    <div className="w-2/3 mb-2 px-3 ">Margin Penjualan</div>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full h-1/4">
+                <div
+                  className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 h-full rounded-md `}
+                >
+                  <div className="flex justify-between items-center">
+                    {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
+                    <div className="w-2/3 mb-2 px-3 ">Stok Minimum</div>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full h-2/4">
+                <div
+                  className={`shadow-md shadow-black/20  transition-all ease-in dark:shadow-black border-[1px] border-gray-300 bg-colorTwo  dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkTwo p-3 h-full rounded-md `}
+                >
+                  <div className="flex justify-between items-center">
+                    {/* gunakan table daftarproduk lalu cari barang dengan stok kurang dari 10, dan tampilkan  */}
+                    <div className="w-2/3 mb-2 px-3 ">Stok Minimum</div>
+                  </div>
                 </div>
               </div>
             </div>
