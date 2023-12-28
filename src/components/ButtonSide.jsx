@@ -24,10 +24,6 @@ const ButtonSide = () => {
     ? "hidden"
     : "absolute  hidden group-hover:inline text-purple-600 shadow-lg bg-colorTwo text-base rounded font-semibold px-2 py-1";
   const contentWidth = sideActive ? "w-10/12 " : "w-full ";
-
-  const widthLogFilter = sideActive
-    ? "w-52 transition-all "
-    : "w-64 transition-all ";
   const fontSize = sideActive ? "text-base" : "text-xl";
   const textCenter = sideActive ? "text-start ms-8 " : "text-center p-1 ms-0 ";
   const fontSize6xl = sideActive ? "text-6xl" : "text-2xl";
@@ -57,7 +53,6 @@ const ButtonSide = () => {
     pb,
     ps,
     hidenBlock,
-    widthLogFilter,
     delay,
   ];
 };

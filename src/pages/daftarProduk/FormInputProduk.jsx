@@ -72,7 +72,7 @@ const FormInputProduk = ({
           <input
             type="text"
             autoFocus
-            className={`w-full h-10 font-pt_Sans focus:outline-none   focus:bg-colorTwo dark:focus:bg-colorTwo dark:focus:text-colorDarkOne  hover:border-[1px] hover:border-purple-600 dark:focus:shadow-black/50 focus:scale-[1.01] bg-colorTwo dark:bg-colorDarkTwo  border-gray-300 focus:border-purple-600  transition-transform ease-in-out  font-medium border-[1px] text-gray-600 focus:text-colorDarkOne  rounded px-2 text-base placeholder:text-sm placeholder:font-normal dark:placeholder:text-colorTwo/50 dark:text-colorTwo placeholder:text-gray-600 ${emptyNamaProdukStyle}`}
+            className={`w-full h-10 font-pt_Sans focus:outline-none focus:bg-colorTwo dark:focus:bg-colorTwo dark:focus:text-colorDarkOne  hover:border-[1px] hover:border-purple-600 dark:focus:shadow-black/50 focus:scale-[1.01] bg-colorTwo dark:bg-colorDarkTwo  border-gray-300 focus:border-purple-600  transition-transform ease-in-out  font-medium border-[1px] text-gray-600 focus:text-colorDarkOne  rounded px-2 text-base placeholder:text-sm placeholder:font-normal dark:placeholder:text-colorTwo/50 dark:text-colorTwo placeholder:text-gray-600 ${emptyNamaProdukStyle}`}
             placeholder="Produk"
             value={newNamaProduk}
             onChange={(e) => {

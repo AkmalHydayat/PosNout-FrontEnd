@@ -26,7 +26,7 @@ const Kategori = () => {
 
   return (
     <LayoutPage>
-      <div className={`p-6 font-pt_Sans `}>
+      <div className={`p-6 font-pt_Sans`}>
         <div className="font-medium text-3xl  mb-3 text-gray-900 dark:text-colorTwo transition-colors ease-in">
           Kategori Produk
         </div>

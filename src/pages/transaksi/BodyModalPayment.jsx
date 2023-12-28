@@ -215,7 +215,6 @@ const BodyModalGetProduk = ({
         <div
           className={`w-[650px] relative text-base  font-semibold bg-colorTwo rounded-md`}
         >
-          {/* children berisi formAddStok  */}
           <div className="">{children}</div>
         </div>
         <div className={`w-[400px] relative`}>
@@ -248,7 +247,9 @@ const BodyModalGetProduk = ({
             <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 dark:border-colorDarkOne/90  ">
               <div className="w-32 ">Total Belanja</div>
               <div className="text-end w-10">:</div>
-              <div className="text-end w-72 ">{totalJumlah}</div>
+              <div className="text-end w-72 ">
+                {totalJumlah.toLocaleString("id-ID")}
+              </div>
             </div>
             <div className="flex border-b-[1px] pb-2  border-purple-200 dark:border-colorDarkOne/90  ">
               <div className="w-32">Bayar</div>
@@ -279,7 +280,9 @@ const BodyModalGetProduk = ({
             <div className="flex border-b-[1px] pb-2 pe-2 border-purple-200 dark:border-colorDarkOne/90  ">
               <div className="w-32">Kembalian</div>
               <div className="text-end w-10">:</div>
-              <div className="text-end  w-72 ">{kembalian}</div>
+              <div className="text-end  w-72 ">
+                {kembalian.toLocaleString("id-ID")}
+              </div>
             </div>
             <div className="flex justify-center gap-9 py-2">
               <button
@@ -287,6 +290,12 @@ const BodyModalGetProduk = ({
                 onClick={() => {
                   if (pembayaran === "") {
                     AlertMessage("Masukkan nominal pembayaran", 400, "warning");
+                  } else if (kembalian.toString().charAt(0) == "-") {
+                    AlertMessage(
+                      "Nominal pembayaran tidak cukup",
+                      400,
+                      "warning"
+                    );
                   } else {
                     // stok barang yang dipilih akan berkurang
                     addTransaksiDetail();
@@ -307,11 +316,6 @@ const BodyModalGetProduk = ({
                 }}
               >
                 Proses
-              </button>
-              <button
-                className={`bg-colorTwo dark:border-[1px] w-[75px] dark:bg-colorDarkTwo dark:shadow-black  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 font-semibold dark:hover:shadow-black hover:dark:shadow-purple-600 dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  dark:border-purple-600 hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group py-1 `}
-              >
-                Selesai
               </button>
             </div>
           </div>

@@ -110,7 +110,7 @@ const TableStok = ({ stoks }) => {
                         index % 2
                           ? `bg-colorTwo dark:bg-colorDarkTwo text-colorDarkOne dark:text-colorTwo transition-all ease-in`
                           : `bg-gray-100 dark:bg-colorDarkOne/50 text-colorDarkOne dark:text-colorTwo transition-all ease-in`
-                      }`}
+                      } border-[1px] border-gray-300  text-center `}
                       key={index}
                     >
                       <td className="w-10 border-s-[1px] py-0.5 border-gray-300">

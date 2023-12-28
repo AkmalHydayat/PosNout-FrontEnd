@@ -1,10 +1,12 @@
+import LayoutPage from "../../layout/PageLayout";
+
 [
   {
     id: 1,
-   tanggal: "05-11-2023",
-   totalTransaksi: 2,
-   totalPenjualan: 26400,
-   totalKeuntungan: 10200,
+    tanggal: "05-11-2023",
+    totalTransaksi: 2,
+    totalPenjualan: 26400,
+    totalKeuntungan: 10200,
   },
   {
     id: 2,
@@ -70,3 +72,5 @@
     totalKeuntungan: 1200,
   },
 ];
+
+

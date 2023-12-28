@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { getTransaksiLogs } from "../../utils/api";
 import AlertShow from "../../components/ui/Alert";
 
-const LaporanPenjualan = ({ widthLogFilter }) => {
+const LaporanPenjualan = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchInvoice, setSearchInvoice] = useState("");
@@ -144,14 +144,14 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
             <div className="py-3">
               <form
                 action=""
-                className="flex justify-center dark:text-colorTwo text-colorDarkTwo  transition-colors ease-in"
+                className="flex justify-evenly dark:text-colorTwo text-colorDarkTwo  transition-colors ease-in"
               >
-                <div className="flex justify-center">
+                <div className="flex justify-between">
                   <div className=" space-x-3 flex items-center w-2/4 ">
                     <label className="">Tanggal</label>
                     <input
                       type="date"
-                      className={` border-[1px] focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 dark:bg-colorDarkTwo text-gray-900 dark:text-colorTwo transition-all ease-in   focus:border-purple-600 h-10 border-gray-300 ${widthLogFilter} rounded px-2`}
+                      className={` border-[1px] focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 dark:bg-colorDarkTwo text-gray-900 dark:text-colorTwo transition-all ease-in   focus:border-purple-600 h-10 border-gray-300 w-80 rounded px-2`}
                       value={rangeDateFrom}
                       onChange={(e) => {
                         const inputDate = new Date(e.target.value);
@@ -172,7 +172,7 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
                     <label>s/d</label>
 
                     <input
-                      className={` border-[1px] h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 dark:bg-colorDarkTwo transition-all ease-in  text-gray-900 dark:text-colorTwo  border-gray-300 rounded ${widthLogFilter}  px-2 `}
+                      className={` border-[1px] h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 dark:bg-colorDarkTwo transition-all ease-in  text-gray-900 dark:text-colorTwo  border-gray-300 rounded w-48  px-2 `}
                       type="date"
                       value={rangeDateTo}
                       onChange={(e) => {
@@ -196,7 +196,7 @@ const LaporanPenjualan = ({ widthLogFilter }) => {
                     <label className="">
                       Invoice
                       <input
-                        className={`border-[1px] px-3 focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 dark:bg-colorDarkTwo transition-all ease-in text-gray-900 dark:text-colorTwo ${widthLogFilter} focus:border-purple-600 ms-3 h-10 px- border-gray-300 rounded placeholder:text-gray-500 `}
+                        className={`border-[1px] px-3 focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 dark:bg-colorDarkTwo transition-all ease-in text-gray-900 dark:text-colorTwo w-48 focus:border-purple-600 ms-3 h-10 px- border-gray-300 rounded placeholder:text-gray-500 `}
                         type="text"
                         value={searchInvoice}
                         onChange={(e) => {

@@ -55,13 +55,13 @@ export const PaymentTable = ({ transaksiList }) => {
                     {item.namaProduk}
                   </td>
                   <td className="w-28 py-1 border-s-[1px] border-gray-900 dark:border-gray-300">
-                    {item.harga}
+                    {item.harga.toLocaleString("id-ID")}
                   </td>
                   <td className="w-14 py-1 border-s-[1px] border-gray-900 dark:border-gray-300">
                     {item.jumlah}
                   </td>
                   <td className="w-32 py-1 border-x-[1px] border-gray-900 dark:border-gray-300">
-                    {item.total}
+                    {item.total.toLocaleString("id-ID")}
                   </td>
                 </tr>
               ))}

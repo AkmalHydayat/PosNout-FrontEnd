@@ -45,7 +45,7 @@ const ButtonDetail = ({ invoice, tanggal, daftarBarang, totalTransaksi }) => {
             </div>
             <div className="flex ">
               <span className="w-32">Total Transaksi</span>
-              <span className="">: {totalTransaksi}</span>
+              <span className="">: Rp {totalTransaksi.toLocaleString("id-ID")}</span>
             </div>
           </div>
           <div
@@ -100,13 +100,13 @@ const ButtonDetail = ({ invoice, tanggal, daftarBarang, totalTransaksi }) => {
                         {item.namaProduk}
                       </td>
                       <td className="w-28 py-0.5 border-s-[1px] border-gray-300">
-                        {item.hargaSatuan}
+                        {item.hargaSatuan.toLocaleString("id-ID")}
                       </td>
                       <td className="w-14  py-0.5 border-s-[1px] border-gray-300">
                         {item.jumlah}
                       </td>
                       <td className="w-32 py-0.5 border-x-[1px] border-gray-300">
-                        {item.total}
+                        {item.total.toLocaleString("id-ID")}
                       </td>
                     </tr>
                   </tbody>

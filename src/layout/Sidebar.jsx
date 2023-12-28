@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -6,6 +7,7 @@ import { PiUserThin, PiUser } from "react-icons/pi";
 import { HiOutlineShoppingCart, HiOutlineArchiveBox } from "react-icons/hi2";
 import { FiChevronUp, FiChevronDown } from "react-icons/fi";
 import { BsHouse, BsBoxSeam, BsTags, BsPass, BsInboxes } from "react-icons/bs";
+
 const Sidebar = ({
   widthUserImg,
   inlineHiden,
@@ -18,6 +20,8 @@ const Sidebar = ({
   w45,
   hidenBlock,
   delay,
+  username,
+  url,
 }) => {
   const listNav = [
     {
@@ -89,19 +93,29 @@ const Sidebar = ({
   return (
     <div className="my-10">
       <div className={`flex flex-col text-gray-300`}>
-        <div className="text-center basis-1/6 ">
+        <div className="text-center basis-1/6">
           <div
             className={`-translate-y-0.5 transition-all ease-in ${pb} border-b-[1px] border-gray-300 dark:border-colorDarkOne`}
           >
             <div
               className={`mx-auto mb-2 scale-105 text-gray-900 dark:text-colorTwo transition-all ease-in rounded-full flex  justify-center items-center bg-gray-200 dark:bg-colorDarkOne/40  ${widthUserImg}`}
             >
-              <PiUserThin className={`my-auto ${fontSize6xl}`} />
+              {url ? (
+                <img
+                  src={url}
+                  alt=""
+                  className={`rounded-full object-cover ${widthUserImg} transition-all ease-in`}
+                />
+              ) : (
+                <PiUserThin
+                  className={`my-auto ${fontSize6xl} transition-all ease-in`}
+                />
+              )}
             </div>
             <h1
               className={`text-gray-900 dark:text-colorTwo font-acme font-semibold ${inlineHiden} transition-all ease-in`}
             >
-              Akmal Hydayat
+              {username}
             </h1>
           </div>
         </div>

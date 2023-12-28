@@ -354,7 +354,7 @@ const Transaksi = () => {
               <div className="text-5xl mt-6 font-acme text-end">
                 <span className="me-2">Rp.</span>
 
-                <span> {totalJumlah}</span>
+                <span> {totalJumlah.toLocaleString("id-ID")}</span>
               </div>
             </div>
           </div>

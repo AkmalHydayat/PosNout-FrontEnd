@@ -120,13 +120,13 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                         {item.namaProduk}
                       </td>
                       <td className="w-28 py-0.5 border-s-[1px] border-gray-300">
-                        {item.harga}
+                        {item.harga.toLocaleString("id-ID")}
                       </td>
                       <td className="w-14 py-0.5 border-s-[1px] border-gray-300">
                         {item.jumlah}
                       </td>
                       <td className="w-32 py-0.5 border-s-[1px] border-gray-300">
-                        {item.total}
+                        {item.total.toLocaleString("id-ID")}
                       </td>
                       <td className="w-20 py-0.5 border-x-[1px] border-gray-300 space-x-2">
                         <button
@@ -202,13 +202,13 @@ export const TableTransaksi = ({ transaksiList, setTransaksiList }) => {
                         {item.namaProduk}
                       </td>
                       <td className="w-28 py-0.5 border-s-[1px] border-gray-300">
-                        {item.harga}
+                        {item.harga.toLocaleString("id-ID")}
                       </td>
                       <td className="w-14 py-0.5 border-s-[1px]  border-gray-300">
                         {item.jumlah}
                       </td>
                       <td className="w-32 py-0.5 border-s-[1px] border-gray-300">
-                        {item.total}
+                        {item.total.toLocaleString("id-ID")}
                       </td>
                       <td className="w-20 py-0.5 border-x-[1px] border-gray-300 space-x-2">
                         <button

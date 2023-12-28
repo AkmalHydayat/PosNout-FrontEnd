@@ -1,11 +1,14 @@
 import Clock from "../components/FormatClock";
 import DateNow from "../components/Date";
-import { BsMoon, BsGear, BsBoxArrowRight, BsRobot } from "react-icons/bs";
+import { BsMoon, BsBoxArrowRight, BsRobot } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Setting from "./Setting";
 /* eslint-disable react/prop-types */
-const NavTop = () => {
+const NavTop = ({ username, url, id, email, role, refreshToken }) => {
+  const navigate = useNavigate();
   const { day, hari, month, year } = DateNow();
-  const [showModal, setShowModal] = useState(false);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") === "dark" ? "dark" : "light"
   );
@@ -22,6 +25,15 @@ const NavTop = () => {
 
   const handleThemeChange = () => {
     setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  const Logout = async () => {
+    try {
+      await axios.delete("http://localhost:3000/logout");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -60,13 +72,16 @@ const NavTop = () => {
             >
               <BsMoon className="text-xl text-gray-900 dark:text-colorTwo group-hover:text-purple-600 group-hover:scale-110 transition-all ease-in" />
             </button>
-            <button
-              className="group   p-2 rounded-xl"
-              onClick={() => setShowModal(true)}
-            >
-              <BsGear className="text-xl text-gray-900 dark:text-colorTwo group-hover:text-purple-600 group-hover:scale-110 transition-all ease-in" />
-            </button>
-            <button className="group  p-2 rounded-xl">
+
+            <Setting
+              username={username}
+              url={url}
+              id={id}
+              email={email}
+              role={role}
+              refreshToken={refreshToken}
+            />
+            <button className="group  p-2 rounded-xl" onClick={Logout}>
               <BsBoxArrowRight className="text-xl text-gray-900 dark:text-colorTwo group-hover:text-purple-600 group-hover:scale-110 transition-all ease-in" />
             </button>
           </div>
