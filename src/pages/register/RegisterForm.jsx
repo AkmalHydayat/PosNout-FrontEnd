@@ -49,6 +49,7 @@ const RegisterForm = () => {
             placeholder=" "
             onChange={(e) => setUsername(e.target.value)}
             value={username}
+            required
           />
           <label className="absolute text-sm   text-purple-600  duration-300 transform -translate-y-6 scale-90 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-purple-600 peer-focus:font-bold peer-placeholder-shown:scale-100  peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-6">
             Username
@@ -57,20 +58,19 @@ const RegisterForm = () => {
         <div className="relative z-0 mt-8 mb-6">
           <select
             size={1}
-            name=""
-            id=""
-            className={`block py-2.5 ${
+            required
+            className={`block py-2.5  ${
               role
                 ? "font-semibold text-sm font-acme"
-                : "font-light text-xs text-purple-600"
-            } px-0 w-full  bg-transparent border-0 border-b-2 border-purple-600 appearance-none focus:outline-none focus:ring-0 focus:border-purple-900 peer`}
+                : "font-light text-sm text-purple-600"
+            } px-0 w-full  bg-transparent border-0 border-b-2  border-purple-600 appearance-none focus:outline-none focus:ring-0 focus:border-purple-900 peer`}
             value={role}
             onChange={(e) => {
               setRole(e.target.value.toLowerCase());
             }}
           >
             <option
-              className="font-semibold font-acme text-sm ms-10 text-gray-500"
+              className=" font-semibold font-acme text-sm ms-10 text-gray-500"
               defaultValue={"Pilih"}
               hidden
             >
@@ -78,13 +78,13 @@ const RegisterForm = () => {
             </option>
             <option
               value="user"
-              className="font-semibold font-acme text-sm ms-10 text-black"
+              className="font-semibold font-acme text-sm ms-10   text-black"
             >
               User
             </option>
             <option
               value="admin"
-              className="font-semibold font-acme text-sm ms-10 text-black"
+              className="font-semibold font-acme text-sm ms-10  text-black"
             >
               Admin
             </option>
@@ -101,6 +101,7 @@ const RegisterForm = () => {
             placeholder=" "
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            required
           />
           <label className="absolute text-sm   text-purple-600  duration-300 transform -translate-y-6 scale-90 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-purple-600 peer-focus:font-bold peer-placeholder-shown:scale-100  peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-6">
             Email
@@ -113,6 +114,7 @@ const RegisterForm = () => {
             className="block py-2.5 font-semibold font-acme text-md px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-purple-600 appearance-none focus:outline-none focus:ring-0 focus:border-purple-900 peer"
             placeholder=" "
             value={password}
+            required
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -134,6 +136,7 @@ const RegisterForm = () => {
             className="block py-2.5 font-semibold font-acme text-md px-0 w-full  text-gray-900 bg-transparent border-0 border-b-2 border-purple-600 appearance-none focus:outline-none focus:ring-0 focus:border-purple-900 peer"
             placeholder=" "
             value={confPassword}
+            required
             onChange={(e) => {
               setConfPassword(e.target.value);
             }}

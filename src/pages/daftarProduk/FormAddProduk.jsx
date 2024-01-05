@@ -51,7 +51,7 @@ const FormAddProduk = ({
     try {
       const barcode = generateBarcode(); // Memanggil fungsi untuk mendapatkan barcode baru
 
-      await axios.post("http://localhost:3000/produk", {
+      const response = await axios.post("http://localhost:3000/produk", {
         barcode,
         nama_produk: newNamaProduk,
         satuan: newSatuanProduk,
@@ -61,7 +61,7 @@ const FormAddProduk = ({
         keuntungan: newHargaJualProduk - newHargaBeliProduk,
         stok: 0,
       });
-
+      AlertMessage(response.data.msg, 360, "success");
       const updatedProduks = await getProduks(); // Mengambil produk terbaru
       setProduks(updatedProduks); // Memperbarui state produk di luar komponen
 
@@ -119,7 +119,6 @@ const FormAddProduk = ({
       setNewHargaJualProduk("");
       setErrorInput("");
       onClose();
-      AlertMessage("berhasil menambahkan produk", 370, "success");
     }
   };
   return (

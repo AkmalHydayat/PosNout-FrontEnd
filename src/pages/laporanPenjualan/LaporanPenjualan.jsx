@@ -16,7 +16,15 @@ const LaporanPenjualan = () => {
   const [rangeDateTo, setRangeDateTo] = useState("");
   const [transaksiLog, setTransaksiLog] = useState([]);
   const [daftarBarang, setDaftarBarang] = useState([]);
-
+  const currentDate = new Date();
+  const formattedDate = currentDate
+    .toLocaleDateString("id-ID", {
+      year: "2-digit",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .split("/")
+    .join("");
   const AlertMessage = (message, width, icon) => {
     AlertShow(message, width, icon);
   };
@@ -151,7 +159,7 @@ const LaporanPenjualan = () => {
                     <label className="">Tanggal</label>
                     <input
                       type="date"
-                      className={` border-[1px] focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 dark:bg-colorDarkTwo text-gray-900 dark:text-colorTwo transition-all ease-in   focus:border-purple-600 h-10 border-gray-300 w-80 rounded px-2`}
+                      className={` border-[1px] focus:outline-none hover:border-[1px] hover:border-purple-600 outline-none focus:border-2 dark:bg-colorDarkTwo text-gray-900 dark:text-colorTwo transition-all ease-in   focus:border-purple-600 h-10 border-gray-300 w-60 rounded px-2`}
                       value={rangeDateFrom}
                       onChange={(e) => {
                         const inputDate = new Date(e.target.value);
@@ -172,7 +180,7 @@ const LaporanPenjualan = () => {
                     <label>s/d</label>
 
                     <input
-                      className={` border-[1px] h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 dark:bg-colorDarkTwo transition-all ease-in  text-gray-900 dark:text-colorTwo  border-gray-300 rounded w-48  px-2 `}
+                      className={` border-[1px] h-10 hover:border-[1px] hover:border-purple-600 focus:outline-none outline-none focus:border-2  focus:border-purple-600 dark:bg-colorDarkTwo transition-all ease-in  text-gray-900 dark:text-colorTwo  border-gray-300 rounded w-60  px-2 `}
                       type="date"
                       value={rangeDateTo}
                       onChange={(e) => {
@@ -203,7 +211,7 @@ const LaporanPenjualan = () => {
                           const value = e.target.value.toLocaleUpperCase();
                           setSearchInvoice(value);
                         }}
-                        placeholder="PP0609200001"
+                        placeholder={`PP${formattedDate}0001`}
                       />
                     </label>
                     <div className="flex justify-center items-center space-x-3">

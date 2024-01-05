@@ -20,9 +20,9 @@ const Setting = ({ username, url, id, email, role, refreshToken }) => {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:3000/users/${id}`, {
-        username: editUsername,
-        email: editEmail,
-        role,
+        username: editUsername ? editUsername : username,
+        email: editEmail ? editEmail : email,
+        role: role,
         password,
         confPassword,
       });
@@ -125,7 +125,6 @@ const Setting = ({ username, url, id, email, role, refreshToken }) => {
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
-                    required
                     readOnly={edit ? false : true}
                     placeholder="********"
                   />
@@ -139,7 +138,6 @@ const Setting = ({ username, url, id, email, role, refreshToken }) => {
                         ? " dark:border-colorDarkOne dark:bg-colorDarkTwo"
                         : "bg-gray-400/60 dark:bg-colorDarkOne/60  cursor-default"
                     }`}
-                    required
                     readOnly={edit ? false : true}
                     placeholder="********"
                     value={confPassword}

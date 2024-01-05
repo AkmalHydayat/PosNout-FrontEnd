@@ -3,9 +3,9 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AlertShow from "../../components/ui/Alert";
-import { getProduks, getSalesReport, getTransaksiLogs } from "../../utils/api";
+import { getProduks, getTransaksiLogs } from "../../utils/api";
 
 const BodyModalGetProduk = ({
   children,
@@ -25,76 +25,6 @@ const BodyModalGetProduk = ({
 }) => {
   const [pembayaran, setPembayaran] = useState("");
   const [kembalian, setKembalian] = useState(0);
-  const [transaksiLog, setTransaksiLog] = useState([]);
-  const [salesReport, setSalesReport] = useState([]);
-  const [penjualanPerHari, setPenjualanPerHari] = useState(0);
-  const [keuntunganPerHari, setKeuntunganPerHari] = useState(0);
-  const [transaksiPerHari, setTransaksiPerHari] = useState(0);
-
-  useEffect(() => {
-    transaksiHariIni();
-    const fetchData = async () => {
-      try {
-        const dataSales = await getSalesReport();
-        setSalesReport(dataSales);
-      } catch (error) {
-        // Handle error jika diperlukan
-        console.error("Error in component:", error);
-      }
-    };
-    fetchData();
-  }, []);
-  useEffect(() => {
-    // transaksiHariIni akan dijalankan setelah setTransaksiLog selesai
-
-    transaksiHariIni();
-  }, [transaksiLog]);
-
-  // sales report
-
-  const addSalesReport = async () => {
-    // jika salesReport tidak kosong jalankan ini
-    if (salesReport.length > 0) {
-      //cari semua salesreport yang dilakukan hari ini
-      const filter = salesReport.filter((report) => {
-        const reportData = report.tanggal;
-        return reportData === tanggalSekarang;
-      });
-      // jika ada tanggalnya sama maka tambahkan data pada database, jika tidak ada buat field baru pada database
-      if (filter.length > 0) {
-        try {
-          await axios.put(
-            `http://localhost:3000/laporanPenjualan/${tanggalSekarang}`,
-            {
-              tanggal: tanggalSekarang,
-              totalTransaksi: transaksiPerHari,
-              totalPenjualan: penjualanPerHari,
-              totalKeuntungan: keuntunganPerHari,
-            }
-          );
-        } catch (error) {
-          console.error("Gagal menyimpan data transaksi ke database:", error);
-        }
-      } else {
-        try {
-          await axios.post("http://localhost:3000/laporanPenjualan", {
-            tanggal: tanggalSekarang,
-            totalTransaksi: transaksiPerHari,
-            totalPenjualan: penjualanPerHari,
-            totalKeuntungan: keuntunganPerHari,
-          });
-        } catch (error) {
-          console.error("Gagal menyimpan data transaksi ke database:", error);
-        }
-      }
-    }
-  };
-  useEffect(() => {
-    addSalesReport();
-  }, []);
-  useEffect(() => {
-    addSalesReport();
-  }, [transaksiPerHari, keuntunganPerHari, penjualanPerHari]);
 
   const addLaporanTransaksi = async () => {
     try {
@@ -107,30 +37,48 @@ const BodyModalGetProduk = ({
         totalKeuntunganPerTransaksi: totalKeuntunganPerTransaksi,
       });
       const updatedTransaksi = await getTransaksiLogs();
-      setTransaksiLog(updatedTransaksi);
+      creatTransaksiHariIni(updatedTransaksi);
     } catch (error) {
       console.error("Gagal menyimpan data transaksi ke database:", error);
     }
   };
 
-  const transaksiHariIni = () => {
-    if (transaksiLog.length > 0) {
-      // Pastikan transaksiLog tidak kosong
-      const filteredData = transaksiLog.filter((log) => {
-        const logDate = log.waktuTransaksi;
-        return logDate === tanggalSekarang;
-      });
-      setTransaksiPerHari(filteredData.length);
-      setPenjualanPerHari(
-        filteredData.reduce((accumulator, transaksi) => {
-          return accumulator + transaksi.totalTransaksi;
-        }, 0) // Inisialisasi accumulator dengan 0
+  const creatTransaksiHariIni = (updatedTransaksi) => {
+    if (updatedTransaksi.length > 0) {
+      const filteredData = updatedTransaksi.filter(
+        (log) => log.waktuTransaksi === tanggalSekarang
       );
-      setKeuntunganPerHari(
-        filteredData.reduce((accumulator, transaksi) => {
-          return accumulator + transaksi.totalKeuntunganPerTransaksi;
-        }, 0) // Inisialisasi accumulator dengan 0
+      const transaksiPerHari = filteredData.length;
+      const penjualanPerHari = filteredData.reduce(
+        (acc, transaksi) => acc + transaksi.totalTransaksi,
+        0
       );
+      const keuntunganPerHari = filteredData.reduce(
+        (acc, transaksi) => acc + transaksi.totalKeuntunganPerTransaksi,
+        0
+      );
+
+      addSalesReport(transaksiPerHari, penjualanPerHari, keuntunganPerHari);
+    }
+  };
+
+  const addSalesReport = async (
+    transaksiPerHari,
+    penjualanPerHari,
+    keuntunganPerHari
+  ) => {
+    try {
+      await axios.put(
+        `http://localhost:3000/laporanPenjualan/${tanggalSekarang}`,
+        {
+          tanggal: tanggalSekarang,
+          totalTransaksi: transaksiPerHari,
+          totalPenjualan: penjualanPerHari,
+          totalKeuntungan: keuntunganPerHari,
+        }
+      );
+    } catch (error) {
+      console.error("Gagal menyimpan data transaksi ke database:", error);
     }
   };
 
@@ -181,7 +129,6 @@ const BodyModalGetProduk = ({
       await axios.post("http://localhost:3000/orderDetail", {
         transaksiList: transaksiListWithInvoice,
       });
-      // console.log("Data transaksi berhasil disimpan ke database.");
     } catch (error) {
       console.error("Gagal menyimpan data transaksi ke database:", error);
     }
@@ -198,6 +145,7 @@ const BodyModalGetProduk = ({
       }
     }
   };
+
   return (
     <div
       className={`fixed inset-0 ${
@@ -298,12 +246,12 @@ const BodyModalGetProduk = ({
                     );
                   } else {
                     // stok barang yang dipilih akan berkurang
-                    addTransaksiDetail();
                     addLaporanTransaksi();
+                    addTransaksiDetail();
                     onClose();
                     updateStok();
+
                     setTimeout(() => {
-                      // addSalesReport();
                       const newInvoice = generateInvoiceNumber();
                       setInvoiceNumber(newInvoice);
                       setTotalJumlah(0);

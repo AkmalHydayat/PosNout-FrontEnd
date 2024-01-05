@@ -17,7 +17,8 @@ const DeleteConfirmProduk = ({
   AlertMessage,
 }) => {
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:3000/produk/${id}`);
+    const response = await axios.delete(`http://localhost:3000/produk/${id}`);
+    AlertMessage(response.data.msg, 350, "success");
     const updatedProduks = await getProduks();
     setProduks(updatedProduks); // Perbarui state kategoris di sini
     onClose();

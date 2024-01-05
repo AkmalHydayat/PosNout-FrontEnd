@@ -19,12 +19,13 @@ const FormAddKategori = ({
 
   const newKategori = async () => {
     try {
-      await axios.post("http://localhost:3000/kategori", {
+      const response = await axios.post("http://localhost:3000/kategori", {
         nama_kategori: namaNewKategori,
       });
       const updatedKategoris = await getKategoris(); // Mengambil kategori terbaru
       setKategoris(updatedKategoris); // Memperbarui state kategoris di luar komponen
       navigate("/KategoriProduk");
+      AlertMessage(response.data.msg, 350, "success");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -48,7 +49,6 @@ const FormAddKategori = ({
       setNamaNewKategori("");
       setErrorInput("");
       onClose();
-      AlertMessage("berhasil menambahkan", 310, "success");
     }
   };
 

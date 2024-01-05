@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/prop-types */
 import ButtonBgSec from "../../components/ui/ButtonBgSec";
 import axios from "axios";
 import AlertShow from "../../components/ui/Alert";
 const AlertMessage = (message, width, icon) => {
   AlertShow(message, width, icon);
 };
-/* eslint-disable react/prop-types */
 const DeleteConfirmAkun = ({ akun, id, idUserLogin, getUsers, onClose }) => {
   const handleDelete = async (id) => {
     if (id === idUserLogin) {
@@ -27,7 +27,7 @@ const DeleteConfirmAkun = ({ akun, id, idUserLogin, getUsers, onClose }) => {
           Hapus Akun
         </div>
       </div>
-      <div className="py-8 text-base  font-normal px-3">
+      <div className="py-8 text-base  font-normal px-3 dark:text-colorTwo">
         Apakah anda yakin ingin menghapus akun dengan username {""}
         <span className="font-bold underline underline-offset-2 decoration-purple-600">
           {akun}

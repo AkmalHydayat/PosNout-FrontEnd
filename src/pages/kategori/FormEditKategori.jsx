@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/prop-types */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getKategoris } from "../../utils/api";
 
-/* eslint-disable react/prop-types */
 const FormEditKategori = ({
   onClose,
   id,
@@ -50,10 +50,11 @@ const FormEditKategori = ({
 
   const updateKategori = async () => {
     try {
-      await axios.put(`http://localhost:3000/kategori/${id}`, {
+      const response = await axios.put(`http://localhost:3000/kategori/${id}`, {
         nama_kategori: namaNewKategori,
       });
       navigate("/KategoriProduk");
+      AlertMessage(response.data.msg, 380, "success");
       const updatedKategoris = await getKategoris(); // Panggil fungsi getKategoris untuk memperbarui data
       setKategoris(updatedKategoris);
       // Perbarui juga searchResults jika id ada dalam hasil pencarian
@@ -88,7 +89,6 @@ const FormEditKategori = ({
     } else {
       updateKategori();
       onClose();
-      AlertMessage("berhasil memperbarui", 310, "success");
       setNamaNewKategori("");
       setErrorInput("");
     }

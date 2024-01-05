@@ -6,6 +6,7 @@ import { BiCamera } from "react-icons/bi";
 import { PiUserThin } from "react-icons/pi";
 import AlertShow from "../components/ui/Alert";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const BodyModalSetting = ({
   children,
@@ -19,6 +20,7 @@ const BodyModalSetting = ({
   setConfPassword,
   id,
 }) => {
+  const navigate = useNavigate();
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
   const [showPreview, setShowPreview] = useState(false);
@@ -51,6 +53,7 @@ const BodyModalSetting = ({
       setFile("");
       AlertMessage("Berhasil Mengupdate Foto Profile", 380, "success");
       setEdit(false);
+      navigate("/dashboard");
     } catch (error) {
       if (error.response) {
         AlertMessage(error.response.data.msg, 470, "error");
@@ -75,8 +78,8 @@ const BodyModalSetting = ({
           edit ? "-translate-y-16 delay-0" : ""
         } relative text-lg transition-all ease-in font-semibold bg-colorTwo dark:bg-colorDarkTwo rounded-md`}
       >
-        <div className="p-1">
-          <div className="relative w-full flex  justify-center items-center rounded-full bg-gray-200 dark:bg-colorDarkOne/40 text-gray-900 dark:text-colorTwo">
+        <div className=" w-full h-full">
+          <div className="relative w-full flex  h-full justify-center items-center rounded-full bg-gray-200 dark:bg-colorDarkOne/40 text-gray-900 dark:text-colorTwo">
             <label className="absolute right-3 bottom-2 ">
               {" "}
               <span>
@@ -87,7 +90,11 @@ const BodyModalSetting = ({
               </span>
             </label>
             {url ? (
-              <img src={url} alt="" className={`rounded-full object-cover`} />
+              <img
+                src={url}
+                alt=""
+                className={`rounded-full object-cover w-[195px] h-[195px]  `}
+              />
             ) : (
               <PiUserThin className={`h-full w-full p-3`} />
             )}

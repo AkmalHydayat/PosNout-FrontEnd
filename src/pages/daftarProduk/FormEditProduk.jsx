@@ -72,7 +72,7 @@ const FormEditProduk = ({
 
   const updateProduk = async () => {
     try {
-      await axios.put(`http://localhost:3000/produk/${id}`, {
+      const response = await axios.put(`http://localhost:3000/produk/${id}`, {
         nama_produk: newNamaProduk,
         satuan: newSatuanProduk,
         kategori: newKategoriProduk,
@@ -81,6 +81,7 @@ const FormEditProduk = ({
         keuntungan: newHargaJualProduk - newHargaBeliProduk,
         stok: stok,
       });
+      AlertMessage(response.data.msg, 370, "success");
       navigate("/DaftarProduk");
       const updatedProduks = await getProduks(); // Panggil fungsi getKategoris untuk memperbarui data
       setProduks(updatedProduks);

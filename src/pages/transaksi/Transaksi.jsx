@@ -9,7 +9,6 @@ import ButtonGetProduk from "./ButtonGetProduk";
 import ButtonPayment from "./ButtonPayment";
 import AlertShow from "../../components/ui/Alert";
 import { TbShoppingCartPlus } from "react-icons/tb";
-import axios from "axios";
 
 const Transaksi = () => {
   const { hari, month, year } = DateNow();
@@ -26,8 +25,9 @@ const Transaksi = () => {
   const [totalKeuntunganPerTransaksi, setTotalKeuntunganPerTransaksi] =
     useState(0);
   const [produks, setProduks] = useState([]);
+  const [user, setUser] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState(
-    localStorage.getItem("invoiceNumber") || generateInvoiceNumber()
+    localStorage.getItem("invoiceNumber")
   );
   const emptyBarcodeStyle = isBarcodeEmpty
     ? "border-[1px] border-red-500 dark:border-red-500 dark:bg-colorDarkTwo"
@@ -49,6 +49,13 @@ const Transaksi = () => {
     // Perbarui totalJumlah
     setTotalJumlah(newTotalJumlah);
   };
+
+  useEffect(() => {
+    const dataStorage = localStorage.getItem("auth");
+    if (dataStorage) {
+      setUser(JSON.parse(dataStorage));
+    }
+  }, []);
 
   const calculateTotalKeuntunganPerTransaksi = () => {
     // Hitung ulang total jumlah dari transaksi
@@ -149,15 +156,9 @@ const Transaksi = () => {
       .split("/")
       .join(""); // Format tanggal YYMMDD
 
-    const lastResetDate = localStorage.getItem("lastResetDate");
-    let invoiceNumberCounter =
-      parseInt(localStorage.getItem("invoiceNumberCounter")) || 1;
-
-    if (lastResetDate !== formattedDate) {
-      // Jika tanggal terakhir reset bukan sama dengan tanggal saat ini, atur ulang counter ke 1
-      invoiceNumberCounter = 1;
-      localStorage.setItem("lastResetDate", formattedDate);
-    }
+    let invoiceNumberCounter = parseInt(
+      localStorage.getItem("invoiceNumberCounter")
+    );
 
     const newInvoiceNumber = `${uniqueCode}${formattedDate}${String(
       invoiceNumberCounter
@@ -173,30 +174,6 @@ const Transaksi = () => {
 
     return newInvoiceNumber;
   };
-
-  const useAutoUpdateInvoiceNumber = () => {
-    useEffect(() => {
-      const currentDate = new Date();
-      const formattedDate = currentDate
-        .toLocaleDateString("id-ID", {
-          year: "2-digit",
-          month: "2-digit",
-          day: "2-digit",
-        })
-        .split("/")
-        .join(""); // Format tanggal YYMMDD
-
-      const lastResetDate = localStorage.getItem("lastResetDate");
-
-      if (lastResetDate !== formattedDate) {
-        // Jika tanggal berubah, perbarui nomor faktur
-        const newInvoiceNumber = generateInvoiceNumber();
-        setInvoiceNumber(newInvoiceNumber);
-      }
-    }, []); // Pastikan useEffect hanya dijalankan sekali pada awal render
-  };
-
-  useAutoUpdateInvoiceNumber();
 
   const setSubmit = (e) => {
     e.preventDefault();
@@ -245,30 +222,18 @@ const Transaksi = () => {
         <div className="space-y-7">
           <div className="flex justify-between gap-6 ">
             <div className=" py-6 px-6 w-1/4 rounded  shadow-md border-[1px] border-gray-200 shadow-black/20 transition-all ease-in dark:shadow-black dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkOne bg-colorTwo ">
-              <form action="" className="space-y-8">
+              <div className="space-y-8">
                 <div className="gap-2 flex h-8">
-                  <label htmlFor="" className="w-1/4 ">
-                    Date
-                  </label>
-                  <input
-                    type="text"
-                    value={`${hari}/${month}/${year}`}
-                    readOnly
-                    className="cursor-default px-2  bg-gray-300 dark:bg-colorDarkOne dark:border-colorTwo text-colorDarkOne dark:text-colorTwo transition-colors ease-in font-bold focus:outline-none border-[1px] border-gray-400 w-3/4 rounded"
-                  />
+                  <div className="w-1/4 ">Date</div>
+                  <div className="cursor-default px-2 my-auto py-0.5 h-full bg-gray-300 dark:bg-colorDarkOne dark:border-colorTwo text-colorDarkOne dark:text-colorTwo transition-colors ease-in font-bold focus:outline-none border-[1px] border-gray-400 w-3/4 rounded">{`${hari}/${month}/${year}`}</div>
                 </div>
                 <div className="gap-2 flex h-8">
-                  <label htmlFor="" className="w-1/4 ">
-                    Kasir
-                  </label>
-                  <input
-                    type="text"
-                    value={"Akmal Hydayat"}
-                    readOnly
-                    className="cursor-default px-2  bg-gray-300 dark:bg-colorDarkOne dark:border-colorTwo text-colorDarkOne dark:text-colorTwo transition-colors ease-in  font-acme focus:outline-none border-[1px] border-gray-400 w-3/4  rounded"
-                  />
+                  <div className="w-1/4 ">Kasir</div>
+                  <div className="cursor-default px-2 my-auto py-0.5 h-full bg-gray-300 dark:bg-colorDarkOne dark:border-colorTwo text-colorDarkOne dark:text-colorTwo transition-colors ease-in  font-acme focus:outline-none border-[1px] border-gray-400 w-3/4  rounded">
+                    {user.username}
+                  </div>
                 </div>
-              </form>
+              </div>
             </div>
             <div className="px-6 py-6 rounded bg-colorTwo shadow-md border-[1px] border-gray-200 shadow-black/20 transition-all ease-in dark:shadow-black dark:bg-colorDarkTwo dark:text-colorTwo dark:border-colorDarkOne">
               <div className="space-y-8">
@@ -292,7 +257,7 @@ const Transaksi = () => {
                     setProduks={setProduks}
                   />
                 </div>
-                <form action="" className="" onSubmit={setSubmit}>
+                <form action="" onSubmit={setSubmit}>
                   <div className=" flex h-8">
                     <label htmlFor="" className="w-1/4 ">
                       Qty

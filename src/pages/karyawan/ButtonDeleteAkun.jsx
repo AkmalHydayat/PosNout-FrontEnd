@@ -17,7 +17,6 @@ const ButtonDeleteAkun = ({ akun, id, idUserLogin, getUsers }) => {
             Delete
           </div>
         }
-        // className={`bg-red-700 font-pt_Sans text-colorTwo p-1 transition-all ease-in  hover:scale-95  hover:bg-red-800  rounded  group font-semibold text-md`}
         modalContent={
           <DeleteConfirmAkun
             akun={akun}

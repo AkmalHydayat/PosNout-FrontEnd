@@ -21,12 +21,14 @@ const FormAddSatuan = ({
 
   const newSatuan = async () => {
     try {
-      await axios.post("http://localhost:3000/satuan", {
+     const response = await axios.post("http://localhost:3000/satuan", {
         nama_satuan: namaNewSatuan,
       });
+      AlertMessage(response.data.msg, 350, "success");
       const updatedSatuans = await getSatuans(); // Mengambil kategori terbaru
       setSatuans(updatedSatuans); // Memperbarui state kategoris di luar komponen
       navigate("/SatuanProduk");
+
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -50,7 +52,6 @@ const FormAddSatuan = ({
       setNamaNewSatuan("");
       setErrorInput("");
       onClose();
-      AlertMessage("berhasil menambahkan", 310, "success");
     }
   };
   return (

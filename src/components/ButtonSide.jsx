@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
 const ButtonSide = () => {
-  const [sideActive, setSideActive] = useState(false);
+  const [sideActive, setSideActive] = useState(
+    localStorage.getItem("showSidebar") === "true"
+  );
 
+  useEffect(() => {
+    localStorage.setItem("showSidebar", JSON.stringify(sideActive));
+  }, [sideActive]);
+
+  const handleSidebar = () => {
+    setSideActive(!sideActive);
+  };
   const iconToggle = (
     <button
       onClick={() => {
-        setSideActive(!sideActive);
+        // setSideActive(!sideActive);
+        handleSidebar();
       }}
       className="absolute -right-4 bottom-10 text-2xl px-1 py-1 rounded-full bg-purple-600 flex  text-white hover:shadow-sm2 hover:shadow-black"
     >
@@ -22,7 +32,7 @@ const ButtonSide = () => {
     : "invisible opacity-0";
   const hidenBlock = sideActive
     ? "hidden"
-    : "absolute  hidden group-hover:inline text-purple-600 shadow-lg bg-colorTwo text-base rounded font-semibold px-2 py-1";
+    : "absolute  hidden group-hover:inline text-purple-600 shadow-lg bg-colorTwo  text-base rounded font-semibold px-2 py-1";
   const contentWidth = sideActive ? "w-10/12 " : "w-full ";
   const fontSize = sideActive ? "text-base" : "text-xl";
   const textCenter = sideActive ? "text-start ms-8 " : "text-center p-1 ms-0 ";

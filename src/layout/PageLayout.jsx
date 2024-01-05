@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import NavTop from "./NavTop";
@@ -6,6 +7,7 @@ import Sidebar from "./Sidebar";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import AlertShow from "../components/ui/Alert";
 
 const LayoutPage = ({ children }) => {
   const [
@@ -30,20 +32,18 @@ const LayoutPage = ({ children }) => {
 
   const [username, SetUsername] = useState("");
   const [url, setUrl] = useState("");
-  const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   const [id, setId] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const navigate = useNavigate();
+  const AlertMessage = (message, width, icon) => {
+    AlertShow(message, width, icon);
+  };
   const refreshToken = async () => {
     try {
       const response = await axios.get("http://localhost:3000/token");
-
-      setToken(response.data.accessToken);
-
       const decoded = jwtDecode(response.data.accessToken);
-
       setExpire(decoded.exp);
       setId(decoded.userId);
       SetUsername(decoded.username);
@@ -53,6 +53,7 @@ const LayoutPage = ({ children }) => {
       setExpire(decoded.exp);
     } catch (error) {
       if (error.response) {
+        AlertMessage("Silahkan Login Terlebih Dahulu!", 370, "warning");
         navigate("/");
       }
     }
@@ -66,7 +67,6 @@ const LayoutPage = ({ children }) => {
       if (expire * 1000 < currentDate.getTime()) {
         const response = await axios.get("http://localhost:3000/token");
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-        setToken(response.data.accessToken);
         const decoded = jwtDecode(response.data.accessToken);
         SetUsername(decoded.username);
         setUrl(decoded.url);

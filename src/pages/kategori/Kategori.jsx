@@ -51,12 +51,4 @@ const Kategori = () => {
 
 export default Kategori;
 
-// const addKategori = (nama) => {
-//   const newId = lastId + 1;
-//   const newKategori = {
-//     id: "KTG" + newId.toString().padStart(3, "0"),
-//     nama: nama,
-//   };
-//   setLastId(newId);
-//   setKategoriList([...kategoriList, newKategori]);
-// };
+

@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LayoutPage from "../../layout/PageLayout";
 import { faGrip, faGripLines } from "@fortawesome/free-solid-svg-icons";
@@ -11,14 +12,12 @@ import { PiUserThin } from "react-icons/pi";
 import ButtonDeleteAkun from "./ButtonDeleteAkun";
 import ButtonEditAkun from "./ButtonEditAkun";
 
-/* eslint-disable react/prop-types */
 const Karyawan = () => {
   const [grid, setGrid] = useState(true);
   const [table, setTable] = useState(false);
   const [idUser, setId] = useState("");
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
-
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
@@ -203,7 +202,7 @@ const Karyawan = () => {
                       <td className="border-x-[1px] border-gray-300  ">
                         {user.email}
                       </td>
-                      <td className=" w-56 flex justify-center items-center py-0.5 space-x-2">
+                      <td className=" w-56 flex justify-center items-center  space-x-2">
                         <ButtonEditAkun
                           username={user.username}
                           id={user.id}

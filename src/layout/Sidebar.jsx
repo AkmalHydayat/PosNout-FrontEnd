@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 import { PiUserThin, PiUser } from "react-icons/pi";
@@ -23,6 +23,14 @@ const Sidebar = ({
   username,
   url,
 }) => {
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    const dataStorage = localStorage.getItem("auth");
+    if (dataStorage) {
+      setUser(JSON.parse(dataStorage));
+    }
+  }, []);
+
   const listNav = [
     {
       id: 1,
@@ -84,7 +92,16 @@ const Sidebar = ({
     },
   ];
 
-  const [showProdukDropdown, setShowProdukDropdown] = useState(false);
+  const [showProdukDropdown, setShowProdukDropdown] = useState(
+    localStorage.getItem("showProdukDropdown") === "true"
+  );
+
+  useEffect(() => {
+    localStorage.setItem(
+      "showProdukDropdown",
+      JSON.stringify(showProdukDropdown)
+    );
+  }, [showProdukDropdown]);
 
   const toggleProdukDropdown = () => {
     setShowProdukDropdown(!showProdukDropdown);
@@ -122,85 +139,188 @@ const Sidebar = ({
         <div
           className={`mt-4 space-y-1 flex flex-col ${textCenter}   ease-in  font-titilium font-semibold basis-4/6  text-gray-900 dark:text-colorTwo`}
         >
-          {listNav.map((item) => (
-            <React.Fragment key={item.id}>
-              {item.list === "Produk" ? (
-                <div className={`transition-all ease-in`}>
-                  <div
-                    onClick={toggleProdukDropdown}
-                    className={`ps-3 py-2 translate-y-0.5 relative group  ease-in hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
-                  >
-                    <span className="">
-                      <item.icon className={` ${w45} ${delay} me-4`} />
-                    </span>
+          {user.role === "admin"
+            ? listNav.map((item) => (
+                <React.Fragment key={item.id}>
+                  {item.list === "Produk" ? (
+                    <div className={`transition-all ease-in`}>
+                      <div
+                        onClick={toggleProdukDropdown}
+                        className={`ps-3 py-2 translate-y-0.5 relative group  ease-in hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
+                      >
+                        <span className="">
+                          <item.icon className={` ${w45} ${delay} me-4`} />
+                        </span>
 
-                    <span className={`${inlineHiden} ${delay} ease-in `}>
-                      {item.list}
-                    </span>
-                    <span
-                      className={`ms-[60px] ${inlineHiden} ${delay}   ease-in mt-1`}
-                    >
-                      {showProdukDropdown ? <FiChevronUp /> : <FiChevronDown />}
-                    </span>
-                    <span className={`${hidenBlock}  ease-in ms-12 -mt-1`}>
-                      {item.list}
-                    </span>
-                  </div>
+                        <span className={`${inlineHiden} ${delay} ease-in `}>
+                          {item.list}
+                        </span>
+                        <span
+                          className={`ms-[60px] ${inlineHiden} ${delay}   ease-in mt-1`}
+                        >
+                          {showProdukDropdown ? (
+                            <FiChevronUp />
+                          ) : (
+                            <FiChevronDown />
+                          )}
+                        </span>
+                        <span className={`${hidenBlock}  ease-in ms-12 -mt-1`}>
+                          {item.list}
+                        </span>
+                      </div>
 
-                  {produk.map((ProdukItem) => (
+                      {produk.map((ProdukItem) => (
+                        <NavLink
+                          to={ProdukItem.linkPath}
+                          key={ProdukItem.id}
+                          className={({ isActive }) => {
+                            return `ps-3 py-2 scale-100 text-gray-900 dark:text-colorTwo  bg-colorTwo dark:bg-colorDarkTwo  group flex ${
+                              showProdukDropdown
+                                ? `visible relative transition-all ease-in translate-y-0  opacity-100 `
+                                : "invisible absolute   -translate-y-2 opacity-0 "
+                            }  hover:text-purple-600 rounded-s-xl ${textCenter} ${mSDrop} ms-1 ${
+                              isActive
+                                ? `bg-gray-200 dark:bg-black/50 border-e-4 ${rounded} border-purple-600 text-purple-600`
+                                : ""
+                            }`;
+                          }}
+                        >
+                          <span className="">
+                            <ProdukItem.icon
+                              className={`${w45} me-3 ${delay}`}
+                            />
+                          </span>
+                          <span className={`${inlineHiden} ${delay} ease-in`}>
+                            {ProdukItem.list}
+                          </span>
+                          <span
+                            className={`${hidenBlock} ms-12 -mt-1  ease-in`}
+                          >
+                            {ProdukItem.list}
+                          </span>
+                        </NavLink>
+                      ))}
+                    </div>
+                  ) : (
                     <NavLink
-                      to={ProdukItem.linkPath}
-                      key={ProdukItem.id}
+                      onClick={() => {
+                        localStorage.setItem("showProdukDropdown", false);
+                      }}
+                      to={item.linkPath}
+                      key={item.id}
                       className={({ isActive }) => {
-                        return `ps-3 py-2 scale-100 text-gray-900 dark:text-colorTwo  bg-colorTwo dark:bg-colorDarkTwo  group flex ${
-                          showProdukDropdown
-                            ? `visible relative transition-all ease-in translate-y-0  opacity-100 `
-                            : "invisible absolute   -translate-y-2 opacity-0 "
-                        }  hover:text-purple-600 rounded-s-xl ${textCenter} ${mSDrop} ms-1 ${
+                        return `ps-3 py-2 hover:text-purple-600 bg-colorTwo transition-all ease-in dark:bg-colorDarkTwo translate-y-0.5  relative group ${me4}  flex ms-1 ${
                           isActive
-                            ? `bg-gray-200 dark:bg-[#121212] border-e-4 ${rounded} border-purple-600 text-purple-600`
-                            : ""
+                            ? `bg-gray-200 dark:bg-black/60 border-e-4 ${rounded} border-purple-600 text-purple-600`
+                            : `bg-colorTwo transition-all ease-in dark:bg-colorDarkTwo`
                         }`;
                       }}
                     >
-                      <span className="">
-                        <ProdukItem.icon className={`${w45} me-3 ${delay}`} />
+                      <span className={``}>
+                        <item.icon className={` ${delay} ${w45} me-4`} />
                       </span>
-                      <span className={`${inlineHiden} ${delay} ease-in`}>
-                        {ProdukItem.list}
+                      <span className={`${inlineHiden} ${delay}`}>
+                        {item.list}
                       </span>
-                      <span className={`${hidenBlock} ms-12 -mt-1  ease-in`}>
-                        {ProdukItem.list}
+                      <span
+                        className={`${hidenBlock}  ease-in ms-12 -mt-1  z-50`}
+                      >
+                        {item.list}
                       </span>
                     </NavLink>
-                  ))}
-                </div>
-              ) : (
-                <NavLink
-                  onClick={() => {
-                    setShowProdukDropdown(false);
-                  }}
-                  to={item.linkPath}
-                  key={item.id}
-                  className={({ isActive }) => {
-                    return `ps-3 py-2   hover:text-purple-600 bg-colorTwo transition-all ease-in dark:bg-colorDarkTwo translate-y-0.5  relative group ${me4}  flex ms-1 ${
-                      isActive
-                        ? `bg-gray-200 dark:bg-[#121212] border-e-4 ${rounded} border-purple-600   text-purple-600`
-                        : `bg-colorTwo transition-all ease-in dark:bg-colorDarkTwo`
-                    }`;
-                  }}
-                >
-                  <span className={``}>
-                    <item.icon className={` ${delay} ${w45} me-4`} />
-                  </span>
-                  <span className={`${inlineHiden} ${delay}`}>{item.list}</span>
-                  <span className={`${hidenBlock}  ease-in ms-12 -mt-1  `}>
-                    {item.list}
-                  </span>
-                </NavLink>
-              )}
-            </React.Fragment>
-          ))}
+                  )}
+                </React.Fragment>
+              ))
+            : listNav.map((item) => (
+                <React.Fragment key={item.id}>
+                  {item.list === "User/Karyawan" ? null : item.list ===
+                    "Produk" ? (
+                    <div className={`transition-all ease-in`}>
+                      <div
+                        onClick={toggleProdukDropdown}
+                        className={`ps-3 py-2 translate-y-0.5 relative group  ease-in hover:text-purple-600 rounded-s-xl cursor-pointer ms-1 ${me4}  flex `}
+                      >
+                        <span className="">
+                          <item.icon className={` ${w45} ${delay} me-4`} />
+                        </span>
+
+                        <span className={`${inlineHiden} ${delay} ease-in `}>
+                          {item.list}
+                        </span>
+                        <span
+                          className={`ms-[60px] ${inlineHiden} ${delay}   ease-in mt-1`}
+                        >
+                          {showProdukDropdown ? (
+                            <FiChevronUp />
+                          ) : (
+                            <FiChevronDown />
+                          )}
+                        </span>
+                        <span className={`${hidenBlock}  ease-in ms-12 -mt-1`}>
+                          {item.list}
+                        </span>
+                      </div>
+
+                      {produk.map((ProdukItem) => (
+                        <NavLink
+                          to={ProdukItem.linkPath}
+                          key={ProdukItem.id}
+                          className={({ isActive }) => {
+                            return `ps-3 py-2 scale-100 text-gray-900 dark:text-colorTwo  bg-colorTwo dark:bg-colorDarkTwo  group flex ${
+                              showProdukDropdown
+                                ? `visible relative transition-all ease-in translate-y-0  opacity-100 `
+                                : "invisible absolute   -translate-y-2 opacity-0 "
+                            }  hover:text-purple-600 rounded-s-xl ${textCenter} ${mSDrop} ms-1 ${
+                              isActive
+                                ? `bg-gray-200 dark:bg-black/50 border-e-4 ${rounded} border-purple-600 text-purple-600`
+                                : ""
+                            }`;
+                          }}
+                        >
+                          <span className="">
+                            <ProdukItem.icon
+                              className={`${w45} me-3 ${delay}`}
+                            />
+                          </span>
+                          <span className={`${inlineHiden} ${delay} ease-in`}>
+                            {ProdukItem.list}
+                          </span>
+                          <span
+                            className={`${hidenBlock} ms-12 -mt-1  ease-in`}
+                          >
+                            {ProdukItem.list}
+                          </span>
+                        </NavLink>
+                      ))}
+                    </div>
+                  ) : (
+                    <NavLink
+                      onClick={() => {
+                        localStorage.setItem("showProdukDropdown", false);
+                      }}
+                      to={item.linkPath}
+                      key={item.id}
+                      className={({ isActive }) => {
+                        return `ps-3 py-2   hover:text-purple-600 bg-colorTwo transition-all ease-in dark:bg-colorDarkTwo translate-y-0.5  relative group ${me4}  flex ms-1 ${
+                          isActive
+                            ? `bg-gray-200 dark:bg-black/50 border-e-4 ${rounded} border-purple-600   text-purple-600`
+                            : `bg-colorTwo transition-all ease-in dark:bg-colorDarkTwo`
+                        }`;
+                      }}
+                    >
+                      <span className={``}>
+                        <item.icon className={` ${delay} ${w45} me-4`} />
+                      </span>
+                      <span className={`${inlineHiden} ${delay}`}>
+                        {item.list}
+                      </span>
+                      <span className={`${hidenBlock}  ease-in ms-12 -mt-1  `}>
+                        {item.list}
+                      </span>
+                    </NavLink>
+                  )}
+                </React.Fragment>
+              ))}
         </div>
       </div>
     </div>

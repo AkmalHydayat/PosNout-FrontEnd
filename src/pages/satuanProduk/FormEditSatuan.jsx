@@ -47,9 +47,10 @@ const FormEditSatuan = ({
 
   const updateSatuan = async () => {
     try {
-      await axios.put(`http://localhost:3000/satuan/${id}`, {
+      const response = await axios.put(`http://localhost:3000/satuan/${id}`, {
         nama_satuan: namaNewSatuan,
       });
+      AlertMessage(response.data.msg, 380, "success");
       navigate("/SatuanProduk");
       const updatedSatuans = await getSatuans(); // Panggil fungsi getSatuans untuk memperbarui data
       setSatuans(updatedSatuans);
@@ -85,7 +86,6 @@ const FormEditSatuan = ({
     } else {
       updateSatuan();
       onClose();
-      AlertMessage("berhasil memperbarui", 310, "success");
       setNamaNewSatuan("");
       setErrorInput("");
     }

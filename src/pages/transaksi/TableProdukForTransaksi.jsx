@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import ButtonSelect from "../../components/ui/ButtonSelect";
 import { getProduks } from "../../utils/api";
-import { BiSearchAlt } from "react-icons/bi";
 import { BsCheck } from "react-icons/bs";
 
 const TableprodukForTransaksi = ({
@@ -52,19 +51,14 @@ const TableprodukForTransaksi = ({
     <div>
       <div className=" p-6 space-y-3 font-pt_Sans bg-colorTwo rounded dark:bg-colorDarkTwo transition-all ease-in font-normal">
         <div className="flex px-3 justify-end h-[30px] mb-5">
-          <label htmlFor="" className="me-2 font-medium text-gray-900"></label>
           <input
             type="text"
             placeholder="Cari item"
             value={searchTerm}
             onChange={handleSearch}
-            className="rounded-l border-[1px] dark:bg-colorDarkTwo  ease-in  bg-colorTwo text-colorDarkTwo dark:text-colorTwo focus:bg-white transition-colors border-purple-600 font-medium w-48 focus:outline-none ps-2 placeholder:text-sm"
+            className="rounded border-[1px] dark:bg-colorDarkTwo  ease-in  bg-colorTwo text-colorDarkTwo dark:text-colorTwo focus:bg-white transition-colors border-purple-600 font-medium w-52 focus:outline-none ps-2 placeholder:text-sm"
             required
           />
-
-          <button className="bg-purple-600 px-2  border-[1px] border-s-0 border-purple-600 rounded-r hover:border-purple-700">
-            <BiSearchAlt className="text-colorTwo  text-xl" />
-          </button>
         </div>
         {isSearching ? (
           <div

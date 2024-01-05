@@ -16,10 +16,13 @@ const LoginForm = () => {
   const Auth = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/login", {
+      const response = await axios.post("http://localhost:3000/login", {
         email,
         password,
       });
+      const responseData = response.data;
+      localStorage.setItem("auth", JSON.stringify(responseData));
+    
       AlertMessage("Login Berhasil", 310, "success");
       navigate("/dashboard");
     } catch (error) {
@@ -29,7 +32,6 @@ const LoginForm = () => {
     }
   };
 
-  
   return (
     <div>
       {" "}

@@ -30,6 +30,8 @@ const NavTop = ({ username, url, id, email, role, refreshToken }) => {
   const Logout = async () => {
     try {
       await axios.delete("http://localhost:3000/logout");
+      localStorage.removeItem("auth");
+      localStorage.setItem("showProdukDropdown", "false");
       navigate("/");
     } catch (error) {
       console.log(error);

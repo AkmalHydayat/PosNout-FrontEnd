@@ -43,7 +43,7 @@ const FormAddStok = ({
       setStoks(updatedStoks);
       const updatedProduks = await getProduks();
       setProduks(updatedProduks);
-      console.log(response.data.message);
+      AlertMessage(response.data.message, 350, "success");
     } catch (error) {
       console.error("Terjadi kesalahan:", error.message);
     }
@@ -71,7 +71,6 @@ const FormAddStok = ({
             setJumlah("");
             getIdName("", "");
             onClose();
-            AlertMessage("berhasil menambahkan stok", 350, "success");
           }
         }}
       >

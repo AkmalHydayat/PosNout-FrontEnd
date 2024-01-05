@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/prop-types */
 
 import { getKategoris } from "../../utils/api";
 import ButtonBgSec from "../../components/ui/ButtonBgSec";
 import axios from "axios";
 
-/* eslint-disable react/prop-types */
 const DeleteConfirmKategori = ({
   setKategoris,
   namaKategori,
@@ -17,8 +17,9 @@ const DeleteConfirmKategori = ({
   AlertMessage,
 }) => {
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:3000/kategori/${id}`);
+    const response = await axios.delete(`http://localhost:3000/kategori/${id}`);
     const updatedKategoris = await getKategoris();
+    AlertMessage(response.data.msg, 370, "success");
     setKategoris(updatedKategoris); // Perbarui state kategoris di sini
     onClose();
 
@@ -51,7 +52,6 @@ const DeleteConfirmKategori = ({
           className={`bg-colorTwo dark:border-[1px] w-[68px] dark:bg-colorDarkTwo dark:shadow-black  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black hover:dark:shadow-purple-600 dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  dark:border-purple-600 hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group py-0.5  `}
           onClick={() => {
             handleDelete(id);
-            AlertMessage("berhasil menghapus", 310, "success");
           }}
         >
           Ya

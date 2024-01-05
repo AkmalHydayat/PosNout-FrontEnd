@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import AlertShow from "../../components/ui/Alert";
 import ModalEditAkun from "./ModalEditAkun";
+
 const ButtonEditAkun = ({ username, id, email, role, getUsers }) => {
   const [showModal, setShowModal] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -19,9 +20,9 @@ const ButtonEditAkun = ({ username, id, email, role, getUsers }) => {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:3000/users/${id}`, {
-        username: editUsername,
-        email: editEmail,
-        role: editRole,
+        username: editUsername ? editUsername : username,
+        email: editEmail ? editEmail : email,
+        role: editRole ? editRole : role,
         password,
         confPassword,
       });
@@ -74,7 +75,6 @@ const ButtonEditAkun = ({ username, id, email, role, getUsers }) => {
                   }`}
                   value={editUsername ? editUsername : username}
                   onChange={(e) => SetEditUsername(e.target.value)}
-                  required
                   readOnly={edit ? false : true}
                 />
               </div>
@@ -103,7 +103,6 @@ const ButtonEditAkun = ({ username, id, email, role, getUsers }) => {
                   }`}
                   value={editEmail ? editEmail : email}
                   onChange={(e) => SetEditEmail(e.target.value)}
-                  required
                   readOnly={edit ? false : true}
                 />
               </div>
@@ -128,7 +127,6 @@ const ButtonEditAkun = ({ username, id, email, role, getUsers }) => {
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
-                    required
                     readOnly={edit ? false : true}
                     placeholder="********"
                   />
@@ -142,7 +140,6 @@ const ButtonEditAkun = ({ username, id, email, role, getUsers }) => {
                         ? " dark:border-colorDarkOne dark:bg-colorDarkTwo"
                         : "bg-gray-400/60 dark:bg-colorDarkOne/60  cursor-default"
                     }`}
-                    required
                     readOnly={edit ? false : true}
                     placeholder="********"
                     value={confPassword}

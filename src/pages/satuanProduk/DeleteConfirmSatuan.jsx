@@ -17,7 +17,8 @@ const DeleteConfirmSatuan = ({
   AlertMessage,
 }) => {
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:3000/satuan/${id}`);
+    const response = await axios.delete(`http://localhost:3000/satuan/${id}`);
+    AlertMessage(response.data.msg, 350, "success");
     const updatedSatuans = await getSatuans();
     setSatuans(updatedSatuans); // Perbarui state Satuans di sini
     onClose();
@@ -49,7 +50,6 @@ const DeleteConfirmSatuan = ({
           className={`bg-colorTwo dark:border-[1px] w-[68px] dark:bg-colorDarkTwo dark:shadow-black  dark:text-colorTwo  dark:hover:text-purple-600 dark:hover:shadow-sm2 dark:hover:shadow-black hover:dark:shadow-purple-600 dark:shadow-cus2 cursor-pointer shadow-sm2 text-purple-600  dark:border-purple-600 hover:border-purple-600 shadow-gray-300 transition-all ease-in hover:shadow-gray-50 hover: hover:text-white  hover:bg-purple-700 rounded  group py-0.5  `}
           onClick={() => {
             handleDelete(id);
-            AlertMessage("berhasil menghapus", 310, "success");
           }}
         >
           Ya
